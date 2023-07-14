@@ -104,6 +104,24 @@ foreach($getAllModeles as $modele ){
 
 </div>
 <br>
+<div class="drp">
+
+<select class="custom-select" id="select-5" name="id_annee">
+<option value="">Année</option>
+<?php 
+$getAllAnnees = $bdd->query('SELECT * FROM annees ORDER BY nom');
+$getAllAnnees->execute(array());
+foreach($getAllAnnees as $annee ){
+	
+	?>
+	<option value=<?= $annee['id']; ?>><?= $annee['nom']; ?></option>
+	<?php
+}
+?>
+</select>
+
+</div>
+<br>
 <div class="clear"> </div>
 <div class="register-but">
 

@@ -119,7 +119,6 @@
                 <ul class="sous">
                     <li><a href="../pages/dashboard.php">Dashboard</a></li>
                     <li><a href="../pages/ajouteFiche.php">Ajouter un fiche</a></li>
-                    <li><a href="../pages/ajouteConstructeur.php">Ajouter un constructeur</a></li>
                     <li><a href="../actions/user/logout.php">Deconnexion</a></li>
                 </ul>
             </li>

@@ -95,17 +95,27 @@ require('../actions/database.php');
 
 <select name="Modèles">
     <?php 
-   
-      $getAllModeles = $bdd->query('SELECT * FROM modeles ORDER BY nom');
-      $getAllModeles->execute(array());
-    
-    
-      foreach($getAllModeles as $modele ){
-                  
-                  ?>
-        <option value=<?= $modele['id']; ?> name=<?= $modele['nom']; ?> ><?= $modele['nom']; ?></option>
-                  <?php
+      if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur'])){
+          $getAllModeles = $bdd->query('SELECT * FROM modeles ORDER BY nom');
+          $getAllModeles->execute(array());
+          foreach($getAllModeles as $modele ){   
+                      ?>
+            <option value=<?= $modele['id']; ?> name=<?= $modele['nom']; ?> ><?= $modele['nom']; ?></option>
+                      <?php
+          }
+      }else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur'])){
+        $ids_constructeur = explode(",", $_GET['id_constructeur']);
+        foreach($ids_constructeur as $id) {
+          $getAllModeles = $bdd->prepare('SELECT * FROM modeles WHERE id_constructeur=? ORDER BY nom');
+          $getAllModeles->execute(array($id));
+          foreach($getAllModeles as $modele) {
+            ?>
+            <option value=<?= $modele['id']; ?> name=<?= $modele['nom']; ?> ><?= $modele['nom']; ?></option>
+                      <?php
+          }
+        }
       }
+ 
     ?>
     
 </select>
@@ -167,12 +177,19 @@ include("../actions/actionsVoiture/allFiches.php");
   <?php 
     
       while($fiche = $getAllFiches->fetch()){
+        $getConstructeur = $bdd->prepare('SELECT nom FROM constructeurs WHERE id=?');
+        $getConstructeur->execute(array($fiche['id_constructeur']));
+        $constructeur = $getConstructeur->fetch();
+
+        $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
+        $getAnnee->execute(array($fiche['id_annee']));
+        $annee = $getAnnee->fetch();
   ?>
 
   <div class="column">
     <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image class="voitures" src=../../library/img/<?= $fiche['image']; ?> /></a>
     <div class="text">
-      <p><?= $fiche['nom']; ?></p>
+      <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
     </div> 
   </div>
 

@@ -2,7 +2,7 @@
 /*----------------------------------------------------------------------------------------------*/
 /*body*/
 body{
-  
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     width:100%;
     background: #fff7ed;
     min-height: 100vh;
@@ -99,10 +99,23 @@ body{
   }
 
   h5{
-
     text-align: center;
 
   }
+
+  .nomWidgetFiche{
+    font-size: 0.9em;
+  }
+
+  .spanNomConstructeur{
+    font-weight: bold;
+  }
+
+  .spanNomAnnee{
+    color: #7b533d;
+    font-weight: bolder;
+  }
+
 
   /*------FICHE2-------*/
   .article-div-fiche-2{
@@ -176,6 +189,7 @@ body{
   }
   
   .column {
+    z-index: 1;
     float:left;
     width: 25%;
     padding: 3px;
@@ -288,6 +302,7 @@ body{
   
   .checkbox_select_dropdown.show
   {
+    z-index:2;
       display: block;
       position: absolute;
   }
@@ -331,7 +346,7 @@ body{
   {
     position: absolute;
     left:10px;
-    z-index:1;
+    z-index:2;
     display: inline-block;
     height: 100%;
     width: 20px;
@@ -621,6 +636,128 @@ body{
     margin-left:  30px;
     width: 300px;
   }
+  /*---------------- DASHBOARD ----------------------*/
+
+  /*AJOUTER CONSTRUCTEUR */
+
+  .addDashboardConstructeur{
+    float: left;
+    margin-right: 80px;
+  }
+
+  .addConstructeur{
+    background-color: rgb(255, 255, 255);
+    border: dashed rgb(169, 179, 255);
+    height: 35px;
+    margin-left:  30px;
+    width: 150px;
+  }
+
+  .ajouteConstructeurH3{
+    font-size: 1em;
+  }
+
+  /*AJOUTER TYPE */
+  
+  .addDashboardType{
+    float: left;
+    margin-top: -22px;
+    margin-right: 80px;
+  }
+
+  .addType{
+    background-color: rgb(255, 255, 255);
+    border: dashed rgb(169, 179, 255);
+    height: 35px;
+    margin-left:  30px;
+    width: 150px;
+  }
+
+  .ajouteTypeH3{
+    font-size: 1em;
+  }
+
+  /*AJOUTER MODELE */
+  
+  .addDashboardModele{
+    float: left;
+    margin-top: -44px;
+    margin-right: 70px;
+  }
+
+  .addModele{
+    background-color: rgb(255, 255, 255);
+    border: dashed rgb(169, 179, 255);
+    height: 35px;
+    margin-left:  30px;
+    width: 150px;
+  }
+
+  .ajouteModeleH3{
+    font-size: 1em;
+  }
+
+  /*AJOUTER ANNEE */
+  
+  .addDashboardAnnee{
+    float: left;
+    margin-top: -66px;
+    margin-right: 70px;
+  }
+
+  .addAnnee{
+    background-color: rgb(255, 255, 255);
+    border: dashed rgb(169, 179, 255);
+    height: 35px;
+    margin-left:  30px;
+    width: 150px;
+  }
+
+  .ajouteAnneeH3{
+    font-size: 1em;
+  }
+
+  /*AJOUTER PAYS */
+
+  .addDashboardPays{
+    float: left;
+    margin-top: -90px;
+    margin-right: 70px;
+  }
+
+  .addPays{
+    background-color: rgb(255, 255, 255);
+    border: dashed rgb(169, 179, 255);
+    height: 35px;
+    margin-left:  30px;
+    width: 150px;
+  }
+
+  .ajoutePaysH3{
+    font-size: 1em;
+  }
+
+  /*AJOUTER GROUPE */
+
+  .addDashboardGroupe{
+    float: left;
+    margin-top: -115px;
+    margin-right: 22px;
+  }
+
+  .addGroupe{
+    background-color: rgb(255, 255, 255);
+    border: dashed rgb(169, 179, 255);
+    height: 35px;
+    margin-left:  30px;
+    width: 150px;
+  }
+
+  .ajouteGroupeH3{
+    font-size: 1em;
+  }
+
+  /*---------------- DASHBOARD ----------------------*/
   
    /*AJOUTER CONSTRUCTEUR */
 
@@ -636,7 +773,6 @@ table {
   background: #d8ecff;
   border-radius: 0.25em;
   border-collapse: collapse;
-  margin: 1em;
 }
 .constructeurDash{
   float: left;
@@ -651,6 +787,14 @@ table {
   width: 300px;
 }
 .anneeDash{
+  float: left;
+  width: 300px;
+}
+.paysDash{
+  float: left;
+  width: 300px;
+}
+.groupeDash{
   float: left;
   width: 300px;
 }

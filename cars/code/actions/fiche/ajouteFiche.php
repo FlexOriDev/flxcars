@@ -9,7 +9,7 @@ if(isset($_POST['validate'])){
     
     //Vérifier si l'user a bien complété tous les champs
     if(!empty($_POST['nom']) AND !empty($_POST['resume']) AND !empty($_POST['description']) AND !empty($_POST['motorisation']) AND 
-    !empty($_FILES['fichier']) AND !empty($_POST['id_constructeur']) AND !empty($_POST['id_type']) AND !empty($_POST['id_modele'])){
+    !empty($_FILES['fichier']) AND !empty($_POST['id_constructeur']) AND !empty($_POST['id_type']) AND !empty($_POST['id_modele']) AND !empty($_POST['id_annee'])){
         
         $fiche_nom = htmlspecialchars($_POST['nom']);
         $fiche_resume = htmlspecialchars($_POST['resume']);
@@ -20,13 +20,14 @@ if(isset($_POST['validate'])){
         $idConstructeur = htmlspecialchars($_POST['id_constructeur']);
         $idType = htmlspecialchars($_POST['id_type']);
         $idModele = htmlspecialchars($_POST['id_modele']);
+        $idAnnee = htmlspecialchars($_POST['id_annee']);
         
         $tmp_fichier = $_FILES['fichier']['tmp_name'];
         $nom_destination = "../../library/img/".$nom_fichier;
         move_uploaded_file($tmp_fichier,$nom_destination);
         
-        $insertFicheOnWebsite = $bdd->prepare('INSERT INTO fiches(nom, id_modele, resume, description, motorisation, image, date, id_constructeur, id_type, id_user)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        $insertFicheOnWebsite->execute(array($fiche_nom, $idModele, $fiche_resume, $fiche_description, $fiche_motorisation, $nom_fichier, $formated_DATETIME, $idConstructeur,$idType, $_SESSION['id']));
+        $insertFicheOnWebsite = $bdd->prepare('INSERT INTO fiches(nom, id_modele, id_annee, resume, description, motorisation, image, date, id_constructeur, id_type, id_user)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $insertFicheOnWebsite->execute(array($fiche_nom, $idModele, $idAnnee, $fiche_resume, $fiche_description, $fiche_motorisation, $nom_fichier, $formated_DATETIME, $idConstructeur,$idType, $_SESSION['id']));
         
         $getInfosOfThisFicheReq = $bdd->prepare('SELECT id FROM fiches WHERE nom = ?');
         $getInfosOfThisFicheReq->execute(array($fiche_nom));
