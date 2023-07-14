@@ -51,9 +51,7 @@
   <ul>
     <li class="deroulant"><a href="../pages/index.php">Accueil &ensp;</a>
       <ul class="sous">
-        <li><a href="accueil.php#article-1">Pourquoi Smoky Ghost ?</a></li>
-        <li><a href="accueil.php#article-2">Quel est le but ?</a></li>
-        <li><a href="accueil.php#article-3">Comment ça fonctionne ?</a></li>
+        <li><a href="index.php">Pourquoi Smoky Ghost ?</a></li>
       </ul>
     </li>
 
@@ -93,12 +91,6 @@
         <li><a href="accueil.php#article-1">19ème</a></li>
         <li><a href="accueil.php#article-2">20ème</a></li>
         <li><a href="accueil.php#article-3">21ème</a></li>
-      </ul>
-    </li>
-
-    <li class="deroulant"><a href="accueil.php">Armées &ensp;</a>
-      <ul class="sous">
-        <li><a href="accueil.php#article-1">France</a></li>
       </ul>
     </li>
 

@@ -5,7 +5,6 @@ include '../includesHeaderFooter/header.php';
 
 <main>
 
-
 <div class="fiche-container">
         <?php 
         if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){

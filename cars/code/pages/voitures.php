@@ -200,3 +200,5 @@ include("../actions/actionsVoiture/allFiches.php");
 </div> 
 
 </main>
+
+<?php require '../includesHeaderFooter/footer.php' ; ?>
