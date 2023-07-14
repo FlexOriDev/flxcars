@@ -1,0 +1,683 @@
+
+/*----------------------------------------------------------------------------------------------*/
+/*body*/
+body{
+  
+    width:100%;
+    background: #fff7ed;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 115px;
+    min-height: 100vh;
+  }
+
+  p{
+    color: #141414;
+  }
+
+.text{
+  background-color: #e7d9c8;
+  text-align: center;
+  font-size:1.2em;
+}
+
+.voitures {
+    width: 100%;
+   
+}
+
+.imgFiche{
+ 
+  width: 800px;
+}
+
+.fiche-container{
+  padding-top: 50px;
+  text-align:center;
+
+}
+  
+  /*----------------------------------------------------------------------------------------------*/
+
+
+  /* MAIN */
+  .carousel-item {
+    height: 65vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+  }
+  .space{
+    margin-top: 20px;
+  }
+  main {
+    width: 90vw;
+    margin: 0 auto;
+    padding: 30px 20px;
+    min-height: calc(100vh - 100px - 116px);
+  }
+
+  /*------FICHE-------*/
+
+
+  /*------FICHE1-------*/
+  .article-div-fiche{
+    margin-top: -50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    height: 20px;
+    padding-bottom: 95px;
+  }
+
+  .article-fiche-name{
+    
+    background-color: #c6baab;
+
+  }
+
+  .h5Title{
+
+    margin-top: -30px;
+
+  }
+
+
+  .ficheConstruct{
+    padding-top: 10px;
+    text-align: left;
+
+  }
+
+  .ficheType{
+    text-align: right;
+    margin-top: -28px;
+  }
+
+  h5{
+
+    text-align: center;
+
+  }
+
+  /*------FICHE2-------*/
+  .article-div-fiche-2{
+
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    height: 20px;
+    margin-top: -40px;
+
+  }
+
+  .article-fiche-name2{
+
+    background-color: #e9e0cd;
+
+  }
+
+  /*------FICHE3-------*/
+  .article-div-fiche-3{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    margin-top: 0px;
+
+  }
+
+  .article-fiche-name3{
+
+    background-color: #e9e0cd;
+
+  }
+
+  
+/*---------------------------*/
+
+  article {
+    background-color: #e7d9c8;
+    padding: 20px;
+    margin-bottom: 0px;
+  }
+  article:last-child {
+    margin-bottom: 0;
+  }
+  article h1{
+    font-size: 2rem;
+    font-weight: bolder;
+    text-align: center;
+    color: #463232;
+  }
+  article h2{
+    margin-top: -35px;
+    text-align: center;
+    color: #6b5b51;
+  }
+  article h3{
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0px 0 25px 0;
+    color: #7e5e4a;
+  }
+  article p{
+    color: #141414;
+    margin-top: 16px;
+    line-height: 24px;
+  }
+  h4{
+    color: #ff1e1e;
+    text-align: center;
+  }
+  
+  .column {
+    float:left;
+    width: 25%;
+    padding: 3px;
+    margin-top: 20px;
+  }
+  
+  /* Clear floats after image containers */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  @media screen and (max-width: 300px) {
+    .column {
+      width: 100%;
+    }
+  }
+  
+  .column{
+  opacity: 1;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  }
+  .column:hover{
+  opacity: .5;
+  }
+  #colonne{
+    margin-left: 0;
+    margin-right: auto;
+    width: auto;
+  }
+
+  /*----------PREFERENCES----------*/
+  .rowPreferences{
+    display: flex;
+  }
+
+  .columnPreferences{
+    float:right;
+    width: 25%;
+    padding: 3px;
+    margin-top: 20px;
+  }
+
+/* ----------------------------------------------------------------------------------------
+  /* Style The Dropdown Button */
+  
+  small
+  {
+    color: rgb(83, 71, 59);
+  }
+  
+  div.checkbox_select
+  {
+    width: 250px;
+  }
+  
+  .checkbox_select_anchor
+  {
+    display: block;
+    background: rgb(116, 87, 63);
+    color: white;
+    cursor: pointer;
+    padding: 10px 5px 5px;
+    position: relative;
+    text-decoration: none;
+  }
+  
+  .checkbox_select_anchor:after
+  {
+    width: 0; 
+      height: 0; 
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid #e7d9c8;
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 15px;
+  }
+  
+  .expanded .checkbox_select_anchor:after
+  {
+      border-top: 0;
+      border-bottom: 10px solid #e7d9c8;
+  }
+  
+  
+  .checkbox_select_anchor:hover
+  {
+    background: #3f2d23 !important;
+    color :rgb(255, 255, 255);
+    text-decoration: none;
+  }
+  
+
+  
+  div.checkbox_select .select_input
+  {
+      width: 100%;
+      cursor: pointer;
+  }
+  
+  .checkbox_select_dropdown
+  {
+      display: none;
+      background: whitesmoke;
+  }
+  
+  .checkbox_select_dropdown.show
+  {
+      display: block;
+      position: absolute;
+  }
+  
+  .checkbox_select_dropdown ul
+  {
+    max-height: 250px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #999;
+    border-top: 0;
+    border-bottom: 0;
+  }
+  .checkbox_select_dropdown ul li
+  {
+      list-style: none;
+      position: relative;
+      color: #666;
+  }
+  .checkbox_select_dropdown ul li label
+  {
+    position: relative;
+        padding: 10px 5px 5px 40px;
+       display: block;
+    cursor: pointer;
+  }
+  .checkbox_select_dropdown ul li label:hover
+  {
+    background: #cbcbcb;
+    color: white;
+  }
+  .checkbox_select_dropdown ul li input:checked + label
+  {
+    background: #bbb;
+    color: white;
+    text-shadow: 0px 1px 1px rgba(150, 150, 150, 1);
+  }
+  .checkbox_select_dropdown ul li input
+  {
+    position: absolute;
+    left:10px;
+    z-index:1;
+    display: inline-block;
+    height: 100%;
+    width: 20px;
+  }
+  .checkbox_select_search
+  {
+      width: 250px;
+      padding: 10px 5px 5px;
+      border: 1px solid #999;
+        border-top: 0;
+      -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+  }
+  
+  .checkbox_select_submit
+  {
+      background: #d4bcb1;
+      color: white;
+      padding: 10px 5px 5px;
+      border: 0;
+      width: 100%;
+      font-size: 14px;
+      cursor: pointer;
+  }
+
+  .checkbox_select_submit:hover
+  {
+      background: #ad8d7e;
+      color: white;
+      padding: 10px 5px 5px;
+      border: 0;
+      width: 100%;
+      font-size: 14px;
+      cursor: pointer;
+  }
+  
+  .hide
+  {
+      display: none;
+  }
+  
+  /* -------------------------------------------------------------------------------------------------------------- */
+  
+    .checkboxs{
+      display: inline-block;
+    }
+  
+  /*----------------------------------------------------------------------------------------------*/
+  /*----------------------------------------------------------------------------------------------*/
+  /*----------------------------------------------------------------------------------------------*/
+
+  /* HEADER top-top */
+  .header-top-top{
+    background: #2b231f;
+    padding: 20px 0;
+    text-align: left;
+  }
+  .logo {
+    margin-bottom: 20px;
+  }
+  .box{
+    position: sticky;
+    margin-left: 10px;
+  }
+  
+  input.submit{
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    transition: 0.5s;
+  }
+  .textSearch{
+    background-color: rgb(255, 255, 255);
+    border: none;
+    height: 27px;
+    padding: 0 15px;
+    border-radius: 25px 0 0 25px;
+    outline: none;
+  
+  }
+  .submit{
+    left: -5px;
+    position: relative;
+    border-radius: 0 25px 25px 0;
+    width: 70px;
+    border: none;
+    outline: none;
+    background-color: #4777fc;
+    color: #ffffff;
+  }
+  .submit:hover{
+    background-color: #ff1e1e;
+  }
+  /* HEADER top */
+  .header-top{
+    background: #2b231f;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  img{
+    width: 170px;
+    margin-top: -47px;
+  }
+  
+  /*----------------------------------------------------------------------------------------------*/
+  /* mid */
+  .header-mid{
+    background: #4777fc;
+    padding: 2px 0;
+    text-align: center;
+  }
+  /*----------------------------------------------------------------------------------------------*/
+  /* DEROULANT */
+  
+  nav{
+    z-index: 10;
+    width: 100%;
+    margin: 2 auto;
+    background-color: #ffffff;
+    transition: 0.5s;
+  }
+  
+  nav ul{
+    list-style-type: none;
+  }
+  
+  nav ul li{
+    float: left;
+    width: 11%;
+    text-align: center;
+    position: relative;
+  }
+  
+  nav ul::after{
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  nav a{
+    display: block;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    border-bottom: 2px solid transparent;
+    padding: 10px 0px;
+  }
+  
+  nav a:hover{
+    color: #4777fc;
+    
+  }
+  
+  .sous{
+    z-index: 10;
+    border-top: 4px solid #ffffff;
+    display: none;
+    box-shadow: 0px 1px 2px rgb(173, 173, 173);
+    background-color: white;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+  }
+  nav > ul li:hover .sous{
+    display: block;
+  }
+  .sous li{
+    float: none;
+    width: 100%;
+    text-align: left;
+  }
+  .sous a{
+    padding: 10px;
+    border-bottom: none;
+  }
+  .sous a:hover{
+    border-bottom: none;
+    background-color: RGBa(200,200,200,0.1);
+    z-index: 100; 
+  }
+  .deroulant > a::after{
+    content:" ⚫";
+    font-size: 12px;
+  }
+  /*----------------------------------------------------------------------------------------------*/
+  /* bot */
+  .header-bot{
+    margin-top: -16px;
+    background: #e43535;
+    padding: 2px ;
+    text-align: center;
+    position: sticky;
+  }
+  
+  /*----------------------------------------------------------------------------------------------*/
+  /*----------------------------------------------------------------------------------------------*/
+  /*----------------------------------------------------------------------------------------------*/
+  
+  /* FOOTER */
+  #scroll_to_top {
+    z-index: 20;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    bottom: 30px;
+    right: 55px;
+  }
+  #scroll_to_top img {
+    
+    width: 50px;
+  }
+  
+  footer{
+      text-align: center;
+      background: #262626;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+  
+    }
+   
+    .footer-content{
+      bottom: 0px;
+      background: #262626;
+      width: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .socials{
+      margin-bottom: 0px;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem 0 2rem 0;
+    }
+    .socials li{
+      margin: 0 20px;
+    }
+    .socials a{
+      color: #fff;
+    }
+    .socials a i{
+      font-size: 1.1rem;
+      transition: color .4s ease;
+    
+    }
+    .socials a:hover i{
+      color: #4777fc;
+    }
+  
+    /*----------------------------------------------------------------------------------------------*/
+  /* bot */
+  .footer-bottom{
+    width: 100%;
+    height: 40%;
+    position: relative;
+    bottom: 0;
+    background: #4777fc;
+    text-align: center;
+  }
+
+  span{
+    color: #262626;
+  }
+  span:hover{
+    color: rgb(255, 255, 255);
+    transition: 0.5s;
+    cursor:default;
+  }
+  
+     /*----------------------------------------------------------------------------------------------*/
+  /* voitures */
+  
+  /*AJOUTER FICHE */
+
+  .addFiche{
+    background-color: rgb(255, 255, 255);
+    border: dashed rgb(169, 179, 255);
+    height: 35px;
+    margin-left:  30px;
+    width: 300px;
+  }
+  
+   /*AJOUTER CONSTRUCTEUR */
+
+   @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+table {
+  background: #d8ecff;
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 1em;
+}
+.constructeurDash{
+  float: left;
+  width: 300px;
+}
+.typeDash{
+  float: left;
+  width: 300px;
+}
+.modeleDash{
+  float: left;
+  width: 300px;
+}
+.anneeDash{
+  float: left;
+  width: 300px;
+}
+th {
+  border-bottom: 1px solid #364043;
+  color: #010634;
+  font-size: 0.85em;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+td {
+  color: #000000;
+  font-weight: 400;
+  padding: 0.65em 1em;
+}
+.disabled td {
+  color: #ff0000;
+}
+tbody tr {
+  transition: background 0.25s ease;
+}
+tbody tr:hover {
+  background: rgb(206, 222, 255);
+}
+
+
+  
+  
+  
