@@ -47,8 +47,28 @@ body{
     min-height: calc(100vh - 100px - 116px);
   }
 
+  /*PATH*/
+
+  .boutonPath{
+    color: #2b231f;
+  }
+  .boutonPath:hover{
+    color: #b29586;
+  }
+
+  .boutonPathActual{
+    color: #b29586;
+  }
+
+  .boutonPathActual:hover{
+    color: #b29586;
+  }
+
+  /* INDEX */
+
   /* INDEX CAROUSEL */
   .carousel-item {
+    margin-top: 10px;
     width: 100%;
     height: 78%;
     min-height: 350px;
@@ -72,9 +92,21 @@ body{
     width: 1%;
   }
 
+  /* INDEX BLOCS */
+
+  .bloc-index{
+    background: #2b231f;
+    padding: 5px 0;
+    text-align: center;
+  }
+
+  .bloc-index-info{
+    background: #b8a283;
+    padding: 100px 0;
+    text-align: center;
+  }
 
   /*------FICHE-------*/
-
 
   /*------FICHE1-------*/
   .article-div-fiche{
@@ -93,7 +125,7 @@ body{
   }
 
   .h5Title{
-
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     margin-top: -30px;
 
   }
@@ -217,7 +249,7 @@ body{
   .column {
     z-index: 1;
     float:left;
-    width: 25%;
+    width: 20%;
     padding: 3px;
     margin-top: 20px;
   }
@@ -256,7 +288,7 @@ body{
 
   .columnPreferences{
     float:right;
-    width: 25%;
+    width: 20%;
     padding: 3px;
     margin-top: 20px;
   }
@@ -277,7 +309,7 @@ body{
   .checkbox_select_anchor
   {
     display: block;
-    background: rgb(116, 87, 63);
+    background: rgb(139, 112, 90);
     color: white;
     cursor: pointer;
     padding: 10px 5px 5px;
@@ -917,7 +949,7 @@ tbody tr:hover {
     height: 40%;
     position: relative;
     bottom: 0;
-    background: #a19786;
+    background: #b8a283;
     text-align: center;
   }
   .pCarousel{

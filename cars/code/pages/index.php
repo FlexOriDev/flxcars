@@ -11,6 +11,11 @@
 <?php include '../includesHeaderFooter/header.php'; ?>
 
 <!---------------------------------------------MAIN----------------------------------------------------->
+<main>
+<!-------------------PATH---------------------->
+<a class="boutonPathActual">Accueil</a>
+<!-------------------PATH---------------------->
+
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -60,10 +65,16 @@
       <span class="visually-hidden">Next</span>
     </button>
 </div>
-<main>
 
+<div class="bloc-index">
+    
+</div>
 
 
 </main>
+<div class="bloc-index-info">
+    
+</div>
+<br><br><br><br><br><br>
 <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
 <?php require '../includesHeaderFooter/footer.php' ; ?>

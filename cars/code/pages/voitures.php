@@ -20,7 +20,8 @@ require('../actions/database.php');
 
 <!-------------------------CONTENT--------------------------->
 
-
+<a href="index.php" class="boutonPath">Accueil</a>
+<a class="boutonPathActual">/Voitures</a>
 
 <!-----------------------PARTIE FORMS------------------------>
 

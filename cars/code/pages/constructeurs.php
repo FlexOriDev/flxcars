@@ -20,6 +20,8 @@ require('../actions/database.php');
 
 <!-------------------------CONTENT--------------------------->
 
+<a href="index.php" class="boutonPath">Accueil</a>
+<a class="boutonPathActual">/Constructeurs</a>
 
 <!-----------------------PARTIE FORMS------------------------>
 
@@ -158,3 +160,5 @@ include("../actions/actionsConstructeur/allConstructeurs.php");
 </div> 
 
 </main>
+
+<?php require '../includesHeaderFooter/footer.php' ; ?>

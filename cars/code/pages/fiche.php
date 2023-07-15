@@ -1,9 +1,22 @@
+<!--------------------------------------------HEAD------------------------------------------------------>
+<head>
+    <link rel="shortcut icon" href="img/fav.png"><!--favicon du site-->
+    <meta charset ="utf_8"><!--Encodage universel-->
+
+    <title>Voitures</title><!--Titre de la page web-->
+</head>
+
 <?php 
 include '../includesHeaderFooter/header.php'; 
 
 ?>
 
 <main>
+
+ <a href="index.php" class="boutonPath">Accueil</a>
+ <a href="voitures.php" class="boutonPath">/Voitures</a>
+ <a class="boutonPathActual">/Fiche</a>
+
 
 <div class="fiche-container">
         <?php 
