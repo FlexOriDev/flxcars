@@ -15,6 +15,7 @@ $(function()
 			{	
 				var str = window.location.href;
 
+				var indexConstructeur = str.indexOf("id_constructeur");
 				var indexPays = str.indexOf("id_pays");
 				var indexGroupe = str.indexOf("id_groupe");
 
@@ -25,7 +26,7 @@ $(function()
 				if(e.selected.length !== 0){
 
 					//Il existe deja une requete dans les composants
-					if(indexPays !== -1 | indexGroupe !== -1){
+					if(indexPays !== -1 | indexGroupe !== -1 | indexConstructeur !== -1){
 						if(indexPays !== -1){
 							for(var i = indexPays; i < str.length; i++){
 								if(i == str.length-1){
@@ -63,6 +64,9 @@ $(function()
 					var secondCase3 = false;
 					var indexSecondCase3 = -1;
 					var cptTags = 0;
+					if(indexConstructeur !== -1){
+						cptTags++;
+					}
 					if(indexPays !== -1){
 						cptTags++;
 					}

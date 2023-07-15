@@ -8,12 +8,12 @@ require('../actions/fiche/ajouteAnnee.php');
 require('../actions/fiche/ajoutePays.php'); 
 require('../actions/fiche/ajouteGroupe.php'); 
 
-require('../actions/actionsVoiture/allConstructeurs.php'); 
-require('../actions/actionsVoiture/allTypes.php'); 
-require('../actions/actionsVoiture/allModeles.php'); 
-require('../actions/actionsVoiture/allAnnees.php'); 
-require('../actions/actionsVoiture/allPays.php'); 
-require('../actions/actionsVoiture/allGroupes.php'); 
+require('../actions/actionsConstructeur/allConstructeurs.php'); 
+require('../actions/actionsType/allTypes.php'); 
+require('../actions/actionsModele/allModeles.php'); 
+require('../actions/actionsAnnee/allAnnees.php'); 
+require('../actions/actionsPays/allPays.php'); 
+require('../actions/actionsGroupe/allGroupes.php'); 
 ?>
 
 <main>

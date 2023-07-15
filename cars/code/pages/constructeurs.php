@@ -20,15 +20,42 @@ require('../actions/database.php');
 
 <!-------------------------CONTENT--------------------------->
 
-<article id="article-1">
-        <h1>Constructeurs</h1>
-</article>
 
 <!-----------------------PARTIE FORMS------------------------>
 
 
 
 <div class="rowPreferences" id="colonnePreferences">
+
+<div class="columnPreferences">
+
+<!-------------CONSTRUCTEURS------------->
+
+<form method="post" id="make_checkbox_select_constructeurs2">
+
+<select name="Constructeurs" multiple="multiple" id="current_select">
+      <?php 
+			$getAllConstructeurs = $bdd->query('SELECT * FROM constructeurs ORDER BY nom');
+			$getAllConstructeurs->execute(array());
+				foreach($getAllConstructeurs as $constructeur ){
+                    ?>
+					<option value=<?= $constructeur['id']; ?> name=<?= $constructeur['nom']; ?> ><?= $constructeur['nom']; ?></option>
+                    <?php
+                }
+    	?>
+      
+  </select>
+  <input type="submit" class="sub-drop1"/>
+</form>
+
+  <!--On envoie le script personalisé pour cette checkbox = MARQUES-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+  <?php
+    include("../scripts/checkboxConstructeurs2.php");
+  ?>
+  
+  </div>
 
   <div class="columnPreferences">
 
@@ -93,10 +120,41 @@ require('../actions/database.php');
 
 
 
-
-
-
-
 <!-----------------------AFFICHAGE VOITURES------------------------>
+<?php 
+include("../actions/actionsConstructeur/allConstructeurs.php");
+?>
+<div class="row" id="colonne">
+
+  <?php if(isset($error)){ echo '<p>'.$error.'</p>'; } ?>
+  <?php 
+    
+      while($ficheConstructeur = $getAllConstructeurs->fetch()){
+        $getPays = $bdd->prepare('SELECT nom FROM pays WHERE id=?');
+        $getPays->execute(array($ficheConstructeur['id_pays']));
+        $pays = $getPays->fetch();
+
+        $getGroupe = $bdd->prepare('SELECT nom FROM groupes WHERE id=?');
+        $getGroupe->execute(array($ficheConstructeur['id_groupe']));
+        $groupe = $getGroupe->fetch();
+        if(empty($groupe)){
+          $groupe="";
+        }else{
+          $groupe = $groupe['nom'];
+        };
+  ?>
+
+  <div class="column">
+    <a href="voitures.php?id_constructeur=<?= $ficheConstructeur['id']; ?>"><input type=image class="voitures" src=../../library/imgConstructeurs/<?= $ficheConstructeur['image']; ?> /></a>
+    <div class="text">
+      <p class="nomWidgetFiche">  <?= $ficheConstructeur['nom']; ?> </p>
+    </div> 
+  </div>
+
+  <?php
+    }
+  ?>
+
+</div> 
 
 </main>
