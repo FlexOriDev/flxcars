@@ -160,6 +160,36 @@ require('../actions/database.php');
 
   </div>
 
+  <div class="columnPreferences">
+    <!-------------SEGMENT------------->
+
+<form id="make_checkbox_select_segments">
+
+<select name="Segment">
+    <?php 
+    $getAllSegments = $bdd->query('SELECT * FROM segments ORDER BY nom');
+    $getAllSegments->execute(array());
+      foreach($getAllSegments as $segment ){
+                  
+                  ?>
+        <option value=<?= $segment['id']; ?> name=<?= $segment['nom']; ?>><?= $segment['nom']; ?></option>
+                  <?php
+              }
+    ?>
+    
+</select>
+<input type="submit" class="sub-drop1" name="validateFormes"/>
+</form>
+
+<!--On envoie le script personalisé pour cette checkbox = FORMES-->
+
+  
+<?php
+  include("../scripts/checkboxSegments.php");
+?>	
+
+  </div>
+
 </div> 
 
 

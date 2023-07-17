@@ -20,6 +20,7 @@ $(function()
             var indexType = str.indexOf("id_type");
             var indexModele = str.indexOf("id_modele");
             var indexAnnee = str.indexOf("id_annee");
+            var indexSegment = str.indexOf("id_segment");
 
             var firstCase = false;
             var secondCase = false;
@@ -28,7 +29,7 @@ $(function()
             if(e.selected.length !== 0){
 
                 //Il existe deja une requete dans les composants
-                if(indexConstructeur !== -1 | indexType !== -1 | indexModele !== -1 | indexAnnee !== -1){
+                if(indexConstructeur !== -1 | indexType !== -1 | indexModele !== -1 | indexAnnee !== -1 | indexSegment !== -1){
                     if(indexModele !== -1){
                         for(var i = indexModele; i < str.length; i++){
                             if(i == str.length-1){
@@ -78,6 +79,9 @@ $(function()
                 if(indexAnnee !== -1){
                     cptTags++;
                 }
+                if(indexSegment !== -1){
+					cptTags++;
+				}
                 if(indexModele !== -1){
                     for(var i = indexModele; i < str.length; i++){
                             if(i == str.length-1){
