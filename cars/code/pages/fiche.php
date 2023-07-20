@@ -75,20 +75,22 @@ include '../includesHeaderFooter/header.php';
                 ?>
 
                 <article class="boxLeftResume">
-
+                                
                                 <p class="textResumeFiche"><?= $ficheInfos['resume']; ?></p>
 
                 </article>
 
                 <div class="boxButtonLeftDate">
 
-                                <a class="buttonLeftDate" ><p class="textButtonDateFiche"><?= $ficheAnne['nom']; ?></p></a>
+                                <a><p class="textButtonDateFiche"><?= $ficheAnne['nom']; ?></p></a>
+                                <img class="imgLeftDate" src="../../library/imgIconsFiche/date.png">
 
                 </div>
 
                 <div class="boxButtonLeftOne">
 
                                 <a class="buttonLeftOne" ><p class="textButtonOneFiche"><?= $fichePays['nom']; ?></p></a>
+                                <img class="imgLeftPays" src="../../library/imgIconsFiche/pays.png">
 
                 </div>
 
@@ -114,36 +116,42 @@ include '../includesHeaderFooter/header.php';
                 <div class="boxButtonRightOne">
 
                                 <a href="#" class="buttonRightOne" ><p class="textButtonOneRightFiche"><?= $ficheSegment['nom']; ?></p></a>
+                                <img class="imgLeftSegment" src="../../library/imgIconsFiche/segment.png">
 
                 </div>
 
                 <div class="boxButtonRight2">
 
                                 <a href="#" class="buttonRight2" ><p class="textButton2RightFiche"><?= $ficheGroupeFinal; ?></p></a>
+                                <img class="imgLeftGroupe" src="../../library/imgIconsFiche/groupe.png">
 
                 </div>
 
                 <div class="boxButtonRight3">
 
                                 <a href="#resume" class="buttonRight3" ><p class="textButton3RightFiche">Résumé</p></a>
+                                <img class="imgLeftResume" src="../../library/imgIconsFiche/resume.png">
 
                 </div>
 
                 <div class="boxButtonRight4">
 
                                 <a href="#histoire" class="buttonRight4" ><p class="textButton4RightFiche">Histoire</p></a>
+                                <img class="imgLeftHistoire" src="../../library/imgIconsFiche/histoire.png">
 
                 </div>
 
                 <div class="boxButtonRight5">
 
                                 <a href="#technique" class="buttonRight5" ><p class="textButton5RightFiche">Technique</p></a>
+                                <img class="imgLeftTechnique" src="../../library/imgIconsFiche/technique.png">
 
                 </div>
 
                 <div class="boxButtonRight6">
 
                                 <a href="#photos" class="buttonRight6" ><p class="textButton6RightFiche">Photos</p></a>
+                                <img class="imgLeftPhoto" src="../../library/imgIconsFiche/photo.png">
 
                 </div>
 
@@ -171,7 +179,7 @@ include '../includesHeaderFooter/header.php';
                 </article>
                 <br>
                 <article class="article-fiche-name3">
-                        <p><?= $ficheInfos['description']; ?></p>
+                        <p class="textResumeFiche"><?= $ficheInfos['description']; ?></p>
                 </article>
                 <br><br><br>
                 <article class="article-fiche-title" id="histoire">
