@@ -3,29 +3,38 @@
     <link rel="shortcut icon" href="img/fav.png"><!--favicon du site-->
     <meta charset ="utf_8"><!--Encodage universel-->
 
-    <title>Voitures</title><!--Titre de la page web-->
+    <title>Fiche</title><!--Titre de la page web-->
 </head>
+<!--------------------------------------------HEAD------------------------------------------------------>
 
+<!--------------------------------------------HEADER------------------------------------------------------>
 <?php 
 include '../includesHeaderFooter/header.php'; 
-
 ?>
+<!--------------------------------------------HEADER------------------------------------------------------>
 
-<main>
+<!----------PATH---------->
+<div class="pathButtons">
+        <a href="index.php" class="boutonPath">Accueil</a>
+        <a href="voitures.php" class="boutonPath">/Voitures</a>
+        <a class="boutonPathActual">/Fiche</a>
+</div>
+<!----------PATH---------->
 
- <a href="index.php" class="boutonPath">Accueil</a>
- <a href="voitures.php" class="boutonPath">/Voitures</a>
- <a class="boutonPathActual">/Fiche</a>
+<!----------CARD---------->
+<div class="cardFiche">
 
-
-<div class="fiche-container">
-        <?php 
+<?php 
         if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 
                 $fiche_id = $_GET['id_fiche'];
 
                 $getInfosOfThisFicheReq = $bdd->prepare('SELECT * FROM fiches WHERE id = ?');
                 $getInfosOfThisFicheReq->execute(array($fiche_id));
+
+                if(empty($getInfosOfThisFicheReq)){
+                        echo "Fiche introuvable.";
+                }else{
         
                 $ficheInfos = $getInfosOfThisFicheReq->fetch();
 
@@ -34,45 +43,112 @@ include '../includesHeaderFooter/header.php';
 
                 $ficheConstructeur = $getConstructor->fetch();
 
+                $getPays = $bdd->prepare('SELECT * FROM pays WHERE id = ?');
+                $getPays->execute(array($ficheConstructeur['id_pays']));
+
+                $fichePays = $getPays->fetch();
+
+                $getAnnee = $bdd->prepare('SELECT * FROM annees WHERE id = ?');
+                $getAnnee->execute(array($ficheInfos['id_annee']));
+
+                $ficheAnne = $getAnnee->fetch();
+
+                $getGroupe = $bdd->prepare('SELECT * FROM groupes WHERE id = ?');
+                $getGroupe->execute(array($ficheConstructeur['id_groupe']));
+                $ficheGroupe = $getGroupe->fetch();
+                $ficheGroupeFinal = $ficheConstructeur['nom'];
+
+                if($ficheGroupe){  
+                        $ficheGroupeFinal = $ficheGroupe['nom'];
+                }
+
                 $getType = $bdd->prepare('SELECT * FROM types WHERE id = ?');
                 $getType->execute(array($ficheInfos['id_type']));
 
                 $ficheType = $getType->fetch();
+
+                $getSegment = $bdd->prepare('SELECT * FROM segments WHERE id = ?');
+                $getSegment->execute(array($ficheInfos['id_segment']));
+
+                $ficheSegment = $getSegment->fetch();
                 
                 ?>
 
-                <div class="article-div-fiche">
-                        <article class="article-fiche-name">
+                <article class="boxLeftResume">
 
-                                <h6 class="ficheConstruct"><?= $ficheConstructeur['nom']; ?></h6>
-                                <h5 class="h5Title"><?= $ficheInfos['nom']; ?></h5>
-                                <h6 class="ficheType"><?= $ficheType['nom']; ?></h6>
+                                <p class="textResumeFiche"><?= $ficheInfos['resume']; ?></p>
+
+                </article>
+
+                <div class="boxButtonLeftDate">
+
+                                <a class="buttonLeftDate" ><p class="textButtonDateFiche"><?= $ficheAnne['nom']; ?></p></a>
+
+                </div>
+
+                <div class="boxButtonLeftOne">
+
+                                <a class="buttonLeftOne" ><p class="textButtonOneFiche"><?= $fichePays['nom']; ?></p></a>
+
+                </div>
+
+                <div class="boxButtonLeftTwo">
+
+                                <a href="#" class="buttonLeftTwo" ><p class="textButtonTwoFiche"><?= $ficheType['nom']; ?></p></a>
+
+                </div>
+
+                <div class="boxTopAndPicture">
+
+                        <article class="boxTopPictureFiche">
+
+                                <h6 class="textFicheConstruct"><?= $ficheConstructeur['nom']; ?> - <?= $ficheInfos['nom']; ?></h6>
                                 
                         </article>
-                </div>
-                
-                <br>
-                <div class="imgFicheDiv">
 
-                <img class="imgFiche" src="../../library/img/<?= $ficheInfos['image']; ?>">
-
-                </div>
-                
-                <br><br><br>
-
-                <div class="article-div-fiche-2">
-                        <article class="article-fiche-name2">
-                                <p><?= $ficheInfos['resume']; ?></p>
-                        </article>
-                </div>
-                <br><br><br><br>
-                <div class="article-div-fiche-3">
-                        <article class="article-fiche-name3">
-                                <p><?= $ficheInfos['description']; ?></p>
-                        </article>
+                        <div class="containerPictureFiche">
+                                <img class="pictureFiche" src="../../library/img/<?= $ficheInfos['image']; ?>">
+                        </div>
                 </div>
 
-                <?php
+                <div class="boxButtonRightOne">
+
+                                <a href="#" class="buttonRightOne" ><p class="textButtonOneRightFiche"><?= $ficheSegment['nom']; ?></p></a>
+
+                </div>
+
+                <div class="boxButtonRight2">
+
+                                <a href="#" class="buttonRight2" ><p class="textButton2RightFiche"><?= $ficheGroupeFinal; ?></p></a>
+
+                </div>
+
+                <div class="boxButtonRight3">
+
+                                <a href="#resume" class="buttonRight3" ><p class="textButton3RightFiche">Résumé</p></a>
+
+                </div>
+
+                <div class="boxButtonRight4">
+
+                                <a href="#histoire" class="buttonRight4" ><p class="textButton4RightFiche">Histoire</p></a>
+
+                </div>
+
+                <div class="boxButtonRight5">
+
+                                <a href="#technique" class="buttonRight5" ><p class="textButton5RightFiche">Technique</p></a>
+
+                </div>
+
+                <div class="boxButtonRight6">
+
+                                <a href="#photos" class="buttonRight6" ><p class="textButton6RightFiche">Photos</p></a>
+
+                </div>
+
+        <?php
+                }
 
         }else{
                 echo "Fiche introuvable.";
@@ -81,11 +157,47 @@ include '../includesHeaderFooter/header.php';
                 
 
         ?>
-        
-
 </div>
 
-<?php if(isset($errorMsg)){ echo '<p>'.$errorMsg.'</p>'; } ?>
+
+<!----------CARD---------->
+
+<!--------------------------------------------MAIN------------------------------------------------------>
+<main>
+
+<div class="fiche-container">
+                <article class="article-fiche-title" id="resume">
+                        <h1>Résumé</h1>
+                </article>
+                <br>
+                <article class="article-fiche-name3">
+                        <p><?= $ficheInfos['description']; ?></p>
+                </article>
+                <br><br><br>
+                <article class="article-fiche-title" id="histoire">
+                        <h1>Histoire</h1>
+                </article>
+                <br>
+                <article class="article-fiche-name3">
+                        <p><?= $ficheInfos['description']; ?></p>
+                </article>
+                <br><br><br>
+                <article class="article-fiche-title" id="technique">
+                        <h1>Technique</h1>
+                </article>
+                <br>
+                <article class="article-fiche-name3">
+                        <p><?= $ficheInfos['description']; ?></p>
+                </article>
+                <br><br><br>
+                <article class="article-fiche-title" id="photos">
+                        <h1>Photos</h1>
+                </article>
+</div>
+
+<br><br><br><br><br><br>
 
 </main>
+<!--------------------------------------------MAIN------------------------------------------------------>
 
+<?php require '../includesHeaderFooter/footer.php' ; ?>

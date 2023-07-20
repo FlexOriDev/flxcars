@@ -10,11 +10,14 @@
 
 <?php include '../includesHeaderFooter/header.php'; ?>
 
+<!----------PATH---------->
+<div class="pathButtons">
+        <a class="boutonPathActual">Accueil</a>
+</div>
+<!----------PATH---------->
+
 <!---------------------------------------------MAIN----------------------------------------------------->
 <main>
-<!-------------------PATH---------------------->
-<a class="boutonPathActual">Accueil</a>
-<!-------------------PATH---------------------->
 
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">

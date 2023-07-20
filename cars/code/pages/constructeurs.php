@@ -11,17 +11,20 @@
 <?php 
 include '../includesHeaderFooter/header.php'; 
 require('../actions/database.php');
-
 ?>
+
+<!----------PATH---------->
+<div class="pathButtons">
+  <a href="index.php" class="boutonPath">Accueil</a>
+  <a class="boutonPathActual">/Constructeurs</a>
+</div>
+<!----------PATH---------->
 
 <!---------------------------------------------MAIN----------------------------------------------------->
 
 <main>
 
 <!-------------------------CONTENT--------------------------->
-
-<a href="index.php" class="boutonPath">Accueil</a>
-<a class="boutonPathActual">/Constructeurs</a>
 
 <!-----------------------PARTIE FORMS------------------------>
 

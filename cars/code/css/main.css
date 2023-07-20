@@ -10,11 +10,39 @@ body{
     position: relative;
     padding-bottom: 115px;
     min-height: 100vh;
+    font-size: 100%
   }
 
-  p{
-    color: #141414;
+  p {
+    font-size: 1em;
+    line-height: 1em;;
   }
+
+@media screen and (max-width: 90em) {
+  p {
+    font-size: 0.5em;
+    line-height: 0.5em;;
+  }
+}
+
+@media screen and (max-width: 50em) {
+  p {
+      font-size: 0.25em;
+    }
+  }
+  
+  @media screen and (max-width: 30em){
+    p {
+      font-size: 0.125em;
+    }
+  }
+
+  @media screen and (max-width: 10em){
+    p {
+      font-size: 0.0625em;
+    }
+  }
+
 
 .text{
   background-color: #e7d9c8;
@@ -50,6 +78,11 @@ body{
 
   /*PATH*/
 
+  .pathButtons{
+    margin-top: 30px;
+    margin-left: 116px;
+  }
+
   .boutonPath{
     color: #2b231f;
   }
@@ -64,6 +97,7 @@ body{
   .boutonPathActual:hover{
     color: #b29586;
   }
+  /*PATH*/
 
   /* INDEX */
 
@@ -106,6 +140,8 @@ body{
     padding: 100px 0;
     text-align: center;
   }
+
+  /* INDEX */
 
   /*------FICHE-------*/
 
@@ -453,6 +489,12 @@ body{
     .checkboxs{
       display: inline-block;
     }
+
+  /* CONTENT VOITURES.php */
+
+  .errorCarNotFind{
+    margin-top: 20px;
+  }
   
   /*----------------------------------------------------------------------------------------------*/
   /*----------------------------------------------------------------------------------------------*/
@@ -891,4 +933,402 @@ tbody tr:hover {
   }
   
   
+  /*----------------------------------FICHE------------------------------------------*/
+
+  /*--------------CARD------------------*/
+
+  .cardFiche{
+    position: relative;
+    background-color: #c6baab;
+    margin-top: 30px;
+    width: 100%;
+    height: 65%;
+    box-shadow: 0px 5px 5px #3e2f25;
+  }
+
+  .boxTopAndPicture{
+    z-index: 1;
+    border-radius: 30px;
+    position: absolute;
+    top: 40%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 45%;
+  }
+
+  .boxTopPictureFiche{
+    border-radius: 15px;
+    background-color: #a49480;
+    height: 150px;
+  }
+
+  .pictureFiche{
+    box-shadow: 0px 5px 5px #3e2f25;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    width: 100%;
+  }
   
+  .textFicheConstruct{
+    text-align: center;
+    color: #3e2f25;
+    font-size: 1.7em;
+    margin-top: 2.5%;
+  }
+
+  /* RESUME */
+
+  .boxLeftResume{
+    box-shadow: 10px 5px 5px #3e2f25;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background-color: #a49480;
+    position: absolute;
+    top: 13%; left: 15.1%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: 14%;
+  }
+
+  .textResumeFiche{
+    margin: auto;
+    color: #1e1812;
+  }
+
+  /* RESUME */
+
+  /* BUTTON DATE */
+
+  .boxButtonLeftDate{
+    background-color: #ffffff;
+    box-shadow: 5px 5px 5px #3e2f25;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    position: absolute;
+    top: 30%; left: 22.1%;
+    transform: translate(-50%, -50%);
+    width: 11%;
+    height: 12%;
+  }
+
+  .boxButtonLeftDate:hover{
+    background-color: #ffffff;
+    transition: 1s;
+  }
+
+  .buttonLeftDate{
+    display:block;width:100%;height:100%;
+    text-decoration: none;
+  }
+
+  .textButtonDateFiche{
+    white-space: nowrap;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #261d15;
+  }
+
+  /* BUTTON DATE */
+
+  /* BUTTON PAYS */
+
+  .boxButtonLeftOne{
+    background-color: #ffffff;
+    box-shadow: 5px 5px 5px #3e2f25;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    position: absolute;
+    top: 46%; left: 22.1%;
+    transform: translate(-50%, -50%);
+    width: 11%;
+    height: 12%;
+  }
+  
+  .boxButtonLeftOne:hover{
+    background-color: #ffffff;
+    transition: 1s;
+  }
+
+  .buttonLeftOne{
+    display:block;width:100%;height:100%;
+    text-decoration: none;
+  }
+
+  .textButtonOneFiche{
+    white-space: nowrap;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #261d15;
+  }
+
+  /* BUTTON PAYS */
+
+  /* BUTTON TYPE */
+
+  .boxButtonLeftTwo{
+    background-color: #a49480;
+    box-shadow: 5px 5px 5px #3e2f25;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    position: absolute;
+    top: 62%; left: 22.1%;
+    transform: translate(-50%, -50%);
+    width: 11%;
+    height: 12%;
+    transition: 1s;
+  }
+
+  .boxButtonLeftTwo:hover{
+    background-color: #f5e4cf;
+    transition: 1s;
+  }
+
+  .buttonLeftTwo{
+    display:block;width:100%;height:100%;
+    text-decoration: none;
+  }
+
+  .textButtonTwoFiche{
+    white-space: nowrap;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #261d15;
+  }
+
+  /* BUTTON TYPE */
+
+  /* BUTTON SEGMENT */
+
+  .boxButtonRightOne{
+    background-color: #a49480;
+    box-shadow: 5px 5px 5px #3e2f25;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    position: absolute;
+    top: 78%; left: 22.1%;
+    transform: translate(-50%, -50%);
+    width: 11%;
+    height: 12%;
+    transition: 1s;
+  }
+
+  .boxButtonRightOne:hover{
+    background-color: #f5e4cf;
+    transition: 1s;
+  }
+
+  .buttonRightOne{
+    display:block;width:100%;height:100%;
+    text-decoration: none;
+  }
+
+  .textButtonOneRightFiche{
+    white-space: nowrap;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #261d15;
+  }
+
+  /* BUTTON SEGMENT */
+
+  /* BUTTON GROUPE */
+
+  .boxButtonRight2{
+    z-index: 2;
+    background-color: #a49480;
+    box-shadow: 5px 5px 5px #3e2f25;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    position: absolute;
+    top: 14%; left: 78%;
+    transform: translate(-50%, -50%);
+    width: 11%;
+    height: 12%;
+    transition: 1s;
+  }
+
+  .boxButtonRight2:hover{
+    background-color: #f5e4cf;
+    transition: 1s;
+  }
+
+  .buttonRight2{
+    display:block;width:100%;height:100%;
+    text-decoration: none;
+  }
+
+  .textButton2RightFiche{
+    white-space: nowrap;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #261d15;
+  }
+
+  /* BUTTON GROUPE */
+
+  /* BUTTON RESUME */
+
+  .boxButtonRight3{
+    z-index: 2;
+    background-color: #a49480;
+    box-shadow: 5px 5px 5px #3e2f25;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    position: absolute;
+    top: 30%; left: 78%;
+    transform: translate(-50%, -50%);
+    width: 11%;
+    height: 12%;
+    transition: 1s;
+  }
+
+  .boxButtonRight3:hover{
+    background-color: #f5e4cf;
+    transition: 1s;
+  }
+
+  .buttonRight3{
+    display:block;width:100%;height:100%;
+    text-decoration: none;
+  }
+
+  .textButton3RightFiche{
+    white-space: nowrap;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #261d15;
+  }
+
+  /* BUTTON RESUME */
+
+  /* BUTTON HISTOIRE */
+
+  .boxButtonRight4{
+    z-index: 2;
+    background-color: #a49480;
+    box-shadow: 5px 5px 5px #3e2f25;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    position: absolute;
+    top: 46%; left: 78%;
+    transform: translate(-50%, -50%);
+    width: 11%;
+    height: 12%;
+    transition: 1s;
+  }
+
+  .boxButtonRight4:hover{
+    background-color: #f5e4cf;
+    transition: 1s;
+  }
+
+  .buttonRight4{
+    display:block;width:100%;height:100%;
+    text-decoration: none;
+  }
+
+  .textButton4RightFiche{
+    white-space: nowrap;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #261d15;
+  }
+
+  /* BUTTON HISTOIRE */
+
+  /* BUTTON TECHNIQUE */
+
+  .boxButtonRight5{
+    z-index: 2;
+    background-color: #a49480;
+    box-shadow: 5px 5px 5px #3e2f25;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    position: absolute;
+    top: 62%; left: 78%;
+    transform: translate(-50%, -50%);
+    width: 11%;
+    height: 12%;
+    transition: 1s;
+  }
+
+  .boxButtonRight5:hover{
+    background-color: #f5e4cf;
+    transition: 1s;
+  }
+
+  .buttonRight5{
+    display:block;width:100%;height:100%;
+    text-decoration: none;
+  }
+
+  .textButton5RightFiche{
+    white-space: nowrap;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #261d15;
+  }
+
+  /* BUTTON TECHNIQUE */
+
+  /* BUTTON PHOTOS */
+
+  .boxButtonRight6{
+    z-index: 2;
+    background-color: #a49480;
+    box-shadow: 5px 5px 5px #3e2f25;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    position: absolute;
+    top: 78%; left: 78%;
+    transform: translate(-50%, -50%);
+    width: 11%;
+    height: 12%;
+    transition: 1s;
+  }
+
+  .boxButtonRight6:hover{
+    background-color: #f5e4cf;
+    transition: 1s;
+  }
+
+  .buttonRight6{
+    display:block;width:100%;height:100%;
+    text-decoration: none;
+  }
+
+  .textButton6RightFiche{
+    white-space: nowrap;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #261d15;
+  }
+
+  /* BUTTON PHOTOS */
+
+  /* BOX TITLE */
+
+  .article-fiche-title{
+    background-color: #a49480;
+  }
+
+  /* BOX TITLE */
+
+  /*----------------------------------FICHE------------------------------------------*/

@@ -39,7 +39,7 @@ if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AND !is
     }
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }
@@ -85,7 +85,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }
@@ -131,7 +131,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par annee de voiture
@@ -176,7 +176,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par segment de voiture
@@ -221,7 +221,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par constructeur automobile + type
@@ -272,7 +272,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par constructeur automobile + modele
@@ -323,7 +323,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par constructeur automobile + annee
@@ -374,7 +374,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par constructeur automobile + segment
@@ -425,7 +425,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par type + modele
@@ -476,7 +476,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par type + annee
@@ -527,7 +527,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par type + segment
@@ -578,7 +578,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par modele + annee
@@ -629,7 +629,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par modele + segment
@@ -680,7 +680,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par segment + annee
@@ -731,7 +731,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par constructeur + type + modele
@@ -786,7 +786,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par type + modele + annee
@@ -841,7 +841,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par modele + annee + segment
@@ -896,7 +896,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par annee + segment + constructeur
@@ -951,7 +951,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par segment + constructeur + types
@@ -1006,7 +1006,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par segment + modele + types
@@ -1061,7 +1061,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par segment + modele + constructeur
@@ -1116,7 +1116,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par segment + type + année
@@ -1171,7 +1171,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par modele + annee + constructeur
@@ -1226,7 +1226,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par annee + constructeur + type
@@ -1281,7 +1281,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par constructeur + type + modele + annee
@@ -1340,7 +1340,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par type + modele + annee + segment
@@ -1399,7 +1399,7 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par modele + annee + segment + constructeur
@@ -1458,7 +1458,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par annee + segment + constructeur + type
@@ -1517,7 +1517,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par segment + constructeur + type + modele
@@ -1576,7 +1576,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }// recherche par constructeur + type + modele + annee + segment
@@ -1638,7 +1638,7 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
             <?php 
      
     if($cpt == 0){
-        $error =  "Aucune annonce n'a été trouvée.";  
+        $error =  "Aucune voiture n'a été trouvée.";  
     }
   
 }else{

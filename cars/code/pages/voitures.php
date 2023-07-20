@@ -11,17 +11,20 @@
 <?php 
 include '../includesHeaderFooter/header.php'; 
 require('../actions/database.php');
-
 ?>
+
+<!----------PATH---------->
+<div class="pathButtons">
+        <a href="index.php" class="boutonPath">Accueil</a>
+        <a class="boutonPathActual">/Voitures</a>
+</div>
+<!----------PATH---------->
 
 <!---------------------------------------------MAIN----------------------------------------------------->
 
 <main>
 
 <!-------------------------CONTENT--------------------------->
-
-<a href="index.php" class="boutonPath">Accueil</a>
-<a class="boutonPathActual">/Voitures</a>
 
 <!-----------------------PARTIE FORMS------------------------>
 
@@ -200,7 +203,7 @@ include("../actions/actionsVoiture/allFiches.php");
 ?>
 
 
-  <?php if(isset($error)){ echo '<p>'.$error.'</p>'; } ?>
+  <?php if(isset($error)){ echo '<p class="errorCarNotFind">'.$error.'</p>'; } ?>
   <?php 
     
       while($fiche = $getAllFiches->fetch()){
