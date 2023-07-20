@@ -193,16 +193,12 @@ require('../actions/database.php');
 </div> 
 
 
-
-
-
-
-
 <!-----------------------AFFICHAGE VOITURES------------------------>
+<div class="row" id="colonne">
 <?php 
 include("../actions/actionsVoiture/allFiches.php");
 ?>
-<div class="row" id="colonne">
+
 
   <?php if(isset($error)){ echo '<p>'.$error.'</p>'; } ?>
   <?php 
@@ -229,6 +225,7 @@ include("../actions/actionsVoiture/allFiches.php");
   ?>
 
 </div> 
+
 
 </main>
 

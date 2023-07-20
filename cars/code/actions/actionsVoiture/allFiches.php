@@ -683,6 +683,57 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
         $error =  "Aucune annonce n'a été trouvée.";  
     }
   
+}// recherche par segment + annee
+else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AND !isset($_GET['id_type'] ) AND empty($_GET['id_type']) AND !isset($_GET['id_modele'] ) AND empty($_GET['id_modele']) AND isset($_GET['id_annee'] ) AND !empty($_GET['id_annee'])  AND isset($_GET['id_segment'] ) AND !empty($_GET['id_segment'])){
+    $ids_annees = explode(",", $_GET['id_annee']);
+    $cpt1 = 0;
+    foreach($ids_annees as $idAnnee) {
+        $ids_segment = explode(",", $_GET['id_segment']);
+        $cpt2 = 0;
+        ?>
+         
+
+                <?php 
+        foreach($ids_segment as $idSegment) {
+            $getAllFiches = $bdd->prepare('SELECT * FROM fiches WHERE id_segment=? AND id_annee =? ORDER BY nom');
+            $getAllFiches->execute(array($idSegment, $idAnnee));
+            if($getAllFiches->rowCount() > 0){
+                $cpt2++;
+            }
+                    if(isset($error)){ echo '<p>'.$error.'</p>'; } 
+                    while($fiche = $getAllFiches->fetch()){
+                        $getConstructeur = $bdd->prepare('SELECT nom FROM constructeurs WHERE id=?');
+                        $getConstructeur->execute(array($fiche['id_constructeur']));
+                        $constructeur = $getConstructeur->fetch();
+                
+                        $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
+                        $getAnnee->execute(array($fiche['id_annee']));
+                        $annee = $getAnnee->fetch();
+                ?>
+                <div class="column">
+                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                    <div class="text">
+                    <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
+                    </div> 
+                </div>
+
+                
+
+                <?php
+                    }
+                ?>
+                
+    <?php
+        }}
+    ?>
+           
+
+            <?php 
+     
+    if($cpt == 0){
+        $error =  "Aucune annonce n'a été trouvée.";  
+    }
+  
 }// recherche par constructeur + type + modele
 else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AND isset($_GET['id_type'] ) AND !empty($_GET['id_type']) AND isset($_GET['id_modele'] ) AND !empty($_GET['id_modele']) AND !isset($_GET['id_annee'] ) AND empty($_GET['id_annee'])  AND !isset($_GET['id_segment'] ) AND empty($_GET['id_segment'])){
     $ids_constructeurs = explode(",", $_GET['id_constructeur']);

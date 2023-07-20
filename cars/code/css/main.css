@@ -2,7 +2,8 @@
 /*----------------------------------------------------------------------------------------------*/
 /*body*/
 body{
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     width:100%;
     background: #fff7ed;
     min-height: 100vh;
@@ -818,13 +819,20 @@ tbody tr:hover {
     width: 50px;
   }
   
-  #footer{
-      text-align: center;
-      background: #2b231f;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-    }
+  .footer {
+    margin-top: 20px;
+    margin-bottom: -150px;
+    position: relative;
+    width: 100%;
+    background: #3586ff;
+    min-height: 100px;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
    
     .footer-content{
       bottom: 0px;
@@ -865,6 +873,7 @@ tbody tr:hover {
     /*----------------------------------------------------------------------------------------------*/
   /* bot */
   .footer-bottom{
+    height: 25px;
     width: 100%;
     position: absolute;
     bottom: 0;
