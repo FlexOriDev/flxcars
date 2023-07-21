@@ -28,31 +28,31 @@
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item active" style="background-image: url('../../library/imgFioritures/pexels-jae-park-3770875.jpg')">
+      <div class="carousel-item active" id="carousel-item-index-active" style="background-image: url('../../library/imgFioritures/pexels-jae-park-3770875.jpg')">
         <div class="carousel-caption">
             <h5></h5>
           <p class="pCarousel">Good parking.</p>
         </div>
       </div>
-      <div class="carousel-item" style="background-image: url('../../library/imgFioritures/pexels-tyler-clemmensen-8376563.jpg')">
+      <div class="carousel-item" id="carousel-item-index" style="background-image: url('../../library/imgFioritures/pexels-tyler-clemmensen-8376563.jpg')">
         <div class="carousel-caption">
          <h5></h5>
           <p class="pCarousel">BMW M2.</p>
         </div>
       </div>
-      <div class="carousel-item" style="background-image: url('../../library/imgFioritures/pexels-leif-bergerson-9582590.jpg')">
+      <div class="carousel-item" id="carousel-item-index" style="background-image: url('../../library/imgFioritures/pexels-leif-bergerson-9582590.jpg')">
         <div class="carousel-caption">
           <h5></h5>
           <p class="pCarousel">Audi Quattro S1.</p>
         </div>
       </div>
-      <div class="carousel-item" style="background-image: url('../../library/imgFioritures/white-sedan-driving-on-the-highway-accross-the-forest.jpg')">
+      <div class="carousel-item" id="carousel-item-index" style="background-image: url('../../library/imgFioritures/white-sedan-driving-on-the-highway-accross-the-forest.jpg')">
         <div class="carousel-caption">
           <h5></h5>
           <p class="pCarousel">Audi RS7.</p>
         </div>
       </div>
-      <div class="carousel-item" style="background-image: url('../../library/imgFioritures/pexels-mike-noga-3541743.jpg')">
+      <div class="carousel-item" id="carousel-item-index" style="background-image: url('../../library/imgFioritures/pexels-mike-noga-3541743.jpg')">
         <div class="carousel-caption">
           <h5></h5>
           <p class="pCarousel">Audi RS7.</p>

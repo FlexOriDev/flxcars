@@ -87,10 +87,11 @@
       </ul>
     </li>
 
+    <li class="deroulant"><a href="../pages/details.php">Détails &ensp;</a>
       <ul class="sous">
-        <li><a href="accueil.php#article-1">19ème</a></li>
-        <li><a href="accueil.php#article-2">20ème</a></li>
-        <li><a href="accueil.php#article-3">21ème</a></li>
+        <li><a href="details.php">Types</a></li>
+        <li><a href="details.php">Segments</a></li>
+        <li><a href="details.php">Goupes</a></li>
       </ul>
     </li>
 

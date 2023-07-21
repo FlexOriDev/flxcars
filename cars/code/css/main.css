@@ -102,7 +102,7 @@ body{
   /* INDEX */
 
   /* INDEX CAROUSEL */
-  .carousel-item {
+  #carousel-item-index {
     margin-top: 10px;
     width: 100%;
     height: 78%;
@@ -123,8 +123,16 @@ body{
     margin-top: 20px;
   }
 
-  .carousel-item active{
-    width: 1%;
+  #carousel-item-index-active{
+    margin-top: 10px;
+    width: 100%;
+    height: 78%;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
 
   /* INDEX BLOCS */
@@ -947,7 +955,7 @@ tbody tr:hover {
   }
 
   .boxTopAndPicture{
-    z-index: 1;
+    z-index: 5;
     border-radius: 30px;
     position: absolute;
     top: 40%; left: 50%;
@@ -1404,4 +1412,92 @@ tbody tr:hover {
 
   /* TEXT RESUME FICHE */
 
-  /*----------------------------------FICHE------------------------------------------*/
+  /* ERROR FICHE */
+
+  .errorFicheNonTrouvee{
+    margin-left: 115px;
+    padding-top: 50px;
+    font-size: large;
+    color: #8d1616;
+  }
+
+  /* ERROR FICHE */
+
+  /* GALLERY PICTURES */
+
+  div.img {
+    margin-right: 15px;
+    float: left;
+    width: 11.5%;
+}
+
+div.img:hover {
+  opacity: .5;
+}
+
+div.img img {
+    width: 100%;
+    height: auto;
+}
+
+/* GALLERY PICTURES */
+
+/* CARROUSEL PICTURES */
+
+.container {
+  margin-top: 8%;
+  margin-left: -0.6%;
+  width: 50%;
+  position: relative;
+}
+
+.slides {
+  display: none;
+}
+
+.prev{
+  text-decoration: none;
+  color: #000000;
+  font-style: none;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  padding: 16px;
+  border-radius: 0 3px 3px 0;
+  background: rgba(223, 222, 222, 0.5);
+  transition: all .3s;
+}
+
+.next{
+  text-decoration: none;
+  color: #000000;
+  cursor: pointer;
+  position: absolute;
+  margin-right: 12px;
+  top: 50%;
+  transform: translate(0, -50%);
+  padding: 16px;
+  border-radius: 0 3px 3px 0;
+  background: rgba(223, 222, 222, 0.5);
+  transition: all .3s;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover,
+.next:hover {
+  color: #000000;
+  background: rgba(112, 111, 111, 0.8);
+}
+
+
+
+/* CARROUSEL PICTURES */
+
+/*----------------------------------FICHE------------------------------------------*/
+
+  
