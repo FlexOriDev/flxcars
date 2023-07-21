@@ -121,6 +121,25 @@ foreach($getAllAnnees as $annee ){
 </select>
 
 </div>
+
+<br>
+<div class="drp">
+
+<select class="custom-select" id="select-5" name="id_segment">
+<option value="">Segment</option>
+<?php 
+$getAllSegment = $bdd->query('SELECT * FROM segments ORDER BY nom');
+$getAllSegment->execute(array());
+foreach($getAllSegment as $segment ){
+	
+	?>
+	<option value=<?= $segment['id']; ?>><?= $segment['nom']; ?></option>
+	<?php
+}
+?>
+</select>
+
+</div>
 <br>
 <div class="clear"> </div>
 <div class="register-but">

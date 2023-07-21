@@ -222,107 +222,184 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
         <?php
                         }
 
-}else{
-        echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
-}
-        
-                
-
         ?>
 
-<br><br><br><br><br><br>
 
 <!-- GALERIE -->
 
-<div class="img">
-  <a target="_blank" href="fjords.jpg">
-    <img src="../../library/img/audi_rs7.jpg" alt="Fjords" width="300" height="200">
-  </a>
-</div>
+<?php
 
-<div class="img">
-  <a target="_blank" href="forest.jpg">
-    <img src="../../library/img/audi_rs7.jpg" alt="Forest" width="300" height="200">
-  </a>
-</div>
+        $fiche_id = $_GET['id_fiche'];
 
-<div class="img">
-  <a target="_blank" href="lights.jpg">
-    <img src="../../library/img/audi_rs7.jpg" alt="Northern Lights" width="300" height="200">
-  </a>
-</div>
+        $getInfosOfThisFicheReq = $bdd->prepare('SELECT * FROM fiches WHERE id = ?');
+        $getInfosOfThisFicheReq->execute(array($fiche_id));
 
-<div class="img">
-  <a target="_blank" href="mountains.jpg">
-    <img src="../../library/img/audi_rs7.jpg" alt="Mountains" width="300" height="200">
-  </a>
-</div>
+        $ficheInfos = $getInfosOfThisFicheReq->fetch();
 
-<div class="img">
-  <a target="_blank" href="mountains.jpg">
-    <img src="../../library/img/audi_rs7.jpg" alt="Mountains" width="300" height="200">
-  </a>
-</div>
+        $getModele = $bdd->prepare('SELECT * FROM modeles WHERE id = ?');
+        $getModele->execute(array($ficheInfos['id_modele']));
 
-<div class="img">
-  <a target="_blank" href="mountains.jpg">
-    <img src="../../library/img/audi_rs7.jpg" alt="Mountains" width="300" height="200">
-  </a>
-</div>
+        $modele = $getModele->fetch();
 
-<div class="img">
-  <a target="_blank" href="mountains.jpg">
-    <img src="../../library/img/audi_rs7.jpg" alt="Mountains" width="300" height="200">
-  </a>
-</div>
+        if(!$ficheInfos){
+                echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
+        }else{
+                
+                $getPhotos = $bdd->prepare('SELECT * FROM imagesfiche WHERE id_modele=?');
+                $getPhotos->execute(array($ficheInfos['id_modele']));
 
-<!-- CARROUSEL -->
+                
 
-<div class="container">
-  <div class="slides">
-    <img src="../../library/img/audi_rs7.jpg" style="width:100%">
-  </div>
+                while($photo = $getPhotos->fetch()){
+                        
+                        $getNomFiche = $bdd->prepare('SELECT * FROM fiches WHERE id = ?');
+                        $getNomFiche->execute(array($photo['id_fiche']));
+                        $nomFiche = $getNomFiche->fetch()
 
-  <div class="slides">
-    <img src="../../library/img/maserati.jpg" style="width:100%">
-  </div>
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
-</div>
+                        ?>
+                        <br><br>
+                        <article class="article-fiche-title-photos">
+                                <h2 class="ficheTitreModelePhotos"><?= $nomFiche['nom']; ?></h2>
+                        </article>
+                        <br><br>
+                        <br><br>
+
+                        <?php
+                        if($photo['img_1']!=""){
+                        ?>
+
+                                <div class="img">
+                                        <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(1)">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_1']; ?>.jpg" alt=<?= $photo['img_1']; ?> width="300" height="200">
+                                        </a>
+                                </div>
+
+                        <?php }if($photo['img_2']!=""){
+                        ?>
+
+                                <div class="img">
+                                        <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(2)">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_2']; ?>.jpg" alt=<?= $photo['img_2']; ?> width="300" height="200">
+                                        </a>
+                                </div>
+
+                        <?php }if($photo['img_3']!=""){
+                        ?>
+
+                                <div class="img">
+                                        <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(3)">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_3']; ?>.jpg" alt=<?= $photo['img_3']; ?> width="300" height="200">
+                                        </a>
+                                </div>
+
+                        <?php }if($photo['img_4']!=""){
+                        ?>
+
+                                <div class="img">
+                                        <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(4)">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_4']; ?>.jpg" alt=<?= $photo['img_4']; ?> width="300" height="200">
+                                        </a>
+                                </div>
+
+                        <?php }if($photo['img_5']!=""){
+                        ?>
+                                
+                                <div class="img">
+                                        <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(5)">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_5']; ?>.jpg" alt=<?= $photo['img_5']; ?> width="300" height="200">
+                                        </a>
+                                </div>
+
+                        <?php }if($photo['img_1']!=""){
+                        ?>
+                                <!-- CARROUSEL -->
+
+                                <div class="container">
+                                <div class="slides<?= $photo['id_fiche']; ?>">
+                                <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_1']; ?>.jpg" style="width:100%">
+                                </div>
+
+                                <?php if($photo['img_2']!=""){
+                        ?>
+
+                                        <div class="slides<?= $photo['id_fiche']; ?>">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_2']; ?>.jpg" style="width:100%">
+                                        </div>
+
+                                <?php }if($photo['img_3']!=""){
+                        ?>
+
+                                        <div class="slides<?= $photo['id_fiche']; ?>">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_3']; ?>.jpg" style="width:100%">
+                                        </div>
+
+                                <?php }if($photo['img_4']!=""){
+                        ?>
+
+                                        <div class="slides<?= $photo['id_fiche']; ?>">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_4']; ?>.jpg" style="width:100%">
+                                        </div>
+
+                                <?php }if($photo['img_5']!=""){
+                        ?>
+
+                                        <div class="slides<?= $photo['id_fiche']; ?>">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_5']; ?>.jpg" style="width:100%">
+                                        </div>
+
+                                <?php }
+                        ?>
+
+                                <a class="prev" onclick="plusSlides<?= $photo['id_fiche']; ?>(-1)">&#10094;</a>
+                                <a class="next" onclick="plusSlides<?= $photo['id_fiche']; ?>(1)">&#10095;</a>
+                                </div>
+
+                                <script>
+
+                                let slideIndex<?= $photo['id_fiche']; ?> = 1;
+                                showSlides<?= $photo['id_fiche']; ?>(slideIndex<?= $photo['id_fiche']; ?>);
+
+
+                                function plusSlides<?= $photo['id_fiche']; ?>(n) {
+                                showSlides<?= $photo['id_fiche']; ?>(slideIndex<?= $photo['id_fiche']; ?> += n);
+                                }
+
+                                function currentSlide<?= $photo['id_fiche']; ?>(n) {
+                                showSlides<?= $photo['id_fiche']; ?>(slideIndex<?= $photo['id_fiche']; ?> = n);
+                                }
+
+                                function showSlides<?= $photo['id_fiche']; ?>(n) {
+                                let slides = document.getElementsByClassName('slides<?= $photo['id_fiche']; ?>');
+                                
+                                if(n > slides.length) { slideIndex<?= $photo['id_fiche']; ?> = 1 }
+                                
+                                if(n < 1 ) { slideIndex<?= $photo['id_fiche']; ?> = slides.length }
+                                
+                                // Cacher toutes les slides
+                                for(let i = 0; i < slides.length; i++) {
+                                slides[i].style.display = "none";
+                                }
+                                
+                                
+                                // Afficher la slide demandée
+                                slides[slideIndex<?= $photo['id_fiche']; ?> - 1].style.display = 'block';
+                                
+                                }
+
+                                </script>
+        <?php
+                        }
+                }
+        }
+
+}else{
+        echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
+}        
+
+        ?>
 <br>
 
-<script>
 
-let slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-    showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-    showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  let slides = document.getElementsByClassName('slides');
-  
-  if(n > slides.length) { slideIndex = 1 }
-  
-  if(n < 1 ) { slideIndex = slides.length }
-  
-  // Cacher toutes les slides
-  for(let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  
-  
-  // Afficher la slide demandée
-  slides[slideIndex - 1].style.display = 'block';
-  
-}
-
-</script>
 
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
