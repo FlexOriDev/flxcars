@@ -245,15 +245,15 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
                 echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
         }else{
                 
-                $getPhotos = $bdd->prepare('SELECT * FROM imagesfiche WHERE id_modele=?');
-                $getPhotos->execute(array($ficheInfos['id_modele']));
+                $getPhotos = $bdd->prepare('SELECT * FROM imagesfiche WHERE id_fiche=?');
+                $getPhotos->execute(array($fiche_id));
 
                 
 
-                while($photo = $getPhotos->fetch()){
+                $photo = $getPhotos->fetch();
                         
                         $getNomFiche = $bdd->prepare('SELECT * FROM fiches WHERE id = ?');
-                        $getNomFiche->execute(array($photo['id_fiche']));
+                        $getNomFiche->execute(array($fiche_id));
                         $nomFiche = $getNomFiche->fetch()
 
                         ?>
@@ -389,7 +389,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
                                 </script>
         <?php
                         }
-                }
+                
         }
 
 }else{

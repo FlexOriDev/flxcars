@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <link href="../css/main.css" rel="stylesheet"><!--lien vers feuille de style avec le nom de celle-ci-->
-  <link rel="shortcut icon" href="../../library/img/fav.png"><!--favicon du site-->
+  <link rel="shortcut icon" href="../../library/imgFioritures/logo_test.png"><!--favicon du site-->
   <title>Flx Cars</title><!--Titre de la page web-->
   <?php
     include("../actions/user/login.php");

@@ -31,21 +31,21 @@ require('../actions/database.php');
 
 <!-----------------------AFFICHAGE VOITURES------------------------>
 <?php 
-include("../actions/actionsType/allTypes.php");
+include("../actions/actionsSegment/allSegments.php");
 ?>
 <div class="row" id="colonne">
 
   <?php if(isset($error)){ echo '<p>'.$error.'</p>'; } ?>
   <?php 
     
-      while($ficheType = $getAllTypes->fetch()){
+      while($ficheSegment = $getAllSegments->fetch()){
 
   ?>
 
   <div class="column">
-    <a href="type.php?id_type=<?= $ficheType['id']; ?>"><input type=image class="voitures" src=../../library/imgGroupes/<?= $ficheType['image']; ?> /></a>
+    <a href="type.php?id_type=<?= $ficheSegment['id']; ?>"><input type=image class="voitures" src=../../library/models_cars/<?= $ficheSegment['image']; ?> /></a>
     <div class="text">
-      <p class="nomWidgetFiche">  <?= $ficheType['nom']; ?> </p>
+      <p class="nomWidgetFiche">  <?= $ficheSegment['nom']; ?> </p>
     </div> 
   </div>
 
