@@ -15,3 +15,15 @@ checkboxs research pour les constructeurs!
 connexion/creation de compte + verification par mail
 
 ajout de fiche avec editeur de texte integré
+
+
+
+#AJOUTEUR-FICHE
+
+plateforme ?
+
+NOM
+RESUME : 60c max
+DESCRIPTION : pas de limite ?
+HISTOIRE : pas de limite ?
+TECHNIQUE : tableaux options, motorisations, couleurs

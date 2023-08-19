@@ -24,9 +24,14 @@ if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AND !is
                     $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                     $getAnnee->execute(array($fiche['id_annee']));
                     $annee = $getAnnee->fetch();
+
+                    $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                    $getModele->execute(array($fiche['id_modele']));
+                    $modele = $getModele->fetch();
+                    $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
             ?>
             <div class="column">
-                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                 <div class="text">
                 <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                 </div> 
@@ -66,9 +71,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                     $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                     $getAnnee->execute(array($fiche['id_annee']));
                     $annee = $getAnnee->fetch();
+
+                    $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                    $getModele->execute(array($fiche['id_modele']));
+                    $modele = $getModele->fetch();
+                    $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
             ?>
             <div class="column">
-                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                 <div class="text">
                 <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                 </div> 
@@ -112,9 +122,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                     $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                     $getAnnee->execute(array($fiche['id_annee']));
                     $annee = $getAnnee->fetch();
+
+                    $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                    $getModele->execute(array($fiche['id_modele']));
+                    $modele = $getModele->fetch();
+                    $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
             ?>
             <div class="column">
-                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                 <div class="text">
                 <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                 </div> 
@@ -157,9 +172,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                     $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                     $getAnnee->execute(array($fiche['id_annee']));
                     $annee = $getAnnee->fetch();
+
+                    $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                    $getModele->execute(array($fiche['id_modele']));
+                    $modele = $getModele->fetch();
+                    $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
             ?>
             <div class="column">
-                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                 <div class="text">
                 <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                 </div> 
@@ -202,9 +222,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                     $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                     $getAnnee->execute(array($fiche['id_annee']));
                     $annee = $getAnnee->fetch();
+
+                    $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                    $getModele->execute(array($fiche['id_modele']));
+                    $modele = $getModele->fetch();
+                    $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
             ?>
             <div class="column">
-                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                 <div class="text">
                 <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                 </div> 
@@ -250,9 +275,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                         $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                         $getAnnee->execute(array($fiche['id_annee']));
                         $annee = $getAnnee->fetch();
+
+                        $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                        $getModele->execute(array($fiche['id_modele']));
+                        $modele = $getModele->fetch();
+                        $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                 ?>
                 <div class="column">
-                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                     <div class="text">
                     <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                     </div> 
@@ -301,9 +331,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                         $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                         $getAnnee->execute(array($fiche['id_annee']));
                         $annee = $getAnnee->fetch();
+
+                        $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                        $getModele->execute(array($fiche['id_modele']));
+                        $modele = $getModele->fetch();
+                        $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                 ?>
                 <div class="column">
-                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                     <div class="text">
                     <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                     </div> 
@@ -352,9 +387,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                         $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                         $getAnnee->execute(array($fiche['id_annee']));
                         $annee = $getAnnee->fetch();
+
+                        $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                        $getModele->execute(array($fiche['id_modele']));
+                        $modele = $getModele->fetch();
+                        $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                 ?>
                 <div class="column">
-                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                     <div class="text">
                     <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                     </div> 
@@ -403,9 +443,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                         $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                         $getAnnee->execute(array($fiche['id_annee']));
                         $annee = $getAnnee->fetch();
+
+                        $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                        $getModele->execute(array($fiche['id_modele']));
+                        $modele = $getModele->fetch();
+                        $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                 ?>
                 <div class="column">
-                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                     <div class="text">
                     <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                     </div> 
@@ -454,9 +499,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                         $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                         $getAnnee->execute(array($fiche['id_annee']));
                         $annee = $getAnnee->fetch();
+
+                        $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                        $getModele->execute(array($fiche['id_modele']));
+                        $modele = $getModele->fetch();
+                        $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                 ?>
                 <div class="column">
-                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                     <div class="text">
                     <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                     </div> 
@@ -505,9 +555,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                         $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                         $getAnnee->execute(array($fiche['id_annee']));
                         $annee = $getAnnee->fetch();
+
+                        $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                        $getModele->execute(array($fiche['id_modele']));
+                        $modele = $getModele->fetch();
+                        $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                 ?>
                 <div class="column">
-                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                     <div class="text">
                     <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                     </div> 
@@ -556,9 +611,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                         $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                         $getAnnee->execute(array($fiche['id_annee']));
                         $annee = $getAnnee->fetch();
+
+                        $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                        $getModele->execute(array($fiche['id_modele']));
+                        $modele = $getModele->fetch();
+                        $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                 ?>
                 <div class="column">
-                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                     <div class="text">
                     <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                     </div> 
@@ -607,9 +667,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                         $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                         $getAnnee->execute(array($fiche['id_annee']));
                         $annee = $getAnnee->fetch();
+
+                        $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                        $getModele->execute(array($fiche['id_modele']));
+                        $modele = $getModele->fetch();
+                        $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                 ?>
                 <div class="column">
-                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                     <div class="text">
                     <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                     </div> 
@@ -658,9 +723,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                         $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                         $getAnnee->execute(array($fiche['id_annee']));
                         $annee = $getAnnee->fetch();
+
+                        $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                        $getModele->execute(array($fiche['id_modele']));
+                        $modele = $getModele->fetch();
+                        $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                 ?>
                 <div class="column">
-                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                     <div class="text">
                     <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                     </div> 
@@ -709,9 +779,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                         $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                         $getAnnee->execute(array($fiche['id_annee']));
                         $annee = $getAnnee->fetch();
+
+                        $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                        $getModele->execute(array($fiche['id_modele']));
+                        $modele = $getModele->fetch();
+                        $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                 ?>
                 <div class="column">
-                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                     <div class="text">
                     <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                     </div> 
@@ -764,9 +839,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                                 $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                 $getAnnee->execute(array($fiche['id_annee']));
                                 $annee = $getAnnee->fetch();
+
+                                $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                $getModele->execute(array($fiche['id_modele']));
+                                $modele = $getModele->fetch();
+                                $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                         ?>
                         <div class="column">
-                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                             <div class="text">
                             <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                             </div> 
@@ -819,9 +899,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                                 $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                 $getAnnee->execute(array($fiche['id_annee']));
                                 $annee = $getAnnee->fetch();
+
+                                $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                $getModele->execute(array($fiche['id_modele']));
+                                $modele = $getModele->fetch();
+                                $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                         ?>
                         <div class="column">
-                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                             <div class="text">
                             <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                             </div> 
@@ -874,9 +959,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                                 $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                 $getAnnee->execute(array($fiche['id_annee']));
                                 $annee = $getAnnee->fetch();
+
+                                $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                $getModele->execute(array($fiche['id_modele']));
+                                $modele = $getModele->fetch();
+                                $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                         ?>
                         <div class="column">
-                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                             <div class="text">
                             <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                             </div> 
@@ -929,9 +1019,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                                 $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                 $getAnnee->execute(array($fiche['id_annee']));
                                 $annee = $getAnnee->fetch();
+
+                                $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                $getModele->execute(array($fiche['id_modele']));
+                                $modele = $getModele->fetch();
+                                $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                         ?>
                         <div class="column">
-                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                             <div class="text">
                             <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                             </div> 
@@ -984,9 +1079,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                                 $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                 $getAnnee->execute(array($fiche['id_annee']));
                                 $annee = $getAnnee->fetch();
+
+                                $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                $getModele->execute(array($fiche['id_modele']));
+                                $modele = $getModele->fetch();
+                                $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                         ?>
                         <div class="column">
-                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                             <div class="text">
                             <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                             </div> 
@@ -1039,9 +1139,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                                 $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                 $getAnnee->execute(array($fiche['id_annee']));
                                 $annee = $getAnnee->fetch();
+
+                                $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                $getModele->execute(array($fiche['id_modele']));
+                                $modele = $getModele->fetch();
+                                $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                         ?>
                         <div class="column">
-                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                             <div class="text">
                             <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                             </div> 
@@ -1094,9 +1199,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                                 $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                 $getAnnee->execute(array($fiche['id_annee']));
                                 $annee = $getAnnee->fetch();
+
+                                $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                $getModele->execute(array($fiche['id_modele']));
+                                $modele = $getModele->fetch();
+                                $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                         ?>
                         <div class="column">
-                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                             <div class="text">
                             <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                             </div> 
@@ -1149,9 +1259,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                                 $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                 $getAnnee->execute(array($fiche['id_annee']));
                                 $annee = $getAnnee->fetch();
+
+                                $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                $getModele->execute(array($fiche['id_modele']));
+                                $modele = $getModele->fetch();
+                                $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                         ?>
                         <div class="column">
-                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                             <div class="text">
                             <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                             </div> 
@@ -1204,9 +1319,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                                 $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                 $getAnnee->execute(array($fiche['id_annee']));
                                 $annee = $getAnnee->fetch();
+
+                                $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                $getModele->execute(array($fiche['id_modele']));
+                                $modele = $getModele->fetch();
+                                $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                         ?>
                         <div class="column">
-                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                             <div class="text">
                             <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                             </div> 
@@ -1259,9 +1379,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                                 $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                 $getAnnee->execute(array($fiche['id_annee']));
                                 $annee = $getAnnee->fetch();
+
+                                $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                $getModele->execute(array($fiche['id_modele']));
+                                $modele = $getModele->fetch();
+                                $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                         ?>
                         <div class="column">
-                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                            <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                             <div class="text">
                             <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                             </div> 
@@ -1318,9 +1443,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                                     $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                     $getAnnee->execute(array($fiche['id_annee']));
                                     $annee = $getAnnee->fetch();
+
+                                    $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                    $getModele->execute(array($fiche['id_modele']));
+                                    $modele = $getModele->fetch();
+                                    $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                             ?>
                             <div class="column">
-                                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                                 <div class="text">
                                 <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                                 </div> 
@@ -1377,9 +1507,14 @@ else if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur']) AN
                                     $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                     $getAnnee->execute(array($fiche['id_annee']));
                                     $annee = $getAnnee->fetch();
+
+                                    $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                    $getModele->execute(array($fiche['id_modele']));
+                                    $modele = $getModele->fetch();
+                                    $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                             ?>
                             <div class="column">
-                                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                                 <div class="text">
                                 <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                                 </div> 
@@ -1436,9 +1571,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                                     $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                     $getAnnee->execute(array($fiche['id_annee']));
                                     $annee = $getAnnee->fetch();
+
+                                    $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                    $getModele->execute(array($fiche['id_modele']));
+                                    $modele = $getModele->fetch();
+                                    $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                             ?>
                             <div class="column">
-                                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                                 <div class="text">
                                 <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                                 </div> 
@@ -1495,9 +1635,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                                     $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                     $getAnnee->execute(array($fiche['id_annee']));
                                     $annee = $getAnnee->fetch();
+
+                                    $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                    $getModele->execute(array($fiche['id_modele']));
+                                    $modele = $getModele->fetch();
+                                    $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                             ?>
                             <div class="column">
-                                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                                 <div class="text">
                                 <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                                 </div> 
@@ -1554,9 +1699,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                                     $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                     $getAnnee->execute(array($fiche['id_annee']));
                                     $annee = $getAnnee->fetch();
+
+                                    $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                    $getModele->execute(array($fiche['id_modele']));
+                                    $modele = $getModele->fetch();
+                                    $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                             ?>
                             <div class="column">
-                                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                                 <div class="text">
                                 <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                                 </div> 
@@ -1616,9 +1766,14 @@ else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur']) AN
                                     $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
                                     $getAnnee->execute(array($fiche['id_annee']));
                                     $annee = $getAnnee->fetch();
+
+                                    $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+                                    $getModele->execute(array($fiche['id_modele']));
+                                    $modele = $getModele->fetch();
+                                    $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
                             ?>
                             <div class="column">
-                                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/img/<?= $fiche['image']; ?> width="100%"/></a>
+                                <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src=../../library/voitures/<?= $stringImageFiche; ?> width="100%"/></a>
                                 <div class="text">
                                 <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
                                 </div> 

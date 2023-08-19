@@ -214,10 +214,15 @@ include("../actions/actionsVoiture/allFiches.php");
         $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
         $getAnnee->execute(array($fiche['id_annee']));
         $annee = $getAnnee->fetch();
+
+        $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
+        $getModele->execute(array($fiche['id_modele']));
+        $modele = $getModele->fetch();
+        $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
   ?>
 
   <div class="column">
-    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image class="voitures" src=../../library/img/<?= $fiche['image']; ?> /></a>
+    <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image class="voitures" src=../../library/voitures/<?= $stringImageFiche; ?> /></a>
     <div class="text">
       <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
     </div> 

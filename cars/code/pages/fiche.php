@@ -54,6 +54,11 @@ include '../includesHeaderFooter/header.php';
 
                 $ficheAnne = $getAnnee->fetch();
 
+                $getModele = $bdd->prepare('SELECT * FROM modeles WHERE id = ?');
+                $getModele->execute(array($ficheInfos['id_modele']));
+
+                $modele = $getModele->fetch();
+
                 $getGroupe = $bdd->prepare('SELECT * FROM groupes WHERE id = ?');
                 $getGroupe->execute(array($ficheConstructeur['id_groupe']));
                 $ficheGroupe = $getGroupe->fetch();
@@ -110,7 +115,7 @@ include '../includesHeaderFooter/header.php';
                         </article>
 
                         <div class="containerPictureFiche">
-                                <img class="pictureFiche" src="../../library/img/<?= $ficheInfos['image']; ?>">
+                                <img class="pictureFiche" src="../../library/voitures/<?= $modele['nom']."/".$fiche_id."/".$ficheInfos['image']; ?>">
                         </div>
                 </div>
 
@@ -270,7 +275,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 
                                 <div class="img">
                                         <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(1)">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_1']; ?>.jpg" alt=<?= $photo['img_1']; ?> width="300" height="200">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_1']; ?>" alt=<?= $photo['img_1']; ?> width="300" height="200">
                                         </a>
                                 </div>
 
@@ -279,7 +284,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 
                                 <div class="img">
                                         <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(2)">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_2']; ?>.jpg" alt=<?= $photo['img_2']; ?> width="300" height="200">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_2']; ?>" alt=<?= $photo['img_2']; ?> width="300" height="200">
                                         </a>
                                 </div>
 
@@ -288,7 +293,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 
                                 <div class="img">
                                         <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(3)">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_3']; ?>.jpg" alt=<?= $photo['img_3']; ?> width="300" height="200">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_3']; ?>" alt=<?= $photo['img_3']; ?> width="300" height="200">
                                         </a>
                                 </div>
 
@@ -297,7 +302,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 
                                 <div class="img">
                                         <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(4)">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_4']; ?>.jpg" alt=<?= $photo['img_4']; ?> width="300" height="200">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_4']; ?>" alt=<?= $photo['img_4']; ?> width="300" height="200">
                                         </a>
                                 </div>
 
@@ -306,7 +311,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
                                 
                                 <div class="img">
                                         <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(5)">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_5']; ?>.jpg" alt=<?= $photo['img_5']; ?> width="300" height="200">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_5']; ?>" alt=<?= $photo['img_5']; ?> width="300" height="200">
                                         </a>
                                 </div>
 
@@ -316,35 +321,35 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 
                                 <div class="container">
                                 <div class="slides<?= $photo['id_fiche']; ?>">
-                                <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_1']; ?>.jpg" style="width:100%">
+                                <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_1']; ?>" style="width:100%">
                                 </div>
 
                                 <?php if($photo['img_2']!=""){
                         ?>
 
                                         <div class="slides<?= $photo['id_fiche']; ?>">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_2']; ?>.jpg" style="width:100%">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_2']; ?>" style="width:100%">
                                         </div>
 
                                 <?php }if($photo['img_3']!=""){
                         ?>
 
                                         <div class="slides<?= $photo['id_fiche']; ?>">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_3']; ?>.jpg" style="width:100%">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_3']; ?>" style="width:100%">
                                         </div>
 
                                 <?php }if($photo['img_4']!=""){
                         ?>
 
                                         <div class="slides<?= $photo['id_fiche']; ?>">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_4']; ?>.jpg" style="width:100%">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_4']; ?>" style="width:100%">
                                         </div>
 
                                 <?php }if($photo['img_5']!=""){
                         ?>
 
                                         <div class="slides<?= $photo['id_fiche']; ?>">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_5']; ?>.jpg" style="width:100%">
+                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_5']; ?>" style="width:100%">
                                         </div>
 
                                 <?php }

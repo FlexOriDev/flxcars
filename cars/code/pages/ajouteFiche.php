@@ -44,8 +44,24 @@ require('../actions/fiche/ajouteFiche.php');
 </div>
 <br>
 <div>
-<span>Image<label> :</label></span>
-<input type="file" name="fichier" id="cfichier" />
+<span>Image 1<label> :</label></span>
+<input type="file" name="fichier_1" id="fichier_1" />
+</div>
+<div>
+<span>Image 2<label> :</label></span>
+<input type="file" name="fichier_2" id="fichier_2" />
+</div>
+<div>
+<span>Image 3<label> :</label></span>
+<input type="file" name="fichier_3" id="fichier_3" />
+</div>
+<div>
+<span>Image 4<label> :</label></span>
+<input type="file" name="fichier_4" id="fichier_4" />
+</div>
+<div>
+<span>Image 5<label> :</label></span>
+<input type="file" name="fichier_5" id="fichier_5" />
 </div>
 <br>
 
