@@ -217,6 +217,9 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
                         <article class="article-fiche-name3">
                                 <p><?= $ficheInfos['description']; ?></p>
                         </article>
+
+                        
+                            
                         <br><br><br>
                         <article class="article-fiche-title" id="photos">
                                 <h1>Photos</h1>

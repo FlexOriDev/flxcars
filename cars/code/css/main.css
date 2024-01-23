@@ -1423,6 +1423,14 @@ tbody tr:hover {
 
   /* ERROR FICHE */
 
+  /* TABLE TECHNIQUE */
+
+  #add{
+    float:right;
+  }
+
+  /* TABLE TECHNIQUE */
+
   /* GALLERY PICTURES */
 
   div.img {

@@ -38,6 +38,54 @@ require('../actions/fiche/ajouteFiche.php');
 <input class="addFiche" type="text" name="description"> 
 </div>
 <br>
+<!-- EDITABLE TABLE -->
+
+<div class="table-responsive">
+                                <br>
+                                <button type="button" name="add" id="add" class="btn btn-info">Add</button>
+                                <div id="alert_message"></div>
+                                <table id="user_data" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Appellation</th>
+                                            <th>Construction</th>
+                                            <th>Moteur</th>
+                                            <th>Cylindrée</th>
+                                            <th>Performance</th>
+                                            <th>Couple</th>
+                                            <th>0-100</th>
+                                            <th>Vitesse maximale</th>
+                                            <th>Consommation</th>
+                                            <th>Carrosserie</th>
+                                            <th>Marché</th>
+                                        <th></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                        <script type="text/javascript" language="javascript">
+
+                                $(document).ready(function(){
+                                        fetch_data();
+
+                                        function fetch_data(){
+                                                var dataTable = $('#user_data').DataTable({
+                                                        "processing" : true,
+                                                        "serverSide" : true,
+                                                        "order" : [],
+                                                        "ajax" : {
+                                                                url:"../actions/fiche/editableTable.php",
+                                                                type:"POST"
+                                                        }
+                                                });
+                                        }
+                                });
+
+                        </script>
+
+<!-- EDITABLE TABLE -->
+<br>
 <div>
 <span>Motorisation <label> :</label></span>
 <input class="addFiche" type="text" name="motorisation"> 
