@@ -1,11 +1,11 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
+- phpMyAdmin SQL Dump
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 14 juil. 2023 à 12:57
--- Version du serveur : 5.7.36
--- Version de PHP : 7.4.26
+-- Généré le : mar. 23 jan. 2024 à 16:19
+-- Version du serveur : 5.7.40
+-- Version de PHP : 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `annees` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=127 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=128 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `annees`
@@ -164,7 +164,8 @@ INSERT INTO `annees` (`id`, `nom`) VALUES
 (123, 2022),
 (124, 2023),
 (125, 2024),
-(126, 2025);
+(126, 2025),
+(127, 2026);
 
 -- --------------------------------------------------------
 
@@ -176,26 +177,35 @@ DROP TABLE IF EXISTS `constructeurs`;
 CREATE TABLE IF NOT EXISTS `constructeurs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `id_pays` int(11) NOT NULL,
+  `id_groupe` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `constructeurs`
 --
 
-INSERT INTO `constructeurs` (`id`, `nom`) VALUES
-(1, 'Ford'),
-(2, 'Bmw'),
-(3, 'Mercedes'),
-(4, 'Renault'),
-(5, 'Peugeot'),
-(6, 'Alpha Romeo'),
-(7, 'Mitsubishi'),
-(8, 'Dacia'),
-(9, 'Audi'),
-(10, 'Maserati'),
-(12, 'yo'),
-(13, 'g');
+INSERT INTO `constructeurs` (`id`, `nom`, `image`, `id_pays`, `id_groupe`) VALUES
+(1, 'Ford', 'ford.jpg', 4, 3),
+(2, 'Bmw', 'bmw.jpg', 2, 4),
+(3, 'Mercedes-Benz', 'mercedes_benz.jpg', 2, 5),
+(4, 'Renault', 'renault.jpg', 1, 7),
+(5, 'Peugeot', 'peugeot.jpg', 1, 1),
+(6, 'Alfa Romeo', 'alfa_romeo', 3, 1),
+(7, 'Mitsubishi', 'mitsubishi.jpg', 5, 7),
+(8, 'Dacia', 'dacia.jpg', 6, 7),
+(9, 'Audi', 'audi.jpg', 2, 2),
+(10, 'Maserati', 'maserati.jpg', 3, 1),
+(14, 'Aston Martin', 'aston_martin.jpg', 7, 0),
+(11, 'Nissan', 'nissan.jpg', 5, 7),
+(12, 'Ferrari', 'ferrari.jpg', 3, 0),
+(13, 'Land Rover', 'land_rover.jpg', 7, 8),
+(15, 'Chevrolet', 'chevrolet.jpg', 4, 6),
+(16, 'Gmc', 'gmc.jpg', 4, 6),
+(18, 'Rolls Royce', 'rolls_royce.jpg', 7, 4),
+(19, 'Toyota', 'toyota.jpg', 5, 9);
 
 -- --------------------------------------------------------
 
@@ -206,36 +216,29 @@ INSERT INTO `constructeurs` (`id`, `nom`) VALUES
 DROP TABLE IF EXISTS `fiches`;
 CREATE TABLE IF NOT EXISTS `fiches` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_constructeur` int(11) NOT NULL,
+  `id_type` int(11) NOT NULL,
   `id_modele` text NOT NULL,
+  `id_annee` int(11) NOT NULL,
+  `id_segment` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `resume` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `motorisation` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
   `date` datetime NOT NULL,
-  `id_constructeur` int(11) NOT NULL,
-  `id_type` int(11) NOT NULL,
-  `id_annee` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=92 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=143 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `fiches`
 --
 
-INSERT INTO `fiches` (`id`, `id_modele`, `nom`, `resume`, `description`, `motorisation`, `image`, `date`, `id_constructeur`, `id_type`, `id_annee`, `id_user`) VALUES
-(88, '4', 'M5', 'fsf', 'f', 'f', 'pexels-jae-park-3849554.jpg', '2023-01-08 00:23:07', 3, 9, 8, 8),
-(86, '3', 'DB11', 'b', 'b', 'b', 'pexels-bob-ward-3647693.jpg', '2023-01-08 00:22:34', 7, 9, 8, 8),
-(87, '4', 'RX9', 'v', 'v', 'v', 'pexels-erik-mclean-12920583.jpg', '2023-01-08 00:22:55', 5, 9, 7, 8),
-(81, '1', 'FORD GT', 'f', 'f', 'f', 'pexels-supreet-7633343fff.jpg', '2023-01-08 00:16:23', 5, 12, 7, 8),
-(80, '4', 'FERRARI', 'fs', 'f', 'f', 'pexels-supreet-7633343.jpg', '2023-01-08 00:15:42', 7, 10, 6, 8),
-(82, '4', '208', 'f', 'f', 'f', '01-peugeot-208-750x410.jpg', '2023-01-08 00:21:01', 5, 10, 6, 8),
-(83, '1', 'RANGE', 'g', 'g', 'g', 'blue-jeep-photo-shooting-in-the-sunset.jpg', '2023-01-08 00:21:19', 5, 9, 5, 8),
-(89, '5', 'Quattroporte', 'La berline de luxe originale, issue de la course, depuis 1963. Une légende qui ne cesse de nous inspirer.', 'Cette dernière génération de Quattroporte a été présentée officiellement en novembre 2012. Elle sera commercialisée lors du salon de l\'Automobile de Détroit 2013, donc en janvier. Pour l\'été 2016, la Quattroporte sera restylée, avec une carrosserie entièrement en aluminium. La fabrication de cette luxueuse grande routière de sport est assurée dans l\'ancienne usine de la Carrozzeria Bertone de Grugliasco, près de Turin, où le groupe Fiat a réalisé de très importants investissements pour fabriquer ce nouveau modèle ainsi que, au second semestre 2013, sa petite sœur, la Ghibli. La production en série74 a débuté en janvier 2013 pour une commercialisation dès le mois suivant. La firme au trident table sur 12 000 exemplaires annuels.  Les moteurs sont tous deux d\'origine Ferrari. Ils sont entièrement en aluminium. Ils garantissent des accélérations \"foudroyantes\" : 0 à 100 km/h en 4,9 s pour le V6 et 4,5 s pour le V8. La boîte de vitesses est automatique à 8 rapports7.  La Quattroporte 6 fut restylée courant 2016. Elle possède une calandre à barrettes chromées, proche de celle de la Maserati Levante, et un nouveau bouclier, ce qui lui permet aussi de s\'enrichir de deux nouvelles finitions : GranLusso et GranSport8.  En Aout 2020, Maserati dévoile la version TROFEO et le V8 en 580 CV. Une version qui peut atteindre en pointe les 325 km/h.', 'V6 410 ch - propulsion classique, accélération 0 à 100 km/h en 5,1 s, vitesse maxi 285 km/h', 'maserati.jpg', '2023-01-08 12:06:51', 10, 13, 5, 8),
-(85, '3', 'X6', 'f', 'f', 'f', 'pexels-auto-records-10054991.jpg', '2023-01-08 00:21:49', 7, 10, 4, 8),
-(76, '4', 'CORVETTE', 'g', 'g', 'g', 'pexels-raphael-loquellano-8980830.jpg', '2023-01-08 00:12:57', 3, 10, 4, 8),
-(90, '2', 'h', 'h', 'h', 'h', 'mach-1-photo-principale.jpg', '2023-01-08 14:43:01', 5, 10, 3, 8);
+INSERT INTO `fiches` (`id`, `id_constructeur`, `id_type`, `id_modele`, `id_annee`, `id_segment`, `nom`, `resume`, `description`, `motorisation`, `date`, `id_user`, `image`) VALUES
+(142, 11, 3, '12', 118, 3, '370z III', 'zaehae zrherzaeh aezrherz aehae zrherzae haezr herzaeh aezrherza ehaez rherza ehaezr herzaehaez rherza ehaezrher', 'herherhreh', 'gzegzegthjej', '2023-08-15 10:36:23', 8, '142_1_370_III'),
+(139, 1, 1, '7', 120, 3, 'Focus 4', 'zaehaezrher', 'herherhreh', 'gzegzegthjej', '2023-08-15 10:31:36', 8, '139_1_Focus_4'),
+(140, 1, 1, '7', 119, 4, 'Focus 4 SW', 'zaehaezrher', 'herherhreh', 'gzegzegthjej', '2023-08-15 10:32:05', 8, '140_1_Focus_4_SW');
 
 -- --------------------------------------------------------
 
@@ -248,14 +251,52 @@ CREATE TABLE IF NOT EXISTS `groupes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `groupes`
 --
 
 INSERT INTO `groupes` (`id`, `nom`) VALUES
-(1, 'Stellantis');
+(1, 'Stellantis'),
+(2, 'Volkswagen'),
+(3, 'Ford'),
+(4, 'Bmw'),
+(5, 'Daimler'),
+(6, 'General Motors'),
+(7, 'Renault-Nissan-Mitsubishi'),
+(8, 'Tata'),
+(9, 'Toyota');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `imagesfiche`
+--
+
+DROP TABLE IF EXISTS `imagesfiche`;
+CREATE TABLE IF NOT EXISTS `imagesfiche` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `img_1` varchar(255) NOT NULL,
+  `img_2` varchar(255) NOT NULL,
+  `img_3` varchar(255) NOT NULL,
+  `img_4` varchar(255) NOT NULL,
+  `img_5` varchar(255) NOT NULL,
+  `id_fiche` int(11) NOT NULL,
+  `id_modele` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `imagesfiche`
+--
+
+INSERT INTO `imagesfiche` (`id`, `img_1`, `img_2`, `img_3`, `img_4`, `img_5`, `id_fiche`, `id_modele`) VALUES
+(20, '88_1_M5_F90.jpg', '', '', '', '', 88, 2),
+(17, '82_1_208_II.jpg', '', '', '', '', 82, 10),
+(18, '139_1_Focus_4.jpg', '139_2_Focus_4.jpg', '139_3_Focus_4.jpg', '139_4_Focus_4.jpg', '139_5_Focus_4.jpg', 139, 7),
+(19, '140_1_Focus_4_SW.jpg', '140_2_Focus_4_SW.jpg', '140_3_Focus_4_SW.jpg', '140_4_Focus_4_SW.jpg', '140_5_Focus_4_SW.jpg', 140, 7),
+(21, '142_1_370_III.jpg', '', '', '', '', 142, 12);
 
 -- --------------------------------------------------------
 
@@ -268,20 +309,83 @@ CREATE TABLE IF NOT EXISTS `modeles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` text NOT NULL,
   `id_constructeur` int(11) NOT NULL,
-  `id_type` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `modeles`
 --
 
-INSERT INTO `modeles` (`id`, `nom`, `id_constructeur`, `id_type`) VALUES
-(1, 'Focus Break', 1, 2),
-(3, 'Focus', 1, 1),
-(4, 'Focus RS', 1, 3),
-(5, 'Quattroporte', 10, 13),
-(6, 'Megane', 5, 2);
+INSERT INTO `modeles` (`id`, `nom`, `id_constructeur`) VALUES
+(23, 'Sierra', 16),
+(22, 'Sandero', 8),
+(1, 'Mustang', 1),
+(21, 'RS7', 9),
+(6, 'Megane', 4),
+(2, 'M5', 2),
+(7, 'Focus', 1),
+(8, 'Gt', 1),
+(19, 'Corvette', 15),
+(10, '208', 5),
+(24, 'AMG GT', 3),
+(12, '370z', 11),
+(20, 'Rafale', 4),
+(14, 'DBS', 14),
+(15, 'F8 Tributo', 12),
+(16, 'Range Rover', 13),
+(17, 'Quattroporte', 10),
+(18, 'X6', 2),
+(25, 'Lancer Evo', 7),
+(26, 'Spectre', 18),
+(27, 'Giulia', 6),
+(28, 'Supra', 19);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `motorisationsessence`
+--
+
+DROP TABLE IF EXISTS `motorisationsessence`;
+CREATE TABLE IF NOT EXISTS `motorisationsessence` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_fiche` int(11) NOT NULL,
+  `appellation` varchar(255) NOT NULL,
+  `construction` varchar(255) NOT NULL,
+  `moteur` varchar(255) NOT NULL,
+  `cylindree` varchar(255) NOT NULL,
+  `performance` varchar(255) NOT NULL,
+  `couple` varchar(255) NOT NULL,
+  `0100` varchar(255) NOT NULL,
+  `vmax` varchar(255) NOT NULL,
+  `conso` varchar(255) NOT NULL,
+  `carrosserie` varchar(255) NOT NULL,
+  `marche` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `motorisationsgasoil`
+--
+
+DROP TABLE IF EXISTS `motorisationsgasoil`;
+CREATE TABLE IF NOT EXISTS `motorisationsgasoil` (
+  `id` int(11) NOT NULL,
+  `id_fiche` int(11) NOT NULL,
+  `appellation` varchar(255) NOT NULL,
+  `construction` varchar(255) NOT NULL,
+  `moteur` varchar(255) NOT NULL,
+  `cylindree` varchar(255) NOT NULL,
+  `performance` varchar(255) NOT NULL,
+  `couple` varchar(255) NOT NULL,
+  `0100` varchar(255) NOT NULL,
+  `vmax` varchar(255) NOT NULL,
+  `conso` varchar(255) NOT NULL,
+  `carrosserie` varchar(255) NOT NULL,
+  `marche` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -294,7 +398,7 @@ CREATE TABLE IF NOT EXISTS `pays` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `pays`
@@ -302,7 +406,42 @@ CREATE TABLE IF NOT EXISTS `pays` (
 
 INSERT INTO `pays` (`id`, `nom`) VALUES
 (1, 'France'),
-(2, 'Allemagne');
+(2, 'Allemagne'),
+(3, 'Italie'),
+(4, 'Etats-Unis'),
+(5, 'Japon'),
+(6, 'Roumanie'),
+(7, 'Royaume-Uni'),
+(8, 'Belgique'),
+(9, 'Espagne');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `segments`
+--
+
+DROP TABLE IF EXISTS `segments`;
+CREATE TABLE IF NOT EXISTS `segments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `segments`
+--
+
+INSERT INTO `segments` (`id`, `nom`, `image`) VALUES
+(1, 'A - Mini', 'mini.png'),
+(2, 'B - Sous-compacte', 'sous_compacte.png'),
+(3, 'C - Compacte', 'compacte.png'),
+(4, 'D - Intermédiaire', 'intermediaire.png'),
+(5, 'E - Grosse voiture', 'grosse_voiture'),
+(6, 'F - Luxe', ''),
+(7, 'G - Fourgonnette', ''),
+(8, 'H - Course', '');
 
 -- --------------------------------------------------------
 
@@ -314,27 +453,27 @@ DROP TABLE IF EXISTS `types`;
 CREATE TABLE IF NOT EXISTS `types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` text NOT NULL,
+  `image` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `types`
 --
 
-INSERT INTO `types` (`id`, `nom`) VALUES
-(1, 'Berline'),
-(2, 'Break'),
-(3, 'Coupé'),
-(4, 'Cabriolet'),
-(5, 'Camion'),
-(6, 'Crossover'),
-(7, 'Fourgon'),
-(8, 'Prototype'),
-(9, 'Roadster'),
-(10, 'Supercar'),
-(11, 'Tout-terrrain'),
-(12, 'RATIO'),
-(13, 'Berline Sportive');
+INSERT INTO `types` (`id`, `nom`, `image`) VALUES
+(1, 'Berline', 'model.png'),
+(2, 'Break', 'model.png'),
+(3, 'Coupé', 'model.png'),
+(4, 'Cabriolet', 'model.png'),
+(5, 'Camion', 'model.png'),
+(6, 'Crossover', 'model.png'),
+(7, 'Fourgon', 'model.png'),
+(8, 'Prototype', 'model.png'),
+(9, 'Roadster', 'model.png'),
+(10, 'Supercar', 'model.png'),
+(11, 'Tout-terrrain', 'model.png'),
+(12, 'Limousine', 'model.png');
 
 -- --------------------------------------------------------
 

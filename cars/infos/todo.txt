@@ -1,8 +1,0 @@
-multi select dropdowns
-afficher le nom du constructeur devant le nom de chaque modele de voiture
-fiche voiture (details : moteur, specs techniques ...)
-taille image
-
-
-
-RESPONSIVE ^^
