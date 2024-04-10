@@ -659,13 +659,118 @@ body{
   
   /*AJOUTER FICHE */
 
-  .addFiche{
-    background-color: rgb(255, 255, 255);
-    border: dashed rgb(169, 179, 255);
-    height: 35px;
-    margin-left:  30px;
-    width: 300px;
+  /* Sélectionne l'éditeur Quill */
+#editor-container .ql-editor {
+  background-color: #f8f9fa; /* Remplacez par la couleur de fond souhaitée */
+  color: #333; /* Couleur du texte */
+  min-height: 200px; /* Hauteur minimale de l'éditeur */
+  font-size: 16px; /* Taille de police */
+  border: 1px solid #ccc; /* Bordure */
+  padding: 10px; /* Espacement intérieur */
+}
+
+/* Augmenter la hauteur de la barre d'outils */
+#editor-container .ql-toolbar {
+  height: 60px; /* Hauteur souhaitée de la barre d'outils */
+  background-color: #2766a6; /* Couleur de fond de la barre d'outils */
+  border-bottom: 1px solid #ccc; /* Bordure inférieure de la barre d'outils */
+  padding: 8px; /* Espacement intérieur */
+}
+
+/* Ajuster le style des boutons pour la nouvelle hauteur */
+#editor-container .ql-toolbar .ql-button {
+  color: #555; /* Couleur du texte des boutons */
+  padding: 12px 20px; /* Espacement intérieur des boutons (ajustez selon vos besoins) */
+  margin-right: 5px; /* Marge entre les boutons */
+  border: none; /* Supprimer la bordure des boutons */
+  cursor: pointer; /* Curseur sur les boutons */
+  margin-bottom: 10px;
+}
+
+/* Style pour les boutons de la barre d'outils au survol */
+#editor-container .ql-toolbar .ql-button:hover {
+  background-color: #d42323; /* Couleur de fond au survol */
+}
+
+
+  .center-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
   }
+  
+  /* Ajustements pour le bouton "Supprimer" lui-même */
+  .center-button button {
+    display: inline-block; /* Assurez-vous que le bouton respecte les dimensions du texte */
+    vertical-align: middle; /* Alignement vertical au centre */
+  }
+  
+  .table-responsive {
+    overflow-y: hidden; /* Masquer la barre de défilement verticale */
+    width: 100%; /* Ajuster la largeur à 100% */
+  }
+  
+  .table-container {
+    display: flex; /* Utiliser flexbox pour aligner les éléments */
+    justify-content: space-between; /* Espacement égal entre les éléments */
+    align-items: center; /* Centrer verticalement les éléments */
+  }
+  
+  #user_data {
+    width: 80%; /* Largeur de la table */
+    margin-right: 10px; /* Marge à droite pour séparer la table du bouton */
+  }
+
+  section {
+    height: 20%;
+}
+  
+.side {
+    margin-left: 0;
+}
+  
+
+  
+button:hover {
+    background-color: #fec8d8 !important;
+}
+  
+textarea {
+    padding: 3.3%;
+}
+  
+.flex-box {
+    display: flex;
+    justify-content: center;
+}
+
+  .input-container {
+    display: flex;
+    align-items: center;
+}
+
+.input-container span {
+    margin-right: 10px; /* Marge à droite pour l'espace entre le texte et l'input */
+}
+
+
+  .addFiche {
+    background-color: rgb(255, 255, 255);
+    height: 35px;
+    margin-left: 30px;
+    width: 300px;
+    padding-left: 10px; /* Ajoute un padding à gauche */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+.addFiche::placeholder {
+    opacity: 0; /* Rend le placeholder invisible */
+}
+
+.addFiche:focus::placeholder {
+    opacity: 1; /* Rend le placeholder visible lorsqu'on focus sur le champ */
+}
   /*---------------- DASHBOARD ----------------------*/
 
   /*AJOUTER CONSTRUCTEUR */

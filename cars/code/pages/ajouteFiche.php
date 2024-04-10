@@ -23,66 +23,103 @@ require('../actions/fiche/ajouteFiche.php');
 
 <h3>Publier une fiche</h3>
 <br>
-<div>
+<div class="input-container">
 <span>Nom <label> :</label></span>
 <input class="addFiche" type="text" name="nom"> 
 </div>
 <br>
-<div>
-<span>Résumé <label> :</label></span>
-<input class="addFiche" type="text" name="resume"> 
+<div class="input-container">
+    <span>Résumé <label> :</label></span>
+    <textarea class="addFiche" name="resume" maxlength="200"></textarea>
 </div>
 <br>
-<div>
-<span>Description <label> :</label></span>
-<input class="addFiche" type="text" name="description"> 
-</div>
+
+<div id="editor-container" style="height: 300px;">
+        <p>Commencez à écrire ici...</p>
+    </div>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script>
+        // Initialiser Quill
+        var quill = new Quill('#editor-container', {
+            theme: 'snow'
+        });
+    </script>
+
 <br>
 <!-- EDITABLE TABLE -->
 
-<div class="table-responsive">
-                                <br>
-                                <button type="button" name="add" id="add" class="btn btn-info">Add</button>
-                                <div id="alert_message"></div>
-                                <table id="user_data" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Appellation</th>
-                                            <th>Construction</th>
-                                            <th>Moteur</th>
-                                            <th>Cylindrée</th>
-                                            <th>Performance</th>
-                                            <th>Couple</th>
-                                            <th>0-100</th>
-                                            <th>Vitesse maximale</th>
-                                            <th>Consommation</th>
-                                            <th>Carrosserie</th>
-                                            <th>Marché</th>
-                                        <th></th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
+<!-- Tableau des versions -->
+<div class="table-container">
+        <div class="table-responsive">
+            <table id="user_data" class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Appellation</th>
+                <th>Construction</th>
+                <th>Moteur</th>
+                <th>Cylindrée</th>
+                <th>Performance</th>
+                <th>Couple</th>
+                <th>0-100</th>
+                <th>Vitesse maximale</th>
+                <th>Consommation</th>
+                <th>Carrosserie</th>
+                <th>Marché</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="table_body">
+            <!-- Lignes du tableau à remplir dynamiquement -->
+            <tr>
+                <td><input type="text" name="appellation[]" class="form-control" /></td>
+                <td><input type="text" name="construction[]" class="form-control" /></td>
+                <td><input type="text" name="moteur[]" class="form-control" /></td>
+                <td><input type="text" name="cylindree[]" class="form-control" /></td>
+                <td><input type="text" name="performance[]" class="form-control" /></td>
+                <td><input type="text" name="couple[]" class="form-control" /></td>
+                <td><input type="text" name="zero_to_hundred[]" class="form-control" /></td>
+                <td><input type="text" name="vitesse_max[]" class="form-control" /></td>
+                <td><input type="text" name="consommation[]" class="form-control" /></td>
+                <td><input type="text" name="carrosserie[]" class="form-control" /></td>
+                <td><input type="text" name="marche[]" class="form-control" /></td>
+                <td class="center-button">
+                            <button type="button" name="remove" class="btn btn-danger btn-sm">Supprimer</button>
+                </td>
+            </tr>
+        </tbody>
+            </table>
+        </div>
+        <button type="button" name="add" id="add" class="btn btn-info">Ajouter une ligne</button>
+    </div>
 
-                        <script type="text/javascript" language="javascript">
+<script type="text/javascript">
+    $(document).ready(function() {
+    // Supprimer une ligne du tableau
+    $(document).on('click', 'button[name="remove"]', function() {
+        $(this).closest('tr').remove();
+    });
 
-                                $(document).ready(function(){
-                                        fetch_data();
-
-                                        function fetch_data(){
-                                                var dataTable = $('#user_data').DataTable({
-                                                        "processing" : true,
-                                                        "serverSide" : true,
-                                                        "order" : [],
-                                                        "ajax" : {
-                                                                url:"../actions/fiche/editableTable.php",
-                                                                type:"POST"
-                                                        }
-                                                });
-                                        }
-                                });
-
-                        </script>
+    // Ajouter une nouvelle ligne au tableau
+    $('#add').click(function() {
+        var html = '<tr>';
+        html += '<td><input type="text" name="appellation[]" class="form-control" /></td>';
+        html += '<td><input type="text" name="construction[]" class="form-control" /></td>';
+        html += '<td><input type="text" name="moteur[]" class="form-control" /></td>';
+        html += '<td><input type="text" name="cylindree[]" class="form-control" /></td>';
+        html += '<td><input type="text" name="performance[]" class="form-control" /></td>';
+        html += '<td><input type="text" name="couple[]" class="form-control" /></td>';
+        html += '<td><input type="text" name="zero_to_hundred[]" class="form-control" /></td>';
+        html += '<td><input type="text" name="vitesse_max[]" class="form-control" /></td>';
+        html += '<td><input type="text" name="consommation[]" class="form-control" /></td>';
+        html += '<td><input type="text" name="carrosserie[]" class="form-control" /></td>';
+        html += '<td><input type="text" name="marche[]" class="form-control" /></td>';
+        html += '<td class="center-button"><button type="button" name="remove" class="btn btn-danger btn-sm">Supprimer</button></td>';
+        html += '</tr>';
+        $('#table_body').append(html);
+    });
+});
+</script>
 
 <!-- EDITABLE TABLE -->
 <br>

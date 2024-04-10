@@ -70,7 +70,6 @@
 </div>
 
 <div class="bloc-index">
-    
 </div>
 
 
