@@ -218,7 +218,12 @@ include("../actions/actionsVoiture/allFiches.php");
         $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
         $getModele->execute(array($fiche['id_modele']));
         $modele = $getModele->fetch();
-        $stringImageFiche = $modele[0]."/".$fiche['id']."/".$fiche['image'];
+
+        $getImage = $bdd->prepare('SELECT img_1 FROM imagesfiche WHERE id_fiche=?');
+        $getImage->execute(array($fiche['id']));
+        $image = $getImage->fetch();
+
+        $stringImageFiche = $modele[0]."/".$fiche['id']."/".$image['img_1'];
   ?>
 
   <div class="column">

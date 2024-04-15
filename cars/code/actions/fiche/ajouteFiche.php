@@ -6,26 +6,42 @@ require('../actions/database.php');
 
 //Validation du formulaire
 if(isset($_POST['validate'])){
-    
+
+
+
+    // Ajoutez des vérifications similaires pour les autres champs du formulaire...
+
+
     //Vérifier si l'user a bien complété tous les champs
-    if(!empty($_POST['nom']) AND !empty($_POST['resume']) AND !empty($_POST['description']) AND !empty($_POST['motorisation']) AND 
-    $_FILES['fichier_1']['size'] != 0  AND !empty($_POST['id_constructeur']) AND !empty($_POST['id_type']) AND !empty($_POST['id_modele']) AND !empty($_POST['id_annee']) AND !empty($_POST['id_segment'])){
+    if(!empty($_POST['nom']) AND !empty($_POST['selectedType']) AND !empty($_POST['selectedAnneeSortie']) 
+        AND !empty($_POST['selectedAnneeFin']) AND !empty($_POST['selectedModele']) AND !empty($_POST['selectedSegment'])
+        AND !empty($_POST['selectedConstructeur']) AND !empty($_POST['resume']) AND !empty($_POST['editor'])
+
+        AND !empty($_FILES['image1']) AND $_FILES['image1']['error'] == 0){
+
+        
         
         $fiche_nom = htmlspecialchars($_POST['nom']);
+
+        $fiche_type = htmlspecialchars($_POST['selectedType']);
+        $fiche_annee_sortie = htmlspecialchars($_POST['selectedAnneeSortie']);
+        $fiche_annee_fin = htmlspecialchars($_POST['selectedAnneeFin']);
+        $fiche_modele = htmlspecialchars($_POST['selectedModele']);
+        $fiche_segment = htmlspecialchars($_POST['selectedSegment']);
+        $fiche_constructeur = htmlspecialchars($_POST['selectedConstructeur']);
+
         $fiche_resume = htmlspecialchars($_POST['resume']);
-        $fiche_description = htmlspecialchars($_POST['description']);
-        $fiche_motorisation = htmlspecialchars($_POST['motorisation']);
-        $nom_fichier = $_FILES['fichier_1']['name'];
+        $fiche_histoire = htmlspecialchars($_POST['editor']);
+
         $formated_DATETIME = date('Y-m-d H:i:s');
-        $idConstructeur = htmlspecialchars($_POST['id_constructeur']);
-        $idType = htmlspecialchars($_POST['id_type']);
-        $idModele = htmlspecialchars($_POST['id_modele']);
-        $idAnnee = htmlspecialchars($_POST['id_annee']);
-        $idSegment = htmlspecialchars($_POST['id_segment']);
         
-        $insertFicheOnWebsite = $bdd->prepare('INSERT INTO fiches(nom, id_modele, id_annee, id_segment, resume, description, motorisation, date, id_constructeur, id_type, id_user, image)VALUES(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        $insertFicheOnWebsite->execute(array($fiche_nom, $idModele, $idAnnee, $idSegment, $fiche_resume, $fiche_description, $fiche_motorisation, $formated_DATETIME, $idConstructeur,$idType, $_SESSION['id'],$nom_fichier));
+        $insertFicheOnWebsite = $bdd->prepare('INSERT INTO fiches(id_constructeur, id_type, id_modele, id_annee, id_annee_fin, 
+        id_segment, nom, resume, histoire, date, id_user)VALUES(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $insertFicheOnWebsite->execute(array($fiche_constructeur, $fiche_type, $fiche_modele, $fiche_annee_sortie, $fiche_annee_fin, 
+        $fiche_segment, $fiche_nom, $fiche_resume, $fiche_histoire,$formated_DATETIME, $_SESSION['id']));
         
+        //IMAGES
+
         $getInfosOfThisFicheReq = $bdd->prepare('SELECT id FROM fiches WHERE nom = ?');
         $getInfosOfThisFicheReq->execute(array($fiche_nom));
         
@@ -34,7 +50,7 @@ if(isset($_POST['validate'])){
         $fiche_id = $ficheInfos['id'];
 
         $getNomModele = $bdd->prepare('SELECT nom FROM modeles WHERE id = ?');
-        $getNomModele->execute(array($idModele));
+        $getNomModele->execute(array($fiche_modele));
         $modeleArray = $getNomModele->fetch();
         $modele = $modeleArray['nom'];
 
@@ -42,7 +58,7 @@ if(isset($_POST['validate'])){
         $stringFiche = $fiche_id."_1_".$fiche_nom.".jpg";
         $resStringFiche = str_replace(' ', '_', $stringFiche);
         
-        $tmp_fichier = $_FILES['fichier_1']['tmp_name'];
+        $tmp_fichier = $_FILES['image1']['tmp_name'];
         mkdir("../../library/voitures/$modele/$fiche_id/", 0777, true);
         $nom_destination = "../../library/voitures/".$modele."/".$fiche_id."/".$resStringFiche;
         move_uploaded_file($tmp_fichier,$nom_destination);
@@ -52,12 +68,10 @@ if(isset($_POST['validate'])){
         $nameImg3 = "";
         $nameImg4 = "";
         $nameImg5 = "";
-
-        $insertFicheOnWebsite = $bdd->prepare('UPDATE fiches set image = ? WHERE id = ?');
-        $insertFicheOnWebsite->execute(array($resStringFiche, $fiche_id));
+        $nameImg6 = "";
         
-        if(isset($_FILES['fichier_2']) AND $_FILES['fichier_2']['error'] == 0){
-            $nom_fichier2 = $_FILES['fichier_2']['tmp_name'];
+        if(isset($_FILES['image2']) AND $_FILES['image2']['error'] == 0){
+            $nom_fichier2 = $_FILES['image2']['tmp_name'];
             $stringFiche2 = $fiche_id."_2_".$fiche_nom.".jpg";
             $resStringFiche2 = str_replace(' ', '_', $stringFiche2);
             $nom_destination2 = "../../library/voitures/".$modele."/".$fiche_id."/".$resStringFiche2;
@@ -67,8 +81,8 @@ if(isset($_POST['validate'])){
             $nameImg2 = "";
         }
 
-        if(isset($_FILES['fichier_3']) AND $_FILES['fichier_3']['error'] == 0){
-            $nom_fichier3 = $_FILES['fichier_3']['tmp_name'];
+        if(isset($_FILES['image3']) AND $_FILES['image3']['error'] == 0){
+            $nom_fichier3 = $_FILES['image3']['tmp_name'];
             $stringFiche3 = $fiche_id."_3_".$fiche_nom.".jpg";
             $resStringFiche3 = str_replace(' ', '_', $stringFiche3);
             $nom_destination3 = "../../library/voitures/".$modele."/".$fiche_id."/".$resStringFiche3;
@@ -78,8 +92,8 @@ if(isset($_POST['validate'])){
             $nameImg3 = "";
         }
 
-        if(isset($_FILES['fichier_4']) AND $_FILES['fichier_4']['error'] == 0){
-            $nom_fichier4 = $_FILES['fichier_4']['tmp_name'];
+        if(isset($_FILES['image4']) AND $_FILES['image4']['error'] == 0){
+            $nom_fichier4 = $_FILES['image4']['tmp_name'];
             $stringFiche4 = $fiche_id."_4_".$fiche_nom.".jpg";
             $resStringFiche4 = str_replace(' ', '_', $stringFiche4);
             $nom_destination4 = "../../library/voitures/".$modele."/".$fiche_id."/".$resStringFiche4;
@@ -89,8 +103,8 @@ if(isset($_POST['validate'])){
             $nameImg4 = "";
         }
 
-        if(isset($_FILES['fichier_5']) AND $_FILES['fichier_5']['error'] == 0){
-            $nom_fichier5 = $_FILES['fichier_5']['tmp_name'];
+        if(isset($_FILES['image5']) AND $_FILES['image5']['error'] == 0){
+            $nom_fichier5 = $_FILES['image5']['tmp_name'];
             $stringFiche5 = $fiche_id."_5_".$fiche_nom.".jpg";
             $resStringFiche5 = str_replace(' ', '_', $stringFiche5);
             $nom_destination5 = "../../library/voitures/".$modele."/".$fiche_id."/".$resStringFiche5;
@@ -100,8 +114,61 @@ if(isset($_POST['validate'])){
             $nameImg5 = "";
         }
 
+        if(isset($_FILES['image6']) AND $_FILES['image6']['error'] == 0){
+            $nom_fichier6 = $_FILES['image6']['tmp_name'];
+            $stringFiche6 = $fiche_id."_6_".$fiche_nom.".jpg";
+            $resStringFiche6 = str_replace(' ', '_', $stringFiche6);
+            $nom_destination6 = "../../library/voitures/".$modele."/".$fiche_id."/".$resStringFiche6;
+            move_uploaded_file($nom_fichier6,$nom_destination6);
+            $nameImg6 = $resStringFiche6;
+        }else{
+            $nameImg6 = "";
+        }
+
         $insertImgFiche = $bdd->prepare('INSERT INTO imagesfiche(img_1, img_2, img_3, img_4, img_5, id_fiche, id_modele) VALUES(?, ?, ?, ?, ?, ?, ?)');
-        $insertImgFiche->execute(array($nameImg1, $nameImg2, $nameImg3, $nameImg4, $nameImg5, $fiche_id, $idModele));
+        $insertImgFiche->execute(array($nameImg1, $nameImg2, $nameImg3, $nameImg4, $nameImg5, $fiche_id, $fiche_modele));
+
+        //TABLEAUX
+
+        $appellations = $_POST['appellation'];
+        $carburants = $_POST['carburant'];
+        $constructions = $_POST['construction'];
+        $moteurs = $_POST['moteur'];
+        $cylindrees = $_POST['cylindree'];
+        $performances = $_POST['performance'];
+        $couples = $_POST['couple'];
+        $zero_to_hundreds = $_POST['zero_to_hundred'];
+        $vitesse_maxs = $_POST['vitesse_max'];
+        $consommations = $_POST['consommation'];
+        $carrosseries = $_POST['carrosserie'];
+        $marches = $_POST['marche'];
+        // Et ainsi de suite pour les autres champs du tableau
+
+        // Boucle sur les données du tableau
+        $rowCount = count($appellations); // Nombre de lignes dans le tableau
+
+        for ($i = 0; $i < $rowCount; $i++) {
+            $appellation = $appellations[$i];
+            $carburant = $carburants[$i];
+            $construction = $constructions[$i];
+            $moteur = $moteurs[$i];
+            $cylindree = $cylindrees[$i];
+            $performance = $performances[$i];
+            $couple = $couples[$i];
+            $zero_to_hundred = $zero_to_hundreds[$i];
+            $vitesse_max = $vitesse_maxs[$i];
+            $consommation = $consommations[$i];
+            $carrosserie = $carrosseries[$i];
+            $marche = $marches[$i];
+            // Récupérer les autres champs de la même manière
+
+            // Maintenant vous pouvez utiliser ces valeurs comme vous le souhaitez, par exemple les insérer dans la base de données
+            // Exemple d'insertion dans une base de données avec PDO
+            $stmt = $bdd->prepare("INSERT INTO motorisationsessence (id_fiche, appellation, carburant, 
+            construction, moteur, cylindree, performance, couple, zero_to_hundred, vmax, conso, carrosserie, marche) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$fiche_id, $appellation, $carburant, $construction, $moteur, $cylindree, $performance, $couple, $zero_to_hundred, $vitesse_max, $consommation, $carrosserie, $marche ]);
+            // Insérez d'autres champs si nécessaire
+        }
 
         $url = htmlspecialchars('ajouteFiche.php');
         echo '<script>window.location = "'.$url.'";</script>';

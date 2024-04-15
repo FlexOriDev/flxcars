@@ -52,7 +52,7 @@ var checkbox_select = function(params)
         selected_translationOne    = params.selected_translationOne   ? params.selected_translationOne   : "selected",
         selected_translation    = params.selected_translation   ? params.selected_translation   : "selected",
         all_translation         = params.all_translation        ? params.all_translation        : "All " + select_name + "s",
-        not_found_text          = params.not_found              ? params.not_found              : "No " + select_name + "s found.",
+        not_found_text          = params.not_found              ? params.not_found              : " No " + select_name + "s found.",
         currently_selected      = [],
         
         // Create the elements needed for the checkbox select
@@ -61,7 +61,7 @@ var checkbox_select = function(params)
         $_search        = $("<input />")    .addClass("checkbox_select_search"),
         $_submit        = $("<input />")    .addClass("checkbox_select_submit")     .val("Appliquer") .attr('type','submit') .data("selected", ""),
         $_dropdown_div  = $("<div />")      .addClass("checkbox_select_dropdown"),
-        $_not_found     = $("<span />")     .addClass("not_found hide")             .text(not_found_text),
+        $_not_found     = $("<span />")     .addClass("not_found hide")             .text(" " +not_found_text).css("margin-left", "5px"),
         $_ul            = $("<ul />"),
 
         updateCurrentlySelected = function()

@@ -18,12 +18,12 @@ if(isset($_POST['validateModele'])){
 
         
 
-        $url = htmlspecialchars('dashboard.php');
+        $url = htmlspecialchars('ajouteFiche.php');
         echo '<script>window.location = "'.$url.'";</script>';
-        $errorMsg = "Modele publié.";
+        $errorMsgModele = "Modele publié.";
 
     }else{
-        $errorMsg = "Veuillez compléter tous les champs...";
+        $errorMsgModele = "Veuillez compléter tous les champs...";
     }
     
 }

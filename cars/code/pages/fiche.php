@@ -23,21 +23,21 @@ include '../includesHeaderFooter/header.php';
 <!----------PATH---------->
 
 <!----------CARD---------->
-<div class="cardFiche">
+<br>
 
-<?php 
+<?php
         if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 
-                $fiche_id = $_GET['id_fiche'];
+            $fiche_id = $_GET['id_fiche'];
 
-                $getInfosOfThisFicheReq = $bdd->prepare('SELECT * FROM fiches WHERE id = ?');
-                $getInfosOfThisFicheReq->execute(array($fiche_id));
+            $getInfosOfThisFicheReq = $bdd->prepare('SELECT * FROM fiches WHERE id = ?');
+            $getInfosOfThisFicheReq->execute(array($fiche_id));
 
-                $ficheInfos = $getInfosOfThisFicheReq->fetch();
+            $ficheInfos = $getInfosOfThisFicheReq->fetch();
 
-                if(!$ficheInfos){
-                        echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
-                }else{
+            if(!$ficheInfos){
+                echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
+            }else{
 
                 $getConstructor = $bdd->prepare('SELECT * FROM constructeurs WHERE id = ?');
                 $getConstructor->execute(array($ficheInfos['id_constructeur']));
@@ -54,6 +54,11 @@ include '../includesHeaderFooter/header.php';
 
                 $ficheAnne = $getAnnee->fetch();
 
+                $getAnneeFin = $bdd->prepare('SELECT * FROM annees WHERE id = ?');
+                $getAnneeFin->execute(array($ficheInfos['id_annee_fin']));
+
+                $ficheAnneFin = $getAnneeFin->fetch();
+
                 $getModele = $bdd->prepare('SELECT * FROM modeles WHERE id = ?');
                 $getModele->execute(array($ficheInfos['id_modele']));
 
@@ -64,8 +69,8 @@ include '../includesHeaderFooter/header.php';
                 $ficheGroupe = $getGroupe->fetch();
                 $ficheGroupeFinal = $ficheConstructeur['nom'];
 
-                if($ficheGroupe){  
-                        $ficheGroupeFinal = $ficheGroupe['nom'];
+                if($ficheGroupe){
+                    $ficheGroupeFinal = $ficheGroupe['nom'];
                 }
 
                 $getType = $bdd->prepare('SELECT * FROM types WHERE id = ?');
@@ -77,101 +82,73 @@ include '../includesHeaderFooter/header.php';
                 $getSegment->execute(array($ficheInfos['id_segment']));
 
                 $ficheSegment = $getSegment->fetch();
-                
-                ?>
 
-                <article class="boxLeftResume">
-                                
-                                <p class="textResumeFiche"><?= $ficheInfos['resume']; ?></p>
+                $getImage = $bdd->prepare('SELECT img_1 FROM imagesfiche WHERE id_fiche=?');
+                $getImage->execute(array($ficheInfos['id']));
+                $image = $getImage->fetch();
 
-                </article>
+                $getLignesOfTab = $bdd->prepare('SELECT * FROM motorisationsessence WHERE id_fiche = ?');
+                $getLignesOfTab->execute(array($fiche_id));
 
-                <div class="boxButtonLeftDate">
+                // Récupération de toutes les lignes de résultats dans un tableau
+                $tabInfos = $getLignesOfTab->fetchAll();
 
-                                <a><p class="textButtonDateFiche"><?= $ficheAnne['nom']; ?></p></a>
-                                <img class="imgLeftDate" src="../../library/imgIconsFiche/date.png">
-
-                </div>
-
-                <div class="boxButtonLeftOne">
-
-                                <a class="buttonLeftOne" ><p class="textButtonOneFiche"><?= $fichePays['nom']; ?></p></a>
-                                <img class="imgLeftPays" src="../../library/imgIconsFiche/pays.png">
-
-                </div>
-
-                <div class="boxButtonLeftTwo">
-
-                                <a href="#" class="buttonLeftTwo" ><p class="textButtonTwoFiche"><?= $ficheType['nom']; ?></p></a>
-
-                </div>
-
-                <div class="boxTopAndPicture">
-
-                        <article class="boxTopPictureFiche">
-
-                                <h6 class="textFicheConstruct"><?= $ficheConstructeur['nom']; ?> - <?= $ficheInfos['nom']; ?></h6>
-                                
-                        </article>
-
-                        <div class="containerPictureFiche">
-                                <img class="pictureFiche" src="../../library/voitures/<?= $modele['nom']."/".$fiche_id."/".$ficheInfos['image']; ?>">
+            ?>
+                <div class="color-band">
+                    <div class="car-details">
+                        <div class="content-left">
+                            <p><?= $ficheInfos['resume']; ?></p>
                         </div>
+                        <div class="title-banner">
+                            <h2><?= $ficheInfos['nom']; ?></h2>
+                        </div>
+                        <a href="#summary-anchor" class="btn-banner-1">
+                            <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon4">
+                            <p>Modèle : <?= $modele['nom']; ?></p>
+                        </a>
+                        <a href="#summary-anchor" class="btn-banner-2">
+                            <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon7">
+                            <p>Type : <?= $ficheType['nom']; ?></p>
+                        </a>
+                        <a href="#summary-anchor" class="btn-banner-3">
+                            <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon3">
+                            <p>Segment : <?= $ficheSegment['nom']; ?></p>
+                        </a>
+                        <a href="#summary-anchor" class="btn-banner-4">
+                            <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon">
+                            <p>Constructeur : <?= $ficheConstructeur['nom']; ?></p>
+                        </a>
+                        <a href="#summary-anchor" class="btn-banner-5">
+                            <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon2">
+                            <p>Groupe automobile : <?= $ficheGroupe['nom']; ?></p>
+                        </a>
+                        <a href="#summary-anchor" class="btn-banner-6">
+                            <img src="../../library/imgIconsFiche/date.png" alt="Icone" class="banner-icon5">
+                            <p>Année de sortie : <?= $ficheAnne['nom']; ?></p>
+                        </a>
+                        <a href="#summary-anchor" class="btn-banner-7">
+                            <img src="../../library/imgIconsFiche/pays.png" alt="Icone" class="banner-icon2">
+                            <p>Pays constructeur : <?= $fichePays['nom']; ?></p>
+                        </a>
+                        <img src="../../library/voitures/<?= $modele['nom']."/".$fiche_id."/".$image['img_1']; ?>" alt="Car Photo" class="car-photo">
+                        <a href="#histoire" class="btn-banner-8">
+                            <img src="../../library/imgIconsFiche/histoire.png" alt="Icone" class="banner-icon8">
+                            <p>Histoire</p>
+                        </a>
+                        <a href="#technique" class="btn-banner-9">
+                            <img src="../../library/imgIconsFiche/technique.png" alt="Icone" class="banner-icon9">
+                            <p>Nombre de versions : <?= count($tabInfos); ?></p>
+                        </a>
+                        <a href="#photo" class="btn-banner-10">
+                            <img src="../../library/imgIconsFiche/photo.png" alt="Icone" class="banner-icon10">
+                            <p>Gallerie photo</p>
+                        </a>
+                    </div>
+                    <!-- Ajoutez d'autres détails de la voiture ici -->
                 </div>
-
-                <div class="boxButtonRightOne">
-
-                                <a href="#" class="buttonRightOne" ><p class="textButtonOneRightFiche"><?= $ficheSegment['nom']; ?></p></a>
-                                <a href="#" ><img class="imgLeftSegment" src="../../library/imgIconsFiche/segment.png"></a>
-
-                </div>
-
-                <div class="boxButtonRight2">
-
-                                <a href="#" class="buttonRight2" ><p class="textButton2RightFiche"><?= $ficheGroupeFinal; ?></p></a>
-                                <a href="#" ><img class="imgLeftGroupe" src="../../library/imgIconsFiche/groupe.png"></a>
-
-                </div>
-
-                <div class="boxButtonRight3">
-
-                                <a href="#resume" class="buttonRight3" ><p class="textButton3RightFiche">Résumé</p></a>
-                                <a href="#resume" ><img class="imgLeftResume" src="../../library/imgIconsFiche/resume.png"></a>
-
-                </div>
-
-                <div class="boxButtonRight4">
-
-                                <a href="#histoire" class="buttonRight4" ><p class="textButton4RightFiche">Histoire</p></a>
-                                <a href="#histoire" ><img class="imgLeftHistoire" src="../../library/imgIconsFiche/histoire.png"></a>
-
-                </div>
-
-                <div class="boxButtonRight5">
-
-                                <a href="#technique" class="buttonRight5" ><p class="textButton5RightFiche">Technique</p></a>
-                                <a href="#technique" ><img class="imgLeftTechnique" src="../../library/imgIconsFiche/technique.png"></a>
-
-                </div>
-
-                <div class="boxButtonRight6">
-
-                                <a href="#photos" class="buttonRight6" ><p class="textButton6RightFiche">Photos</p></a>
-                                <a href="#photos" ><img class="imgLeftPhoto" src="../../library/imgIconsFiche/photo.png"></a>
-
-                </div>
-
-        <?php
-                }
-
-        }else{
-                echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
-        }
-        
-                
-
-        ?>
-</div>
+            <?php
+            }
+            } else{echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';}?>
 
 
 <!----------CARD---------->
@@ -194,37 +171,84 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
         }else{?>
 
         <div class="fiche-container">
-                        <article class="article-fiche-title" id="resume">
-                                <h1>Résumé</h1>
-                        </article>
-                        <br>
-                        <article class="article-fiche-name3">
-                                <p class="textResumeFiche"><?= $ficheInfos['description']; ?></p>
-                        </article>
-                        <br><br><br>
-                        <article class="article-fiche-title" id="histoire">
-                                <h1>Histoire</h1>
-                        </article>
-                        <br>
-                        <article class="article-fiche-name3">
-                                <p><?= $ficheInfos['description']; ?></p>
-                        </article>
-                        <br><br><br>
-                        <article class="article-fiche-title" id="technique">
-                                <h1>Technique</h1>
-                        </article>
-                        <br>
-                        <article class="article-fiche-name3">
-                                <p><?= $ficheInfos['description']; ?></p>
-                        </article>
 
-                        
-                            
+            <article class="article-fiche-title" id="histoire">
+                    <h1 class="h1-fiche">Histoire</h1>
+            </article>
+            <br>
+            <article class="article-fiche-name3" id="histoire">
+                <?= htmlspecialchars_decode($ficheInfos['histoire']); ?>
+            </article>
+            <br><br><br>
+
+            <!----------------TABLEAU DES VERSIONS-------------->
+            <article class="article-fiche-title" id="technique">
+                    <h1 class="h1-fiche">Versions</h1>
+            </article>
+            <br><br><br>
+
+            <?php
+            // Préparation et exécution de la requête pour récupérer toutes les lignes associées à la fiche
+
+
+            // Vérifier s'il y a des lignes à afficher
+            if (count($tabInfos) > 0) {
+                echo '<div class="table-container">';
+                echo '<div class="table-responsive">';
+                echo '<table id="user_data" class="table table-bordered">';
+                echo '<thead>';
+                echo '<tr>';
+                echo '<th>Appellation</th>';
+                echo '<th class="col-carburant">Carburant</th>';
+                echo '<th>Construction</th>';
+                echo '<th>Moteur</th>';
+                echo '<th>Cylindrée</th>';
+                echo '<th>Performance</th>';
+                echo '<th>Couple</th>';
+                echo '<th>0-100</th>';
+                echo '<th>Vitesse maximale</th>';
+                echo '<th>Consommation</th>';
+                echo '<th>Carrosserie</th>';
+                echo '<th class="col-marche">Marché</th>';
+                echo '</tr>';
+                echo '</thead>';
+                echo '<tbody id="table_body">';
+
+                // Parcourir chaque ligne de résultats pour générer les lignes du tableau
+                foreach ($tabInfos as $ligne) {
+                    echo '<tr>';
+                    echo '<td>' . htmlspecialchars($ligne['appellation']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['carburant']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['construction']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['moteur']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['cylindree']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['performance']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['couple']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['zero_to_hundred']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['vmax']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['conso']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['carrosserie']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['marche']) . '</td>';
+                    echo '</tr>';
+                }
+
+                echo '</tbody>';
+                echo '</table>';
+                echo '</div>';
+                echo '</div>';
+            } else {
+                // Aucune ligne trouvée pour cette fiche
+                echo 'Aucune donnée à afficher.';
+            }
+            ?>
+
+
+
                         <br><br><br>
                         <article class="article-fiche-title" id="photos">
-                                <h1>Photos</h1>
+                                <h1 id="photo" class="h1-fiche">Gallerie photo</h1>
                         </article>
-                        
+
         </div>
 
         <?php

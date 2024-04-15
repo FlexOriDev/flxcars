@@ -17,45 +17,186 @@ require('../actions/fiche/ajouteFiche.php');
 
 <form method="POST" ENCTYPE="multipart/form-data"> 
 
-<?php if(isset($errorMsg)){ echo '<p>'.$errorMsg.'</p>'; } ?>
+<?php if(isset($errorMsg)){ echo '<br><p class="error-ajout-fiche">'.$errorMsg.'</p>'; } ?>
 <br>
 <div class="register-top-grid">
 
-<h3>Publier une fiche</h3>
+<h3 class="text-ajout-fiche">Publier une fiche</h3>
 <br>
+<!-- NOM -->
 <div class="input-container">
-<span>Nom <label> :</label></span>
-<input class="addFiche" type="text" name="nom"> 
+<span class="span-ajout-fiche">Nom * <label> :</label></span>
+<input class="nom" type="text" name="nom"> 
 </div>
-<br>
-<div class="input-container">
-    <span>Résumé <label> :</label></span>
-    <textarea class="addFiche" name="resume" maxlength="200"></textarea>
-</div>
-<br>
 
-<div id="editor-container" style="height: 300px;">
-        <p>Commencez à écrire ici...</p>
+
+<!-- METRIQUES -->
+<div class="rowMetriques" id="rowMetriques">
+
+    <div class="columnMetriques">
+
+        <div class="custom-select">
+            <select id="selectType" onchange="" name="selectedType">
+                <option value="" disabled selected>Type * </option>
+                <?php
+
+                // Requête SQL pour récupérer les types depuis la base de données
+                $getAllTypes = $bdd->query('SELECT * FROM types ORDER BY nom');
+                $types = $getAllTypes->fetchAll(PDO::FETCH_ASSOC);
+
+                // Affichage des options pour la liste déroulante
+                foreach ($types as $type) {
+                    echo '<option value="' . $type['id'] . '">' . $type['nom'] . '</option>';
+                }
+                ?>
+            </select>
+        </div>
+
     </div>
+    <div class="columnMetriques">
 
-    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
-    <script>
-        // Initialiser Quill
-        var quill = new Quill('#editor-container', {
-            theme: 'snow'
-        });
-    </script>
+        <div class="custom-select">
+            <select id="selectType" onchange="" name="selectedAnneeSortie">
+                <option value="" disabled selected>Année de sortie * </option>
+                <?php
+
+                // Requête SQL pour récupérer les types depuis la base de données
+                $getAllTypes = $bdd->query('SELECT * FROM annees ORDER BY nom DESC');
+                $types = $getAllTypes->fetchAll(PDO::FETCH_ASSOC);
+
+                // Affichage des options pour la liste déroulante
+                foreach ($types as $type) {
+                    echo '<option value="' . $type['id'] . '">' . $type['nom'] . '</option>';
+                }
+                ?>
+            </select>
+        </div>
+
+    </div>
+    <div class="columnMetriques">
+
+        <div class="custom-select">
+            <select id="selectType" onchange="" name="selectedAnneeFin">
+                <option value="" disabled selected>Année de fin de production * </option>
+                <?php
+
+                // Requête SQL pour récupérer les types depuis la base de données
+                $getAllTypes = $bdd->query('SELECT * FROM annees ORDER BY nom DESC');
+                $types = $getAllTypes->fetchAll(PDO::FETCH_ASSOC);
+
+                // Affichage des options pour la liste déroulante
+                foreach ($types as $type) {
+                    echo '<option value="' . $type['id'] . '">' . $type['nom'] . '</option>';
+                }
+                ?>
+            </select>
+        </div>
+
+    </div>
+    <div class="columnMetriques">
+
+        <div class="custom-select">
+            <select id="selectType" onchange="" name="selectedModele">
+                <option value="" disabled selected>Modèle * </option>
+                <?php
+
+                // Requête SQL pour récupérer les types depuis la base de données
+                $getAllTypes = $bdd->query('SELECT * FROM modeles ORDER BY nom');
+                $types = $getAllTypes->fetchAll(PDO::FETCH_ASSOC);
+
+                // Affichage des options pour la liste déroulante
+                foreach ($types as $type) {
+                    echo '<option value="' . $type['id'] . '">' . $type['nom'] . '</option>';
+                }
+                ?>
+            </select>
+        </div>
+
+    </div>
+    <div class="columnMetriques">
+
+        <div class="custom-select">
+            <select id="selectType" onchange="" name="selectedSegment">
+                <option value="" disabled selected>Segment * </option>
+                <?php
+
+                // Requête SQL pour récupérer les types depuis la base de données
+                $getAllTypes = $bdd->query('SELECT * FROM segments ORDER BY nom');
+                $types = $getAllTypes->fetchAll(PDO::FETCH_ASSOC);
+
+                // Affichage des options pour la liste déroulante
+                foreach ($types as $type) {
+                    echo '<option value="' . $type['id'] . '">' . $type['nom'] . '</option>';
+                }
+                ?>
+            </select>
+        </div>
+
+    </div>
+    <div class="columnMetriques">
+
+        <div class="custom-select">
+            <select id="selectType" onchange="" name="selectedConstructeur">
+                <option value="" disabled selected>Constructeur * </option>
+                <?php
+
+                // Requête SQL pour récupérer les types depuis la base de données
+                $getAllTypes = $bdd->query('SELECT * FROM constructeurs ORDER BY nom');
+                $types = $getAllTypes->fetchAll(PDO::FETCH_ASSOC);
+
+                // Affichage des options pour la liste déroulante
+                foreach ($types as $type) {
+                    echo '<option value="' . $type['id'] . '">' . $type['nom'] . '</option>';
+                }
+                ?>
+            </select>
+        </div>
+
+    </div>
+</div>
+<br>
+
+
+
+
+<!-- RESUME -->
+<div class="input-container">
+    <span class="span-ajout-fiche">Résumé * <label> :</label></span>
+    <textarea class="addFiche" name="resume" maxlength="120" oninput="updateCount(this)"></textarea>
+    <div>
+        <small>Nombre de caractères restants : <span id="charCount">120</span></small>
+    </div>
+</div>
+
+<script>
+    function updateCount(textarea) {
+    const maxLength = textarea.maxLength;
+    const currentLength = textarea.value.length;
+    const charsRemaining = maxLength - currentLength;
+
+    const charCountSpan = document.getElementById('charCount');
+    if (charCountSpan) {
+        charCountSpan.textContent = charsRemaining;
+    }
+}
+</script>
+<br>
+<!-- HISTOIRE -->
+<span class="span-ajout-fiche">Histoire * <label> :</label></span>
+    <!-- Zone d'édition TinyMCE -->
+    <textarea id="editor" name="editor" class="history"></textarea>
 
 <br>
-<!-- EDITABLE TABLE -->
 
 <!-- Tableau des versions -->
+<span class="span-ajout-fiche">Versions * <label> :</label></span>
 <div class="table-container">
         <div class="table-responsive">
             <table id="user_data" class="table table-bordered">
             <thead>
             <tr>
                 <th>Appellation</th>
+                <th class="col-carburant">Carburant</th>
                 <th>Construction</th>
                 <th>Moteur</th>
                 <th>Cylindrée</th>
@@ -65,7 +206,7 @@ require('../actions/fiche/ajouteFiche.php');
                 <th>Vitesse maximale</th>
                 <th>Consommation</th>
                 <th>Carrosserie</th>
-                <th>Marché</th>
+                <th class="col-marche">Marché</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -73,6 +214,14 @@ require('../actions/fiche/ajouteFiche.php');
             <!-- Lignes du tableau à remplir dynamiquement -->
             <tr>
                 <td><input type="text" name="appellation[]" class="form-control" /></td>
+                <td>
+    <select name="carburant[]" class="form-control">
+        <option value="essence">Essence</option>
+        <option value="diesel">Diesel</option>
+        <option value="electrique">Électrique</option>
+        <option value="hydrogene">Hydrogène</option>
+    </select>
+</td>
                 <td><input type="text" name="construction[]" class="form-control" /></td>
                 <td><input type="text" name="moteur[]" class="form-control" /></td>
                 <td><input type="text" name="cylindree[]" class="form-control" /></td>
@@ -82,7 +231,16 @@ require('../actions/fiche/ajouteFiche.php');
                 <td><input type="text" name="vitesse_max[]" class="form-control" /></td>
                 <td><input type="text" name="consommation[]" class="form-control" /></td>
                 <td><input type="text" name="carrosserie[]" class="form-control" /></td>
-                <td><input type="text" name="marche[]" class="form-control" /></td>
+                <td>
+    <select name="marche[]" class="form-control">
+        <option value="Europe">Europe</option>
+        <option value="Asie">Asie</option>
+        <option value="Amérique du Nord">Amérique du Nord</option>
+        <option value="Amérique du Sud">Amérique du Sud</option>
+        <option value="Afrique">Afrique</option>
+        <option value="Océanie">Océanie</option>
+    </select>
+</td>
                 <td class="center-button">
                             <button type="button" name="remove" class="btn btn-danger btn-sm">Supprimer</button>
                 </td>
@@ -90,7 +248,7 @@ require('../actions/fiche/ajouteFiche.php');
         </tbody>
             </table>
         </div>
-        <button type="button" name="add" id="add" class="btn btn-info">Ajouter une ligne</button>
+        <button type="button" name="add" id="add" class="btn btn-info">Ajouter</button>
     </div>
 
 <script type="text/javascript">
@@ -102,152 +260,176 @@ require('../actions/fiche/ajouteFiche.php');
 
     // Ajouter une nouvelle ligne au tableau
     $('#add').click(function() {
-        var html = '<tr>';
-        html += '<td><input type="text" name="appellation[]" class="form-control" /></td>';
-        html += '<td><input type="text" name="construction[]" class="form-control" /></td>';
-        html += '<td><input type="text" name="moteur[]" class="form-control" /></td>';
-        html += '<td><input type="text" name="cylindree[]" class="form-control" /></td>';
-        html += '<td><input type="text" name="performance[]" class="form-control" /></td>';
-        html += '<td><input type="text" name="couple[]" class="form-control" /></td>';
-        html += '<td><input type="text" name="zero_to_hundred[]" class="form-control" /></td>';
-        html += '<td><input type="text" name="vitesse_max[]" class="form-control" /></td>';
-        html += '<td><input type="text" name="consommation[]" class="form-control" /></td>';
-        html += '<td><input type="text" name="carrosserie[]" class="form-control" /></td>';
-        html += '<td><input type="text" name="marche[]" class="form-control" /></td>';
-        html += '<td class="center-button"><button type="button" name="remove" class="btn btn-danger btn-sm">Supprimer</button></td>';
-        html += '</tr>';
-        $('#table_body').append(html);
-    });
+    var html = '<tr>';
+    html += '<td><input type="text" name="appellation[]" class="form-control" /></td>';
+    html += '<td><select name="carburant[]" class="form-control"><option value="essence">Essence</option><option value="diesel">Diesel</option><option value="electrique">Électrique</option><option value="hydrogene">Hydrogène</option></select></td>';
+    html += '<td><input type="text" name="construction[]" class="form-control" /></td>';
+    html += '<td><input type="text" name="moteur[]" class="form-control" /></td>';
+    html += '<td><input type="text" name="cylindree[]" class="form-control" /></td>';
+    html += '<td><input type="text" name="performance[]" class="form-control" /></td>';
+    html += '<td><input type="text" name="couple[]" class="form-control" /></td>';
+    html += '<td><input type="text" name="zero_to_hundred[]" class="form-control" /></td>';
+    html += '<td><input type="text" name="vitesse_max[]" class="form-control" /></td>';
+    html += '<td><input type="text" name="consommation[]" class="form-control" /></td>';
+    html += '<td><input type="text" name="carrosserie[]" class="form-control" /></td>';
+    html += '<td><select name="marche[]" class="form-control"><option value="Europe">Europe</option><option value="Asie">Asie</option><option value="Amérique du Nord">Amérique du Nord</option><option value="Amérique du Sud">Amérique du Sud</option><option value="Afrique">Afrique</option><option value="Océanie">Océanie</option></select></td>';
+    html += '<td class="center-button"><button type="button" name="remove" class="btn btn-danger btn-sm">Supprimer</button></td>';
+    html += '</tr>';
+    $('#table_body').append(html);
+});
 });
 </script>
+<br><br><br><br><br>
+<!-- PICTURES -->
+<span class="span-ajout-fiche">Images * <label> :</label></span>
 
-<!-- EDITABLE TABLE -->
+    <div class="image-thumbnails">
+        <!-- Les inputs file sont ajoutés pour chaque miniature -->
+
+        <!-- Miniatures d'image avec des attributs onclick pour déclencher le téléchargement de fichier -->
+        <input type="file" id="fileInput1" name="image1" style="display:none;" accept="image/*" onchange="handleFileUpload(1)" />
+        <div class="image-thumbnail" id="thumbnail1" onclick="openFileSelector(1)">
+            <img id="previewImage1" class="image-upload" src="../../library/imgFioritures/upload_icon.png" alt="Upload Icon" />
+        </div>
+        <input type="file" id="fileInput2" name="image2" style="display:none;" accept="image/*" onchange="handleFileUpload(2)" />
+        <div class="image-thumbnail" id="thumbnail2" onclick="openFileSelector(2)">
+            <img id="previewImage2" class="image-upload" src="../../library/imgFioritures/upload_icon.png" alt="Upload Icon" />
+        </div>
+        <input type="file" id="fileInput3" name="image3" style="display:none;" accept="image/*" onchange="handleFileUpload(3)" />
+        <div class="image-thumbnail" id="thumbnail3" onclick="openFileSelector(3)">
+            <img id="previewImage3" class="image-upload" src="../../library/imgFioritures/upload_icon.png" alt="Upload Icon" />
+        </div>
+        <input type="file" id="fileInput4" name="image4" style="display:none;" accept="image/*" onchange="handleFileUpload(4)" />
+        <div class="image-thumbnail" id="thumbnail4" onclick="openFileSelector(4)">
+            <img id="previewImage4" class="image-upload" src="../../library/imgFioritures/upload_icon.png" alt="Upload Icon" />
+        </div>
+        <input type="file" id="fileInput5" name="image5" style="display:none;" accept="image/*" onchange="handleFileUpload(5)" />
+        <div class="image-thumbnail" id="thumbnail5" onclick="openFileSelector(5)">
+            <img id="previewImage5" class="image-upload" src="../../library/imgFioritures/upload_icon.png" alt="Upload Icon" />
+        </div>
+        <input type="file" id="fileInput6" name="image6" style="display:none;" accept="image/*" onchange="handleFileUpload(6)" />
+        <div class="image-thumbnail" id="thumbnail6" onclick="openFileSelector(6)">
+            <img id="previewImage6" class="image-upload" src="../../library/imgFioritures/upload_icon.png" alt="Upload Icon" />
+        </div>
+    </div>
+
+<div class="container-ajoutFiche">
+<div class="selected-images-container">
+        <!-- Conteneur pour les miniatures des images sélectionnées -->
+    </div>
+    <div class="slides-container-ajoutFiche" id="slidesContainer">
+        <!-- Slides -->
+    </div>
+    <button class="prevAjoutfiche"  type="button" onclick="prevSlide()">&#10094;</button>
+    <button class="nextAjoutfiche"  type="button" onclick="nextSlide()">&#10095;</button>
+</div>
+
+
+<script>
+    let slideIndex = 0;
+
+    // Fonction pour vérifier si la miniature est vide
+    function checkEmptyThumbnail(imageIndex) {
+        const thumbnailElement = document.getElementById(`thumbnail${imageIndex}`);
+        if (thumbnailElement && !thumbnailElement.querySelector('img')) {
+            thumbnailElement.innerHTML = `<img src="../../library/imgFioritures/upload_icon.png" alt="Upload Icon" />`;
+        }
+    }
+
+    // Appeler la fonction pour chaque miniature au chargement de la page
+    window.onload = function() {
+        for (let i = 1; i <= 6; i++) {
+            checkEmptyThumbnail(i);
+        }
+    };
+
+    // Fonction pour ouvrir le sélecteur de fichier lorsqu'une miniature est cliquée
+    function openFileSelector(index) {
+        const fileInput = document.getElementById(`fileInput${index}`);
+        if (fileInput) {
+            fileInput.click(); // Ouvrir la boîte de dialogue de sélection de fichier
+        }
+    }
+
+    // Fonction appelée lorsqu'un fichier est sélectionné
+    function handleFileUpload(imageIndex) {
+        const fileInput = document.getElementById(`fileInput${imageIndex}`);
+        if (fileInput) {
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageUrl = e.target.result;
+                    const thumbnailElement = document.getElementById(`thumbnail${imageIndex}`);
+
+                    // Mettre à jour la miniature avec l'image chargée
+                    if (thumbnailElement) {
+                        thumbnailElement.innerHTML = `<img src="${imageUrl}" alt="Uploaded Image" />`;
+                    }
+
+                    // Afficher l'image dans le carrousel
+                    displayImageInCarousel(imageUrl);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+
+    // Fonction pour afficher l'image dans le carrousel
+    function displayImageInCarousel(imageUrl) {
+        const container = document.getElementById('slidesContainer');
+        if (container) {
+            const imgElement = document.createElement('div');
+            imgElement.className = 'slide';
+            imgElement.innerHTML = `<img class="imgAjoutFiche" src="${imageUrl}" alt="Uploaded Image" />`;
+
+            container.appendChild(imgElement);
+            showSlides(++slideIndex); // Afficher la nouvelle diapositive dans le carrousel
+        }
+    }
+
+    // Fonction pour afficher la diapositive spécifiée dans le carrousel
+    function showSlides(n) {
+        const slides = document.querySelectorAll('.slide');
+
+        if (n > slides.length) {
+            slideIndex = 1;
+        }
+        if (n < 1) {
+            slideIndex = slides.length;
+        }
+
+        slides.forEach(slide => {
+            slide.style.display = 'none'; // Masquer toutes les diapositives
+        });
+
+        slides[slideIndex - 1].style.display = 'block'; // Afficher la diapositive actuelle
+    }
+
+    // Fonction pour passer à la diapositive précédente dans le carrousel
+    function prevSlide() {
+        event.preventDefault(); // Empêcher le comportement par défaut du bouton
+        showSlides(slideIndex -= 1);
+    }
+
+    // Fonction pour passer à la diapositive suivante dans le carrousel
+    function nextSlide() {
+        event.preventDefault(); // Empêcher le comportement par défaut du bouton
+        showSlides(slideIndex += 1);
+    }
+
+</script>
+
 <br>
-<div>
-<span>Motorisation <label> :</label></span>
-<input class="addFiche" type="text" name="motorisation"> 
-</div>
-<br>
-<div>
-<span>Image 1<label> :</label></span>
-<input type="file" name="fichier_1" id="fichier_1" />
-</div>
-<div>
-<span>Image 2<label> :</label></span>
-<input type="file" name="fichier_2" id="fichier_2" />
-</div>
-<div>
-<span>Image 3<label> :</label></span>
-<input type="file" name="fichier_3" id="fichier_3" />
-</div>
-<div>
-<span>Image 4<label> :</label></span>
-<input type="file" name="fichier_4" id="fichier_4" />
-</div>
-<div>
-<span>Image 5<label> :</label></span>
-<input type="file" name="fichier_5" id="fichier_5" />
-</div>
-<br>
-
-
-<div class="drp">
-
-<select class="custom-select" id="select-5" name="id_constructeur">
-<option value="">Constructeur</option>
-<?php 
-$getAllConstructeurs = $bdd->query('SELECT * FROM constructeurs ORDER BY nom');
-$getAllConstructeurs->execute(array());
-foreach($getAllConstructeurs as $constructeur ){
-	
-	?>
-	<option value=<?= $constructeur['id']; ?>><?= $constructeur['nom']; ?></option>
-	<?php
-}
-?>
-</select>
-
-</div>
-<br>
-<div class="drp">
-
-<select class="custom-select" id="select-5" name="id_type">
-<option value="">Type</option>
-<?php 
-$getAllTypes = $bdd->query('SELECT * FROM types ORDER BY nom');
-$getAllTypes->execute(array());
-foreach($getAllTypes as $type ){
-	
-	?>
-	<option value=<?= $type['id']; ?>><?= $type['nom']; ?></option>
-	<?php
-}
-?>
-</select>
-
-</div>
-<br>
-<div class="drp">
-
-<select class="custom-select" id="select-5" name="id_modele">
-<option value="">Modèle</option>
-<?php 
-$getAllModeles = $bdd->query('SELECT * FROM modeles ORDER BY nom');
-$getAllModeles->execute(array());
-foreach($getAllModeles as $modele ){
-	
-	?>
-	<option value=<?= $modele['id']; ?>><?= $modele['nom']; ?></option>
-	<?php
-}
-?>
-</select>
-
-</div>
-<br>
-<div class="drp">
-
-<select class="custom-select" id="select-5" name="id_annee">
-<option value="">Année</option>
-<?php 
-$getAllAnnees = $bdd->query('SELECT * FROM annees ORDER BY nom');
-$getAllAnnees->execute(array());
-foreach($getAllAnnees as $annee ){
-	
-	?>
-	<option value=<?= $annee['id']; ?>><?= $annee['nom']; ?></option>
-	<?php
-}
-?>
-</select>
-
-</div>
-
-<br>
-<div class="drp">
-
-<select class="custom-select" id="select-5" name="id_segment">
-<option value="">Segment</option>
-<?php 
-$getAllSegment = $bdd->query('SELECT * FROM segments ORDER BY nom');
-$getAllSegment->execute(array());
-foreach($getAllSegment as $segment ){
-	
-	?>
-	<option value=<?= $segment['id']; ?>><?= $segment['nom']; ?></option>
-	<?php
-}
-?>
-</select>
-
-</div>
+<br><br><br>
 <br>
 <div class="clear"> </div>
 <div class="register-but">
 
-<input type="submit" value="Publier" name="validate">
+<input type="submit" value="Publier" name="validate" class="custom-button">
 <div class="clear"> </div>
-
+<br><br><br><br><br><br><br><br><br>
 </div>
 </form>
 </div>
@@ -261,3 +443,5 @@ foreach($getAllSegment as $segment ){
 ?>
 
 </main>
+
+<?php require '../includesHeaderFooter/footer.php' ; ?>

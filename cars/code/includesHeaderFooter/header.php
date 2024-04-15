@@ -9,6 +9,7 @@
   <link href="../css/main.css" rel="stylesheet"><!--lien vers feuille de style avec le nom de celle-ci-->
   <link rel="shortcut icon" href="../../library/imgFioritures/logo_test.png"><!--favicon du site-->
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -17,6 +18,11 @@
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/tei4ruy7np5gv3bchu4wpu0vl4ayvwmfiprwxdvlq6oxn03f/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
   <title>Flx Cars</title><!--Titre de la page web-->
   <?php
     include("../actions/user/login.php");
@@ -26,7 +32,25 @@
         <?php
             include("../scripts/checkboxSCRIPT.js");
         ?>
-    </script> 
+    </script>
+
+    <script src="https://cdn.tiny.cloud/1/tei4ruy7np5gv3bchu4wpu0vl4ayvwmfiprwxdvlq6oxn03f/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+    <script>
+        tinymce.init({
+            selector: 'textarea.history', // Sélecteur spécifique pour les textarea avec la classe "addFiche"
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+        });
+    </script>
   
 </head>
 
