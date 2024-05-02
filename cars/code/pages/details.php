@@ -14,9 +14,9 @@ require('../actions/database.php');
 ?>
 
 <!----------PATH---------->
-<div class="pathButtons">
-  <a href="index.php" class="boutonPath">Accueil</a>
-  <a class="boutonPathActual">/Détails</a>
+<div class="global-pathButtons">
+  <a href="index.php" class="global-boutonPath">Accueil</a>
+  <a class="global-boutonPathActual">/Détails</a>
 </div>
 <!----------PATH---------->
 

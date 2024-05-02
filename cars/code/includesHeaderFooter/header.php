@@ -59,18 +59,11 @@
 <header class="header">
 
 <div class="header-top-top" id="haut-haut">
-    <div class="box">
-        
-            <form method="GET">
-                <input class="textSearch" type="text" name="id_modele" placeholder="Ecrire ici...">
-                <input class="submit" type="submit" name="submit" value="Search">
-            </form>
-    </div>
+
 </div>
 
 <div class="header-top">
-        
-        <img class="logo" src="../../library/img2/logo.png" href="#">
+
         
 </div>
 
@@ -82,13 +75,13 @@
 
 <nav>
   <ul>
-    <li class="deroulant"><a href="../pages/index.php">Accueil &ensp;</a>
+    <li class="deroulant"><a href="../pages/index.php">Accueil</a>
       <ul class="sous">
         <li><a href="index.php">Pourquoi Smoky Ghost ?</a></li>
       </ul>
     </li>
 
-    <li class="deroulant"><a href="../pages/voitures.php">Voitures &ensp;</a>
+    <li class="deroulant"><a href="../pages/voitures.php">Voitures</a>
       <ul class="sous">
       <?php 
     $getAllTypes = $bdd->query('SELECT * FROM types ORDER BY nom');
@@ -104,7 +97,7 @@
       </ul>
     </li>
 
-    <li class="deroulant"><a href="../pages/constructeurs.php">Constructeurs &ensp;</a>
+    <li class="deroulant"><a href="../pages/constructeurs.php">Constructeurs</a>
       <ul class="sous">
       <?php 
     $getAllConstructeurs = $bdd->query('SELECT * FROM constructeurs ORDER BY nom');
@@ -120,7 +113,7 @@
       </ul>
     </li>
 
-    <li class="deroulant"><a href="../pages/details.php">Détails &ensp;</a>
+    <li class="deroulant"><a href="../pages/details.php">Détails</a>
       <ul class="sous">
         <li><a href="details.php">Types</a></li>
         <li><a href="details.php">Segments</a></li>
@@ -128,7 +121,7 @@
       </ul>
     </li>
 
-    <li class="deroulant"><a href="accueil.php">Qui sommes nous ? &ensp;</a>
+    <li class="deroulant"><a href="accueil.php">Qui sommes nous ?</a>
       <ul class="sous">
         <li><a href="accueil.php#article-1">Pourquoi Flx Cars ?</a></li>
         <li><a href="accueil.php#article-2">Quel est le but ?</a></li>
@@ -136,7 +129,7 @@
       </ul>
     </li>
 
-    <li class="deroulant"><a href="accueil.php">Nous contacter &ensp;</a></li>
+    <li class="deroulant"><a href="accueil.php">Nous contacter</a></li>
 
     <?php 
           if(isset($_SESSION['auth'])){
@@ -154,7 +147,7 @@
 		<?php 
           if(!isset($_SESSION['auth'])){
             ?>
-            <li class="deroulant"><a href="login.php">Connexion &ensp;</a></li>
+            <li class="deroulant"><a href="login.php">Connexion</a></li>
             <?php
           }
         ?>

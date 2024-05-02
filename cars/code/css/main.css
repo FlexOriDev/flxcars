@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #393a39; /* Exemple de couleur principale */
+  --primary-color: #303030; /* Exemple de couleur principale */
   --secondary-color: #242423; /* Exemple de couleur secondaire */
   --accent-color-yellow: #F5CB5C; /* Exemple de couleur d'accentuation */
   --accent-color-white: #E8EDDF; /* Exemple de couleur d'accentuation */
@@ -63,7 +63,7 @@ body{
 }
 
 .imgFiche{
- 
+
   width: 45%;
 }
 
@@ -86,98 +86,38 @@ body{
 
   /*PATH*/
 
-  .pathButtons{
+  .global-pathButtons{
     margin-top: 30px;
     margin-left: 116px;
   }
 
-  .boutonPath{
+  .global-boutonPath{
     color: var(--accent-color-white);
   }
-  .boutonPath:hover{
+  .global-boutonPath:hover{
     color: var(--accent-color-gray);
   }
 
-  .boutonPathActual{
+  .global-boutonPathActual{
     color: var(--accent-color-yellow);
   }
 
-  .boutonPathActual:hover{
+  .global-boutonPathActual:hover{
     color: var(--accent-color-yellow);
   }
   /*PATH*/
 
   /* INDEX */
 
-  /* INDEX CAROUSEL */
-  #carousel-item-index {
-    margin-top: 10px;
-    width: 100%;
-    height: 78%;
-    min-height: 350px;
-    background: no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    
-  }
 
-  .carousel-control-prev{
-    cursor: pointer;
-  }
-
-  .space{
-    margin-top: 20px;
-  }
-
-  #carousel-item-index-active{
-    margin-top: 10px;
-    width: 100%;
-    height: 78%;
-    min-height: 350px;
-    background: no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
-
-  /* INDEX BLOCS */
-
-
-
-  .bloc-index{
-    background: var(--accent-color-yellow);
-    padding: 5px 0;
-    text-align: center;
-  }
-
-  .bloc-index-info{
-    background: var(--accent-color-yellow);
-    padding: 100px 0;
-    text-align: center;
-  }
 
   /* INDEX */
 
   /*------FICHE-------*/
 
   /*------FICHE1-------*/
-  .article-div-fiche{
-    margin-top: -50px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 45%;
-    height: 20px;
-    padding-bottom: 95px;
-  }
 
-  .article-fiche-name{
-    
-    background-color: var(--accent-color-yellow);
 
-  }
 
   .h5Title{
     margin-top: -30px;
@@ -202,17 +142,7 @@ body{
 
   }
 
-  .nomWidgetFiche{
-    color: var(--accent-color-yellow);
-  }
 
-  .spanNomConstructeur{
-    color: var(--accent-color-gray);
-  }
-
-  .spanNomAnnee{
-    color: var(--accent-color-gray);
-  }
 
 
   /*------FICHE2-------*/
@@ -314,6 +244,7 @@ body{
     content: "";
     clear: both;
     display: table;
+
   }
   
   @media screen and (max-width: 300px) {
@@ -332,24 +263,18 @@ body{
   }
   #colonne{
     margin-left: 0;
-    margin-right: auto;
+    margin-right: 0;
     width: auto;
   }
 
   /*----------PREFERENCES----------*/
-  .rowPreferences{
-    display: flex;
-  }
 
-  .columnPreferences{
-    float:right;
-    width: 20%;
-    padding: 3px;
-    margin-top: 20px;
-  }
+
 
 /* ----------------------------------------------------------------------------------------
   /* Style The Dropdown Button */
+
+
   
   
   small
@@ -502,8 +427,19 @@ body{
   {
       display: none;
   }
-  
-  /* -------------------------------------------------------------------------------------------------------------- */
+
+.rowPreferences{
+  display: flex;
+}
+
+.columnPreferences{
+  float:left;
+  width: 20%;
+  padding: 3px;
+}
+
+
+/* -------------------------------------------------------------------------------------------------------------- */
   
     .checkboxs{
       display: inline-block;
@@ -512,7 +448,8 @@ body{
   /* CONTENT VOITURES.php */
 
   .errorCarNotFind{
-    margin-top: 20px;
+    margin-top: 40px;
+    color: var(--accent-color-yellow);
   }
   
   /*----------------------------------------------------------------------------------------------*/
@@ -533,35 +470,7 @@ body{
     margin-left: 10px;
   }
   
-  input.submit{
-    position: relative;
-    display: inline-block;
-    transition: 0.5s;
-  }
-  .textSearch{
-    background-color: rgb(255, 255, 255);
-    border: none;
-    height: 27px;
-    padding: 0 15px;
-    border-radius: 25px 0 0 25px;
-    outline: none;
-  
-  }
-  .submit{
-    left: -5px;
-    border: none;
-    position: relative;
-    border-radius: 0 25px 25px 0;
-    width: 70px;
-    height: 27px;
-    border: none;
-    outline: none;
-    background-color: var(--accent-color-yellow);
-    color: #ffffff;
-  }
-  .submit:hover{
-    background-color: var(--accent-color-gray);
-  }
+
   /* HEADER top */
   .header-top{
     background: var(--secondary-color);
@@ -576,18 +485,14 @@ body{
   
   /*----------------------------------------------------------------------------------------------*/
   /* mid */
-  .header-mid{
-    background: var(--accent-color-yellow);
-    padding: 4px;
-    text-align: center;
-  }
+
   /*----------------------------------------------------------------------------------------------*/
   /* DEROULANT */
   
   nav{
     z-index: 10;
     width: 100%;
-    background-color: var(--accent-color-gray);
+    background-color: var(--secondary-color);
     transition: 0.5s;
   }
   
@@ -611,21 +516,20 @@ body{
   nav a{
     display: block;
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: var(--accent-color-white);
     border-bottom: 2px solid transparent;
     padding: 10px 0px;
   }
   
   nav a:hover{
-    color: var(--secondary-color);
+    color: var(--accent-color-yellow);
 
   }
   
   .sous{
     z-index: 10;
     display: none;
-    box-shadow: 0px 1px 2px var(--accent-color-white);
-    background-color: var(--accent-color-white);
+    background-color: var(--secondary-color);
     position: absolute;
     width: 100%;
     z-index: 1000;
@@ -648,7 +552,6 @@ body{
     z-index: 100; 
   }
   .deroulant > a::after{
-    content:" ⚫";
     font-size: 12px;
   }
   /*----------------------------------------------------------------------------------------------*/
@@ -1216,14 +1119,6 @@ tbody tr {
   
   /* FOOTER */
 
-.footer-mid{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-    background: var(--accent-color-yellow);
-    padding: 4px;
-}
-
 .footer {
   position: absolute;
   left: 0;
@@ -1268,282 +1163,11 @@ tbody tr {
 
   /*--------------CARD------------------*/
 
-.color-band {
-  background-color: var(--accent-color-gray);
-  width: 100%; /* La bande prend toute la largeur de la page */
-  text-align: center; /* Centrer le contenu à l'intérieur de la bande */
-  padding: 20px 0; /* Ajouter un espace intérieur en haut et en bas de la bande */
-}
-
-.car-details {
-  position: relative; /* Position relative pour les éléments enfants positionnés absolument */
-  max-width: 800px; /* Largeur maximale des détails de la voiture */
-  margin: 0 auto;
-}
-
-.title-banner {
-  position: relative; /* Position relative pour positionner la bande de titre */
-  width: 100%; /* La bannière fait la même largeur que l'image */
-  background-color: var(--primary-color); /* Couleur de fond de la bannière (blanc semi-transparent) */
-  color: var(--accent-color-yellow);
-  padding: 10px; /* Espacement intérieur de la bannière */
-  box-sizing: border-box; /* Inclure le padding dans la largeur de la bannière */
-  border-top-left-radius: 10px; /* Arrondir le coin supérieur gauche */
-  border-top-right-radius: 10px; /* Arrondir le coin supérieur droit */
-}
-
-.title-banner h2   {
-  margin-top: 10px; /* Espacement en bas du paragraphe */
-  text-align: center; /* Justifier le texte */
-  margin-bottom: 10px; /* Espacement en bas du paragraphe */
-}
-
-.car-photo {
-  width: 100%; /* Définir la largeur de l'image à 100% de la largeur de son conteneur */
-  max-width: 800px; /* Largeur maximale de l'image (800px dans cet exemple) */
-  height: auto; /* Pour conserver le ratio hauteur/largeur de l'image */
-  display: block;
-  margin: 0 auto; /* Centrer l'image horizontalement */
-  border-bottom-left-radius: 10px; /* Arrondir le coin supérieur gauche */
-  border-bottom-right-radius: 10px; /* Arrondir le coin supérieur droit */
-}
-
-.content-left {
-  position: absolute; /* Position absolue pour placer la bande de contenu à gauche */
-  top: 25%; /* Aligner la bande de contenu au milieu verticalement */
-  left: -500px; /* Positionner la bande de contenu à gauche de l'image */
-  transform: translateY(-50%); /* Ajuster verticalement pour centrer la bande de contenu */
-  width: 500px; /* Largeur de la bande de contenu */
-  background-color: var(--accent-color-gray-fiche); /* Couleur de fond du contenu (blanc semi-transparent) */
-  padding: 10px; /* Espacement intérieur du contenu */
-  border-bottom-left-radius: 10px; /* Arrondir le coin inférieur gauche */
-  border-top-left-radius: 10px; /* Arrondir le coin supérieur gauche */
-}
-.content-left p {
-  margin-top: 10px; /* Espacement en bas du paragraphe */
-  text-align: justify; /* Justifier le texte */
-  margin-bottom: 10px; /* Espacement en bas du paragraphe */
-  text-indent: 20px; /* Ajouter un retrait (alinea) au début du paragraphe */
-}
-
-.banner-icon,.banner-icon2,.banner-icon3,.banner-icon4,.banner-icon5{
-  width: 30px;
-  height: auto;
-  margin-right: 10px;
-  flex-shrink: 0; /* Empêcher la réduction de taille de l'icône */
-
-}
-
-.btn-banner-1 p,.btn-banner-2 p,.btn-banner-3 p,.btn-banner-4 p,.btn-banner-5 p {
-  margin: 0;
-  overflow: hidden; /* Masquer le texte qui dépasse */
-  text-overflow: ellipsis; /* Afficher des points de suspension pour le texte qui dépasse */
-  white-space: nowrap; /* Empêcher le texte de passer à la ligne */
-}
-
-.btn-banner-1:hover ,.btn-banner-2:hover ,.btn-banner-3:hover ,.btn-banner-4:hover ,.btn-banner-5:hover,.btn-banner-6:hover,.btn-banner-7:hover,.btn-banner-8:hover,.btn-banner-9:hover,.btn-banner-10:hover  {
-  color: var(--secondary-color);
-  transition: 0.2s;
-}
-
-.btn-banner-1 img,.btn-banner-2 img,.btn-banner-3 img, .btn-banner-4 img, .btn-banner-5 img {
-  margin-top: -5px; /* Déplacer l'image vers le bas de 10px */
-}
-
-.btn-banner-1, .btn-banner-2,.btn-banner-3, .btn-banner-4, .btn-banner-5  {
-  position: absolute;
-  left: -350px;
-  transform: translateY(-50%);
-  width: 350px;
-  padding: 10px;
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  overflow: hidden; /* Masquer tout contenu qui dépasse */
-  color: black;
-  background-color: var(--accent-color-gray-fiche);
-}
-.btn-banner-1 {
-  top: 40%;
-}
-.btn-banner-2 {
-  top: 50%;
-}
-.btn-banner-3 {
-  top: 60%;
-}
-.btn-banner-4 {
-  top: 70%;
-}
-.btn-banner-5 {
-  top: 80%;
-}
-
-.banner-icon6,.banner-icon7,.banner-icon8, .banner-icon9, .banner-icon10 {
-  width: 30px;
-  height: auto;
-  margin-right: 10px;
-  flex-shrink: 0; /* Empêcher la réduction de taille de l'icône */
-}
-
-.btn-banner-6 p,.btn-banner-7 p,.btn-banner-8 p, .btn-banner-9 p, .btn-banner-10 p  {
-  margin: 0;
-  overflow: hidden; /* Masquer le texte qui dépasse */
-  text-overflow: ellipsis; /* Afficher des points de suspension pour le texte qui dépasse */
-  white-space: nowrap; /* Empêcher le texte de passer à la ligne */
-}
-
-.btn-banner-6 img,.btn-banner-7 img,.btn-banner-8 img, .btn-banner-9 img, .btn-banner-10 img  {
-  margin-top: -5px; /* Déplacer l'image vers le bas de 10px */
-}
-
-.btn-banner-6,.btn-banner-7, .btn-banner-8,.btn-banner-9, .btn-banner-10 {
-  position: absolute;
-  right: -350px;
-  transform: translateY(-50%);
-  width: 350px;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  overflow: hidden; /* Masquer tout contenu qui dépasse */
-  color: black;
-  background-color: var(--accent-color-gray-fiche);
-}
-.btn-banner-6 {
-  top: 70%;
-}
-.btn-banner-7 {
-  top: 80%;
-}
-.btn-banner-8 {
-  top: 40%;
-}
-.btn-banner-9 {
-  top: 50%;
-}
-.btn-banner-10 {
-  top: 60%;
-}
 
 
 /*--------------CARD------------------*/
 
-.h1-fiche{
-  color: var(--secondary-color);
-}
 
-
-  /* ERROR FICHE */
-
-  .errorFicheNonTrouvee{
-    margin-left: 115px;
-    padding-top: 50px;
-    font-size: large;
-    color: #8d1616;
-  }
-
-  /* ERROR FICHE */
-
-  /* TABLE TECHNIQUE */
-
-  #add{
-    float:right;
-  }
-
-  /* TABLE TECHNIQUE */
-
-  /* GALLERY PICTURES */
-
-  div.img {
-    margin-right: 15px;
-    float: left;
-    width: 11.5%;
-    cursor: pointer;
-    transition: all .3s;
-}
-
-div.img:hover {
-  opacity: .5;
-  transition: all .3s;
-}
-
-div.img img {
-    width: 100%;
-    height: auto;
-}
-
-/* GALLERY PICTURES */
-
-/* CARROUSEL PICTURES */
-
-.container {
-  margin-top: 8%;
-  margin-left: -0.6%;
-  width: 50%;
-  position: relative;
-}
-
-.slides {
-  display: none;
-}
-
-.prev{
-  text-decoration: none;
-  color: var(--accent-color-yellow);
-  font-style: none;
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  padding: 16px;
-  border-radius: 0 3px 3px 0;
-  background: var(--secondary-color);
-  transition: all .3s;
-}
-
-.next{
-  text-decoration: none;
-  color: var(--accent-color-yellow);
-  cursor: pointer;
-  position: absolute;
-  margin-right: 12px;
-  top: 50%;
-  transform: translate(0, -50%);
-  padding: 16px;
-  border-radius: 0 3px 3px 0;
-  background: var(--secondary-color);
-  transition: all .3s;
-}
-
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-.prev:hover,
-.next:hover {
-  color: var(--secondary-color);
-  background: var(--accent-color-yellow);
-}
-
-.ficheTitreModelePhotos{
-  font-size: 1.7em;
-  padding-top: 20px;
-  color: var(--secondary-color);
-}
-
-.article-fiche-title-photos{
-    margin-left: 0;
-    margin-right: auto;
-    width: 23.9%;
-    height: 15px;
-}
 
 /* CARROUSEL PICTURES */
 

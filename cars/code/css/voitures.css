@@ -1,0 +1,261 @@
+/* En-tête */
+.header-voitures {
+    width: 100%; /* Utilisation de la largeur totale de son conteneur parent */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 1px; /* Espacement interne */
+}
+
+/* Barre de recherche */
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-box {
+    height: 40px;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    width: 205px; /* Largeur initiale de la barre de recherche */
+}
+
+.search-button {
+    height: 40px;
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.1s;
+    margin-right: 22px; /* Espacement entre la barre de recherche et les boutons */
+}
+
+/* Conteneur des boutons */
+.button-container {
+    display: flex;
+    align-items: center;
+}
+
+.tri-button,
+.filters-button {
+    height: 40px;
+    padding: 8px;
+    font-size: 16px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+
+
+.tri-button:hover,
+.filters-button:hover,
+.search-button:hover{
+    background-color: var(--accent-color-white);
+    color: var(--secondary-color);
+}
+
+.clear-filters-button {
+    background-color: var(--secondary-color);
+    color: var(--accent-color-yellow);
+    border: none;
+    width: 40px;
+    height: 40px;
+    line-height: 30px; /* Pour centrer le contenu verticalement */
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+.clear-filters-button:hover {
+    background-color: var(--accent-color-yellow);
+    color: var(--secondary-color);
+}
+
+/* dropwdown trier par */
+.dropdown-content-sort {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 130px;
+    z-index: 100;
+}
+
+.dropdown-content-sort a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content-sort a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* NOM DES VOITURES */
+.nomWidgetFiche{
+    color: var(--accent-color-white);
+    font-size: 0.8em;
+}
+
+/* FILTER SECTION LATERAL MENU */
+
+.filter-section h2{
+    color: white;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -500px; /* Déplacer le menu hors de l'écran à droite */
+    bottom: 0;
+    width: 500px;
+    background-color: var(--primary-color);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    display: none; /* Caché initialement */
+    z-index: 1000; /* Assurez-vous qu'il s'affiche au-dessus du contenu principal */
+    overflow-y: auto; /* Permet le défilement si le contenu dépasse la hauteur */
+    border-left: 5px solid var(--accent-color-yellow); /* Bordure de couleur jaune */
+    transition: right 0.3s ease-in-out;
+}
+
+/* Lorsque le menu est visible (affiché en JavaScript), le déplacer vers la gauche */
+.side-menu.show {
+    right: 0; /* Afficher le menu en le positionnant à 0 pixels à partir de la droite */
+}
+
+.filter-section {
+    padding: 20px;
+}
+
+.filter-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.filter-section label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.filter-section select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+
+
+/* CHECKBOX CONSTRUCTEURS */
+
+/* Style pour le conteneur de la liste déroulante */
+.dropdown-checkboxes {
+    position: relative;
+    width: 100%; /* Utiliser toute la largeur du conteneur parent */
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+/* Style pour le bouton de la liste déroulante */
+.dropdown-btn-constructeur, .dropdown-btn-type, .dropdown-btn-modele, .dropdown-btn-segment, .dropdown-btn-annee   {
+    width: 100%;
+    box-sizing: border-box; /* Inclure la largeur du padding et de la bordure dans la largeur totale */
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.dropdown-btn-constructeur:hover, .dropdown-btn-type:hover, .dropdown-btn-modele:hover, .dropdown-btn-segment:hover, .dropdown-btn-annee:hover {
+    background-color: var(--accent-color-white);
+    color: var(--secondary-color);
+}
+
+/* Style pour le contenu de la liste déroulante */
+.dropdown-content-constructeurs, .dropdown-content-types, .dropdown-content-modeles, .dropdown-content-segments, .dropdown-content-annees {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    width: calc(100% ); /* Ajuster la largeur au conteneur parent, en tenant compte de la bordure */
+    top: 100%; /* Positionner sous le bouton */
+    box-sizing: border-box; /* Inclure le padding dans la taille totale */
+    max-height: 200px; /* Hauteur maximale de la liste déroulante */
+    overflow-y: auto; /* Activer le défilement vertical si nécessaire */
+}
+/* Style pour les éléments <input> au survol dans la liste déroulante */
+.dropdown-content-constructeurs label:hover,
+.dropdown-content-types label:hover,
+.dropdown-content-modeles label:hover,
+.dropdown-content-segments label:hover,
+.dropdown-content-annees label:hover{
+    background-color: var(--accent-color-gray); /* Couleur de fond au survol */
+    cursor: pointer; /* Curseur de souris */
+    transition: 0.1s;
+}
+
+.dropdown-content-constructeurs label,
+.dropdown-content-types label,
+.dropdown-content-modeles label,
+.dropdown-content-segments label,
+.dropdown-content-annees label{
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.input-checkbox-filtres {
+    margin-right: 5px; /* Ajustez la valeur selon vos besoins */
+}
+
+.checkmark{
+    background-color: #ff0000;
+}
+
+/* Style pour le champ de recherche */
+#searchConstructeur, #searchType, #searchModele, #searchSegment, #searchAnnee {
+    width: 100%; /* Utiliser toute la largeur du conteneur parent */
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box; /* Inclure le padding dans la taille totale */
+    display: none;
+    border:none;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+/* Style pour le bouton "Appliquer" */
+.appliquer_filtres {
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px 12px;
+    background-color: var(--accent-color-yellow);
+    color: var(--secondary-color);
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box; /* Inclure la largeur du padding dans la taille totale */
+    transition: 0.2s;
+    z-index: 1;
+}
+
+/* Style pour le bouton "Appliquer" lorsqu'il est survolé */
+.appliquer_filtres:hover {
+    background-color: var(--secondary-color);
+    color: var(--accent-color-yellow);
+}
+
+.counter {
+    color: var(--accent-color-yellow); /* Couleur de votre choix */
+}

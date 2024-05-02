@@ -1,0 +1,277 @@
+.color-band {
+    background-color: var(--accent-color-gray);
+    width: 100%; /* La bande prend toute la largeur de la page */
+    text-align: center; /* Centrer le contenu à l'intérieur de la bande */
+    padding: 20px 0; /* Ajouter un espace intérieur en haut et en bas de la bande */
+}
+
+.car-details {
+    position: relative; /* Position relative pour les éléments enfants positionnés absolument */
+    max-width: 800px; /* Largeur maximale des détails de la voiture */
+    margin: 0 auto;
+}
+
+.title-banner {
+    position: relative; /* Position relative pour positionner la bande de titre */
+    width: 100%; /* La bannière fait la même largeur que l'image */
+    background-color: var(--primary-color); /* Couleur de fond de la bannière (blanc semi-transparent) */
+    color: var(--accent-color-yellow);
+    padding: 10px; /* Espacement intérieur de la bannière */
+    box-sizing: border-box; /* Inclure le padding dans la largeur de la bannière */
+    border-top-left-radius: 10px; /* Arrondir le coin supérieur gauche */
+    border-top-right-radius: 10px; /* Arrondir le coin supérieur droit */
+}
+
+.title-banner h2   {
+    margin-top: 10px; /* Espacement en bas du paragraphe */
+    text-align: center; /* Justifier le texte */
+    margin-bottom: 10px; /* Espacement en bas du paragraphe */
+}
+
+.fiche-photo-carousel{
+    width: 100%;
+}
+
+.car-photo {
+    width: 100%; /* Définir la largeur de l'image à 100% de la largeur de son conteneur */
+    max-width: 800px; /* Largeur maximale de l'image (800px dans cet exemple) */
+    height: auto; /* Pour conserver le ratio hauteur/largeur de l'image */
+    display: block;
+    margin: 0 auto; /* Centrer l'image horizontalement */
+    border-bottom-left-radius: 10px; /* Arrondir le coin supérieur gauche */
+    border-bottom-right-radius: 10px; /* Arrondir le coin supérieur droit */
+}
+
+.content-left {
+    position: absolute; /* Position absolue pour placer la bande de contenu à gauche */
+    top: 25%; /* Aligner la bande de contenu au milieu verticalement */
+    left: -500px; /* Positionner la bande de contenu à gauche de l'image */
+    transform: translateY(-50%); /* Ajuster verticalement pour centrer la bande de contenu */
+    width: 500px; /* Largeur de la bande de contenu */
+    background-color: var(--accent-color-gray-fiche); /* Couleur de fond du contenu (blanc semi-transparent) */
+    padding: 10px; /* Espacement intérieur du contenu */
+    border-bottom-left-radius: 10px; /* Arrondir le coin inférieur gauche */
+    border-top-left-radius: 10px; /* Arrondir le coin supérieur gauche */
+}
+.content-left p {
+    margin-top: 10px; /* Espacement en bas du paragraphe */
+    text-align: justify; /* Justifier le texte */
+    margin-bottom: 10px; /* Espacement en bas du paragraphe */
+    text-indent: 20px; /* Ajouter un retrait (alinea) au début du paragraphe */
+}
+
+.banner-icon,.banner-icon2,.banner-icon3,.banner-icon4,.banner-icon5{
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+    flex-shrink: 0; /* Empêcher la réduction de taille de l'icône */
+
+}
+
+.btn-banner-1 p,.btn-banner-2 p,.btn-banner-3 p,.btn-banner-4 p,.btn-banner-5 p {
+    margin: 0;
+    overflow: hidden; /* Masquer le texte qui dépasse */
+    text-overflow: ellipsis; /* Afficher des points de suspension pour le texte qui dépasse */
+    white-space: nowrap; /* Empêcher le texte de passer à la ligne */
+}
+
+.btn-banner-1:hover ,.btn-banner-2:hover ,.btn-banner-3:hover ,.btn-banner-4:hover ,.btn-banner-5:hover,.btn-banner-6:hover,.btn-banner-7:hover,.btn-banner-8:hover,.btn-banner-9:hover,.btn-banner-10:hover  {
+    color: var(--secondary-color);
+    transition: 0.2s;
+}
+
+.btn-banner-1 img,.btn-banner-2 img,.btn-banner-3 img, .btn-banner-4 img, .btn-banner-5 img {
+    margin-top: -5px; /* Déplacer l'image vers le bas de 10px */
+}
+
+.btn-banner-1, .btn-banner-2,.btn-banner-3, .btn-banner-4, .btn-banner-5  {
+    position: absolute;
+    left: -350px;
+    transform: translateY(-50%);
+    width: 350px;
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    overflow: hidden; /* Masquer tout contenu qui dépasse */
+    color: black;
+    background-color: var(--accent-color-gray-fiche);
+}
+.btn-banner-1 {
+    top: 40%;
+}
+.btn-banner-2 {
+    top: 50%;
+}
+.btn-banner-3 {
+    top: 60%;
+}
+.btn-banner-4 {
+    top: 70%;
+}
+.btn-banner-5 {
+    top: 80%;
+}
+
+.banner-icon6,.banner-icon7,.banner-icon8, .banner-icon9, .banner-icon10 {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+    flex-shrink: 0; /* Empêcher la réduction de taille de l'icône */
+}
+
+.btn-banner-6 p,.btn-banner-7 p,.btn-banner-8 p, .btn-banner-9 p, .btn-banner-10 p  {
+    margin: 0;
+    overflow: hidden; /* Masquer le texte qui dépasse */
+    text-overflow: ellipsis; /* Afficher des points de suspension pour le texte qui dépasse */
+    white-space: nowrap; /* Empêcher le texte de passer à la ligne */
+}
+
+.btn-banner-6 img,.btn-banner-7 img,.btn-banner-8 img, .btn-banner-9 img, .btn-banner-10 img  {
+    margin-top: -5px; /* Déplacer l'image vers le bas de 10px */
+}
+
+.btn-banner-6,.btn-banner-7, .btn-banner-8,.btn-banner-9, .btn-banner-10 {
+    position: absolute;
+    right: -350px;
+    transform: translateY(-50%);
+    width: 350px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    overflow: hidden; /* Masquer tout contenu qui dépasse */
+    color: black;
+    background-color: var(--accent-color-gray-fiche);
+}
+.btn-banner-6 {
+    top: 70%;
+}
+.btn-banner-7 {
+    top: 80%;
+}
+.btn-banner-8 {
+    top: 40%;
+}
+.btn-banner-9 {
+    top: 50%;
+}
+.btn-banner-10 {
+    top: 60%;
+}
+.h1-fiche{
+    color: var(--secondary-color);
+}
+
+
+/* ERROR FICHE */
+
+.errorFicheNonTrouvee{
+    margin-left: 115px;
+    padding-top: 50px;
+    font-size: large;
+    color: #8d1616;
+}
+
+/* ERROR FICHE */
+
+/* TABLE TECHNIQUE */
+
+#add{
+    float:right;
+}
+
+/* TABLE TECHNIQUE */
+
+/* GALLERY PICTURES */
+
+div.img {
+    margin-right: 15px;
+    float: left;
+    width: 11.5%;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+div.img:hover {
+    opacity: .5;
+    transition: all .3s;
+}
+
+div.img img {
+    width: 100%;
+    height: auto;
+}
+
+/* GALLERY PICTURES */
+
+/* CARROUSEL PICTURES */
+
+.container {
+    margin-top: 8%;
+    margin-left: -0.6%;
+    width: 50%;
+    position: relative;
+}
+
+.slides {
+    display: none;
+    width: 45%;
+}
+
+.prev{
+    text-decoration: none;
+    color: var(--accent-color-yellow);
+    font-style: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    padding: 16px;
+    border-radius: 0 3px 3px 0;
+    background: var(--secondary-color);
+    transition: all .3s;
+}
+
+.next{
+    text-decoration: none;
+    color: var(--accent-color-yellow);
+    cursor: pointer;
+    position: absolute;
+    margin-right: 12px;
+    top: 50%;
+    transform: translate(0, -50%);
+    padding: 16px;
+    border-radius: 0 3px 3px 0;
+    background: var(--secondary-color);
+    transition: all .3s;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover,
+.next:hover {
+    color: var(--secondary-color);
+    background: var(--accent-color-yellow);
+}
+
+.ficheTitreModelePhotos{
+    font-size: 1.7em;
+    padding-top: 20px;
+    color: var(--secondary-color);
+}
+
+.article-fiche-title-photos{
+    margin-left: 0;
+    margin-right: auto;
+    width: 23.9%;
+    height: 15px;
+}

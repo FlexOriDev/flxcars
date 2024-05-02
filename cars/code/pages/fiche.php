@@ -4,21 +4,21 @@
     <meta charset ="utf_8"><!--Encodage universel-->
 
     <title>Fiche</title><!--Titre de la page web-->
-  
+    <link href="../css/fiche.css" rel="stylesheet">
 </head>
 <!--------------------------------------------HEAD------------------------------------------------------>
 
 <!--------------------------------------------HEADER------------------------------------------------------>
-<?php 
-include '../includesHeaderFooter/header.php'; 
+<?php
+include '../includesHeaderFooter/header.php';
 ?>
 <!--------------------------------------------HEADER------------------------------------------------------>
 
 <!----------PATH---------->
-<div class="pathButtons">
-        <a href="index.php" class="boutonPath">Accueil</a>
-        <a href="voitures.php" class="boutonPath">/Voitures</a>
-        <a class="boutonPathActual">/Fiche</a>
+<div class="global-pathButtons">
+        <a href="index.php" class="global-boutonPath">Accueil</a>
+        <a href="voitures.php" class="global-boutonPath">/Voitures</a>
+        <a class="global-boutonPathActual">/Fiche</a>
 </div>
 <!----------PATH---------->
 
@@ -100,7 +100,7 @@ include '../includesHeaderFooter/header.php';
                             <p><?= $ficheInfos['resume']; ?></p>
                         </div>
                         <div class="title-banner">
-                            <h2><?= $ficheInfos['nom']; ?></h2>
+                            <h2><?= $ficheConstructeur['nom']; ?> <?= $ficheInfos['nom']; ?></h2>
                         </div>
                         <a href="#summary-anchor" class="btn-banner-1">
                             <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon4">
@@ -141,7 +141,7 @@ include '../includesHeaderFooter/header.php';
                         </a>
                         <a href="#photo" class="btn-banner-10">
                             <img src="../../library/imgIconsFiche/photo.png" alt="Icone" class="banner-icon10">
-                            <p>Gallerie photo</p>
+                            <p>Galerie photo</p>
                         </a>
                     </div>
                     <!-- Ajoutez d'autres détails de la voiture ici -->
@@ -246,7 +246,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 
                         <br><br><br>
                         <article class="article-fiche-title" id="photos">
-                                <h1 id="photo" class="h1-fiche">Gallerie photo</h1>
+                                <h1 id="photo" class="h1-fiche">Galerie photo</h1>
                         </article>
 
         </div>
@@ -279,8 +279,6 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
                 
                 $getPhotos = $bdd->prepare('SELECT * FROM imagesfiche WHERE id_fiche=?');
                 $getPhotos->execute(array($fiche_id));
-
-                
 
                 $photo = $getPhotos->fetch();
                         
@@ -348,35 +346,35 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 
                                 <div class="container">
                                 <div class="slides<?= $photo['id_fiche']; ?>">
-                                <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_1']; ?>" style="width:100%">
+                                <img class="fiche-photo-carousel" src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_1']; ?>" >
                                 </div>
 
                                 <?php if($photo['img_2']!=""){
                         ?>
 
                                         <div class="slides<?= $photo['id_fiche']; ?>">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_2']; ?>" style="width:100%">
+                                        <img class="fiche-photo-carousel" src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_2']; ?>" >
                                         </div>
 
                                 <?php }if($photo['img_3']!=""){
                         ?>
 
                                         <div class="slides<?= $photo['id_fiche']; ?>">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_3']; ?>" style="width:100%">
+                                        <img class="fiche-photo-carousel" src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_3']; ?>" >
                                         </div>
 
                                 <?php }if($photo['img_4']!=""){
                         ?>
 
                                         <div class="slides<?= $photo['id_fiche']; ?>">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_4']; ?>" style="width:100%">
+                                        <img class="fiche-photo-carousel" src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_4']; ?>" >
                                         </div>
 
                                 <?php }if($photo['img_5']!=""){
                         ?>
 
                                         <div class="slides<?= $photo['id_fiche']; ?>">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_5']; ?>" style="width:100%">
+                                        <img class="fiche-photo-carousel" src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_5']; ?>" >
                                         </div>
 
                                 <?php }

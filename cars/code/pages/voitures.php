@@ -4,6 +4,7 @@
     <meta charset ="utf_8"><!--Encodage universel-->
 
     <title>Voitures</title><!--Titre de la page web-->
+    <link href="../css/voitures.css" rel="stylesheet">
 </head>
 
 <!------------------------------------------INCLUDES---------------------------------------------------->
@@ -14,9 +15,9 @@ require('../actions/database.php');
 ?>
 
 <!----------PATH---------->
-<div class="pathButtons">
-        <a href="index.php" class="boutonPath">Accueil</a>
-        <a class="boutonPathActual">/Voitures</a>
+<div class="global-pathButtons">
+        <a href="index.php" class="global-boutonPath">Accueil</a>
+        <a class="global-boutonPathActual">/Voitures</a>
 </div>
 <!----------PATH---------->
 
@@ -35,6 +36,14 @@ require('../actions/database.php');
   <div class="columnPreferences">
 
 <!-------------CONSTRUCTEURS------------->
+
+      <div class="box">
+
+          <form method="GET">
+              <input class="textSearch" type="text" name="id_modele" placeholder="Ecrire ici...">
+              <input class="submit" type="submit" name="submit" value="Search">
+          </form>
+      </div>
 
 <form method="post" id="make_checkbox_select_constructeurs">
 
@@ -183,6 +192,27 @@ require('../actions/database.php');
 </select>
 <input type="submit" class="sub-drop1" name="validateFormes"/>
 </form>
+
+      <div class="tri-dropdown">
+          <button onclick="toggleDropdown()" class="tri-button">Trier par</button>
+          <div id="triDropdown" class="tri-dropdown-content">
+              <a href="?sort=alphabetique_asc">Alphabétique Croissant</a>
+              <a href="?sort=alphabetique_desc">Alphabétique Décroissant</a>
+              <a href="?sort=annee_asc">Année Croissante</a>
+              <a href="?sort=annee_desc">Année Décroissante</a>
+          </div>
+      </div>
+      <script>
+          // Fonction pour afficher/cacher le dropdown
+          function toggleDropdown() {
+              var dropdown = document.getElementById("triDropdown");
+              if (dropdown.style.display === "block") {
+                  dropdown.style.display = "none";
+              } else {
+                  dropdown.style.display = "block";
+              }
+          }
+      </script>
 
 <!--On envoie le script personalisé pour cette checkbox = FORMES-->
 
