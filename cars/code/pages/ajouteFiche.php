@@ -1,4 +1,13 @@
-<?php 
+<!--------------------------------------------HEAD------------------------------------------------------>
+<head>
+    <link rel="shortcut icon" href="img/fav.png"><!--favicon du site-->
+    <meta charset ="utf_8"><!--Encodage universel-->
+
+    <title>Ajouter une fiche</title><!--Titre de la page web-->
+    <link href="../css/ajouteFiche.css" rel="stylesheet">
+</head>
+
+<?php
 include '../includesHeaderFooter/header.php'; 
 require('../actions/database.php');
 require('../actions/fiche/ajouteFiche.php'); 
@@ -184,9 +193,24 @@ require('../actions/fiche/ajouteFiche.php');
 <!-- HISTOIRE -->
 <span class="span-ajout-fiche">Histoire * <label> :</label></span>
     <!-- Zone d'édition TinyMCE -->
-    <textarea id="editor" name="editor" class="history"></textarea>
+<textarea id="editor" name="editor" class="history"></textarea>
+
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            ckfinder: {
+                uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+            },
+            toolbar: [ 'heading', '|', 'bold', 'italic', 'underline', 'strikethrough', '|', 'bulletedList', 'numberedList', '|', 'undo', 'redo' ],
+            height: '4000px' // Définit la hauteur de l'éditeur
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 
 <br>
+
 
 <!-- Tableau des versions -->
 <span class="span-ajout-fiche">Versions * <label> :</label></span>

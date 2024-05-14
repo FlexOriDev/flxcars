@@ -21,7 +21,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="https://cdn.tiny.cloud/1/tei4ruy7np5gv3bchu4wpu0vl4ayvwmfiprwxdvlq6oxn03f/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.0.0/classic/ckeditor.js"></script>
 
   <title>Flx Cars</title><!--Titre de la page web-->
   <?php
@@ -34,7 +34,6 @@
         ?>
     </script>
 
-    <script src="https://cdn.tiny.cloud/1/tei4ruy7np5gv3bchu4wpu0vl4ayvwmfiprwxdvlq6oxn03f/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
     <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
     <script>

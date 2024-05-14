@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+.error-register{
+    color: #ccc;
+}
+
+.h3-register{
+    color: var(--accent-color-yellow);
+}
+
+.main-register {
+    width: 100%;
+    max-width: 500px; /* Ajustez cette valeur selon vos besoins */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.register-form {
+    margin-top: 20px;
+}
+
+.register-form-item {
+    margin-bottom: 15px;
+}
+
+.register-form-item span {
+    display: block;
+    margin-bottom: 5px;
+    color: #ccc;
+}
+
+.register-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.register-but input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: var(--accent-color-yellow);
+    color: var(--secondary-color);
+}
+
+.register-but input[type="submit"]:hover {
+    background-color: var(--primary-color);
+    color: var(--accent-color-yellow);
+}
+
+.clear {
+    clear: both;
+}

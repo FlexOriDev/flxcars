@@ -8,7 +8,6 @@
 </head>
 
 <!------------------------------------------INCLUDES---------------------------------------------------->
-
 <?php 
 include '../includesHeaderFooter/header.php'; 
 require('../actions/database.php');
@@ -19,214 +18,127 @@ require('../actions/database.php');
         <a href="index.php" class="global-boutonPath">Accueil</a>
         <a class="global-boutonPathActual">/Voitures</a>
 </div>
-<!----------PATH---------->
 
 <!---------------------------------------------MAIN----------------------------------------------------->
-
 <main>
 
-<!-------------------------CONTENT--------------------------->
-
 <!-----------------------PARTIE FORMS------------------------>
+    <div class="header-voitures">
+        <div class="search-container">
+            <input type="text" placeholder="Rechercher..." class="search-box" id="searchInput" onkeydown="handleSearch(event)">
+            <button class="search-button" onclick="search()">Rechercher</button>
+            <script src="../scripts/voitures/filter_search.js"></script>
+            <button class="filters-button" onclick="toggleSideMenu()" id="toggleButton">Plus de filtres</button>
+            <button class="clear-filters-button" onclick="clearFilters()" id="clearFiltersButton" title="Effacer tous les filtres">✕</button>
+        </div>
 
+        <div class="dropdown" id="dropdown">
+            <button onclick="toggleDropdown()" class="tri-button">Trier par</button>
+            <div id="dropdown-content-sort" class="dropdown-content-sort">
+                <a href="#" onclick="redirectToSortedURL('alphabetique_asc')">ordre alphabétique croissant</a>
+                <a href="#" onclick="redirectToSortedURL('alphabetique_desc')">ordre alphabétique décroissant</a>
+                <a href="#" onclick="redirectToSortedURL('annee_asc')">année croissante</a>
+                <a href="#" onclick="redirectToSortedURL('annee_desc')">année décroissante</a>
+            </div>
+            <script src="../scripts/voitures/filter_sort.js"></script>
+        </div>
 
+    </div>
+    <!-- Menu latéral des filtres -->
+    <div class="side-menu" id="sideMenu">
+            <div class="filter-section">
+            <h2>Filtres</h2>
 
-<div class="rowPreferences" id="colonnePreferences">
-
-  <div class="columnPreferences">
-
-<!-------------CONSTRUCTEURS------------->
-
-      <div class="box">
-
-          <form method="GET">
-              <input class="textSearch" type="text" name="id_modele" placeholder="Ecrire ici...">
-              <input class="submit" type="submit" name="submit" value="Search">
-          </form>
-      </div>
-
-<form method="post" id="make_checkbox_select_constructeurs">
-
-<select name="Constructeurs" multiple="multiple" id="current_select">
-      <?php 
-			$getAllConstructeurs = $bdd->query('SELECT * FROM constructeurs ORDER BY nom');
-			$getAllConstructeurs->execute(array());
-				foreach($getAllConstructeurs as $constructeur ){
-                    ?>
-					<option value=<?= $constructeur['id']; ?> name=<?= $constructeur['nom']; ?> ><?= $constructeur['nom']; ?></option>
+            <div class="dropdown-checkboxes">
+                <button onclick="toggleConstructeurDropdown()" class="dropdown-btn-constructeur">Constructeurs</button>
+                <!-- Champ de recherche -->
+                <input type="text" id="searchConstructeur" placeholder="Rechercher un constructeur..." onkeyup="filterConstructeurs()">
+                <!-- Liste déroulante des constructeurs avec cases à cocher -->
+                <div id="constructeurDropdown" class="dropdown-content-constructeurs">
+                    <!-- Options pour les constructeurs avec cases à cocher -->
                     <?php
-                }
-    	?>
-      
-  </select>
-  <input type="submit" class="sub-drop1"/>
-</form>
+                    $getAllConstructeurs = $bdd->query('SELECT * FROM constructeurs ORDER BY nom');
+                    while ($constructeur = $getAllConstructeurs->fetch(PDO::FETCH_ASSOC)) {
+                        echo '<label class="checkbox-label"><input class="input-checkbox-filtres" type="checkbox" value="'.$constructeur['id'].'"> '.$constructeur['nom'].'</label>';
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="dropdown-checkboxes move-down-constructeur">
+                <button onclick="toggleTypeDropdown()" class="dropdown-btn-type">Types</button>
+                <!-- Champ de recherche -->
+                <input type="text" id="searchType" placeholder="Rechercher un type..." onkeyup="filterTypes()">
+                <!-- Liste déroulante des constructeurs avec cases à cocher -->
+                <div id="typeDropdown" class="dropdown-content-types">
+                    <!-- Options pour les constructeurs avec cases à cocher -->
+                    <?php
+                    $getAllTypes = $bdd->query('SELECT * FROM types ORDER BY nom');
+                    while ($type = $getAllTypes->fetch(PDO::FETCH_ASSOC)) {
+                        echo '<label class="checkbox-label">
+                                <input class="input-checkbox-filtres" type="checkbox" value="'.$type['id'].'">
+                                '.$type['nom'].'
+                              </label>';
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="dropdown-checkboxes move-down-constructeur move-down-type">
+                <button onclick="toggleModeleDropdown()" class="dropdown-btn-modele">Modèles</button>
+                <!-- Champ de recherche -->
+                <input type="text" id="searchModele" placeholder="Rechercher un modèle..." onkeyup="filterModeles()">
+                <!-- Liste déroulante des constructeurs avec cases à cocher -->
+                <div id="modeleDropdown" class="dropdown-content-modeles">
+                    <!-- Options pour les constructeurs avec cases à cocher -->
+                    <?php
+                    $getAllModeles = $bdd->query('SELECT * FROM modeles ORDER BY nom');
+                    while ($modele = $getAllModeles->fetch(PDO::FETCH_ASSOC)) {
+                        echo '<label class="checkbox-label"><input class="input-checkbox-filtres"  type="checkbox" value="'.$modele['id'].'"> '.$modele['nom'].'</label>';
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="dropdown-checkboxes move-down-constructeur move-down-type move-down-modele">
+                <button onclick="toggleSegmentDropdown()" class="dropdown-btn-segment">Segments</button>
+                <!-- Champ de recherche -->
+                <input type="text" id="searchSegment" placeholder="Rechercher un segment..." onkeyup="filterSegments()">
+                <!-- Liste déroulante des constructeurs avec cases à cocher -->
+                <div id="segmentDropdown" class="dropdown-content-segments">
+                    <!-- Options pour les constructeurs avec cases à cocher -->
+                    <?php
+                    $getAllSegments = $bdd->query('SELECT * FROM segments ORDER BY nom');
+                    while ($segment = $getAllSegments->fetch(PDO::FETCH_ASSOC)) {
+                        echo '<label class="checkbox-label"><input class="input-checkbox-filtres"  type="checkbox" value="'.$segment['id'].'"> '.$segment['nom'].'</label>';
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="dropdown-checkboxes move-down-constructeur move-down-type move-down-modele move-down-segment">
+                <button onclick="toggleAnneeDropdown()" class="dropdown-btn-annee">Annees</button>
+                <!-- Champ de recherche -->
+                <input type="text" id="searchAnnee" placeholder="Rechercher une décennie..." onkeyup="filterAnnees()">
+                <!-- Liste déroulante des constructeurs avec cases à cocher -->
+                <div id="anneeDropdown" class="dropdown-content-annees">
+                    <!-- Options pour les constructeurs avec cases à cocher -->
+                    <?php
+                    $getAllAnnees = $bdd->query('SELECT * FROM anneestranche ORDER BY nom DESC ');
+                    while ($annee = $getAllAnnees->fetch(PDO::FETCH_ASSOC)) {
+                        echo '<label class="checkbox-label"><input class="input-checkbox-filtres"  type="checkbox" value="'.$annee['id'].'"> '.$annee['nom'].'</label>';
+                    }
+                    ?>
+                </div>
+            </div>
 
-  <!--On envoie le script personalisé pour cette checkbox = MARQUES-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+            <!-- Bouton pour appliquer les filtres -->
+            <button onclick="applyFilters()" class="appliquer_filtres move-down-annee move-down-constructeur move-down-type move-down-modele move-down-segment">Appliquer</button>
+        </div>
+    </div>
 
-  <?php
-    include("../scripts/checkboxConstructeurs.php");
-  ?>
-  
-  </div>
-
-  <div class="columnPreferences">
-    <!-------------TYPES------------->
-
-<form id="make_checkbox_select_types">
-
-<select name="Types">
-    <?php 
-    $getAllTypes = $bdd->query('SELECT * FROM types ORDER BY nom');
-    $getAllTypes->execute(array());
-      foreach($getAllTypes as $type ){
-                  
-                  ?>
-        <option value=<?= $type['id']; ?> name=<?= $type['nom']; ?> ><?= $type['nom']; ?></option>
-                  <?php
-              }
-    ?>
-    
-</select>
-<input type="submit" class="sub-drop1"/>
-</form>
-
-<!--On envoie le script personalisé pour cette checkbox = FORMES-->
-
-<?php
-  include("../scripts/checkboxTypes.php");
-?>	
-
-  </div>
-
-
-  <div class="columnPreferences">
-    <!-------------MODELES------------->
-
-<form id="make_checkbox_select_modeles">
-
-<select name="Modèles">
-    <?php 
-      if(!isset($_GET['id_constructeur'] ) AND empty($_GET['id_constructeur'])){
-          $getAllModeles = $bdd->query('SELECT * FROM modeles ORDER BY nom');
-          $getAllModeles->execute(array());
-          foreach($getAllModeles as $modele ){   
-                      ?>
-            <option value=<?= $modele['id']; ?> name=<?= $modele['nom']; ?> ><?= $modele['nom']; ?></option>
-                      <?php
-          }
-      }else if(isset($_GET['id_constructeur'] ) AND !empty($_GET['id_constructeur'])){
-        $ids_constructeur = explode(",", $_GET['id_constructeur']);
-        foreach($ids_constructeur as $id) {
-          $getAllModeles = $bdd->prepare('SELECT * FROM modeles WHERE id_constructeur=? ORDER BY nom');
-          $getAllModeles->execute(array($id));
-          foreach($getAllModeles as $modele) {
-            ?>
-            <option value=<?= $modele['id']; ?> name=<?= $modele['nom']; ?> ><?= $modele['nom']; ?></option>
-                      <?php
-          }
-        }
-      }
- 
-    ?>
-    
-</select>
-<input type="submit" class="sub-drop1"/>
-</form>
-
-<!--On envoie le script personalisé pour cette checkbox = FORMES-->
-
-<?php
-  include("../scripts/checkboxModeles.php");
-?>	
-  </div>
-
-  <div class="columnPreferences">
-    <!-------------ANNEE------------->
-
-<form id="make_checkbox_select_year">
-
-<select name="Année">
-    <?php 
-    $getAllAnnees = $bdd->query('SELECT * FROM annees ORDER BY nom DESC');
-    $getAllAnnees->execute(array());
-      foreach($getAllAnnees as $annee ){
-                  
-                  ?>
-        <option value=<?= $annee['id']; ?> name=<?= $annee['nom']; ?>><?= $annee['nom']; ?></option>
-                  <?php
-              }
-    ?>
-    
-</select>
-<input type="submit" class="sub-drop1" name="validateFormes"/>
-</form>
-
-<!--On envoie le script personalisé pour cette checkbox = FORMES-->
-
-  
-<?php
-  include("../scripts/checkboxAnnee.php");
-?>	
-
-  </div>
-
-  <div class="columnPreferences">
-    <!-------------SEGMENT------------->
-
-<form id="make_checkbox_select_segments">
-
-<select name="Segment">
-    <?php 
-    $getAllSegments = $bdd->query('SELECT * FROM segments ORDER BY nom');
-    $getAllSegments->execute(array());
-      foreach($getAllSegments as $segment ){
-                  
-                  ?>
-        <option value=<?= $segment['id']; ?> name=<?= $segment['nom']; ?>><?= $segment['nom']; ?></option>
-                  <?php
-              }
-    ?>
-    
-</select>
-<input type="submit" class="sub-drop1" name="validateFormes"/>
-</form>
-
-      <div class="tri-dropdown">
-          <button onclick="toggleDropdown()" class="tri-button">Trier par</button>
-          <div id="triDropdown" class="tri-dropdown-content">
-              <a href="?sort=alphabetique_asc">Alphabétique Croissant</a>
-              <a href="?sort=alphabetique_desc">Alphabétique Décroissant</a>
-              <a href="?sort=annee_asc">Année Croissante</a>
-              <a href="?sort=annee_desc">Année Décroissante</a>
-          </div>
-      </div>
-      <script>
-          // Fonction pour afficher/cacher le dropdown
-          function toggleDropdown() {
-              var dropdown = document.getElementById("triDropdown");
-              if (dropdown.style.display === "block") {
-                  dropdown.style.display = "none";
-              } else {
-                  dropdown.style.display = "block";
-              }
-          }
-      </script>
-
-<!--On envoie le script personalisé pour cette checkbox = FORMES-->
-
-  
-<?php
-  include("../scripts/checkboxSegments.php");
-?>	
-
-  </div>
-
-</div> 
+    <script src="../scripts/voitures/filter_side_menu.js"></script>
 
 
-<!-----------------------AFFICHAGE VOITURES------------------------>
+
+
+    <!-----------------------AFFICHAGE VOITURES------------------------>
 <div class="row" id="colonne">
 <?php 
 include("../actions/actionsVoiture/allFiches.php");
@@ -259,7 +171,7 @@ include("../actions/actionsVoiture/allFiches.php");
   <div class="column">
     <a href="fiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image class="voitures" src=../../library/voitures/<?= $stringImageFiche; ?> /></a>
     <div class="text">
-      <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $constructeur['nom']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $annee['nom']; ?> </span></p>
+      <p class="nomWidgetFiche"><?= $constructeur['nom']; ?><?= $fiche['nom']; ?><?= $annee['nom']; ?></p>
     </div> 
   </div>
 

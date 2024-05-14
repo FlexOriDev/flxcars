@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+
+
+.main-login {
+    width: 100%;
+    max-width: 600px; /* Ajustez cette valeur selon vos besoins */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.col-left {
+    width: 45%; /* Ajustez la largeur des colonnes selon vos besoins */
+}
+
+.login-header h3 {
+    color: var(--accent-color-yellow);
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.login-header p {
+    color: #ccc;
+}
+
+.login-form {
+    margin-top: 20px;
+}
+
+.login-form-item {
+    margin-bottom: 15px;
+}
+
+.login-form-item span {
+    display: block;
+    margin-bottom: 5px;
+    color: #ccc;
+}
+
+.login-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--accent-color-yellow);
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-submit:hover {
+    background-color: var(--primary-color);
+    color: var(--accent-color-yellow);
+}
+
+.login-forgot {
+    display: block;
+    color: #ccc;
+    text-decoration: underline;
+    margin-top: 10px;
+}
+.login-forgot:hover {
+    display: block;
+    color: var(--accent-color-gray);
+    text-decoration: underline;
+    margin-top: 10px;
+}
+
+.acount-btn{
+    color: #ccc;
+}
+
+.acount-btn:hover{
+    color: var(--accent-color-gray);
+}
+
+.login-clearfix {
+    clear: both;
+}
+
+.login-clear {
+    clear: both;
+}

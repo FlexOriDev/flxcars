@@ -324,7 +324,7 @@ function applyFilters() {
     // Mettre à jour le texte du bouton pour chaque liste déroulante
 
     // Construire l'URL avec les IDs sélectionnés
-    var url = './voitures2.php?';
+    var url = './voitures.php?';
     if (selectedConstructeurs.length > 0) {
         url += 'id_constructeur=' + selectedConstructeurs.join(',') + '&';
     }
