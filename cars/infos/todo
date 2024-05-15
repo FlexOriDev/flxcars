@@ -1,0 +1,36 @@
+accueil :
+
+-tout faire
+
+-responsive
+
+voitures :
+
+-selecteur de 25/50/100/200 voitures par page
+
+-titre des voitures
+
+-responsive
+
+mon profil :
+
+-rendre accessible depuis un url
+
+ajouter fiche :
+
+-selecteurs d'options avec barre de recherche
+-ajout d'un modele si modele non existant, pareil pour constructeur (toujours dans les selecteurs)
+-gestion des images non optimale
+
+-securité des forms !!!
+
+dashboard :
+
+-tableau avec toutes les fiches -> suppression
+-tableaux constructeurs, segements etc ...
+
+SECUTITE :
+
+-crypter les code source
+-acces bdd ??
+-secu login et register (mail registration)

@@ -5,3 +5,8 @@
 .history {
     height: 500px;
 }
+
+.image-thumbnails img{
+    width: 170px;
+    margin-top: -47px;
+}

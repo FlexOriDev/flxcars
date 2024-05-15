@@ -23,7 +23,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/35.0.0/classic/ckeditor.js"></script>
 
-  <title>Flx Cars</title><!--Titre de la page web-->
+
+
+
+    <title>Flx Cars</title><!--Titre de la page web-->
   <?php
     include("../actions/user/login.php");
     ?>
@@ -95,7 +98,7 @@
  
       </ul>
     </li>
-
+<!--
     <li class="deroulant"><a href="../pages/constructeurs.php">Constructeurs</a>
       <ul class="sous">
       <?php 
@@ -111,6 +114,7 @@
  
       </ul>
     </li>
+
 
     <li class="deroulant"><a href="../pages/details.php">Détails</a>
       <ul class="sous">
@@ -129,7 +133,7 @@
     </li>
 
     <li class="deroulant"><a href="accueil.php">Nous contacter</a></li>
-
+-->
     <?php 
           if(isset($_SESSION['auth'])){
             ?>

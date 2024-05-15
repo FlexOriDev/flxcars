@@ -58,9 +58,6 @@ body{
   font-size:1.2em;
 }
 
-.voitures {
-    width: 100%;
-}
 
 .imgFiche{
 
@@ -226,14 +223,14 @@ body{
     color: #ff1e1e;
     text-align: center;
   }
-  
-  .column {
-    z-index: 1;
-    float:left;
-    width: 20%;
-    padding: 3px;
-    margin-top: 20px;
-  }
+.column {
+  z-index: 1;
+  float: left;
+  width: 20%;
+  padding: 3px;
+  margin-top: 20px;
+  position: relative;
+}
 
   .row{
     margin-bottom: 200px;
@@ -478,10 +475,7 @@ body{
     text-align: center;
   }
   
-  img{
-    width: 170px;
-    margin-top: -47px;
-  }
+
   
   /*----------------------------------------------------------------------------------------------*/
   /* mid */

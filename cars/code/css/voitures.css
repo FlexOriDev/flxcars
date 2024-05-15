@@ -259,3 +259,11 @@
 .counter {
     color: var(--accent-color-yellow); /* Couleur de votre choix */
 }
+
+/* card voitures */
+
+.voitures {
+    width: 50px !important; /* largeur fixe */
+    height: 50px; /* hauteur fixe */
+    object-fit: cover; /* pour remplir le conteneur tout en conservant les proportions */
+}

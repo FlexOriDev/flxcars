@@ -4,6 +4,47 @@ if(session_id() == '') {
 }
 require('../actions/database.php');
 
+function resizeAndFillImage($sourcePath, $destinationPath, $newWidth, $newHeight) {
+    // Ouvrir l'image source
+    $sourceImage = imagecreatefromjpeg($sourcePath);
+
+    // Récupérer les dimensions de l'image d'origine
+    $originalWidth = imagesx($sourceImage);
+    $originalHeight = imagesy($sourceImage);
+
+    // Créer une image vide avec la taille spécifiée et remplir avec du noir
+    $newImage = imagecreatetruecolor($newWidth, $newHeight);
+    $black = imagecolorallocate($newImage, 0, 0, 0);
+    imagefill($newImage, 0, 0, $black);
+
+    // Calculer le ratio de redimensionnement pour remplir l'image de destination
+    $widthRatio = $newWidth / $originalWidth;
+    $heightRatio = $newHeight / $originalHeight;
+
+    // Choisir le ratio de redimensionnement maximal pour remplir l'image de destination
+    $resizeRatio = max($widthRatio, $heightRatio);
+
+    // Calculer les nouvelles dimensions de l'image
+    $resizedWidth = $originalWidth * $resizeRatio;
+    $resizedHeight = $originalHeight * $resizeRatio;
+
+    // Calculer les coordonnées pour placer l'image d'origine au centre de l'image vide
+    $x = ($newWidth - $resizedWidth) / 2;
+    $y = ($newHeight - $resizedHeight) / 2;
+
+    // Redimensionner et copier l'image source dans l'image vide
+    imagecopyresampled($newImage, $sourceImage, $x, $y, 0, 0, $resizedWidth, $resizedHeight, $originalWidth, $originalHeight);
+
+    // Sauvegarder l'image redimensionnée dans le dossier de destination
+    imagejpeg($newImage, $destinationPath);
+
+    // Libérer la mémoire
+    imagedestroy($sourceImage);
+    imagedestroy($newImage);
+}
+
+
+
 //Validation du formulaire
 if(isset($_POST['validate'])){
 
@@ -55,13 +96,19 @@ if(isset($_POST['validate'])){
         $modele = $modeleArray['nom'];
 
 
+
         $stringFiche = $fiche_id."_1_".$fiche_nom.".jpg";
         $resStringFiche = str_replace(' ', '_', $stringFiche);
-        
+
         $tmp_fichier = $_FILES['image1']['tmp_name'];
-        mkdir("../../library/voitures/$modele/$fiche_id/", 0777, true);
         $nom_destination = "../../library/voitures/".$modele."/".$fiche_id."/".$resStringFiche;
-        move_uploaded_file($tmp_fichier,$nom_destination);
+        // Créer le dossier de destination s'il n'existe pas déjà
+        if (!file_exists("../../library/voitures/$modele/$fiche_id/")) {
+            mkdir("../../library/voitures/$modele/$fiche_id/", 0777, true);
+        }
+
+        // Redimensionner et remplir l'image avant de la déplacer
+        resizeAndFillImage($tmp_fichier, $nom_destination, 1920, 1080);
 
         $nameImg1 = $resStringFiche;
         $nameImg2 = "";
@@ -75,7 +122,7 @@ if(isset($_POST['validate'])){
             $stringFiche2 = $fiche_id."_2_".$fiche_nom.".jpg";
             $resStringFiche2 = str_replace(' ', '_', $stringFiche2);
             $nom_destination2 = "../../library/voitures/".$modele."/".$fiche_id."/".$resStringFiche2;
-            move_uploaded_file($nom_fichier2,$nom_destination2);
+            resizeAndFillImage($nom_fichier2, $nom_destination2, 1920, 1080);
             $nameImg2 = $resStringFiche2;
         }else{
             $nameImg2 = "";
@@ -86,7 +133,7 @@ if(isset($_POST['validate'])){
             $stringFiche3 = $fiche_id."_3_".$fiche_nom.".jpg";
             $resStringFiche3 = str_replace(' ', '_', $stringFiche3);
             $nom_destination3 = "../../library/voitures/".$modele."/".$fiche_id."/".$resStringFiche3;
-            move_uploaded_file($nom_fichier3,$nom_destination3);
+            resizeAndFillImage($nom_fichier3, $nom_destination3, 1920, 1080);
             $nameImg3 = $resStringFiche3;
         }else{
             $nameImg3 = "";
@@ -97,7 +144,7 @@ if(isset($_POST['validate'])){
             $stringFiche4 = $fiche_id."_4_".$fiche_nom.".jpg";
             $resStringFiche4 = str_replace(' ', '_', $stringFiche4);
             $nom_destination4 = "../../library/voitures/".$modele."/".$fiche_id."/".$resStringFiche4;
-            move_uploaded_file($nom_fichier4,$nom_destination4);
+            resizeAndFillImage($nom_fichier4, $nom_destination4, 1920, 1080);
             $nameImg4 = $resStringFiche4;
         }else{
             $nameImg4 = "";
@@ -108,7 +155,7 @@ if(isset($_POST['validate'])){
             $stringFiche5 = $fiche_id."_5_".$fiche_nom.".jpg";
             $resStringFiche5 = str_replace(' ', '_', $stringFiche5);
             $nom_destination5 = "../../library/voitures/".$modele."/".$fiche_id."/".$resStringFiche5;
-            move_uploaded_file($nom_fichier5,$nom_destination5);
+            resizeAndFillImage($nom_fichier5, $nom_destination5, 1920, 1080);
             $nameImg5 = $resStringFiche5;
         }else{
             $nameImg5 = "";
@@ -119,7 +166,7 @@ if(isset($_POST['validate'])){
             $stringFiche6 = $fiche_id."_6_".$fiche_nom.".jpg";
             $resStringFiche6 = str_replace(' ', '_', $stringFiche6);
             $nom_destination6 = "../../library/voitures/".$modele."/".$fiche_id."/".$resStringFiche6;
-            move_uploaded_file($nom_fichier6,$nom_destination6);
+            resizeAndFillImage($nom_fichier6, $nom_destination6, 1920, 1080);
             $nameImg6 = $resStringFiche6;
         }else{
             $nameImg6 = "";
@@ -170,7 +217,7 @@ if(isset($_POST['validate'])){
             // Insérez d'autres champs si nécessaire
         }
 
-        $url = htmlspecialchars('ajouteFiche.php');
+        $url = htmlspecialchars('fiche.php?id_fiche='.$fiche_id);
         echo '<script>window.location = "'.$url.'";</script>';
         $errorMsg = "Votre fiche a bien été publiée.";
 
