@@ -4,6 +4,20 @@ if(session_id() == '') {
 }
 require('../actions/database.php');
 
+// Initialisation des variables avec les valeurs soumises
+$nom = isset($_POST['nom']) ? $_POST['nom'] : '';
+$selectedType = isset($_POST['selectedType']) ? $_POST['selectedType'] : '';
+$selectedAnneeSortie = isset($_POST['selectedAnneeSortie']) ? $_POST['selectedAnneeSortie'] : '';
+$selectedAnneeFin = isset($_POST['selectedAnneeFin']) ? $_POST['selectedAnneeFin'] : '';
+$selectedModele = isset($_POST['selectedModele']) ? $_POST['selectedModele'] : '';
+$selectedSegment = isset($_POST['selectedSegment']) ? $_POST['selectedSegment'] : '';
+$selectedConstructeur = isset($_POST['selectedConstructeur']) ? $_POST['selectedConstructeur'] : '';
+$resume = isset($_POST['resume']) ? $_POST['resume'] : '';
+$editor = isset($_POST['editor']) ? $_POST['editor'] : '';
+
+
+
+
 function resizeAndFillImage($sourcePath, $destinationPath, $newWidth, $newHeight) {
     // Ouvrir l'image source
     $sourceImage = imagecreatefromjpeg($sourcePath);

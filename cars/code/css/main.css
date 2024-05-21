@@ -614,17 +614,11 @@ body{
     flex: 0 0 calc(33.33% - 10px); /* Ajuste la largeur de chaque colonne avec espace entre elles */
     margin-bottom: 10px; /* Espacement entre les colonnes */
     box-sizing: border-box; /* Inclut le padding dans le calcul de la largeur */
-    background-color: #bf1d1d9b; /* Couleur de fond */
     border-radius: 4px; /* Coins arrondis */
 }
 
 /* Style pour chaque select */
-.custom-select select {
-    width: 100%; /* Remplit la largeur de la colonne */
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-}
+
 
 /* Media query pour rendre responsive */
 @media (max-width: 768px) {

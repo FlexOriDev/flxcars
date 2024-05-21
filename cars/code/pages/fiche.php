@@ -175,7 +175,6 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
             <article class="article-fiche-title" id="histoire">
                     <h1 class="h1-fiche">Histoire</h1>
             </article>
-            <br>
             <article class="article-fiche-name3" id="histoire">
                 <?= htmlspecialchars_decode($ficheInfos['histoire']); ?>
             </article>
@@ -185,7 +184,6 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
             <article class="article-fiche-title" id="technique">
                     <h1 class="h1-fiche">Versions</h1>
             </article>
-            <br><br><br>
 
             <?php
             // Préparation et exécution de la requête pour récupérer toutes les lignes associées à la fiche
