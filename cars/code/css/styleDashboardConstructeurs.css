@@ -1,0 +1,198 @@
+.dashboard-subtitle{
+    color: var(--accent-color-white);
+}
+/* Styles pour les tableaux */
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+/* Styles pour les en-têtes et cellules de tableau */
+.dashboard-table-header, .dashboard-table-cell {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Spécifier les largeurs des colonnes */
+.dashboard-table-id {
+    width: 10%; /* Ajustez cette valeur selon vos besoins */
+}
+
+.dashboard-table-name {
+    width: 25%; /* Ajustez cette valeur selon vos besoins */
+}
+.dashboard-table-pays {
+    width: 25%; /* Ajustez cette valeur selon vos besoins */
+}
+.dashboard-table-group {
+    width: 25%; /* Ajustez cette valeur selon vos besoins */
+}
+.dashboard-table-fiches-count {
+    width: 10%; /* Ajustez cette valeur selon vos besoins */
+}
+
+.dashboard-table-actions {
+    width: 10%; /* Ajustez cette valeur selon vos besoins */
+}
+
+.dashboard-table-header {
+    background-color: #f2f2f2;
+}
+
+/* Styles pour le conteneur de l'en-tête du tableau */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+/* Styles pour le formulaire de recherche */
+.dashboard-search-form {
+    display: flex;
+    align-items: center;
+}
+
+/* Styles pour la barre de recherche */
+.dashboard-search {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 600px; /* Ajustez cette valeur pour la largeur souhaitée */
+}
+
+.dashboard-table-header img:hover {
+    cursor: pointer; /* Changer le curseur au survol */
+}
+.dashboard-table-header img {
+    float: right; /* Aligne l'image à droite */
+    cursor: pointer; /* Définit le curseur sur pointer au survol */
+}
+.dashboard-add-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px; /* Espacement entre la ligne d'ajout et le tableau */
+}
+
+.dashboard-input {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid var(--secondary-color);
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    width: 100%; /* Ajustez cette valeur pour la largeur souhaitée */
+    height: 40px; /* Hauteur spécifique pour uniformiser */
+}
+
+.dashboard-btn {
+    color: var(--accent-color-white);
+    background-color: var(--secondary-color);
+    padding: 8px;
+    border: 1px solid var(--secondary-color);
+    font-size: 14px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    width: 20%; /* Largeur du bouton */
+    height: 40px; /* Hauteur spécifique pour uniformiser */
+}
+.dashboard-btn:hover {
+    color: var(--secondary-color);
+    transition: 0.5s;
+    background-color: var(--accent-color-yellow);
+}
+
+/* Style pour les champs de sélection déroulante */
+.dashboard-select {
+    padding: 8px;
+    border: 1px solid var(--secondary-color);
+    font-size: 14px;
+    width: 100%;
+    height: 40px; /* Hauteur spécifique pour uniformiser */
+}
+
+/* Style pour container des champs d'ajout */
+.dashboard-add-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+    .dashboard-add-container {
+        flex-wrap: nowrap;
+    }
+
+    .dashboard-input, .dashboard-select {
+        flex: 1; /* Permet de répartir l'espace disponible */
+    }
+
+    .dashboard-btn {
+        flex: none;
+        width: 20%;
+    }
+}
+#paysConstructeur {
+    position: relative;
+}
+
+#searchPaysInput {
+    position: absolute;
+    top: -30px; /* Adjust this value as needed */
+}
+
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.custom-dropdown-header {
+    padding: 8px;
+    border: 1px solid var(--secondary-color);
+    font-size: 14px;
+    width: 100%;
+    height: 40px;
+}
+
+.custom-dropdown-options {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid var(--secondary-color);
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.custom-option {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.custom-option:hover {
+    background-color: #f0f0f0;
+}
+
+
+.dashboard-delete-btn {
+    background-color: var(--secondary-color); /* Red background */
+    color: var(--accent-color-yellow); /* White text */
+    border: none; /* No border */
+    padding: 8px 16px; /* Padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* No underline */
+    display: inline-block; /* Inline-block display */
+    font-size: 14px; /* Font size */
+    margin: 4px 2px; /* Margin */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.dashboard-delete-btn:hover {
+    background-color: var(--accent-color-yellow); /* Red background */
+    color: var(--secondary-color); /* White text */
+}

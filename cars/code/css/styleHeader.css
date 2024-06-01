@@ -1,0 +1,98 @@
+
+/* HEADER top-top */
+.header-top-top{
+    background: var(--secondary-color);
+    padding: 20px 0;
+    text-align: left;
+}
+.logo {
+    margin-bottom: 20px;
+}
+.box{
+    position: sticky;
+    margin-left: 10px;
+}
+
+
+/* HEADER top */
+.header-top{
+    background: var(--secondary-color);
+    padding: 20px 0;
+    text-align: center;
+}
+
+
+
+/*----------------------------------------------------------------------------------------------*/
+/* mid */
+
+/*----------------------------------------------------------------------------------------------*/
+/* DEROULANT */
+
+nav{
+    z-index: 10;
+    width: 100%;
+    background-color: var(--secondary-color);
+    transition: 0.5s;
+}
+
+nav ul{
+    list-style-type: none;
+}
+
+nav ul li{
+    float: left;
+    width: 11%;
+    text-align: center;
+    position: relative;
+}
+
+nav ul::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+nav a{
+    display: block;
+    text-decoration: none;
+    color: var(--accent-color-white);
+    border-bottom: 2px solid transparent;
+    padding: 10px 0px;
+}
+
+nav a:hover{
+    color: var(--accent-color-yellow);
+
+}
+
+.sous{
+    z-index: 10;
+    display: none;
+    background-color: var(--secondary-color);
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+}
+nav > ul li:hover .sous{
+    display: block;
+}
+.sous li{
+    float: none;
+    width: 100%;
+    text-align: left;
+}
+.sous a{
+    padding: 10px;
+    border-bottom: none;
+}
+.sous a:hover{
+    border-bottom: none;
+    background-color: RGBa(200,200,200,0.1);
+    z-index: 100;
+}
+.deroulant > a::after{
+    font-size: 12px;
+}
+/*----------------------------------------------------------------------------------------------*/
+/* bot */

@@ -1,0 +1,147 @@
+/* Conteneur principal pour le dashboard */
+.dashboard-container {
+    display: flex;
+    width: 100%;
+}
+
+/* Styles pour la sidebar */
+.dashboard-sidebar {
+    width: 200px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 20px;
+}
+
+/* Styles pour la navigation */
+.dashboard-nav {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Styles pour la liste de navigation */
+.dashboard-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Styles pour les éléments de la liste de navigation */
+.dashboard-nav-item {
+    margin-bottom: 10px;
+}
+
+.dashboard-nav-link-head{
+    color: var(--accent-color-yellow);
+    text-decoration: none;
+    display: block;
+}
+
+.dashboard-nav-link-head:hover{
+    color: var(--accent-color-yellow);
+}
+
+/* Styles pour les liens de navigation */
+.dashboard-nav-link {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.dashboard-nav-link:hover {
+    background-color: #444;
+    color: white;
+}
+
+/* Styles pour les sous-menus */
+.dashboard-submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block; /* Toujours affiché */
+}
+
+.dashboard-submenu-item {
+    margin-left: 20px; /* Décalage pour les sous-éléments */
+}
+
+/* Styles pour le contenu principal */
+.dashboard-main {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Styles pour chaque section du dashboard */
+.dashboard-section {
+    margin-bottom: 20px;
+}
+
+/* Styles pour les titres de section */
+.dashboard-section-title {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+/* Styles pour les sous-titres */
+.dashboard-subtitle {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+/* Styles pour les conteneurs de tableaux */
+.dashboard-table-container {
+    margin-bottom: 20px;
+}
+
+/* Styles pour les tableaux */
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.dashboard-table-header, .dashboard-table-cell {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.dashboard-table-header {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+/* Styles pour les boutons */
+.dashboard-edit-btn, .dashboard-delete-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.dashboard-delete-btn {
+    background-color: #f44336;
+}
+
+/* Styles pour les formulaires */
+.dashboard-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-form-input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+.dashboard-form-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
