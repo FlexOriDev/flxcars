@@ -1,0 +1,9 @@
+:root {
+    --primary-color: #303030;
+    --secondary-color: #242423;
+    --accent-color-yellow: #F5CB5C;
+    --accent-color-white: #E8EDDF;
+    --accent-color-gray: #CFDBD5;
+    --accent-color-gray-fiche: rgba(255, 255, 255, 0.8);
+}
+

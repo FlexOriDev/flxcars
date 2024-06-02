@@ -1,0 +1,57 @@
+/*----------------------------------------------------------------------------------------------*/
+/* BODY */
+body{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width:100%;
+    background: var(--primary-color);
+    min-height: 100vh;
+    position: relative;
+    min-height: 100vh;
+    font-size: 100%
+}
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*----------------------------------------------------------------------------------------------*/
+/* CONTENT */
+#carousel-item-index {
+    margin-top: 10px;
+    width: 100%;
+    height: 78%;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+.carousel-control-prev{
+    cursor: pointer;
+}
+.space{
+    margin-top: 20px;
+}
+#carousel-item-index-active{
+    margin-top: 10px;
+    width: 100%;
+    height: 78%;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.bloc-index{
+    background: var(--accent-color-yellow);
+    padding: 5px 0;
+    text-align: center;
+}
+.bloc-index-info{
+    background: var(--accent-color-yellow);
+    padding: 100px 0;
+    text-align: center;
+}
