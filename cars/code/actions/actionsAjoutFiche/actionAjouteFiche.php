@@ -2,7 +2,7 @@
 if(session_id() == '') {
     session_start();
 }
-require('../actions/database.php');
+require('../actions/Database.php');
 
 // Initialisation des variables avec les valeurs soumises
 $nom = isset($_POST['nom']) ? $_POST['nom'] : '';

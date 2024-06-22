@@ -2,7 +2,7 @@
 if (session_id() == '') {
     session_start();
 }
-require('../actions/database.php');
+require('../actions/Database.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
     if (isset($_POST["nom"], $_POST["pays"], $_POST["groupe"])) {

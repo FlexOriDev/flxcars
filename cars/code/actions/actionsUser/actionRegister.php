@@ -2,7 +2,7 @@
 if (session_id() == '') {
     session_start();
 }
-require('../actions/database.php');
+require('../actions/Database.php');
 
 // Validation du formulaire
 if (isset($_POST['validate'])) {

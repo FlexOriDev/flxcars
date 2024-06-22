@@ -1,19 +1,28 @@
 <?php
-namespace mvc\app\Controllers;
-use TypeModel;
 
-require BASE_PATH . '/app/Models/TypeModel.php';
+namespace mvc\app\Controllers;
+
+use mvc\app\Models\Manager\ConstructeurManager;
 
 class AccueilController
 {
+    private $_constructeurManager;
+    private $_view;
 
-    public function index()
+    public function __construct($url)
     {
-        $typeModel = new TypeModel();
-        $types = $typeModel->getAllTypes();
-        include BASE_PATH . '/app/Views/AccueilView.php';
+        if (!isset($url)) {
+            throw new \Exception('Page introuvable : ' . $url);
+        } else {
+            $this->loadConstructeurs();
+        }
     }
 
-}
+    private function loadConstructeurs()
+    {
+        $this->_constructeurManager = new ConstructeurManager();
+        $constructeurs = $this->_constructeurManager->getConstructeurs();
 
-?>
+        require_once(__DIR__ . '/../Views/AccueilView.php');
+    }
+}

@@ -1,5 +1,5 @@
 <?php
-require('../actions/database.php');
+require('../actions/Database.php');
 
 // Définition des clés de paramètres et de leurs équivalents SQL
 $paramMapping = [

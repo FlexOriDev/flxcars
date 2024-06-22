@@ -23,6 +23,10 @@ main {
     padding: 30px 20px;
     min-height: calc(100vh - 100px - 116px);
 }
+
+h1{
+    color: var(--accent-color-yellow);
+}
 /*----------------------------------------------------------------------------------------------*/
 /*PATH*/
 .global-pathButtons{

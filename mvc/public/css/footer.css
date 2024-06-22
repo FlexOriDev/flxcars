@@ -1,0 +1,39 @@
+/* FOOTER */
+
+.footer {
+    position: absolute;
+    left: 0;
+    width: 100%; /* Permet au footer de prendre toute la largeur de la page */
+    background-color: var(--secondary-color);
+    color: var(--accent-color-yellow);
+    text-align: center;
+    padding: 40px 0;
+    bottom: 0;
+}
+
+.footer-content {
+    max-width: 600px; /* Si vous souhaitez limiter la largeur du contenu du footer */
+    margin: 0 auto; /* Centre le contenu du footer horizontalement */
+}
+
+.socials {
+    list-style-type: none;
+    padding: 0;
+}
+
+.socials li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.socials li a {
+    display: block;
+    color: var(--accent-color-white);
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.socials li a:hover {
+    color: var(--accent-color-yellow); /* Couleur au survol */
+    transition: 0.5s;
+}

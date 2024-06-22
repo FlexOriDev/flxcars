@@ -21,15 +21,17 @@
 }
 
 .dashboard-table-name {
-    width: 40%; /* Ajustez cette valeur selon vos besoins */
+    width: 30%; /* Ajustez cette valeur selon vos besoins */
 }
-
+.dashboard-table-constructor {
+    width: 30%; /* Ajustez cette valeur selon vos besoins */
+}
 .dashboard-table-fiches-count {
-    width: 40%; /* Ajustez cette valeur selon vos besoins */
+    width: 20%; /* Ajustez cette valeur selon vos besoins */
 }
 
 .dashboard-table-actions {
-    width: 40%; /* Ajustez cette valeur selon vos besoins */
+    width: 10%; /* Ajustez cette valeur selon vos besoins */
 }
 
 .dashboard-table-header {

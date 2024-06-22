@@ -28,7 +28,6 @@ require('../actions/actionsDashboard/actionsDashboardModeles/actionDashboardMode
                 <?php
                 $getAllConstructeurs = $bdd->prepare('SELECT * FROM constructeurs ORDER BY nom');
                 $getAllConstructeurs->execute();
-
                 ?>
                 <form method="POST" action="pageDashboardModeles.php">
                     <div class="dashboard-add-container">
@@ -51,6 +50,9 @@ require('../actions/actionsDashboard/actionsDashboardModeles/actionDashboardMode
                         <th class="dashboard-table-header dashboard-table-name">Nom
                             <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByNameIcon" style="width: 16px; height: 16px;">
                         </th>
+                        <th class="dashboard-table-header dashboard-table-constructor">Constructeur
+                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByConstructorIcon" style="width: 16px; height: 16px;">
+                        </th>
                         <th class="dashboard-table-header dashboard-table-fiches-count">Fiches Count</th>
                         <th class="dashboard-table-header dashboard-table-actions">Actions</th>
                     </tr>
@@ -58,8 +60,9 @@ require('../actions/actionsDashboard/actionsDashboardModeles/actionDashboardMode
                     <tbody id="modelesTable">
                     <?php
                     $getAllModeles = $bdd->query('
-                        SELECT modeles.id, modeles.nom, COUNT(fiches.id) AS fiches_count
+                        SELECT modeles.id, modeles.nom, COUNT(fiches.id) AS fiches_count, constructeurs.nom AS constructeur_nom
                         FROM modeles
+                        JOIN constructeurs ON modeles.id_constructeur = constructeurs.id
                         LEFT JOIN fiches ON modeles.id = fiches.id_modele
                         GROUP BY modeles.id, modeles.nom
                         ORDER BY modeles.nom;
@@ -69,6 +72,7 @@ require('../actions/actionsDashboard/actionsDashboardModeles/actionDashboardMode
                         echo '<tr class="dashboard-table-row">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($modele['id']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-name">' . htmlspecialchars($modele['nom']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-constructor">' . htmlspecialchars($modele['constructeur_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-fiches-count">' . htmlspecialchars($modele['fiches_count']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-actions">';
                         echo '<form method="POST" action="pageDashboardModeles.php" onsubmit="return confirmDelete();">';
