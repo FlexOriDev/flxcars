@@ -1,7 +1,7 @@
 // Fonction pour trier les données par ordre numérique ascendant
 function sortByIdAsc() {
     var table, rows, switching, i, x, y, shouldSwitch;
-    table = document.querySelector('.dashboard-table-types');
+    table = document.querySelector('.dashboard-table-segments');
     switching = true;
     while (switching) {
         switching = false;
@@ -25,7 +25,7 @@ function sortByIdAsc() {
 // Fonction pour trier les données par ordre numérique descendant
 function sortByIdDesc() {
     var table, rows, switching, i, x, y, shouldSwitch;
-    table = document.querySelector('.dashboard-table-types');
+    table = document.querySelector('.dashboard-table-segments');
     switching = true;
     while (switching) {
         switching = false;
@@ -49,7 +49,7 @@ function sortByIdDesc() {
 // Fonction pour trier les données par ordre alphabétique ascendant
 function sortByNameAsc() {
     var table, rows, switching, i, x, y, shouldSwitch;
-    table = document.querySelector('.dashboard-table-types');
+    table = document.querySelector('.dashboard-table-segments');
     switching = true;
     while (switching) {
         switching = false;
@@ -73,7 +73,7 @@ function sortByNameAsc() {
 // Fonction pour trier les données par ordre alphabétique descendant
 function sortByNameDesc() {
     var table, rows, switching, i, x, y, shouldSwitch;
-    table = document.querySelector('.dashboard-table-types');
+    table = document.querySelector('.dashboard-table-segments');
     switching = true;
     while (switching) {
         switching = false;
@@ -97,7 +97,7 @@ function sortByNameDesc() {
 // Fonction pour trier les données par ordre alphabétique ascendant
 function sortByCountAsc() {
     var table, rows, switching, i, x, y, shouldSwitch;
-    table = document.querySelector('.dashboard-table-types');
+    table = document.querySelector('.dashboard-table-segments');
     switching = true;
     while (switching) {
         switching = false;
@@ -121,7 +121,7 @@ function sortByCountAsc() {
 // Fonction pour trier les données par ordre alphabétique descendant
 function sortByCountDesc() {
     var table, rows, switching, i, x, y, shouldSwitch;
-    table = document.querySelector('.dashboard-table-types');
+    table = document.querySelector('.dashboard-table-segments');
     switching = true;
     while (switching) {
         switching = false;

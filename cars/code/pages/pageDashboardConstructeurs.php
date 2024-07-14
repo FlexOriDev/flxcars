@@ -67,7 +67,9 @@ require('../actions/actionsDashboard/actionsDashboardConstructeurs/actionDashboa
                         <th class="dashboard-table-header dashboard-table-group">Groupe
                             <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByGroupIcon" style="width: 16px; height: 16px;">
                         </th>
-                        <th class="dashboard-table-header dashboard-table-fiches-count">Fiches Count</th>
+                        <th class="dashboard-table-header dashboard-table-fiches-count">Fiches Count
+                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByCountIcon" style="width: 16px; height: 16px;">
+                        </th>
                         <th class="dashboard-table-header dashboard-table-actions">Actions</th>
                     </tr>
                     </thead>

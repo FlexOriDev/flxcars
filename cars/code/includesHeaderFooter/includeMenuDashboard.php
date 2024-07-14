@@ -11,12 +11,19 @@
     <nav class="dashboard-nav">
         <ul class="dashboard-nav-list">
             <li class="dashboard-nav-item">
+                <a  class="dashboard-nav-link-head">DASHBOARD</a>
+                <ul class="dashboard-submenu">
+                    <li class="dashboard-submenu-item"><a href="../pages/pageDashboard.php" class="dashboard-nav-link">GRAPHIQUES</a></li>
+                    <li class="dashboard-submenu-item"><a href="../pages/pageDashboard.php" class="dashboard-nav-link">INFORMATIONS</a></li>
+                </ul>
                 <a  class="dashboard-nav-link-head">VOITURES</a>
                 <ul class="dashboard-submenu">
                     <li class="dashboard-submenu-item"><a href="../pages/pageDashboardConstructeurs.php" class="dashboard-nav-link">CONSTRUCTEURS</a></li>
                     <li class="dashboard-submenu-item"><a href="../pages/pageDashboardTypes.php" class="dashboard-nav-link">TYPES</a></li>
                     <li class="dashboard-submenu-item"><a href="../pages/pageDashboardModeles.php" class="dashboard-nav-link">MODELES</a></li>
-                    <li class="dashboard-submenu-item"><a href="../pages/pageDashboardConstructeurs.php" class="dashboard-nav-link">SEGMENTS</a></li>
+                    <li class="dashboard-submenu-item"><a href="../pages/pageDashboardSegments.php" class="dashboard-nav-link">SEGMENTS</a></li>
+                    <li class="dashboard-submenu-item"><a href="../pages/pageDashboardConstructeurs.php" class="dashboard-nav-link">GROUPES</a></li>
+                    <li class="dashboard-submenu-item"><a href="../pages/pageDashboardConstructeurs.php" class="dashboard-nav-link">PAYS</a></li>
                 </ul>
             </li>
             <li class="dashboard-nav-item">
