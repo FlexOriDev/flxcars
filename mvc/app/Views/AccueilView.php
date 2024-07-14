@@ -3,4 +3,6 @@
 
 <div class="container accueil">
     <h1>ACCUEIL</h1>
+
+    $constructeurs
 </div>

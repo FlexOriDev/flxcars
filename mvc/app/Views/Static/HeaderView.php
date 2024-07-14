@@ -23,7 +23,7 @@
                     <ul class="sous">
                     </ul>
                 </li>
-                <li class="deroulant"><a href="/flxcars/mvc/public/voiture">Voitures</a>
+                <li class="deroulant"><a href="/flxcars/mvc/public/voitures">Voitures</a>
                     <ul class="sous">
                         <?php
                         foreach ($constructeurs as $constructeur):?>

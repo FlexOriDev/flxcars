@@ -180,7 +180,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
             <article class="article-fiche-title" id="histoire">
                     <h1 class="h1-fiche">Histoire</h1>
             </article>
-            <article class="article-fiche-name3" id="histoire">
+            <article class="²" id="histoire">
                 <?= htmlspecialchars_decode($ficheInfos['histoire']); ?>
             </article>
             <br><br><br>

@@ -1,6 +1,8 @@
 <!--------------------------------------------INCLUDES------------------------------------------------------>
 <?php
 include '../includesHeaderFooter/includeHeader.php';
+require('../actions/actionsUser/actionIsAdmin.php');
+redirectIfNotAdmin();
 require('../actions/database.php');
 require('../actions/actionsDashboard/actionsDashboardConstructeurs/actionDashboardConstructeurs.php');
 ?>

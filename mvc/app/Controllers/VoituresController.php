@@ -4,7 +4,7 @@ namespace mvc\app\Controllers;
 
 use mvc\app\Models\Manager\ConstructeurManager;
 
-class VoitureController
+class VoituresController
 {
     private $_constructeurManager;
     private $_view;
