@@ -8,7 +8,7 @@
 
 <!------------------------------------------INCLUDES---------------------------------------------------->
 
-<?php 
+<?php
 include '../includesHeaderFooter/includeHeader.php';
 require('../actions/database.php');
 ?>

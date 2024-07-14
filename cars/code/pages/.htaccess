@@ -1,0 +1,6 @@
+RewriteEngine On
+
+# Rediriger toutes les requêtes vers index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ pageIndex.php?url=$1 [QSA,L]

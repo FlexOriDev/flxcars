@@ -3,6 +3,7 @@ if(session_id() == '') {
     session_start();
 }
 require('../actions/Database.php');
+require('../actions/actionsUser/actionIsAdmin.php');
 
 //Validation du formulaire
 if(isset($_POST['validate'])){
@@ -33,9 +34,14 @@ if(isset($_POST['validate'])){
                 $_SESSION['prenom'] = $usersInfos['prenom'];
                 $_SESSION['nom'] = $usersInfos['nom'];
                 $_SESSION['mail'] = $usersInfos['mail'];
-                
-                //Rediriger l'utilisateur vers la page d'accueil
-                header('Location: pageIndex.php');
+                $_SESSION['role'] = $usersInfos['role'];
+
+                if(isAdmin()){
+                    header('Location: pageVoitures.php');
+                }else{
+                    //Rediriger l'utilisateur vers la page d'accueil
+                    header('Location: pageIndex.php');
+                }
                 
             }else{
                 $errorMsg = "Votre mot de passe est incorrect...";

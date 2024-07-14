@@ -21,8 +21,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/35.0.0/classic/ckeditor.js"></script>
 
-    <?php include("../actions/actionsUser/actionLogin.php"); ?>
-
+    <?php
+    include("../actions/actionsUser/actionLogin.php");
+    require('../actions/actionsUser/actionIsAdmin.php');
+    ?>
     <script>
         <?php include("../scripts/checkboxSCRIPT.js"); ?>
     </script>
@@ -101,8 +103,14 @@
                     ?>
                     <li class="deroulant"><a href="pageAccount.php?id=<?= $_SESSION['id']; ?>">Mon profil &ensp;</a>
                         <ul class="sous">
-                            <li><a href="../pages/pageDashboardConstructeurs.php">Dashboard</a></li>
+                            <?php
+                            if(isAdmin()){
+                            ?>
+                                <li><a href="../pages/pageDashboardConstructeurs.php">Dashboard</a></li>
                             <li><a href="../pages/pageAjouteFiche.php">Ajouter un fiche</a></li>
+                                <?php
+                            }
+                            ?>
                             <li><a href="../actions/actionsUser/actionLogout.php">Deconnexion</a></li>
                         </ul>
                     </li>
