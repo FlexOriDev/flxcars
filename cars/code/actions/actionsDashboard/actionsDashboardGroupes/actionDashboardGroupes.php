@@ -9,12 +9,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
         $nom = htmlspecialchars(trim($_POST["nom"]));
 
         if (!empty($nom)) {
-            $sql = "INSERT INTO types (nom) VALUES (:nom)";
+            $sql = "INSERT INTO groupes (nom) VALUES (:nom)";
             $stmt = $bdd->prepare($sql);
             $stmt->bindParam(':nom', $nom);
 
             if ($stmt->execute()) {
-                $url = htmlspecialchars('pageDashboardTypes.php');
+                $url = htmlspecialchars('pageDashboardModeles.php');
                 echo '<script>window.location = "'.$url.'";</script>';
                 $errorMsg = "Votre fiche a bien été publiée.";
                 exit;
@@ -31,9 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
 
 if (isset($_POST['delete'])) {
     $deleteId = $_POST['delete_id'];
-    $deleteConstructeur = $bdd->prepare('DELETE FROM types WHERE id = ?');
+    $deleteConstructeur = $bdd->prepare('DELETE FROM groupes WHERE id = ?');
     $deleteConstructeur->execute(array($deleteId));
-    $url = htmlspecialchars('pageDashboardTypes.php');
+    $url = htmlspecialchars('pageDashboardGroupes.php');
     echo '<script>window.location = "'.$url.'";</script>';
     $errorMsg = "Votre fiche a bien été publiée.";
     exit;
