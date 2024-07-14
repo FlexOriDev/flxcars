@@ -104,8 +104,8 @@ function sortByConstructorAsc() {
         rows = table.rows;
         for (i = 1; i < (rows.length - 1); i++) {
             shouldSwitch = false;
-            x = rows[i].getElementsByTagName("TD")[1].innerText.toLowerCase();
-            y = rows[i + 1].getElementsByTagName("TD")[1].innerText.toLowerCase();
+            x = rows[i].getElementsByTagName("TD")[2].innerText.toLowerCase();
+            y = rows[i + 1].getElementsByTagName("TD")[2].innerText.toLowerCase();
             if (x > y) {
                 shouldSwitch = true;
                 break;
@@ -128,8 +128,56 @@ function sortByConstructorDesc() {
         rows = table.rows;
         for (i = 1; i < (rows.length - 1); i++) {
             shouldSwitch = false;
-            x = rows[i].getElementsByTagName("TD")[1].innerText.toLowerCase();
-            y = rows[i + 1].getElementsByTagName("TD")[1].innerText.toLowerCase();
+            x = rows[i].getElementsByTagName("TD")[2].innerText.toLowerCase();
+            y = rows[i + 1].getElementsByTagName("TD")[2].innerText.toLowerCase();
+            if (x < y) {
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
+    }
+}
+
+// Fonction pour trier les données par ordre alphabétique ascendant
+function sortByCountAsc() {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.querySelector('.dashboard-table-modeles');
+    switching = true;
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[3].innerText.toLowerCase();
+            y = rows[i + 1].getElementsByTagName("TD")[3].innerText.toLowerCase();
+            if (x > y) {
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
+    }
+}
+
+// Fonction pour trier les données par ordre alphabétique descendant
+function sortByCountDesc() {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.querySelector('.dashboard-table-modeles');
+    switching = true;
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[3].innerText.toLowerCase();
+            y = rows[i + 1].getElementsByTagName("TD")[3].innerText.toLowerCase();
             if (x < y) {
                 shouldSwitch = true;
                 break;
@@ -145,33 +193,44 @@ function sortByConstructorDesc() {
 // Écouteurs d'événements pour les icônes de tri
 document.getElementById('sortByIdIcon').addEventListener('click', function() {
     var sortByIdIcon = document.getElementById('sortByIdIcon');
-    if (sortByIdIcon.src.includes('ascendant.png')) {
-        sortByIdIcon.src = '../../library/iconsDashboard/descendant.png';
+    if (sortByIdIcon.src.includes('descendant.png')) {
+        sortByIdIcon.src = '../../library/iconsDashboard/ascendant.png';
         sortByIdDesc(); // Appel de la fonction de tri descendant pour la colonne ID
     } else {
-        sortByIdIcon.src = '../../library/iconsDashboard/ascendant.png';
+        sortByIdIcon.src = '../../library/iconsDashboard/descendant.png';
         sortByIdAsc(); // Appel de la fonction de tri ascendant pour la colonne ID
     }
 });
 
 document.getElementById('sortByNameIcon').addEventListener('click', function() {
     var sortByNameIcon = document.getElementById('sortByNameIcon');
-    if (sortByNameIcon.src.includes('ascendant.png')) {
-        sortByNameIcon.src = '../../library/iconsDashboard/descendant.png';
+    if (sortByNameIcon.src.includes('descendant.png')) {
+        sortByNameIcon.src = '../../library/iconsDashboard/ascendant.png';
         sortByNameDesc(); // Appel de la fonction de tri descendant pour la colonne Nom
     } else {
-        sortByNameIcon.src = '../../library/iconsDashboard/ascendant.png';
+        sortByNameIcon.src = '../../library/iconsDashboard/descendant.png';
         sortByNameAsc(); // Appel de la fonction de tri ascendant pour la colonne Nom
     }
 });
 
 document.getElementById('sortByConstructorIcon').addEventListener('click', function() {
     var sortByConstructorIcon = document.getElementById('sortByConstructorIcon');
-    if (sortByConstructorIcon.src.includes('ascendant.png')) {
-        sortByConstructorIcon.src = '../../library/iconsDashboard/descendant.png';
+    if (sortByConstructorIcon.src.includes('descendant.png')) {
+        sortByConstructorIcon.src = '../../library/iconsDashboard/ascendant.png';
         sortByConstructorDesc(); // Appel de la fonction de tri descendant pour la colonne Nom
     } else {
-        sortByConstructorIcon.src = '../../library/iconsDashboard/ascendant.png';
+        sortByConstructorIcon.src = '../../library/iconsDashboard/descendant.png';
         sortByConstructorAsc(); // Appel de la fonction de tri ascendant pour la colonne Nom
+    }
+});
+
+document.getElementById('sortByCountIcon').addEventListener('click', function() {
+    var sortByCountIcon = document.getElementById('sortByCountIcon');
+    if (sortByCountIcon.src.includes('descendant.png')) {
+        sortByCountIcon.src = '../../library/iconsDashboard/ascendant.png';
+        sortByCountDesc(); // Appel de la fonction de tri descendant pour la colonne Nom
+    } else {
+        sortByCountIcon.src = '../../library/iconsDashboard/descendant.png';
+        sortByCountAsc(); // Appel de la fonction de tri ascendant pour la colonne Nom
     }
 });

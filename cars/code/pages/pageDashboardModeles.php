@@ -53,7 +53,9 @@ require('../actions/actionsDashboard/actionsDashboardModeles/actionDashboardMode
                         <th class="dashboard-table-header dashboard-table-constructor">Constructeur
                             <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByConstructorIcon" style="width: 16px; height: 16px;">
                         </th>
-                        <th class="dashboard-table-header dashboard-table-fiches-count">Fiches Count</th>
+                        <th class="dashboard-table-header dashboard-table-fiches-count">Fiches Count
+                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByCountIcon" style="width: 16px; height: 16px;">
+                        </th>
                         <th class="dashboard-table-header dashboard-table-actions">Actions</th>
                     </tr>
                     </thead>
