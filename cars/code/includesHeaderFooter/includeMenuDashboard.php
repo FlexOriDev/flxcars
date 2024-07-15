@@ -23,7 +23,7 @@
                     <li class="dashboard-submenu-item"><a href="../pages/pageDashboardModeles.php" class="dashboard-nav-link">MODELES</a></li>
                     <li class="dashboard-submenu-item"><a href="../pages/pageDashboardSegments.php" class="dashboard-nav-link">SEGMENTS</a></li>
                     <li class="dashboard-submenu-item"><a href="../pages/pageDashboardGroupes.php" class="dashboard-nav-link">GROUPES</a></li>
-                    <li class="dashboard-submenu-item"><a href="../pages/pageDashboardConstructeurs.php" class="dashboard-nav-link">PAYS</a></li>
+                    <li class="dashboard-submenu-item"><a href="../pages/pageDashboardPays.php" class="dashboard-nav-link">PAYS</a></li>
                 </ul>
             </li>
             <li class="dashboard-nav-item">
