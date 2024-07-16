@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
             $stmt->bindParam(':nom', $nom);
 
             if ($stmt->execute()) {
-                $url = htmlspecialchars('pageDashboardModeles.php');
+                $url = htmlspecialchars('pageDashboardGroupes.php');
                 echo '<script>window.location = "'.$url.'";</script>';
                 $errorMsg = "Votre fiche a bien été publiée.";
                 exit;

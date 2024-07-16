@@ -29,7 +29,7 @@
             <li class="dashboard-nav-item">
                 <a class="dashboard-nav-link-head">FICHE</a>
                 <ul class="dashboard-submenu">
-                    <li class="dashboard-submenu-item"><a href="../pages/pageDashboardConstructeurs.php" class="dashboard-nav-link">FICHES</a></li>
+                    <li class="dashboard-submenu-item"><a href="../pages/pageDashboardFiches.php" class="dashboard-nav-link">FICHES</a></li>
                     <li class="dashboard-submenu-item"><a href="../pages/pageDashboardConstructeurs.php" class="dashboard-nav-link">VERSIONS</a></li>
                 </ul>
             </li>
