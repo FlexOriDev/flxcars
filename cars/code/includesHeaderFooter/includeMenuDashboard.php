@@ -36,7 +36,7 @@
             <li class="dashboard-nav-item">
                 <a class="dashboard-nav-link-head">UTILISATEURS</a>
                 <ul class="dashboard-submenu">
-                    <li class="dashboard-submenu-item"><a href="../pages/pageDashboardConstructeurs.php" class="dashboard-nav-link">UTILISATEURS</a></li>
+                    <li class="dashboard-submenu-item"><a href="../pages/pageDashboardUtilisateurs.php" class="dashboard-nav-link">UTILISATEURS</a></li>
                 </ul>
             </li>
         </ul>
