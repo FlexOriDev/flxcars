@@ -41,17 +41,14 @@ require('../actions/actionsDashboard/actionsDashboardPays/actionDashboardPays.ph
                     <th class="dashboard-table-header dashboard-table-id">
                         ID
                         <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByIdIcon" style="width: 16px; height: 16px;">
-                        <div class="spinner" id="spinnerById" style="display: none;"></div>
                     </th>
                     <th class="dashboard-table-header dashboard-table-name">
                         Nom
                         <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByNameIcon" style="width: 16px; height: 16px;">
-                        <div class="spinner" id="spinnerByName" style="display: none;"></div>
                     </th>
                     <th class="dashboard-table-header dashboard-table-fiches-count">
                         Fiches Count
                         <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByCountIcon" style="width: 16px; height: 16px;">
-                        <div class="spinner" id="spinnerByCount" style="display: none;"></div>
                     </th>
 
                     </thead>

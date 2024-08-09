@@ -3,8 +3,8 @@ function sortTableByColumn(table, columnIndex, isNumeric, isAsc) {
     var header = rowsArray.shift(); // Extraire l'en-tête pour le réinsérer plus tard
 
     rowsArray.sort(function(a, b) {
-        var aText = a.cells[columnIndex].innerText;
-        var bText = b.cells[columnIndex].innerText;
+        var aText = a.cells[columnIndex].innerText.toLowerCase(); // Convertir en minuscules
+        var bText = b.cells[columnIndex].innerText.toLowerCase(); // Convertir en minuscules
 
         if (isNumeric) {
             aText = parseFloat(aText) || 0;

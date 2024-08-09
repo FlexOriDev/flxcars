@@ -4,6 +4,39 @@ if (session_id() == '') {
 }
 require('../actions/Database.php');
 
+// Handling AJAX update requests
+if ($_SERVER["REQUEST_METHOD"] == "POST" && strpos($_SERVER["CONTENT_TYPE"], "application/json") !== false) {
+    $data = json_decode(file_get_contents("php://input"), true);
+    $id = htmlspecialchars($data['id']);
+    $column = htmlspecialchars($data['column']);
+    $value = htmlspecialchars($data['value']);
+
+    // Validation de la colonne pour prévenir les injections SQL
+    $validColumns = ['nom', 'id_pays', 'id_groupe'];
+    if (!in_array($column, $validColumns)) {
+        echo json_encode(['success' => false, 'message' => 'Colonne invalide']);
+        exit;
+    }
+
+    // Mise à jour de la requête avec la colonne validée
+    try {
+        $sql = "UPDATE constructeurs SET $column = :value WHERE id = :id";
+        $stmt = $bdd->prepare($sql);
+        $stmt->bindParam(':value', $value);
+        $stmt->bindParam(':id', $id);
+
+        if ($stmt->execute()) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Échec de la mise à jour']);
+        }
+    } catch (PDOException $e) {
+        echo json_encode(['success' => false, 'message' => 'Erreur de base de données : ' . $e->getMessage()]);
+    }
+    exit;
+}
+
+// Handling form submission for adding new constructor
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
     if (isset($_POST["nom"], $_POST["pays"], $_POST["groupe"])) {
         $nom = htmlspecialchars(trim($_POST["nom"]));
@@ -11,19 +44,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
         $groupe = htmlspecialchars(trim($_POST["groupe"]));
 
         if (!empty($nom) && !empty($pays) && !empty($groupe)) {
-            $sql = "INSERT INTO constructeurs (nom, id_pays, id_groupe) VALUES (:nom, :pays, :groupe)";
-            $stmt = $bdd->prepare($sql);
-            $stmt->bindParam(':nom', $nom);
-            $stmt->bindParam(':pays', $pays);
-            $stmt->bindParam(':groupe', $groupe);
+            try {
+                $sql = "INSERT INTO constructeurs (nom, id_pays, id_groupe) VALUES (:nom, :pays, :groupe)";
+                $stmt = $bdd->prepare($sql);
+                $stmt->bindParam(':nom', $nom);
+                $stmt->bindParam(':pays', $pays);
+                $stmt->bindParam(':groupe', $groupe);
 
-            if ($stmt->execute()) {
-                $url = htmlspecialchars('pageDashboardConstructeurs.php');
-                echo '<script>window.location = "'.$url.'";</script>';
-                $errorMsg = "Votre fiche a bien été publiée.";
-                exit;
-            } else {
-                $errorMsg = "Erreur lors de l'ajout du constructeur.";
+                if ($stmt->execute()) {
+                    $url = htmlspecialchars('pageDashboardConstructeurs.php');
+                    echo '<script>window.location = "'.$url.'";</script>';
+                    $errorMsg = "Votre fiche a bien été publiée.";
+                    exit;
+                } else {
+                    $errorMsg = "Erreur lors de l'ajout du constructeur.";
+                }
+            } catch (PDOException $e) {
+                $errorMsg = "Erreur de base de données : " . $e->getMessage();
             }
         } else {
             $errorMsg = "Veuillez remplir tous les champs.";
@@ -33,13 +70,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
     }
 }
 
+// Handling deletion of a constructor
 if (isset($_POST['delete'])) {
     $deleteId = $_POST['delete_id'];
-    $deleteConstructeur = $bdd->prepare('DELETE FROM constructeurs WHERE id = ?');
-    $deleteConstructeur->execute(array($deleteId));
-    $url = htmlspecialchars('pageDashboardConstructeurs.php');
-    echo '<script>window.location = "'.$url.'";</script>';
-    $errorMsg = "Votre fiche a bien été publiée.";
-    exit;
+    try {
+        $deleteConstructeur = $bdd->prepare('DELETE FROM constructeurs WHERE id = ?');
+        $deleteConstructeur->execute(array($deleteId));
+        $url = htmlspecialchars('pageDashboardConstructeurs.php');
+        echo '<script>window.location = "'.$url.'";</script>';
+        $errorMsg = "Votre fiche a bien été supprimée.";
+        exit;
+    } catch (PDOException $e) {
+        $errorMsg = "Erreur de base de données : " . $e->getMessage();
+    }
 }
 ?>
