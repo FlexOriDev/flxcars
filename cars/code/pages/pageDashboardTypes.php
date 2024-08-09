@@ -62,14 +62,14 @@ require('../actions/actionsDashboard/actionsDashboardTypes/actionDashboardTypes.
                     ');
 
                     while ($type = $getAllTypes->fetch()) {
-                        echo '<tr class="dashboard-table-row">';
+                        echo '<tr class="dashboard-table-row" data-id="' . htmlspecialchars($type['id']) . '">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($type['id']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-name">' . htmlspecialchars($type['nom']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-name editable" contenteditable="true" data-column="nom">' . htmlspecialchars($type['nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-fiches-count">' . htmlspecialchars($type['fiches_count']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-actions">';
                         echo '<form method="POST" action="pageDashboardTypes.php" onsubmit="return confirmDelete();">';
                         echo '<input type="hidden" name="delete_id" value="' . htmlspecialchars($type['id']) . '">';
-                        echo '<button type="submit" class="dashboard-delete-btn" name="delete">Supprimer</button>';
+                        echo '<button type="submit" class="dashboard-delete-btn" name="delete" onclick="return confirmDelete(this);">Supprimer</button>';
                         echo '</form>';
                         echo '</td>';
                         echo '</tr>';
@@ -82,11 +82,18 @@ require('../actions/actionsDashboard/actionsDashboardTypes/actionDashboardTypes.
         </section>
     </main>
 </div>
-<script src="../scripts/scriptDashboard/dashboard_types/search_pays_and_group.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_types/search_filter.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_types/column_filter.js"></script>
+<script src="../scripts/scriptDashboard/dashboard_types/modif_tab.js"></script>
 <script>
-    function confirmDelete() {
+    function confirmDelete(button) {
+        const row = button.closest('tr'); // Trouve la ligne correspondante
+        const fichesCount = parseInt(row.querySelector('.dashboard-table-fiches-count').textContent); // Récupère la valeur de fiches_count
+
+        if (fichesCount > 0) {
+            alert('Vous ne pouvez pas supprimer cette ligne car elle contient des fiches.');
+            return false;
+        }
         return confirm('Êtes-vous sûr de vouloir supprimer cette ligne ?');
     }
 </script>
