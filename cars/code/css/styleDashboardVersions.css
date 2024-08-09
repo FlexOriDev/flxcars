@@ -193,8 +193,8 @@
 
 
 .dashboard-delete-btn {
-    background-color: var(--secondary-color); /* Red background */
-    color: var(--accent-color-yellow); /* White text */
+    background-color: var(--secondary-color)!important; /* Red background */
+    color: white!important; /* White text */
     border: none; /* No border */
     padding: 8px 16px; /* Padding */
     text-align: center; /* Centered text */
@@ -204,10 +204,5 @@
     margin: 4px 2px; /* Margin */
     cursor: pointer; /* Pointer cursor on hover */
     border-radius: 4px; /* Rounded corners */
-    transition: background-color 0.3s ease; /* Smooth transition */
-}
-
-.dashboard-delete-btn:hover {
-    background-color: var(--accent-color-yellow); /* Red background */
-    color: var(--secondary-color); /* White text */
+    transition: background-color 0.1s ease; /* Smooth transition */
 }

@@ -38,18 +38,22 @@ require('../actions/actionsDashboard/actionsDashboardPays/actionDashboardPays.ph
                 </form>
                 <table class="dashboard-table-pays">
                     <thead>
-                    <tr>
-                        <th class="dashboard-table-header dashboard-table-id" id="sortById">ID
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByIdIcon" style="width: 16px; height: 16px;">
-                        </th>
-                        <th class="dashboard-table-header dashboard-table-name">Nom
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByNameIcon" style="width: 16px; height: 16px;">
-                        </th>
-                        <th class="dashboard-table-header dashboard-table-fiches-count">Fiches Count
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByCountIcon" style="width: 16px; height: 16px;">
-                        </th>
-                        <th class="dashboard-table-header dashboard-table-actions">Actions</th>
-                    </tr>
+                    <th class="dashboard-table-header dashboard-table-id">
+                        ID
+                        <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByIdIcon" style="width: 16px; height: 16px;">
+                        <div class="spinner" id="spinnerById" style="display: none;"></div>
+                    </th>
+                    <th class="dashboard-table-header dashboard-table-name">
+                        Nom
+                        <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByNameIcon" style="width: 16px; height: 16px;">
+                        <div class="spinner" id="spinnerByName" style="display: none;"></div>
+                    </th>
+                    <th class="dashboard-table-header dashboard-table-fiches-count">
+                        Fiches Count
+                        <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByCountIcon" style="width: 16px; height: 16px;">
+                        <div class="spinner" id="spinnerByCount" style="display: none;"></div>
+                    </th>
+
                     </thead>
                     <tbody id="paysTable">
                     <?php
@@ -63,14 +67,14 @@ require('../actions/actionsDashboard/actionsDashboardPays/actionDashboardPays.ph
                     ');
 
                     while ($pays = $getAllPays->fetch()) {
-                        echo '<tr class="dashboard-table-row">';
+                        echo '<tr class="dashboard-table-row" data-id="' . htmlspecialchars($pays['id']) . '">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($pays['id']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-name">' . htmlspecialchars($pays['nom']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-name editable" contenteditable="true" data-column="nom">' . htmlspecialchars($pays['nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-fiches-count">' . htmlspecialchars($pays['fiches_count']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-actions">';
                         echo '<form method="POST" action="pageDashboardPays.php" onsubmit="return confirmDelete();">';
                         echo '<input type="hidden" name="delete_id" value="' . htmlspecialchars($pays['id']) . '">';
-                        echo '<button type="submit" class="dashboard-delete-btn" name="delete">Supprimer</button>';
+                        echo '<button type="submit" class="dashboard-delete-btn" name="delete" onclick="return confirmDelete(this);">Supprimer</button>';
                         echo '</form>';
                         echo '</td>';
                         echo '</tr>';
@@ -83,13 +87,21 @@ require('../actions/actionsDashboard/actionsDashboardPays/actionDashboardPays.ph
         </section>
     </main>
 </div>
-<script src="../scripts/scriptDashboard/dashboard_pays/search_pays_and_group.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_pays/search_filter.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_pays/column_filter.js"></script>
+<script src="../scripts/scriptDashboard/dashboard_pays/modif_tab.js"></script>
 <script>
-    function confirmDelete() {
+    function confirmDelete(button) {
+        const row = button.closest('tr'); // Trouve la ligne correspondante
+        const fichesCount = parseInt(row.querySelector('.dashboard-table-fiches-count').textContent); // Récupère la valeur de fiches_count
+
+        if (fichesCount > 0) {
+            alert('Vous ne pouvez pas supprimer cette ligne car elle contient des fiches.');
+            return false;
+        }
         return confirm('Êtes-vous sûr de vouloir supprimer cette ligne ?');
     }
+
 </script>
 <?php require '../includesHeaderFooter/includeFooter.php'; ?>
 </body>
