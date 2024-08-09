@@ -86,16 +86,16 @@ require('../actions/actionsDashboard/actionsDashboardConstructeurs/actionDashboa
                     ');
 
                     while ($constructeur = $getAllConstructeurs->fetch()) {
-                        echo '<tr class="dashboard-table-row">';
+                        echo '<tr class="dashboard-table-row" data-id="' . htmlspecialchars($constructeur['id']) . '">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($constructeur['id']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-name">' . htmlspecialchars($constructeur['nom']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-name editable" contenteditable="true" data-column="nom">' . htmlspecialchars($constructeur['nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-pays">' . htmlspecialchars($constructeur['pays_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-group">' . htmlspecialchars($constructeur['groupe_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-fiches-count">' . htmlspecialchars($constructeur['fiches_count']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-actions">';
                         echo '<form method="POST" action="pageDashboardConstructeurs.php" onsubmit="return confirmDelete();">';
                         echo '<input type="hidden" name="delete_id" value="' . htmlspecialchars($constructeur['id']) . '">';
-                        echo '<button type="submit" class="dashboard-delete-btn" name="delete">Supprimer</button>';
+                        echo '<button type="submit" class="dashboard-delete-btn" name="delete" onclick="return confirmDelete(this);">Supprimer</button>';
                         echo '</form>';
                         echo '</td>';
                         echo '</tr>';
@@ -108,11 +108,18 @@ require('../actions/actionsDashboard/actionsDashboardConstructeurs/actionDashboa
         </section>
     </main>
 </div>
-<script src="../scripts/scriptDashboard/dashboard_constructeurs/search_pays_and_group.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_constructeurs/search_filter.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_constructeurs/column_filter.js"></script>
+<script src="../scripts/scriptDashboard/dashboard_constructeurs/modif_tab.js"></script>
 <script>
-    function confirmDelete() {
+    function confirmDelete(button) {
+        const row = button.closest('tr'); // Trouve la ligne correspondante
+        const fichesCount = parseInt(row.querySelector('.dashboard-table-fiches-count').textContent); // Récupère la valeur de fiches_count
+
+        if (fichesCount > 0) {
+            alert('Vous ne pouvez pas supprimer cette ligne car elle contient des fiches.');
+            return false;
+        }
         return confirm('Êtes-vous sûr de vouloir supprimer cette ligne ?');
     }
 </script>
