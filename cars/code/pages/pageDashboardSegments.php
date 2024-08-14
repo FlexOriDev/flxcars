@@ -26,11 +26,16 @@ require('../actions/actionsDashboard/actionsDashboardSegments/actionDashboardSeg
                     <input type="text" id="searchInput" placeholder="Rechercher un segment..." class="dashboard-search">
                 </div>
                 <?php
-                $getAllPays = $bdd->prepare('SELECT * FROM segments ORDER BY nom');
-                $getAllPays->execute();
-
+                $getAllSegments = $bdd->prepare('SELECT * FROM segments ORDER BY nom');
+                $getAllSegments->execute();
                 ?>
-
+                <!-- Formulaire pour ajouter un segment -->
+                <form method="POST" action="pageDashboardSegments.php">
+                    <div class="dashboard-add-container">
+                        <input type="text" id="nomSegment" placeholder="Nom du segment" class="dashboard-input" name="nom">
+                        <input type="submit" value="Ajouter" class="dashboard-btn" id="ajouterSegment" name="validate">
+                    </div>
+                </form>
                 <table class="dashboard-table-segments">
                     <thead>
                     <tr>
@@ -49,7 +54,7 @@ require('../actions/actionsDashboard/actionsDashboardSegments/actionDashboardSeg
                     <tbody id="segmentsTable">
                     <?php
                     $getAllSegments = $bdd->query('
-                        SELECT segments.id, segments.nom, COUNT(segments.id) AS fiches_count
+                        SELECT segments.id, segments.nom, COUNT(fiches.id) AS fiches_count
                         FROM segments
                         LEFT JOIN fiches ON segments.id = fiches.id_segment
                         GROUP BY segments.id, segments.nom
@@ -57,14 +62,14 @@ require('../actions/actionsDashboard/actionsDashboardSegments/actionDashboardSeg
                     ');
 
                     while ($segment = $getAllSegments->fetch()) {
-                        echo '<tr class="dashboard-table-row">';
+                        echo '<tr class="dashboard-table-row" data-id="' . htmlspecialchars($segment['id']) . '">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($segment['id']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-name">' . htmlspecialchars($segment['nom']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-name editable" contenteditable="true" data-column="nom">' . htmlspecialchars($segment['nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-fiches-count">' . htmlspecialchars($segment['fiches_count']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-actions">';
                         echo '<form method="POST" action="pageDashboardSegments.php" onsubmit="return confirmDelete();">';
                         echo '<input type="hidden" name="delete_id" value="' . htmlspecialchars($segment['id']) . '">';
-                        echo '<button type="submit" class="dashboard-delete-btn" name="delete">Supprimer</button>';
+                        echo '<button type="submit" class="dashboard-delete-btn" name="delete" onclick="return confirmDelete(this);">Supprimer</button>';
                         echo '</form>';
                         echo '</td>';
                         echo '</tr>';
@@ -77,11 +82,18 @@ require('../actions/actionsDashboard/actionsDashboardSegments/actionDashboardSeg
         </section>
     </main>
 </div>
-<script src="../scripts/scriptDashboard/dashboard_segments/search_pays_and_group.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_segments/search_filter.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_segments/column_filter.js"></script>
+<script src="../scripts/scriptDashboard/dashboard_segments/modif_tab.js"></script>
 <script>
-    function confirmDelete() {
+    function confirmDelete(button) {
+        const row = button.closest('tr'); // Trouve la ligne correspondante
+        const fichesCount = parseInt(row.querySelector('.dashboard-table-fiches-count').textContent); // Récupère la valeur de fiches_count
+
+        if (fichesCount > 0) {
+            alert('Vous ne pouvez pas supprimer cette ligne car elle contient des fiches.');
+            return false;
+        }
         return confirm('Êtes-vous sûr de vouloir supprimer cette ligne ?');
     }
 </script>
