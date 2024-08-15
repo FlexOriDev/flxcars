@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && strpos($_SERVER["CONTENT_TYPE"], "ap
 
     // Update query with validated column
     try {
-        $sql = "UPDATE modeles SET $column = :value WHERE id = :id";
+        $sql = "UPDATE MODELE SET $column = :value WHERE id = :id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindParam(':value', $value);
         $stmt->bindParam(':id', $id);
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
 
         if (!empty($nom) && !empty($constructeur)) {
             try {
-                $sql = "INSERT INTO modeles (nom, id_constructeur) VALUES (:nom, :constructeur)";
+                $sql = "INSERT INTO MODELE (NOM_MODELE, ID_CONSTRUCTEUR) VALUES (:nom, :constructeur)";
                 $stmt = $bdd->prepare($sql);
                 $stmt->bindParam(':nom', $nom);
                 $stmt->bindParam(':constructeur', $constructeur);
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
 if (isset($_POST['delete'])) {
     $deleteId = $_POST['delete_id'];
     try {
-        $deleteModele = $bdd->prepare('DELETE FROM modeles WHERE id = ?');
+        $deleteModele = $bdd->prepare('DELETE FROM MODELE WHERE id = ?');
         $deleteModele->execute(array($deleteId));
         $url = htmlspecialchars('pageDashboardModeles.php');
         echo '<script>window.location = "'.$url.'";</script>';

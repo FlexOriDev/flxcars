@@ -26,7 +26,7 @@ require('../actions/actionsDashboard/actionsDashboardSegments/actionDashboardSeg
                     <input type="text" id="searchInput" placeholder="Rechercher un segment..." class="dashboard-search">
                 </div>
                 <?php
-                $getAllSegments = $bdd->prepare('SELECT * FROM segments ORDER BY nom');
+                $getAllSegments = $bdd->prepare('SELECT * FROM SEGMENT ORDER BY NOM_SEGMENT');
                 $getAllSegments->execute();
                 ?>
                 <!-- Formulaire pour ajouter un segment -->
@@ -54,17 +54,17 @@ require('../actions/actionsDashboard/actionsDashboardSegments/actionDashboardSeg
                     <tbody id="segmentsTable">
                     <?php
                     $getAllSegments = $bdd->query('
-                        SELECT segments.id, segments.nom, COUNT(fiches.id) AS fiches_count
-                        FROM segments
-                        LEFT JOIN fiches ON segments.id = fiches.id_segment
-                        GROUP BY segments.id, segments.nom
-                        ORDER BY segments.nom;
+                        SELECT SEGMENT.id, SEGMENT.NOM_SEGMENT, COUNT(FICHE.id) AS fiches_count
+                        FROM SEGMENT
+                        LEFT JOIN FICHE ON SEGMENT.id = FICHE.id_segment
+                        GROUP BY SEGMENT.id, SEGMENT.NOM_SEGMENT
+                        ORDER BY SEGMENT.NOM_SEGMENT;
                     ');
 
                     while ($segment = $getAllSegments->fetch()) {
                         echo '<tr class="dashboard-table-row" data-id="' . htmlspecialchars($segment['id']) . '">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($segment['id']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-name editable" contenteditable="true" data-column="nom">' . htmlspecialchars($segment['nom']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-name editable" contenteditable="true" data-column="nom">' . htmlspecialchars($segment['NOM_SEGMENT']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-fiches-count">' . htmlspecialchars($segment['fiches_count']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-actions">';
                         echo '<form method="POST" action="pageDashboardSegments.php" onsubmit="return confirmDelete();">';

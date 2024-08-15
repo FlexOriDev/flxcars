@@ -26,7 +26,7 @@ require('../actions/actionsDashboard/actionsDashboardPays/actionDashboardPays.ph
                     <input type="text" id="searchInput" placeholder="Rechercher un pays..." class="dashboard-search">
                 </div>
                 <?php
-                $getAllPays = $bdd->prepare('SELECT * FROM pays ORDER BY nom');
+                $getAllPays = $bdd->prepare('SELECT * FROM PAYS ORDER BY NOM_PAYS');
                 $getAllPays->execute();
 
                 ?>
@@ -55,18 +55,18 @@ require('../actions/actionsDashboard/actionsDashboardPays/actionDashboardPays.ph
                     <tbody id="paysTable">
                     <?php
                     $getAllPays = $bdd->query('
-                        SELECT pays.id, pays.nom, COUNT(fiches.id) AS fiches_count
-                        FROM pays
-                        LEFT JOIN constructeurs ON pays.id = constructeurs.id_pays
-                        LEFT JOIN fiches ON constructeurs.id = fiches.id_constructeur
-                        GROUP BY pays.id, pays.nom
-                        ORDER BY pays.nom;
+                        SELECT PAYS.id, PAYS.NOM_PAYS, COUNT(FICHE.id) AS fiches_count
+                        FROM PAYS
+                        LEFT JOIN CONSTRUCTEUR ON PAYS.id = CONSTRUCTEUR.id_pays
+                        LEFT JOIN FICHE ON CONSTRUCTEUR.id = FICHE.id_constructeur
+                        GROUP BY PAYS.id, PAYS.NOM_PAYS
+                        ORDER BY PAYS.NOM_PAYS;
                     ');
 
                     while ($pays = $getAllPays->fetch()) {
                         echo '<tr class="dashboard-table-row" data-id="' . htmlspecialchars($pays['id']) . '">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($pays['id']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-name editable" contenteditable="true" data-column="nom">' . htmlspecialchars($pays['nom']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-name editable" contenteditable="true" data-column="nom">' . htmlspecialchars($pays['NOM_PAYS']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-fiches-count">' . htmlspecialchars($pays['fiches_count']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-actions">';
                         echo '<form method="POST" action="pageDashboardPays.php" onsubmit="return confirmDelete();">';

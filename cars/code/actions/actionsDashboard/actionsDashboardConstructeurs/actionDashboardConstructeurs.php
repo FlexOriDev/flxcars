@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && strpos($_SERVER["CONTENT_TYPE"], "ap
     $value = htmlspecialchars($data['value']);
 
     // Validation de la colonne pour prévenir les injections SQL
-    $validColumns = ['nom', 'id_pays', 'id_groupe'];
+    $validColumns = ['NOM_CONSTRUCTEUR', 'ID_PAYS', 'ID_GROUPE'];
     if (!in_array($column, $validColumns)) {
         echo json_encode(['success' => false, 'message' => 'Colonne invalide']);
         exit;
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && strpos($_SERVER["CONTENT_TYPE"], "ap
 
     // Mise à jour de la requête avec la colonne validée
     try {
-        $sql = "UPDATE constructeurs SET $column = :value WHERE id = :id";
+        $sql = "UPDATE CONSTRUCTEUR SET $column = :value WHERE ID_CONSTRUCTEUR = :id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindParam(':value', $value);
         $stmt->bindParam(':id', $id);
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
 
         if (!empty($nom) && !empty($pays) && !empty($groupe)) {
             try {
-                $sql = "INSERT INTO constructeurs (nom, id_pays, id_groupe) VALUES (:nom, :pays, :groupe)";
+                $sql = "INSERT INTO CONSTRUCTEUR (NOM_CONSTRUCTEUR, ID_PAYS, ID_GROUPE) VALUES (:nom, :pays, :groupe)";
                 $stmt = $bdd->prepare($sql);
                 $stmt->bindParam(':nom', $nom);
                 $stmt->bindParam(':pays', $pays);
@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
 if (isset($_POST['delete'])) {
     $deleteId = $_POST['delete_id'];
     try {
-        $deleteConstructeur = $bdd->prepare('DELETE FROM constructeurs WHERE id = ?');
+        $deleteConstructeur = $bdd->prepare('DELETE FROM CONSTRUCTEUR WHERE ID_CONSTRUCTEUR = ?');
         $deleteConstructeur->execute(array($deleteId));
         $url = htmlspecialchars('pageDashboardConstructeurs.php');
         echo '<script>window.location = "'.$url.'";</script>';

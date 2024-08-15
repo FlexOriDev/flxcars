@@ -26,7 +26,7 @@ require('../actions/actionsDashboard/actionsDashboardModeles/actionDashboardMode
                     <input type="text" id="searchInput" placeholder="Rechercher un modèle..." class="dashboard-search">
                 </div>
                 <?php
-                $getAllConstructeurs = $bdd->prepare('SELECT * FROM constructeurs ORDER BY nom');
+                $getAllConstructeurs = $bdd->prepare('SELECT * FROM CONSTRUCTEUR ORDER BY NOM_CONSTRUCTEUR');
                 $getAllConstructeurs->execute();
                 ?>
                 <form method="POST" action="pageDashboardModeles.php">
@@ -35,7 +35,7 @@ require('../actions/actionsDashboard/actionsDashboardModeles/actionDashboardMode
                         <select id="constructeurType" class="dashboard-select" name="constructeur">
                             <option value="">Sélectionner un constructeur</option>
                             <?php foreach ($getAllConstructeurs as $constructeur): ?>
-                                <option value="<?= htmlspecialchars($constructeur['id']) ?>"><?= htmlspecialchars($constructeur['nom']) ?></option>
+                                <option value="<?= htmlspecialchars($constructeur['ID']) ?>"><?= htmlspecialchars($constructeur['NOM_CONSTRUCTEUR']) ?></option>
                             <?php endforeach; ?>
                         </select>
                         <input type="submit" value="Ajouter" class="dashboard-btn" id="ajouterModele" name="validate">
@@ -62,18 +62,18 @@ require('../actions/actionsDashboard/actionsDashboardModeles/actionDashboardMode
                     <tbody id="modelesTable">
                     <?php
                     $getAllModeles = $bdd->query('
-                        SELECT modeles.id, modeles.nom, COUNT(fiches.id) AS fiches_count, constructeurs.nom AS constructeur_nom
-                        FROM modeles
-                        JOIN constructeurs ON modeles.id_constructeur = constructeurs.id
-                        LEFT JOIN fiches ON modeles.id = fiches.id_modele
-                        GROUP BY modeles.id, modeles.nom
-                        ORDER BY modeles.nom;
+                        SELECT MODELE.id, MODELE.NOM_MODELE, COUNT(FICHE.id) AS fiches_count, CONSTRUCTEUR.NOM_CONSTRUCTEUR AS constructeur_nom
+                        FROM MODELE
+                        JOIN CONSTRUCTEUR ON MODELE.id_constructeur = CONSTRUCTEUR.id
+                        LEFT JOIN FICHE ON MODELE.id = FICHE.id_modele
+                        GROUP BY MODELE.id, MODELE.NOM_MODELE
+                        ORDER BY MODELE.NOM_MODELE;
                     ');
 
                     while ($modele = $getAllModeles->fetch()) {
                         echo '<tr class="dashboard-table-row" data-id="' . htmlspecialchars($modele['id']) . '">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($modele['id']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-name editable" contenteditable="true" data-column="nom">' . htmlspecialchars($modele['nom']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-name editable" contenteditable="true" data-column="nom">' . htmlspecialchars($modele['NOM_MODELE']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-constructor">' . htmlspecialchars($modele['constructeur_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-fiches-count">' . htmlspecialchars($modele['fiches_count']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-actions">';

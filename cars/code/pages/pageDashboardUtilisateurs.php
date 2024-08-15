@@ -57,21 +57,21 @@ require('../actions/actionsDashboard/actionsDashboardUtilisateurs/actionDashboar
                     <tbody id="utilisateursTable">
                     <?php
                     $getAllUtilisateurs = $bdd->query('
-                        SELECT utilisateurs.id, utilisateurs.pseudo, utilisateurs.prenom, utilisateurs.nom, utilisateurs.mail, utilisateurs.role, COUNT(fiches.id_user) AS fiches_count
-                        FROM users as utilisateurs
-                        LEFT JOIN fiches ON utilisateurs.id = fiches.id_user
+                        SELECT utilisateurs.id, utilisateurs.PSEUDO_UTILISATEUR, utilisateurs.PRENOM_UTILISATEUR, utilisateurs.NOM_UTILISATEUR, utilisateurs.MAIL_UTILISATEUR, utilisateurs.ROLE_UTILISATEUR, COUNT(FICHE.ID_UTILISATEUR) AS fiches_count
+                        FROM UTILISATEUR as utilisateurs
+                        LEFT JOIN FICHE ON utilisateurs.id = FICHE.ID_UTILISATEUR
                         GROUP BY utilisateurs.id
-                        ORDER BY utilisateurs.nom
+                        ORDER BY utilisateurs.NOM_UTILISATEUR
                     ');
 
                     while ($utilisateur = $getAllUtilisateurs->fetch()) {
                         echo '<tr class="dashboard-table-row">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($utilisateur['id']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-pseudo">' . htmlspecialchars($utilisateur['pseudo']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-prenom">' . htmlspecialchars($utilisateur['prenom']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-nom">' . htmlspecialchars($utilisateur['nom']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-mail">' . htmlspecialchars($utilisateur['mail']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-role">' . htmlspecialchars($utilisateur['role']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-pseudo">' . htmlspecialchars($utilisateur['PSEUDO_UTILISATEUR']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-prenom">' . htmlspecialchars($utilisateur['PRENOM_UTILISATEUR']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-nom">' . htmlspecialchars($utilisateur['NOM_UTILISATEUR']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-mail">' . htmlspecialchars($utilisateur['MAIL_UTILISATEUR']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-role">' . htmlspecialchars($utilisateur['ROLE_UTILISATEUR']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-fiches-count">' . htmlspecialchars($utilisateur['fiches_count']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-actions">';
                         echo '<form method="POST" action="pageDashboardUtilisateurs.php" onsubmit="return confirmDelete();">';

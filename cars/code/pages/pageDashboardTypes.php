@@ -26,7 +26,7 @@ require('../actions/actionsDashboard/actionsDashboardTypes/actionDashboardTypes.
                     <input type="text" id="searchInput" placeholder="Rechercher un type..." class="dashboard-search">
                 </div>
                 <?php
-                $getAllPays = $bdd->prepare('SELECT * FROM types ORDER BY nom');
+                $getAllPays = $bdd->prepare('SELECT * FROM TYPE ORDER BY NOM_TYPE');
                 $getAllPays->execute();
 
                 ?>
@@ -54,17 +54,17 @@ require('../actions/actionsDashboard/actionsDashboardTypes/actionDashboardTypes.
                     <tbody id="typesTable">
                     <?php
                     $getAllTypes = $bdd->query('
-                        SELECT types.id, types.nom, COUNT(fiches.id) AS fiches_count
-                        FROM types
-                        LEFT JOIN fiches ON types.id = fiches.id_type
-                        GROUP BY types.id, types.nom
-                        ORDER BY types.nom;
+                        SELECT TYPE.id, TYPE.NOM_TYPE, COUNT(FICHE.id) AS fiches_count
+                        FROM TYPE
+                        LEFT JOIN FICHE ON TYPE.id = FICHE.id_type
+                        GROUP BY TYPE.id, TYPE.NOM_TYPE
+                        ORDER BY TYPE.NOM_TYPE;
                     ');
 
                     while ($type = $getAllTypes->fetch()) {
                         echo '<tr class="dashboard-table-row" data-id="' . htmlspecialchars($type['id']) . '">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($type['id']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-name editable" contenteditable="true" data-column="nom">' . htmlspecialchars($type['nom']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-name editable" contenteditable="true" data-column="nom">' . htmlspecialchars($type['NOM_TYPE']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-fiches-count">' . htmlspecialchars($type['fiches_count']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-actions">';
                         echo '<form method="POST" action="pageDashboardTypes.php" onsubmit="return confirmDelete();">';

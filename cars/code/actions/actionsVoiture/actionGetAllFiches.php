@@ -3,11 +3,11 @@ require('../actions/Database.php');
 
 // Définition des clés de paramètres et de leurs équivalents SQL
 $paramMapping = [
-    'id_constructeur' => 'f.id_constructeur IN',
-    'id_type' => 'f.id_type IN',
-    'id_modele' => 'f.id_modele IN',
-    'id_annee' => 'f.id_annee IN',
-    'id_segment' => 'f.id_segment IN'
+    'id_constructeur' => 'f.ID_CONSTRUCTEUR IN',
+    'id_type' => 'f.ID_TYPE IN',
+    'id_modele' => 'f.ID_MODELE IN',
+    'id_annee' => 'f.ID_ANNEE_DEBUT IN',
+    'id_segment' => 'f.ID_SEGMENT IN'
 ];
 
 // Initialisation des variables pour la requête SQL
@@ -28,11 +28,10 @@ foreach ($paramMapping as $paramKey => $sqlCondition) {
 $searchCondition = '';
 if (isset($_GET['search']) && !empty($_GET['search'])) {
     $searchInput = $_GET['search'];
-    $searchCondition = " (f.nom LIKE ? OR c.nom LIKE ? OR m.nom LIKE ? OR a.nom LIKE ?) ";
+    $searchCondition = " (f.NOM_FICHE LIKE ? OR c.NOM_CONSTRUCTEUR LIKE ? OR m.NOM_MODELE LIKE ? OR a.NOM_ANNEE LIKE ?) ";
     $params = array_merge($params, array_fill(0, 4, "%$searchInput%"));
 }
 
-// Modification de la logique pour récupérer les ID des années correspondant à la décennie
 // Modification de la logique pour récupérer les ID des années correspondant à la décennie
 if (isset($_GET['id_annee']) && !empty($_GET['id_annee'])) {
     // Récupérer les ID des années correspondant à chaque décennie spécifiée
@@ -40,13 +39,13 @@ if (isset($_GET['id_annee']) && !empty($_GET['id_annee'])) {
     $conditionsAnnee = []; // Tableau pour stocker les conditions d'année
     $paramsAnnee = []; // Tableau pour stocker les paramètres d'année
     foreach ($idDecennies as $decennie) {
-        $sqlAnnees = "SELECT id FROM annees WHERE id_decennie = ?";
+        $sqlAnnees = "SELECT ID FROM ANNEE WHERE ID_DECENNIE = ?";
         $getAnnees = $bdd->prepare($sqlAnnees);
         $getAnnees->execute([$decennie]);
         $annees = $getAnnees->fetchAll(PDO::FETCH_COLUMN);
         if (!empty($annees)) {
             $placeholders = rtrim(str_repeat('?,', count($annees)), ','); // Créer les placeholders
-            $conditionsAnnee[] = "f.id_annee IN ($placeholders)"; // Ajouter la condition d'année
+            $conditionsAnnee[] = "f.ID_ANNEE_DEBUT IN ($placeholders)"; // Ajouter la condition d'année
             $paramsAnnee = array_merge($paramsAnnee, $annees); // Ajouter les ID des années aux paramètres
         }
     }
@@ -57,13 +56,12 @@ if (isset($_GET['id_annee']) && !empty($_GET['id_annee'])) {
     }
 }
 
-
 // Construction de la requête SQL
-$sql = "SELECT f.*, c.nom AS nom_constructeur, m.nom AS nom_modele, a.nom AS nom_annee
-        FROM fiches f
-        LEFT JOIN constructeurs c ON f.id_constructeur = c.id
-        LEFT JOIN modeles m ON f.id_modele = m.id
-        LEFT JOIN annees a ON f.id_annee = a.id";
+$sql = "SELECT f.*, c.NOM_CONSTRUCTEUR, m.NOM_MODELE, a.NOM_ANNEE
+        FROM FICHE f
+        LEFT JOIN CONSTRUCTEUR c ON f.ID_CONSTRUCTEUR = c.ID
+        LEFT JOIN MODELE m ON f.ID_MODELE = m.ID
+        LEFT JOIN ANNEE a ON f.ID_ANNEE_DEBUT = a.ID";
 
 // Ajout des conditions à la requête SQL si des filtres sont appliqués
 if (!empty($conditions) || !empty($searchCondition)) {
@@ -83,19 +81,19 @@ if (!empty($conditions) || !empty($searchCondition)) {
 $sort = isset($_GET['sort']) ? $_GET['sort'] : ''; // Récupérer le paramètre de tri
 switch ($sort) {
     case 'alphabetique_asc':
-        $sql .= " ORDER BY f.nom ASC";
+        $sql .= " ORDER BY f.NOM_FICHE ASC";
         break;
     case 'alphabetique_desc':
-        $sql .= " ORDER BY f.nom DESC";
+        $sql .= " ORDER BY f.NOM_FICHE DESC";
         break;
     case 'annee_asc':
-        $sql .= " ORDER BY a.nom ASC";
+        $sql .= " ORDER BY a.NOM_ANNEE ASC";
         break;
     case 'annee_desc':
-        $sql .= " ORDER BY a.nom DESC";
+        $sql .= " ORDER BY a.NOM_ANNEE DESC";
         break;
     default:
-        $sql .= " ORDER BY f.nom ASC"; // Par défaut, tri par ordre alphabétique croissant
+        $sql .= " ORDER BY f.NOM_FICHE ASC"; // Par défaut, tri par ordre alphabétique croissant
         break;
 }
 
@@ -103,21 +101,20 @@ switch ($sort) {
 $getAllFiches = $bdd->prepare($sql);
 $getAllFiches->execute($params);
 
-
 // Affichage des résultats
 if ($getAllFiches->rowCount() > 0) {
     while ($fiche = $getAllFiches->fetch()) {
         // Votre code d'affichage des résultats ici
-        $getPhotos = $bdd->prepare('SELECT * FROM imagesfiche WHERE id_fiche = ?');
-        $getPhotos->execute([$fiche['id']]);
+        $getPhotos = $bdd->prepare('SELECT * FROM IMAGE WHERE ID_FICHE = ?');
+        $getPhotos->execute([$fiche['ID']]);
         $photo = $getPhotos->fetch();
 
-        $stringImageFiche = $fiche['nom_modele'] . "/" . $fiche['id'] . "/" . $photo['img_1'];
+        $stringImageFiche = $fiche['NOM_MODELE'] . "/" . $fiche['ID'] . "/" . $photo['IMAGE_URL'];
         ?>
         <div class="column">
-            <a href="pageFiche.php?id_fiche=<?= $fiche['id']; ?>"><input type=image src="../../library/voitures/<?= $stringImageFiche; ?>" width="100%"/></a>
+            <a href="pageFiche.php?id_fiche=<?= $fiche['ID']; ?>"><input type=image src="../../library/voitures/<?= $stringImageFiche; ?>" width="100%"/></a>
             <div class="text">
-                <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $fiche['nom_constructeur']; ?> </span>  <?= $fiche['nom']; ?> <span class="spanNomAnnee"><?= $fiche['nom_annee']; ?> </span></p>
+                <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $fiche['NOM_CONSTRUCTEUR']; ?> </span>  <?= $fiche['NOM_FICHE']; ?> <span class="spanNomAnnee"><?= $fiche['NOM_ANNEE']; ?> </span></p>
             </div>
         </div>
         <?php

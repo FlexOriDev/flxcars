@@ -6,7 +6,7 @@ require('../actions/Database.php');
 
 if (isset($_POST['delete'])) {
     $deleteId = $_POST['delete_id'];
-    $deleteConstructeur = $bdd->prepare('DELETE FROM users WHERE id = ?');
+    $deleteConstructeur = $bdd->prepare('DELETE FROM UTILISATEUR WHERE id = ?');
     $deleteConstructeur->execute(array($deleteId));
     $url = htmlspecialchars('pageDashboardUtilisateurs.php');
     echo '<script>window.location = "'.$url.'";</script>';

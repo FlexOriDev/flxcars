@@ -57,13 +57,13 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                                     <option value="" disabled selected>Type * </option>
                                     <?php
                                     // Requête SQL pour récupérer les types depuis la base de données
-                                    $getAllTypes = $bdd->query('SELECT * FROM types ORDER BY nom');
+                                    $getAllTypes = $bdd->query('SELECT * FROM TYPE ORDER BY NOM_TYPE');
                                     $types = $getAllTypes->fetchAll(PDO::FETCH_ASSOC);
                                     // Affichage des options pour la liste déroulante
                                     foreach ($types as $type) {
                                         // Vérifier si l'ID du type correspond à la valeur sélectionnée
-                                        $isSelected = ($type['id'] == $selectedType) ? 'selected' : '';
-                                        echo '<option value="' . $type['id'] . '" ' . $isSelected . '>' . $type['nom'] . '</option>';
+                                        $isSelected = ($type['ID'] == $selectedType) ? 'selected' : '';
+                                        echo '<option value="' . $type['ID'] . '" ' . $isSelected . '>' . $type['NOM_TYPE'] . '</option>';
                                     }
                                     ?>
                                 </select>
@@ -75,12 +75,12 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                                     <option value="" disabled selected>Année de sortie * </option>
                                     <?php
                                     // Requête SQL pour récupérer les années depuis la base de données
-                                    $getAllAnnees = $bdd->query('SELECT * FROM annees ORDER BY nom DESC');
+                                    $getAllAnnees = $bdd->query('SELECT * FROM ANNEE ORDER BY NOM_ANNEE DESC');
                                     $annees = $getAllAnnees->fetchAll(PDO::FETCH_ASSOC);
                                     // Affichage des options pour la liste déroulante
                                     foreach ($annees as $annee) {
-                                        $isSelected = ($annee['id'] == $selectedAnneeSortie) ? 'selected' : '';
-                                        echo '<option value="' . $annee['id'] . '" ' . $isSelected . '>' . $annee['nom'] . '</option>';
+                                        $isSelected = ($annee['ID'] == $selectedAnneeSortie) ? 'selected' : '';
+                                        echo '<option value="' . $annee['ID'] . '" ' . $isSelected . '>' . $annee['NOM_ANNEE'] . '</option>';
                                     }
                                     ?>
                                 </select>
@@ -92,12 +92,12 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                                     <option value="" disabled selected>Année de fin de production * </option>
                                     <?php
                                     // Requête SQL pour récupérer les années depuis la base de données
-                                    $getAllAnnees = $bdd->query('SELECT * FROM annees ORDER BY nom DESC');
+                                    $getAllAnnees = $bdd->query('SELECT * FROM ANNEE ORDER BY NOM_ANNEE DESC');
                                     $annees = $getAllAnnees->fetchAll(PDO::FETCH_ASSOC);
                                     // Affichage des options pour la liste déroulante
                                     foreach ($annees as $annee) {
-                                        $isSelected = ($annee['id'] == $selectedAnneeFin) ? 'selected' : '';
-                                        echo '<option value="' . $annee['id'] . '" ' . $isSelected . '>' . $annee['nom'] . '</option>';
+                                        $isSelected = ($annee['ID'] == $selectedAnneeFin) ? 'selected' : '';
+                                        echo '<option value="' . $annee['ID'] . '" ' . $isSelected . '>' . $annee['NOM_ANNEE'] . '</option>';
                                     }
                                     ?>
                                 </select>
@@ -109,12 +109,12 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                                     <option value="" disabled selected>Modèle * </option>
                                     <?php
                                     // Requête SQL pour récupérer les modèles depuis la base de données
-                                    $getAllModeles = $bdd->query('SELECT * FROM modeles ORDER BY nom');
+                                    $getAllModeles = $bdd->query('SELECT * FROM MODELE ORDER BY NOM_MODELE');
                                     $modeles = $getAllModeles->fetchAll(PDO::FETCH_ASSOC);
                                     // Affichage des options pour la liste déroulante
                                     foreach ($modeles as $modele) {
-                                        $isSelected = ($modele['id'] == $selectedModele) ? 'selected' : '';
-                                        echo '<option value="' . $modele['id'] . '" ' . $isSelected . '>' . $modele['nom'] . '</option>';
+                                        $isSelected = ($modele['ID'] == $selectedModele) ? 'selected' : '';
+                                        echo '<option value="' . $modele['ID'] . '" ' . $isSelected . '>' . $modele['NOM_MODELE'] . '</option>';
                                     }
                                     ?>
                                 </select>
@@ -126,12 +126,12 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                                     <option value="" disabled selected>Segment * </option>
                                     <?php
                                     // Requête SQL pour récupérer les segments depuis la base de données
-                                    $getAllSegments = $bdd->query('SELECT * FROM segments ORDER BY nom');
+                                    $getAllSegments = $bdd->query('SELECT * FROM SEGMENT ORDER BY NOM_SEGMENT');
                                     $segments = $getAllSegments->fetchAll(PDO::FETCH_ASSOC);
                                     // Affichage des options pour la liste déroulante
                                     foreach ($segments as $segment) {
-                                        $isSelected = ($segment['id'] == $selectedSegment) ? 'selected' : '';
-                                        echo '<option value="' . $segment['id'] . '" ' . $isSelected . '>' . $segment['nom'] . '</option>';
+                                        $isSelected = ($segment['ID'] == $selectedSegment) ? 'selected' : '';
+                                        echo '<option value="' . $segment['ID'] . '" ' . $isSelected . '>' . $segment['NOM_SEGMENT'] . '</option>';
                                     }
                                     ?>
                                 </select>
@@ -143,12 +143,12 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                                     <option value="" disabled selected>Constructeur * </option>
                                     <?php
                                     // Requête SQL pour récupérer les constructeurs depuis la base de données
-                                    $getAllConstructeurs = $bdd->query('SELECT * FROM constructeurs ORDER BY nom');
+                                    $getAllConstructeurs = $bdd->query('SELECT * FROM CONSTRUCTEUR ORDER BY NOM_CONSTRUCTEUR');
                                     $constructeurs = $getAllConstructeurs->fetchAll(PDO::FETCH_ASSOC);
                                     // Affichage des options pour la liste déroulante
                                     foreach ($constructeurs as $constructeur) {
-                                        $isSelected = ($constructeur['id'] == $selectedConstructeur) ? 'selected' : '';
-                                        echo '<option value="' . $constructeur['id'] . '" ' . $isSelected . '>' . $constructeur['nom'] . '</option>';
+                                        $isSelected = ($constructeur['ID'] == $selectedConstructeur) ? 'selected' : '';
+                                        echo '<option value="' . $constructeur['ID'] . '" ' . $isSelected . '>' . $constructeur['NOM_CONSTRUCTEUR'] . '</option>';
                                     }
                                     ?>
                                 </select>

@@ -69,44 +69,44 @@ require('../actions/actionsDashboard/actionsDashboardFiches/actionDashboardFiche
                     <tbody id="fichesTable">
                     <?php
                     $getAllFiches = $bdd->query('
-                        SELECT fiches.id, 
-       fiches.nom, 
-       modeles.nom AS modele_nom, 
-       constructeurs.nom AS constructeur_nom, 
-       groupes_constructeurs.nom AS groupe_nom, 
-       types.nom AS type_nom, 
-       segments.nom AS segment_nom, 
-       annee_debut.nom AS annee_nom, 
-       annee_fin.nom AS annee_fin_nom, 
-       users.nom AS user_nom, 
-       fiches.date
-FROM fiches
-JOIN modeles ON fiches.id_modele = modeles.id
-JOIN constructeurs ON fiches.id_constructeur = constructeurs.id
-JOIN groupes AS groupes_constructeurs ON constructeurs.id_groupe = groupes_constructeurs.id
-JOIN types ON fiches.id_type = types.id
-JOIN segments ON fiches.id_segment = segments.id
-JOIN annees AS annee_debut ON fiches.id_annee = annee_debut.id
-JOIN annees AS annee_fin ON fiches.id_annee_fin = annee_fin.id
-JOIN users ON fiches.id_user = users.id
-GROUP BY fiches.id, 
-         fiches.nom, 
-         modeles.nom, 
-         constructeurs.nom, 
-         groupes_constructeurs.nom, 
-         types.nom, 
-         segments.nom, 
-         annee_debut.nom, 
-         annee_fin.nom, 
-         users.nom, 
-         fiches.date
-ORDER BY fiches.nom;
+                        SELECT FICHE.id, 
+       FICHE.NOM_FICHE, 
+       MODELE.NOM_MODELE AS modele_nom, 
+       CONSTRUCTEUR.NOM_CONSTRUCTEUR AS constructeur_nom, 
+       groupes_constructeurs.NOM_GROUPE AS groupe_nom, 
+       TYPE.NOM_TYPE AS type_nom, 
+       SEGMENT.NOM_SEGMENT AS segment_nom, 
+       annee_debut.NOM_ANNEE AS annee_nom, 
+       annee_fin.NOM_ANNEE AS annee_fin_nom, 
+       UTILISATEUR.PSEUDO_UTILISATEUR AS user_nom, 
+       FICHE.DATE_AJOUT
+FROM FICHE
+JOIN MODELE ON FICHE.ID_MODELE = MODELE.id
+JOIN CONSTRUCTEUR ON FICHE.ID_CONSTRUCTEUR = CONSTRUCTEUR.id
+JOIN GROUPE AS groupes_constructeurs ON CONSTRUCTEUR.id_groupe = groupes_constructeurs.id
+JOIN TYPE ON FICHE.ID_TYPE = TYPE.id
+JOIN SEGMENT ON FICHE.ID_SEGMENT = SEGMENT.id
+JOIN ANNEE AS annee_debut ON FICHE.ID_ANNEE_DEBUT = annee_debut.id
+JOIN ANNEE AS annee_fin ON FICHE.ID_ANNEE_FIN = annee_fin.id
+JOIN UTILISATEUR ON FICHE.ID_UTILISATEUR = UTILISATEUR.id
+GROUP BY FICHE.id, 
+         FICHE.NOM_FICHE, 
+         MODELE.NOM_MODELE, 
+         CONSTRUCTEUR.NOM_CONSTRUCTEUR, 
+         groupes_constructeurs.NOM_GROUPE, 
+         TYPE.NOM_TYPE, 
+         SEGMENT.NOM_SEGMENT, 
+         annee_debut.NOM_ANNEE, 
+         annee_fin.NOM_ANNEE, 
+         UTILISATEUR.PSEUDO_UTILISATEUR, 
+         FICHE.DATE_AJOUT
+ORDER BY FICHE.NOM_FICHE;
 ');
 
                     while ($fiche = $getAllFiches->fetch()) {
                         echo '<tr class="dashboard-table-row">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($fiche['id']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-name">' . htmlspecialchars($fiche['nom']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-name">' . htmlspecialchars($fiche['NOM_FICHE']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-modele">' . htmlspecialchars($fiche['modele_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-constructeur">' . htmlspecialchars($fiche['constructeur_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-groupe">' . htmlspecialchars($fiche['groupe_nom']) . '</td>';
@@ -115,7 +115,7 @@ ORDER BY fiches.nom;
                         echo '<td class="dashboard-table-cell dashboard-table-annee">' . htmlspecialchars($fiche['annee_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-annee-fin">' . htmlspecialchars($fiche['annee_fin_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-user">' . htmlspecialchars($fiche['user_nom']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-date">' . htmlspecialchars($fiche['date']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-date">' . htmlspecialchars($fiche['DATE_AJOUT']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-actions">';
                         echo '<form method="POST" action="pageDashboardFiches.php" onsubmit="return confirmDelete();">';
                         echo '<input type="hidden" name="delete_id" value="' . htmlspecialchars($fiche['id']) . '">';

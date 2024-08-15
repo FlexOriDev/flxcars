@@ -79,23 +79,23 @@ require('../actions/actionsDashboard/actionsDashboardVersions/actionDashboardVer
                     <?php
                     $getAllVersions = $bdd->query('
                         SELECT versions.id, 
-                       fiches.nom as fiche, 
+                       FICHE.NOM_FICHE as fiche, 
                        versions.id_fiche, 
-                       versions.appellation AS appellation, 
-                       versions.carburant AS carburant, 
-                       versions.construction AS construction, 
-                       versions.moteur AS moteur,
-                       versions.cylindree AS cylindree,
-                       versions.performance AS performance,
-                       versions.couple AS couple,
-                       versions.zero_to_hundred AS zero_to_hundred,
-                       versions.vmax AS vmax,
-                       versions.conso AS conso,
-                       versions.carrosserie AS carrosserie,
-                       versions.marche AS marche
-                    FROM motorisationsessence as versions
-                    JOIN fiches ON fiches.id = versions.id_fiche
-                    ORDER BY fiches.nom;
+                       versions.APPELLATION AS appellation, 
+                       versions.CARBURANT AS carburant, 
+                       versions.CONSTRUCTION_ANNEE AS construction, 
+                       versions.NOM_MOTEUR AS moteur,
+                       versions.CYLINDREE AS cylindree,
+                       versions.PERFORMANCE AS performance,
+                       versions.COUPLE AS couple,
+                       versions.ZERO_A_100 AS zero_to_hundred,
+                       versions.VMAX AS vmax,
+                       versions.CONSOMMATION AS conso,
+                       versions.CARROSSERIE AS carrosserie,
+                       versions.MARCHE_CONTINENT AS marche
+                    FROM VERSION as versions
+                    JOIN FICHE ON FICHE.id = versions.id_fiche
+                    ORDER BY FICHE.NOM_FICHE;
 ');
 
                     while ($version = $getAllVersions->fetch()) {

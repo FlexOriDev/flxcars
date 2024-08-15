@@ -25,11 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
         $carrosserie = htmlspecialchars(trim($_POST["carrosserie"]));
         $marche = htmlspecialchars(trim($_POST["marche"]));
 
-        if (!empty($fiche) && !empty($appellation) && !empty($carburant) && !empty($construction)&& !empty($moteur)
+        if (!empty($fiche) && !empty($appellation) && !empty($carburant) && !empty($construction) && !empty($moteur)
             && !empty($cylindree) && !empty($performance) && !empty($couple) && !empty($zero_to_hundred)
             && !empty($vmax) && !empty($conso) && !empty($carrosserie) && !empty($marche)) {
-            $sql = "INSERT INTO motorisationsessence (id_fiche, appellation, carburant, construction, moteur, cylindree, performance, couple, zero_to_hundred, vmax, conso, carrosserie, marche) 
-                    VALUES (:fiche, :appellation, :carburant, :construction, :moteur, :cylindree, :performance, :couple, :zero_to_hundred, :conso, :vmax, :carrosserie, :marche)";
+
+            // Use the correct table and columns
+            $sql = "INSERT INTO VERSION (ID_FICHE, APPELLATION, CARBURANT, CONSTRUCTION_ANNEE, NOM_MOTEUR, CYLINDREE, PERFORMANCE, COUPLE, ZERO_A_100, VMAX, CONSOMMATION, CARROSSERIE, MARCHE_CONTINENT) 
+                    VALUES (:fiche, :appellation, :carburant, :construction, :moteur, :cylindree, :performance, :couple, :zero_to_hundred, :vmax, :conso, :carrosserie, :marche)";
             $stmt = $bdd->prepare($sql);
             $stmt->bindParam(':fiche', $fiche);
             $stmt->bindParam(':appellation', $appellation);
@@ -48,10 +50,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
             if ($stmt->execute()) {
                 $url = htmlspecialchars('pageDashboardVersions.php');
                 echo '<script>window.location = "'.$url.'";</script>';
-                $errorMsg = "Votre fiche a bien été publiée.";
                 exit;
             } else {
-                $errorMsg = "Erreur lors de l'ajout du constructeur.";
+                $errorMsg = "Erreur lors de l'ajout de la version.";
             }
         } else {
             $errorMsg = "Veuillez remplir tous les champs.";
@@ -63,11 +64,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
 
 if (isset($_POST['delete'])) {
     $deleteId = $_POST['delete_id'];
-    $deleteConstructeur = $bdd->prepare('DELETE FROM motorisationsessence WHERE id = ?');
-    $deleteConstructeur->execute(array($deleteId));
-    $url = htmlspecialchars('pageDashboardVersions.php');
-    echo '<script>window.location = "'.$url.'";</script>';
-    $errorMsg = "Votre fiche a bien été publiée.";
-    exit;
+    try {
+        $deleteVersion = $bdd->prepare('DELETE FROM VERSION WHERE ID = ?');
+        $deleteVersion->execute(array($deleteId));
+        $url = htmlspecialchars('pageDashboardVersions.php');
+        echo '<script>window.location = "'.$url.'";</script>';
+        exit;
+    } catch (PDOException $e) {
+        $errorMsg = "Erreur de base de données : " . $e->getMessage();
+    }
 }
 ?>

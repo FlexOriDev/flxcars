@@ -28,10 +28,10 @@ require('../actions/actionsDashboard/actionsDashboardConstructeurs/actionDashboa
                     <input type="text" id="searchInput" placeholder="Rechercher un constructeur..." class="dashboard-search">
                 </div>
                 <?php
-                $getAllPays = $bdd->prepare('SELECT * FROM pays ORDER BY nom');
+                $getAllPays = $bdd->prepare('SELECT * FROM PAYS ORDER BY NOM_PAYS');
                 $getAllPays->execute();
 
-                $getAllGroupes = $bdd->prepare('SELECT * FROM groupes ORDER BY nom');
+                $getAllGroupes = $bdd->prepare('SELECT * FROM GROUPE ORDER BY NOM_GROUPE');
                 $getAllGroupes->execute();
                 ?>
                 <form method="POST" action="pageDashboardConstructeurs.php">
@@ -40,13 +40,13 @@ require('../actions/actionsDashboard/actionsDashboardConstructeurs/actionDashboa
                         <select id="paysConstructeur" class="dashboard-select" name="pays">
                             <option value="">Sélectionner un pays</option>
                             <?php foreach ($getAllPays as $pays): ?>
-                                <option value="<?= htmlspecialchars($pays['id']) ?>"><?= htmlspecialchars($pays['nom']) ?></option>
+                                <option value="<?= htmlspecialchars($pays['ID']) ?>"><?= htmlspecialchars($pays['NOM_PAYS']) ?></option>
                             <?php endforeach; ?>
                         </select>
                         <select id="groupeConstructeur" class="dashboard-select" name="groupe">
                             <option value="">Sélectionner un groupe</option>
                             <?php foreach ($getAllGroupes as $groupe): ?>
-                                <option value="<?= htmlspecialchars($groupe['id']) ?>"><?= htmlspecialchars($groupe['nom']) ?></option>
+                                <option value="<?= htmlspecialchars($groupe['ID']) ?>"><?= htmlspecialchars($groupe['NOM_GROUPE']) ?></option>
                             <?php endforeach; ?>
                         </select>
                         <input type="submit" value="Ajouter" class="dashboard-btn" id="ajouterConstructeur" name="validate">
@@ -76,19 +76,19 @@ require('../actions/actionsDashboard/actionsDashboardConstructeurs/actionDashboa
                     <tbody id="constructeursTable">
                     <?php
                     $getAllConstructeurs = $bdd->query('
-                        SELECT constructeurs.id, constructeurs.nom, pays.nom AS pays_nom, groupes.nom AS groupe_nom, COUNT(fiches.id) AS fiches_count
-                        FROM constructeurs
-                        JOIN pays ON constructeurs.id_pays = pays.id
-                        JOIN groupes ON constructeurs.id_groupe = groupes.id
-                        LEFT JOIN fiches ON constructeurs.id = fiches.id_constructeur
-                        GROUP BY constructeurs.id
-                        ORDER BY constructeurs.nom
+                        SELECT CONSTRUCTEUR.id, CONSTRUCTEUR.NOM_CONSTRUCTEUR, PAYS.NOM_PAYS AS pays_nom, GROUPE.NOM_GROUPE AS groupe_nom, COUNT(FICHE.id) AS fiches_count
+                        FROM CONSTRUCTEUR
+                        JOIN PAYS ON CONSTRUCTEUR.ID_PAYS = PAYS.id
+                        JOIN GROUPE ON CONSTRUCTEUR.id_groupe = GROUPE.id
+                        LEFT JOIN FICHE ON CONSTRUCTEUR.id = FICHE.id_constructeur
+                        GROUP BY CONSTRUCTEUR.id
+                        ORDER BY CONSTRUCTEUR.NOM_CONSTRUCTEUR
                     ');
 
                     while ($constructeur = $getAllConstructeurs->fetch()) {
                         echo '<tr class="dashboard-table-row" data-id="' . htmlspecialchars($constructeur['id']) . '">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($constructeur['id']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-name editable" contenteditable="true" data-column="nom">' . htmlspecialchars($constructeur['nom']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-name editable" contenteditable="true" data-column="nom">' . htmlspecialchars($constructeur['NOM_CONSTRUCTEUR']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-pays">' . htmlspecialchars($constructeur['pays_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-group">' . htmlspecialchars($constructeur['groupe_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-fiches-count">' . htmlspecialchars($constructeur['fiches_count']) . '</td>';

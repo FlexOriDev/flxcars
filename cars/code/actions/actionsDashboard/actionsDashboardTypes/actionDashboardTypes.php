@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && strpos($_SERVER["CONTENT_TYPE"], "ap
 
     // Mise à jour de la requête avec la colonne validée
     try {
-        $sql = "UPDATE types SET $column = :value WHERE id = :id";
+        $sql = "UPDATE TYPE SET $column = :value WHERE id = :id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindParam(':value', $value);
         $stmt->bindParam(':id', $id);
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
 
         if (!empty($nom)) {
             try {
-                $sql = "INSERT INTO types (nom) VALUES (:nom)";
+                $sql = "INSERT INTO TYPE (NOM_TYPE) VALUES (:nom)";
                 $stmt = $bdd->prepare($sql);
                 $stmt->bindParam(':nom', $nom);
 
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
 if (isset($_POST['delete'])) {
     $deleteId = $_POST['delete_id'];
     try {
-        $deleteConstructeur = $bdd->prepare('DELETE FROM types WHERE id = ?');
+        $deleteConstructeur = $bdd->prepare('DELETE FROM TYPE WHERE id = ?');
         $deleteConstructeur->execute(array($deleteId));
         $url = htmlspecialchars('pageDashboardTypes.php');
         echo '<script>window.location = "'.$url.'";</script>';

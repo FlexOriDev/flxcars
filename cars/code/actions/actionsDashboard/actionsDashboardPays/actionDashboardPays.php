@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && strpos($_SERVER["CONTENT_TYPE"], "ap
 
     // Mise à jour de la requête avec la colonne validée
     try {
-        $sql = "UPDATE pays SET $column = :value WHERE id = :id";
+        $sql = "UPDATE PAYS SET $column = :value WHERE id = :id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindParam(':value', $value);
         $stmt->bindParam(':id', $id);
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
 
         if (!empty($nom)) {
             try {
-                $sql = "INSERT INTO pays (nom) VALUES (:nom)";
+                $sql = "INSERT INTO PAYS (NOM_PAYS) VALUES (:nom)";
                 $stmt = $bdd->prepare($sql);
                 $stmt->bindParam(':nom', $nom);
 
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
 if (isset($_POST['delete'])) {
     $deleteId = $_POST['delete_id'];
     try {
-        $deleteConstructeur = $bdd->prepare('DELETE FROM pays WHERE id = ?');
+        $deleteConstructeur = $bdd->prepare('DELETE FROM PAYS WHERE id = ?');
         $deleteConstructeur->execute(array($deleteId));
         $url = htmlspecialchars('pageDashboardPays.php');
         echo '<script>window.location = "'.$url.'";</script>';

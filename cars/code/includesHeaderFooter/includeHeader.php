@@ -50,12 +50,12 @@
                 <li class="deroulant"><a href="../pages/pageVoitures.php">Voitures</a>
                     <ul class="sous">
                         <?php
-                        $getAllTypes = $bdd->query('SELECT * FROM types ORDER BY nom');
+                        $getAllTypes = $bdd->query('SELECT * FROM TYPE ORDER BY NOM_TYPE');
                         $getAllTypes->execute(array());
                         foreach($getAllTypes as $type ){
 
                             ?>
-                            <li><a href="pageVoitures.php?id_type=<?= $type['id']; ?>"><?= $type['nom']; ?></a></li>
+                            <li><a href="pageVoitures.php?id_type=<?= $type['ID']; ?>"><?= $type['NOM_TYPE']; ?></a></li>
                             <?php
                         }
                         ?>
@@ -66,12 +66,12 @@
     <li class="deroulant"><a href="../pages/constructeurs.php">Constructeurs</a>
       <ul class="sous">
       <?php
-                $getAllConstructeurs = $bdd->query('SELECT * FROM constructeurs ORDER BY nom');
+                $getAllConstructeurs = $bdd->query('SELECT * FROM CONSTRUCTEUR ORDER BY NOM_CONSTRUCTEUR');
                 $getAllConstructeurs->execute(array());
                 foreach($getAllConstructeurs as $constructeur ){
 
                     ?>
-        <li><a href="constructeurs.php?id_constructeur=<?= $constructeur['id']; ?>"><?= $constructeur['nom']; ?></a></li>
+        <li><a href="constructeurs.php?id_constructeur=<?= $constructeur['ID']; ?>"><?= $constructeur['NOM_CONSTRUCTEUR']; ?></a></li>
                   <?php
                 }
                 ?>

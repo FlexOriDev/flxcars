@@ -26,7 +26,7 @@ require('../actions/actionsDashboard/actionsDashboardGroupes/actionDashboardGrou
                     <input type="text" id="searchInput" placeholder="Rechercher un groupe..." class="dashboard-search">
                 </div>
                 <?php
-                $getAllPays = $bdd->prepare('SELECT * FROM groupes ORDER BY nom');
+                $getAllPays = $bdd->prepare('SELECT * FROM GROUPE ORDER BY NOM_GROUPE');
                 $getAllPays->execute();
 
                 ?>
@@ -54,18 +54,18 @@ require('../actions/actionsDashboard/actionsDashboardGroupes/actionDashboardGrou
                     <tbody id="groupesTable">
                     <?php
                     $getAllGroupes = $bdd->query('
-                        SELECT groupes.id, groupes.nom, COUNT(fiches.id) AS fiches_count
-                        FROM groupes
-                        LEFT JOIN constructeurs ON groupes.id = constructeurs.id_groupe
-                        LEFT JOIN fiches ON constructeurs.id = fiches.id_constructeur
-                        GROUP BY groupes.id, groupes.nom
-                        ORDER BY groupes.nom;
+                        SELECT GROUPE.id, GROUPE.NOM_GROUPE, COUNT(FICHE.id) AS fiches_count
+                        FROM GROUPE
+                        LEFT JOIN CONSTRUCTEUR ON GROUPE.id = CONSTRUCTEUR.id_groupe
+                        LEFT JOIN FICHE ON CONSTRUCTEUR.id = FICHE.id_constructeur
+                        GROUP BY GROUPE.id, GROUPE.NOM_GROUPE
+                        ORDER BY GROUPE.NOM_GROUPE;
                     ');
 
                     while ($groupe = $getAllGroupes->fetch()) {
                         echo '<tr class="dashboard-table-row">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($groupe['id']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-name">' . htmlspecialchars($groupe['nom']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-name">' . htmlspecialchars($groupe['NOM_GROUPE']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-fiches-count">' . htmlspecialchars($groupe['fiches_count']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-actions">';
                         echo '<form method="POST" action="pageDashboardGroupes.php" onsubmit="return confirmDelete();">';

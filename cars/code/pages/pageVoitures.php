@@ -57,9 +57,9 @@ require('../actions/database.php');
                 <div id="constructeurDropdown" class="dropdown-content-constructeurs">
                     <!-- Options pour les constructeurs avec cases à cocher -->
                     <?php
-                    $getAllConstructeurs = $bdd->query('SELECT * FROM constructeurs ORDER BY nom');
+                    $getAllConstructeurs = $bdd->query('SELECT * FROM CONSTRUCTEUR ORDER BY NOM_CONSTRUCTEUR');
                     while ($constructeur = $getAllConstructeurs->fetch(PDO::FETCH_ASSOC)) {
-                        echo '<label class="checkbox-label"><input class="input-checkbox-filtres" type="checkbox" value="'.$constructeur['id'].'"> '.$constructeur['nom'].'</label>';
+                        echo '<label class="checkbox-label"><input class="input-checkbox-filtres" type="checkbox" value="'.$constructeur['ID'].'"> '.$constructeur['NOM_CONSTRUCTEUR'].'</label>';
                     }
                     ?>
                 </div>
@@ -72,11 +72,11 @@ require('../actions/database.php');
                 <div id="typeDropdown" class="dropdown-content-types">
                     <!-- Options pour les constructeurs avec cases à cocher -->
                     <?php
-                    $getAllTypes = $bdd->query('SELECT * FROM types ORDER BY nom');
+                    $getAllTypes = $bdd->query('SELECT * FROM TYPE ORDER BY NOM_TYPE');
                     while ($type = $getAllTypes->fetch(PDO::FETCH_ASSOC)) {
                         echo '<label class="checkbox-label">
-                                <input class="input-checkbox-filtres" type="checkbox" value="'.$type['id'].'">
-                                '.$type['nom'].'
+                                <input class="input-checkbox-filtres" type="checkbox" value="'.$type['ID'].'">
+                                '.$type['NOM_TYPE'].'
                               </label>';
                     }
                     ?>
@@ -90,9 +90,9 @@ require('../actions/database.php');
                 <div id="modeleDropdown" class="dropdown-content-modeles">
                     <!-- Options pour les constructeurs avec cases à cocher -->
                     <?php
-                    $getAllModeles = $bdd->query('SELECT * FROM modeles ORDER BY nom');
+                    $getAllModeles = $bdd->query('SELECT * FROM MODELE ORDER BY NOM_MODELE');
                     while ($modele = $getAllModeles->fetch(PDO::FETCH_ASSOC)) {
-                        echo '<label class="checkbox-label"><input class="input-checkbox-filtres"  type="checkbox" value="'.$modele['id'].'"> '.$modele['nom'].'</label>';
+                        echo '<label class="checkbox-label"><input class="input-checkbox-filtres"  type="checkbox" value="'.$modele['ID'].'"> '.$modele['NOM_MODELE'].'</label>';
                     }
                     ?>
                 </div>
@@ -105,9 +105,9 @@ require('../actions/database.php');
                 <div id="segmentDropdown" class="dropdown-content-segments">
                     <!-- Options pour les constructeurs avec cases à cocher -->
                     <?php
-                    $getAllSegments = $bdd->query('SELECT * FROM segments ORDER BY nom');
+                    $getAllSegments = $bdd->query('SELECT * FROM SEGMENT ORDER BY NOM_SEGMENT');
                     while ($segment = $getAllSegments->fetch(PDO::FETCH_ASSOC)) {
-                        echo '<label class="checkbox-label"><input class="input-checkbox-filtres"  type="checkbox" value="'.$segment['id'].'"> '.$segment['nom'].'</label>';
+                        echo '<label class="checkbox-label"><input class="input-checkbox-filtres"  type="checkbox" value="'.$segment['ID'].'"> '.$segment['NOM_SEGMENT'].'</label>';
                     }
                     ?>
                 </div>
@@ -120,9 +120,9 @@ require('../actions/database.php');
                 <div id="anneeDropdown" class="dropdown-content-annees">
                     <!-- Options pour les constructeurs avec cases à cocher -->
                     <?php
-                    $getAllAnnees = $bdd->query('SELECT * FROM anneestranche ORDER BY nom DESC ');
+                    $getAllAnnees = $bdd->query('SELECT * FROM ANNEE_TRANCHE ORDER BY NOM_ANNEE_TRANCHE DESC ');
                     while ($annee = $getAllAnnees->fetch(PDO::FETCH_ASSOC)) {
-                        echo '<label class="checkbox-label"><input class="input-checkbox-filtres"  type="checkbox" value="'.$annee['id'].'"> '.$annee['nom'].'</label>';
+                        echo '<label class="checkbox-label"><input class="input-checkbox-filtres"  type="checkbox" value="'.$annee['ID'].'"> '.$annee['NOM_ANNEE_TRANCHE'].'</label>';
                     }
                     ?>
                 </div>
@@ -148,30 +148,30 @@ include("../actions/actionsVoiture/actionGetAllFiches.php");
 <div class="column">
     <?php
     while($fiche = $getAllFiches->fetch()){
-        $getConstructeur = $bdd->prepare('SELECT nom FROM constructeurs WHERE id=?');
-        $getConstructeur->execute(array($fiche['id_constructeur']));
+        $getConstructeur = $bdd->prepare('SELECT NOM_CONSTRUCTEUR FROM CONSTRUCTEUR WHERE ID=?');
+        $getConstructeur->execute(array($fiche['ID_CONSTRUCTEUR']));
         $constructeur = $getConstructeur->fetch();
 
-        $getAnnee = $bdd->prepare('SELECT nom FROM annees WHERE id=?');
-        $getAnnee->execute(array($fiche['id_annee']));
+        $getAnnee = $bdd->prepare('SELECT NOM_ANNEE FROM ANNEE WHERE ID=?');
+        $getAnnee->execute(array($fiche['ID_ANNEE_DEBUT']));
         $annee = $getAnnee->fetch();
 
-        $getModele = $bdd->prepare('SELECT nom FROM modeles WHERE id=?');
-        $getModele->execute(array($fiche['id_modele']));
+        $getModele = $bdd->prepare('SELECT NOM_MODELE FROM MODELE WHERE ID=?');
+        $getModele->execute(array($fiche['ID_MODELE']));
         $modele = $getModele->fetch();
 
-        $getImage = $bdd->prepare('SELECT img_1 FROM imagesfiche WHERE id_fiche=?');
-        $getImage->execute(array($fiche['id']));
+        $getImage = $bdd->prepare('SELECT IMAGE_URL FROM IMAGE WHERE ID_FICHE=?');
+        $getImage->execute(array($fiche['ID']));
         $image = $getImage->fetch();
 
-        $stringImageFiche = $modele[0]."/".$fiche['id']."/".$image['img_1'];
+        $stringImageFiche = $modele[0]."/".$fiche['ID']."/".$image['IMAGE_URL'];
     ?>
         <div class="card_voitures">
-            <a href="pageFiche.php?id_fiche=<?= $fiche['id']; ?>">
+            <a href="pageFiche.php?id_fiche=<?= $fiche['ID']; ?>">
                 <img class="voitures" src="../../library/voitures/<?= $stringImageFiche; ?>" />
             </a>
             <div class="text">
-                <p class="nomWidgetFiche"><?= $constructeur['nom']; ?><?= $fiche['nom']; ?><?= $annee['nom']; ?></p>
+                <p class="nomWidgetFiche"><?= $constructeur['NOM_CONSTRUCTEUR']; ?><?= $fiche['NOM_FICHE']; ?><?= $annee['NOM_ANNEE']; ?></p>
             </div>
         </div>
     <?php

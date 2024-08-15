@@ -16,7 +16,7 @@ if(isset($_POST['validate'])){
         $user_password = htmlspecialchars($_POST['password']);
         
         //Vérifier si l'utilisateur existe
-        $checkIfUserExists = $bdd->prepare('SELECT * FROM users WHERE pseudo = ?');
+        $checkIfUserExists = $bdd->prepare('SELECT * FROM UTILISATEUR WHERE PSEUDO_UTILISATEUR = ?');
         $checkIfUserExists->execute(array($user_pseudo));
         
         if($checkIfUserExists->rowCount() > 0){
@@ -25,16 +25,16 @@ if(isset($_POST['validate'])){
             $usersInfos = $checkIfUserExists->fetch();
             
             //Vérifier si le mot de passe est correct
-            if(password_verify($user_password, $usersInfos['password'])){
+            if(password_verify($user_password, $usersInfos['PASSWORD_UTILISATEUR'])){
                 
                 //Authentifier l'utilisateur sur le site et récupérer ses données dans des variables globales sessions
                 $_SESSION['auth'] = true;
-                $_SESSION['id'] = $usersInfos['id'];
-                $_SESSION['pseudo'] = $usersInfos['pseudo'];
-                $_SESSION['prenom'] = $usersInfos['prenom'];
-                $_SESSION['nom'] = $usersInfos['nom'];
-                $_SESSION['mail'] = $usersInfos['mail'];
-                $_SESSION['role'] = $usersInfos['role'];
+                $_SESSION['id'] = $usersInfos['ID'];
+                $_SESSION['pseudo'] = $usersInfos['PSEUDO_UTILISATEUR'];
+                $_SESSION['prenom'] = $usersInfos['PRENOM_UTILISATEUR'];
+                $_SESSION['nom'] = $usersInfos['NOM_UTILISATEUR'];
+                $_SESSION['mail'] = $usersInfos['MAIL_UTILISATEUR'];
+                $_SESSION['role'] = $usersInfos['ROLE_UTILISATEUR'];
 
                 if(isAdmin()){
                     header('Location: pageVoitures.php');

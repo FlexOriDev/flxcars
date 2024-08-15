@@ -30,7 +30,7 @@ include '../includesHeaderFooter/includeHeader.php';
 
             $fiche_id = $_GET['id_fiche'];
 
-            $getInfosOfThisFicheReq = $bdd->prepare('SELECT * FROM fiches WHERE id = ?');
+            $getInfosOfThisFicheReq = $bdd->prepare('SELECT * FROM FICHE WHERE ID = ?');
             $getInfosOfThisFicheReq->execute(array($fiche_id));
 
             $ficheInfos = $getInfosOfThisFicheReq->fetch();
@@ -39,60 +39,60 @@ include '../includesHeaderFooter/includeHeader.php';
                 echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
             }else{
 
-                $getConstructor = $bdd->prepare('SELECT * FROM constructeurs WHERE id = ?');
-                $getConstructor->execute(array($ficheInfos['id_constructeur']));
+                $getConstructor = $bdd->prepare('SELECT * FROM CONSTRUCTEUR WHERE ID = ?');
+                $getConstructor->execute(array($ficheInfos['ID_CONSTRUCTEUR']));
 
                 $ficheConstructeur = $getConstructor->fetch();
 
-                $getPays = $bdd->prepare('SELECT * FROM pays WHERE id = ?');
-                $getPays->execute(array($ficheConstructeur['id_pays']));
+                $getPays = $bdd->prepare('SELECT * FROM PAYS WHERE ID = ?');
+                $getPays->execute(array($ficheConstructeur['ID_PAYS']));
 
                 $fichePays = $getPays->fetch();
 
-                $getAnnee = $bdd->prepare('SELECT * FROM annees WHERE id = ?');
-                $getAnnee->execute(array($ficheInfos['id_annee']));
+                $getAnnee = $bdd->prepare('SELECT * FROM ANNEE WHERE ID = ?');
+                $getAnnee->execute(array($ficheInfos['ID_ANNEE_DEBUT']));
 
                 $ficheAnne = $getAnnee->fetch();
 
-                $getAnnee2 = $bdd->prepare('SELECT * FROM annees WHERE id = ?');
-                $getAnnee2->execute(array($ficheInfos['id_annee_fin']));
+                $getAnnee2 = $bdd->prepare('SELECT * FROM ANNEE WHERE ID = ?');
+                $getAnnee2->execute(array($ficheInfos['ID_ANNEE_FIN']));
 
                 $ficheAnne2 = $getAnnee2->fetch();
 
-                $getAnneeFin = $bdd->prepare('SELECT * FROM annees WHERE id = ?');
-                $getAnneeFin->execute(array($ficheInfos['id_annee_fin']));
+                $getAnneeFin = $bdd->prepare('SELECT * FROM ANNEE WHERE ID = ?');
+                $getAnneeFin->execute(array($ficheInfos['ID_ANNEE_FIN']));
 
                 $ficheAnneFin = $getAnneeFin->fetch();
 
-                $getModele = $bdd->prepare('SELECT * FROM modeles WHERE id = ?');
-                $getModele->execute(array($ficheInfos['id_modele']));
+                $getModele = $bdd->prepare('SELECT * FROM MODELE WHERE ID = ?');
+                $getModele->execute(array($ficheInfos['ID_MODELE']));
 
                 $modele = $getModele->fetch();
 
-                $getGroupe = $bdd->prepare('SELECT * FROM groupes WHERE id = ?');
-                $getGroupe->execute(array($ficheConstructeur['id_groupe']));
+                $getGroupe = $bdd->prepare('SELECT * FROM GROUPE WHERE ID = ?');
+                $getGroupe->execute(array($ficheConstructeur['ID_GROUPE']));
                 $ficheGroupe = $getGroupe->fetch();
-                $ficheGroupeFinal = $ficheConstructeur['nom'];
+                $ficheGroupeFinal = $ficheConstructeur['NOM_CONSTRUCTEUR'];
 
                 if($ficheGroupe){
-                    $ficheGroupeFinal = $ficheGroupe['nom'];
+                    $ficheGroupeFinal = $ficheGroupe['NOM_GROUPE'];
                 }
 
-                $getType = $bdd->prepare('SELECT * FROM types WHERE id = ?');
-                $getType->execute(array($ficheInfos['id_type']));
+                $getType = $bdd->prepare('SELECT * FROM TYPE WHERE ID = ?');
+                $getType->execute(array($ficheInfos['ID_TYPE']));
 
                 $ficheType = $getType->fetch();
 
-                $getSegment = $bdd->prepare('SELECT * FROM segments WHERE id = ?');
-                $getSegment->execute(array($ficheInfos['id_segment']));
+                $getSegment = $bdd->prepare('SELECT * FROM SEGMENT WHERE ID = ?');
+                $getSegment->execute(array($ficheInfos['ID_SEGMENT']));
 
                 $ficheSegment = $getSegment->fetch();
 
-                $getImage = $bdd->prepare('SELECT img_1 FROM imagesfiche WHERE id_fiche=?');
-                $getImage->execute(array($ficheInfos['id']));
+                $getImage = $bdd->prepare('SELECT IMAGE_URL FROM IMAGE WHERE ID_FICHE=?');
+                $getImage->execute(array($ficheInfos['ID']));
                 $image = $getImage->fetch();
 
-                $getLignesOfTab = $bdd->prepare('SELECT * FROM motorisationsessence WHERE id_fiche = ?');
+                $getLignesOfTab = $bdd->prepare('SELECT * FROM VERSION WHERE ID_FICHE = ?');
                 $getLignesOfTab->execute(array($fiche_id));
 
                 // Récupération de toutes les lignes de résultats dans un tableau
@@ -102,40 +102,40 @@ include '../includesHeaderFooter/includeHeader.php';
                 <div class="color-band">
                     <div class="car-details">
                         <div class="content-left">
-                            <p><?= $ficheInfos['resume']; ?></p>
+                            <p><?= $ficheInfos['RESUME_FICHE']; ?></p>
                         </div>
                         <div class="title-banner">
-                            <h2><?= $ficheConstructeur['nom']; ?> <?= $ficheInfos['nom']; ?></h2>
+                            <h2><?= $ficheConstructeur['NOM_CONSTRUCTEUR']; ?> <?= $ficheInfos['NOM_FICHE']; ?></h2>
                         </div>
                         <a href="#summary-anchor" class="btn-banner-1">
                             <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon4">
-                            <p>Modèle : <?= $modele['nom']; ?></p>
+                            <p>Modèle : <?= $modele['NOM_MODELE']; ?></p>
                         </a>
                         <a href="#summary-anchor" class="btn-banner-2">
                             <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon7">
-                            <p>Type : <?= $ficheType['nom']; ?></p>
+                            <p>Type : <?= $ficheType['NOM_TYPE']; ?></p>
                         </a>
                         <a href="#summary-anchor" class="btn-banner-3">
                             <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon3">
-                            <p>Segment : <?= $ficheSegment['nom']; ?></p>
+                            <p>Segment : <?= $ficheSegment['NOM_SEGMENT']; ?></p>
                         </a>
                         <a href="#summary-anchor" class="btn-banner-4">
                             <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon">
-                            <p>Constructeur : <?= $ficheConstructeur['nom']; ?></p>
+                            <p>Constructeur : <?= $ficheConstructeur['NOM_CONSTRUCTEUR']; ?></p>
                         </a>
                         <a href="#summary-anchor" class="btn-banner-5">
                             <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon2">
-                            <p>Groupe automobile : <?= $ficheGroupe['nom']; ?></p>
+                            <p>Groupe automobile : <?= $ficheGroupe['NOM_GROUPE']; ?></p>
                         </a>
                         <a href="#summary-anchor" class="btn-banner-6">
                             <img src="../../library/imgIconsFiche/date.png" alt="Icone" class="banner-icon5">
-                            <p>Période de production : <?= $ficheAnne['nom']; ?> - <?= $ficheAnne2['nom']; ?></p>
+                            <p>Période de production : <?= $ficheAnne['NOM_ANNEE']; ?> - <?= $ficheAnne2['NOM_ANNEE']; ?></p>
                         </a>
                         <a href="#summary-anchor" class="btn-banner-7">
                             <img src="../../library/imgIconsFiche/pays.png" alt="Icone" class="banner-icon2">
-                            <p>Pays constructeur : <?= $fichePays['nom']; ?></p>
+                            <p>Pays constructeur : <?= $fichePays['NOM_PAYS']; ?></p>
                         </a>
-                        <img src="../../library/voitures/<?= $modele['nom']."/".$fiche_id."/".$image['img_1']; ?>" alt="Car Photo" class="car-photo">
+                        <img src="../../library/voitures/<?= $modele['NOM_MODELE']."/".$fiche_id."/".$image['IMAGE_URL']; ?>" alt="Car Photo" class="car-photo">
                         <a href="#histoire" class="btn-banner-8">
                             <img src="../../library/imgIconsFiche/histoire.png" alt="Icone" class="banner-icon8">
                             <p>Histoire</p>
@@ -166,7 +166,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 
         $fiche_id = $_GET['id_fiche'];
 
-        $getInfosOfThisFicheReq = $bdd->prepare('SELECT * FROM fiches WHERE id = ?');
+        $getInfosOfThisFicheReq = $bdd->prepare('SELECT * FROM FICHE WHERE ID = ?');
         $getInfosOfThisFicheReq->execute(array($fiche_id));
 
         $ficheInfos = $getInfosOfThisFicheReq->fetch();
@@ -181,7 +181,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
                     <h1 class="h1-fiche">Histoire</h1>
             </article>
             <article class="²" id="histoire">
-                <?= htmlspecialchars_decode($ficheInfos['histoire']); ?>
+                <?= htmlspecialchars_decode($ficheInfos['HISTOIRE_FICHE']); ?>
             </article>
             <br><br><br>
 
@@ -220,18 +220,18 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
                 // Parcourir chaque ligne de résultats pour générer les lignes du tableau
                 foreach ($tabInfos as $ligne) {
                     echo '<tr>';
-                    echo '<td>' . htmlspecialchars($ligne['appellation']) . '</td>';
-                    echo '<td>' . htmlspecialchars($ligne['carburant']) . '</td>';
-                    echo '<td>' . htmlspecialchars($ligne['construction']) . '</td>';
-                    echo '<td>' . htmlspecialchars($ligne['moteur']) . '</td>';
-                    echo '<td>' . htmlspecialchars($ligne['cylindree']) . '</td>';
-                    echo '<td>' . htmlspecialchars($ligne['performance']) . '</td>';
-                    echo '<td>' . htmlspecialchars($ligne['couple']) . '</td>';
-                    echo '<td>' . htmlspecialchars($ligne['zero_to_hundred']) . '</td>';
-                    echo '<td>' . htmlspecialchars($ligne['vmax']) . '</td>';
-                    echo '<td>' . htmlspecialchars($ligne['conso']) . '</td>';
-                    echo '<td>' . htmlspecialchars($ligne['carrosserie']) . '</td>';
-                    echo '<td>' . htmlspecialchars($ligne['marche']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['APPELLATION']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['CARBURANT']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['CONSTRUCTION_ANNEE']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['NOM_MOTEUR']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['CYLINDREE']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['PERFORMANCE']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['COUPLE']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['ZERO_A_100']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['VMAX']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['CONSOMMATION']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['CARROSSERIE']) . '</td>';
+                    echo '<td>' . htmlspecialchars($ligne['MARCHE_CONTINENT']) . '</td>';
                     echo '</tr>';
                 }
 
@@ -266,13 +266,13 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 
         $fiche_id = $_GET['id_fiche'];
 
-        $getInfosOfThisFicheReq = $bdd->prepare('SELECT * FROM fiches WHERE id = ?');
+        $getInfosOfThisFicheReq = $bdd->prepare('SELECT * FROM FICHE WHERE ID = ?');
         $getInfosOfThisFicheReq->execute(array($fiche_id));
 
         $ficheInfos = $getInfosOfThisFicheReq->fetch();
 
-        $getModele = $bdd->prepare('SELECT * FROM modeles WHERE id = ?');
-        $getModele->execute(array($ficheInfos['id_modele']));
+        $getModele = $bdd->prepare('SELECT * FROM MODELE WHERE ID = ?');
+        $getModele->execute(array($ficheInfos['ID_MODELE']));
 
         $modele = $getModele->fetch();
 
@@ -280,30 +280,30 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
                 echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
         }else{
                 
-                $getPhotos = $bdd->prepare('SELECT * FROM imagesfiche WHERE id_fiche=?');
+                $getPhotos = $bdd->prepare('SELECT * FROM IMAGE WHERE ID_FICHE=?');
                 $getPhotos->execute(array($fiche_id));
 
                 $photo = $getPhotos->fetch();
                         
-                        $getNomFiche = $bdd->prepare('SELECT * FROM fiches WHERE id = ?');
+                        $getNomFiche = $bdd->prepare('SELECT * FROM FICHE WHERE ID = ?');
                         $getNomFiche->execute(array($fiche_id));
                         $nomFiche = $getNomFiche->fetch()
 
                         ?>
                         <br><br>
                         <article class="article-fiche-title-photos">
-                                <h2 class="ficheTitreModelePhotos"><?= $nomFiche['nom']; ?></h2>
+                                <h2 class="ficheTitreModelePhotos"><?= $nomFiche['NOM_FICHE']; ?></h2>
                         </article>
                         <br><br>
                         <br><br>
 
                         <?php
-                        if($photo['img_1']!=""){
+                        if($photo['IMAGE_URL']!=""){
                         ?>
 
                                 <div class="img">
-                                        <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(1)">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_1']; ?>" alt=<?= $photo['img_1']; ?> width="300" height="200">
+                                        <a target="_blank" onclick="currentSlide<?= $photo['ID_FICHE']; ?>(1)">
+                                        <img src="../../library/voitures/<?= $modele['NOM_MODELE']; ?>/<?= $photo['ID_FICHE']; ?>/<?= $photo['IMAGE_URL']; ?>" alt=<?= $photo['IMAGE_URL']; ?> width="300" height="200">
                                         </a>
                                 </div>
 
