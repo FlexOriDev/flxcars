@@ -121,6 +121,23 @@ include '../includesHeaderFooter/includeHeader.php';
                         }
 
                         $typesString = implode(' - ', $typesList);  // Conversion de la liste en chaîne de caractères séparée par des tirets
+
+                        $cheminImage = "../../library/dummy/aucune_image.png";
+
+                        $cheminDossier = "../../library/voitures/" . $modele['NOM_MODELE'] . "/" . $ficheInfos['ID'];
+                        if (is_dir($cheminDossier)) {
+                            // Obtenir la liste des fichiers dans le répertoire
+                            $fichiers = scandir($cheminDossier);
+
+                            // Filtrer les fichiers pour ignorer les entrées '.' et '..'
+                            $fichiers = array_diff($fichiers, array('.', '..'));
+
+                            // Vérifiez si le répertoire contient des fichiers
+                            if (!empty($fichiers)) {
+                                $cheminImage = "../../library/voitures/" . $modele['NOM_MODELE'] . "/" . $ficheInfos['ID'] . "/" . $image['IMAGE_URL'];
+                            }
+                        }
+
                         ?>
 
                         <a href="#summary-anchor" class="btn-banner-2">
@@ -147,7 +164,7 @@ include '../includesHeaderFooter/includeHeader.php';
                             <img src="../../library/imgIconsFiche/pays.png" alt="Icone" class="banner-icon2">
                             <p>Pays constructeur : <?= $fichePays['NOM_PAYS']; ?></p>
                         </a>
-                        <img src="../../library/voitures/<?= $modele['NOM_MODELE']."/".$fiche_id."/".$image['IMAGE_URL']; ?>" alt="Car Photo" class="car-photo">
+                        <img src="<?= $cheminImage; ?>" alt="Car Photo" class="car-photo">
                         <a href="#histoire" class="btn-banner-8">
                             <img src="../../library/imgIconsFiche/histoire.png" alt="Icone" class="banner-icon8">
                             <p>Histoire</p>
@@ -285,14 +302,28 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
     $getModele = $bdd->prepare('SELECT * FROM MODELE WHERE ID = ?');
     $getModele->execute(array($ficheInfos['ID_MODELE']));
 
-// Récupérer les photos associées à la fiche
+    // Récupérer les photos associées à la fiche
     $getPhotos = $bdd->prepare('SELECT * FROM IMAGE WHERE ID_FICHE = ?');
     $getPhotos->execute(array($fiche_id));
 
-// Initialiser l'image principale avec la première photo récupérée
+    if (empty($getPhotos)) {
+        ?>
+
+        <div class="carrousel-container">
+            <div class="main-image-container">
+                <button class="nav-button left" onclick="previousImage()">&#10094;</button>
+                <img id="main-image" class="main-image" src="<?= $cheminImage; ?>" alt="Main Image">
+                <button class="nav-button right" onclick="nextImage()">&#10095;</button>
+            </div>
+        </div>
+        <?php
+    }else{
+
+
+    // Initialiser l'image principale avec la première photo récupérée
     $firstPhoto = $getPhotos->fetch();
 
-// Vérifier si une image a été trouvée
+    // Vérifier si une image a été trouvée
     if ($firstPhoto) {
         $imageArray = [];
         $index = 0;
@@ -350,6 +381,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 
 
     <?php
+    }
 }else{
         echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
 }        

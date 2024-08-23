@@ -117,10 +117,25 @@ if ($getAllFiches->rowCount() > 0) {
         $getPhotos->execute([$fiche['ID']]);
         $photo = $getPhotos->fetch();
 
-        $stringImageFiche = $fiche['NOM_MODELE'] . "/" . $fiche['ID'] . "/" . $photo['IMAGE_URL'];
+        $cheminImage = "../../library/dummy/aucune_image.png";
+
+        $cheminDossier = "../../library/voitures/" . $fiche['NOM_MODELE'] . "/" . $fiche['ID'];
+        if (is_dir($cheminDossier)) {
+            // Obtenir la liste des fichiers dans le répertoire
+            $fichiers = scandir($cheminDossier);
+
+            // Filtrer les fichiers pour ignorer les entrées '.' et '..'
+            $fichiers = array_diff($fichiers, array('.', '..'));
+
+            // Vérifiez si le répertoire contient des fichiers
+            if (!empty($fichiers)) {
+                $cheminImage = "../../library/voitures/" . $fiche['NOM_MODELE'] . "/" . $fiche['ID'] . "/" . $photo['IMAGE_URL'];
+            }
+        }
+
         ?>
         <div class="column">
-            <a href="pageFiche.php?id_fiche=<?= $fiche['ID']; ?>"><input type=image src="../../library/voitures/<?= $stringImageFiche; ?>" width="100%"/></a>
+            <a href="pageFiche.php?id_fiche=<?= $fiche['ID']; ?>"><input type=image src="<?= $cheminImage; ?>" width="100%"/></a>
             <div class="text">
                 <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $fiche['NOM_CONSTRUCTEUR']; ?> </span>  <?= $fiche['NOM_FICHE']; ?> <span class="spanNomAnnee"><?= $fiche['NOM_ANNEE']; ?> </span></p>
             </div>

@@ -74,7 +74,6 @@ if (isset($_POST['validate'])) {
     if (!empty($_POST['nom']) && !empty($selectedTypes) && !empty($_POST['selectedAnneeSortie'])
         && !empty($_POST['selectedAnneeFin']) && !empty($_POST['selectedModele']) && !empty($_POST['selectedSegment'])
         && !empty($_POST['selectedConstructeur']) && !empty($_POST['resume']) && !empty($_POST['editor'])
-        && !empty($galleryImages)
         ) {
 
         $fiche_nom = htmlspecialchars($_POST['nom']);
