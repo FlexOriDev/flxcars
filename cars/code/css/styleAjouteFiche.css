@@ -6,11 +6,6 @@
     height: 500px;
 }
 
-.image-thumbnails img{
-    width: 170px;
-    margin-top: -47px;
-}
-
 /* Style pour les dropdowns */
 .custom-select select {
     width: 100%; /* Pour rendre le dropdown aussi large que son conteneur */
@@ -28,3 +23,127 @@
 .custom-dropdown select option {
     font-size: 14px; /* Ajustez la taille de la police selon vos besoins */
 }
+
+.image-upload-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.central-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 700px; /* Taille fixe pour l'image principale */
+    border: 1px solid #ccc;
+    z-index: 1;
+    overflow: hidden; /* Pour s'assurer que l'image ne déborde pas */
+}
+
+.central-image img {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.image-gallery {
+    width: 500px;
+    height: 700px; /* Taille fixe pour la galerie */
+    border: 1px solid #ccc;
+    overflow-y: auto; /* Scrolling si les images dans la galerie débordent */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.add-image-header {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.gallery-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.thumbnail-container {
+    width: 100%;
+    padding-top: 56.25%; /* Pour obtenir un rapport hauteur/largeur de 16:9 */
+    position: relative;
+    overflow: hidden;
+}
+
+.thumbnail-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Pour s'assurer que les images remplissent bien leur conteneur */
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out; /* Transition en douceur de l'opacité */
+}
+
+/* Transition de l'opacité sur hover */
+.thumbnail-container img:hover {
+    opacity: 0.7; /* Réduire l'opacité à 70% lorsqu'on passe le curseur */
+}
+
+
+.add-new-image {
+    width: calc(100%); /* Compense les 10px de padding de chaque côté */
+    padding-top: 4%; /* Une hauteur plus petite pour l'encart cliquable */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--accent-color-yellow);
+    color: var(--secondary-color);
+    font-size: 16px;
+    cursor: pointer;
+    position: sticky; /* Position fixe dans la galerie */
+    z-index: 10; /* S'assurer que le bouton est au-dessus des autres éléments */
+    transition: 0.2s;
+}
+
+.add-new-image:hover {
+    background-color: var(--secondary-color);
+    color: var(--accent-color-yellow);
+    transition: 0.2s;
+}
+
+.add-image-content {
+    position: absolute;
+    text-align: center;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.8; /* Légère transparence pour une meilleure esthétique */
+    z-index: 10; /* S'assurer que le bouton reste au-dessus de l'image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.remove-btn:hover {
+    opacity: 1; /* Opacité pleine au survol */
+    background-color: #b11c1c;
+}
+

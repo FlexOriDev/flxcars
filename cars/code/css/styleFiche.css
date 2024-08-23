@@ -208,91 +208,119 @@
     border: 1px solid #ccc;
 }
 
-/* GALLERY PICTURES */
 
-div.img {
-    margin-right: 15px;
-    float: left;
-    width: 11.5%;
-    cursor: pointer;
-    transition: all .3s;
+
+
+.carrousel-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
 }
 
-div.img:hover {
-    opacity: .5;
-    transition: all .3s;
+.main-image-container {
+    width: 70%;
+    text-align: center;
+    position: relative;
 }
 
-div.img img {
+.main-image {
     width: 100%;
     height: auto;
 }
 
-/* GALLERY PICTURES */
-
-/* CARROUSEL PICTURES */
-
-.container {
-    margin-top: 8%;
-    margin-left: -0.6%;
-    width: 50%;
-    position: relative;
+.gallery-container {
+    width: 24.5%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.slides {
-    display: none;
-    width: 45%;
-}
-
-.prev{
-    text-decoration: none;
-    color: var(--accent-color-yellow);
-    font-style: none;
-    cursor: pointer;
+.nav-button {
     position: absolute;
     top: 50%;
-    transform: translate(0, -50%);
-    padding: 16px;
-    border-radius: 0 3px 3px 0;
-    background: var(--secondary-color);
-    transition: all .3s;
-}
-
-.next{
-    text-decoration: none;
-    color: var(--accent-color-yellow);
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
     cursor: pointer;
-    position: absolute;
-    margin-right: 12px;
-    top: 50%;
-    transform: translate(0, -50%);
-    padding: 16px;
-    border-radius: 0 3px 3px 0;
-    background: var(--secondary-color);
-    transition: all .3s;
+    z-index: 100;
 }
 
-.next {
+.nav-button.left {
+    left: 0;
+}
+
+.nav-button.right {
     right: 0;
-    border-radius: 3px 0 0 3px;
 }
 
-.prev:hover,
-.next:hover {
-    color: var(--secondary-color);
-    background: var(--accent-color-yellow);
+.remaining-gallery {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
 }
 
-.ficheTitreModelePhotos{
-    font-size: 1.7em;
-    padding-top: 20px;
-    color: var(--secondary-color);
+.img-thumbnail-below {
+    width: calc(100% / 4 - 8px); /* Diviser la largeur en trois colonnes */
+    cursor: pointer;
+    transition: opacity 0.3s;
+    border: none; /* Supprimer les bordures */
+    border-radius: 0; /* Supprimer les arrondis */
 }
 
-.article-fiche-title-photos{
-    margin-left: 0;
-    margin-right: auto;
-    width: 23.9%;
-    height: 15px;
+.img-thumbnail-below img {
+    width: 100%;
+    height: auto;
+    border: none; /* Supprimer les bordures sur les images */
+    border-radius: 0; /* Supprimer les arrondis sur les images */
 }
 
+.img-thumbnail-below:hover {
+    opacity: 0.7;
+}
+
+.img-thumbnail {
+    cursor: pointer;
+    transition: opacity 0.3s;
+    margin-bottom: 0; /* Supprimer la marge inférieure */
+    border: none !important; /* Supprimer les bordures */
+    border-radius: 0 !important; /* Supprimer les arrondis */
+}
+
+.img-thumbnail img {
+    width: 100%;
+    height: auto;
+    border: none !important; /* Supprimer les bordures sur les images */
+    border-radius: 0 !important; /* Supprimer les arrondis sur les images */
+}
+
+.img-thumbnail:hover {
+    opacity: 0.7;
+}
+
+.img-thumbnail, .img-thumbnail img, .img-thumbnail-below, .img-thumbnail-below img {
+    border: none !important;           /* Supprime toutes les bordures */
+    margin: 0 !important;              /* Supprime toutes les marges */
+    padding: 0 !important;             /* Supprime tous les paddings */
+    outline: none !important;          /* Supprime les contours */
+    box-shadow: none !important;       /* Supprime toutes les ombres */
+    border-radius: 0 !important;       /* Supprime tous les arrondis */
+    background-color: transparent !important;  /* Supprime les couleurs de fond */
+}
+.gallery-container, .remaining-gallery {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background-color: transparent !important;
+}
+
+.carrousel-container, .main-image-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background-color: transparent !important;
+}

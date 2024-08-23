@@ -54,9 +54,9 @@ require('../actions/actionsDashboard/actionsDashboardTypes/actionDashboardTypes.
                     <tbody id="typesTable">
                     <?php
                     $getAllTypes = $bdd->query('
-                        SELECT TYPE.id, TYPE.NOM_TYPE, COUNT(FICHE.id) AS fiches_count
+                        SELECT TYPE.id, TYPE.NOM_TYPE, COUNT(FICHE_TYPE.ID_FICHE) AS fiches_count
                         FROM TYPE
-                        LEFT JOIN FICHE ON TYPE.id = FICHE.id_type
+                        LEFT JOIN FICHE_TYPE ON TYPE.id = FICHE_TYPE.ID_TYPE
                         GROUP BY TYPE.id, TYPE.NOM_TYPE
                         ORDER BY TYPE.NOM_TYPE;
                     ');

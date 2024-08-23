@@ -3,11 +3,10 @@ require('../actions/Database.php');
 
 // Définition des clés de paramètres et de leurs équivalents SQL
 $paramMapping = [
-    'id_constructeur' => 'f.ID_CONSTRUCTEUR IN',
-    'id_type' => 'f.ID_TYPE IN',
-    'id_modele' => 'f.ID_MODELE IN',
-    'id_annee' => 'f.ID_ANNEE_DEBUT IN',
-    'id_segment' => 'f.ID_SEGMENT IN'
+    'id_constructeur' => 'f.ID_CONSTRUCTEUR',
+    'id_modele' => 'f.ID_MODELE',
+    'id_annee' => 'f.ID_ANNEE_DEBUT',
+    'id_segment' => 'f.ID_SEGMENT'
 ];
 
 // Initialisation des variables pour la requête SQL
@@ -15,13 +14,21 @@ $conditions = [];
 $params = [];
 
 // Parcourir les paramètres pour construire les conditions SQL et les paramètres
-foreach ($paramMapping as $paramKey => $sqlCondition) {
+foreach ($paramMapping as $paramKey => $sqlColumn) {
     if ($paramKey !== 'id_annee' && isset($_GET[$paramKey]) && !empty($_GET[$paramKey])) {
         $ids = explode(",", $_GET[$paramKey]);
         $placeholders = rtrim(str_repeat('?,', count($ids)), ','); // Créer les placeholders
-        $conditions[] = "$sqlCondition ($placeholders)";
+        $conditions[] = "$sqlColumn IN ($placeholders)";
         $params = array_merge($params, $ids); // Ajouter les IDs au tableau des paramètres
     }
+}
+
+// Traitement du paramètre `id_type`
+if (isset($_GET['id_type']) && !empty($_GET['id_type'])) {
+    $idsType = explode(",", $_GET['id_type']);
+    $placeholdersType = rtrim(str_repeat('?,', count($idsType)), ','); // Créer les placeholders pour les types
+    $conditions[] = "ft.ID_TYPE IN ($placeholdersType)";
+    $params = array_merge($params, $idsType); // Ajouter les IDs de type au tableau des paramètres
 }
 
 // Recherche
@@ -61,7 +68,8 @@ $sql = "SELECT f.*, c.NOM_CONSTRUCTEUR, m.NOM_MODELE, a.NOM_ANNEE
         FROM FICHE f
         LEFT JOIN CONSTRUCTEUR c ON f.ID_CONSTRUCTEUR = c.ID
         LEFT JOIN MODELE m ON f.ID_MODELE = m.ID
-        LEFT JOIN ANNEE a ON f.ID_ANNEE_DEBUT = a.ID";
+        LEFT JOIN ANNEE a ON f.ID_ANNEE_DEBUT = a.ID
+        LEFT JOIN FICHE_TYPE ft ON f.ID = ft.ID_FICHE";
 
 // Ajout des conditions à la requête SQL si des filtres sont appliqués
 if (!empty($conditions) || !empty($searchCondition)) {

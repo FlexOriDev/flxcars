@@ -78,10 +78,9 @@ include '../includesHeaderFooter/includeHeader.php';
                     $ficheGroupeFinal = $ficheGroupe['NOM_GROUPE'];
                 }
 
-                $getType = $bdd->prepare('SELECT * FROM TYPE WHERE ID = ?');
-                $getType->execute(array($ficheInfos['ID_TYPE']));
-
-                $ficheType = $getType->fetch();
+                $getFicheTypes = $bdd->prepare('SELECT * FROM FICHE_TYPE WHERE ID_FICHE = ?');
+                $getFicheTypes->execute(array($ficheInfos['ID']));
+                $ficheTypes = $getFicheTypes->fetchAll();
 
                 $getSegment = $bdd->prepare('SELECT * FROM SEGMENT WHERE ID = ?');
                 $getSegment->execute(array($ficheInfos['ID_SEGMENT']));
@@ -111,9 +110,22 @@ include '../includesHeaderFooter/includeHeader.php';
                             <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon4">
                             <p>Modèle : <?= $modele['NOM_MODELE']; ?></p>
                         </a>
+                        <?php
+                        $typesList = [];
+
+                        foreach ($ficheTypes as $ficheType) {
+                            $getType = $bdd->prepare('SELECT * FROM TYPE WHERE ID = ?');
+                            $getType->execute(array($ficheType['ID_TYPE']));
+                            $Type = $getType->fetch();
+                            $typesList[] = htmlspecialchars($Type['NOM_TYPE']);  // Ajout du nom du type à la liste
+                        }
+
+                        $typesString = implode(' - ', $typesList);  // Conversion de la liste en chaîne de caractères séparée par des tirets
+                        ?>
+
                         <a href="#summary-anchor" class="btn-banner-2">
                             <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon7">
-                            <p>Type : <?= $ficheType['NOM_TYPE']; ?></p>
+                            <p>Type : <?= $typesString; ?></p>
                         </a>
                         <a href="#summary-anchor" class="btn-banner-3">
                             <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon3">
@@ -260,171 +272,84 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
         ?>
 
 
-<!-- GALERIE -->
+    <!-- GALERIE -->
 
-<?php
+    <?php
+    $fiche_id = $_GET['id_fiche'];
 
-        $fiche_id = $_GET['id_fiche'];
+    $getInfosOfThisFicheReq = $bdd->prepare('SELECT * FROM FICHE WHERE ID = ?');
+    $getInfosOfThisFicheReq->execute(array($fiche_id));
 
-        $getInfosOfThisFicheReq = $bdd->prepare('SELECT * FROM FICHE WHERE ID = ?');
-        $getInfosOfThisFicheReq->execute(array($fiche_id));
+    $ficheInfos = $getInfosOfThisFicheReq->fetch();
 
-        $ficheInfos = $getInfosOfThisFicheReq->fetch();
+    $getModele = $bdd->prepare('SELECT * FROM MODELE WHERE ID = ?');
+    $getModele->execute(array($ficheInfos['ID_MODELE']));
 
-        $getModele = $bdd->prepare('SELECT * FROM MODELE WHERE ID = ?');
-        $getModele->execute(array($ficheInfos['ID_MODELE']));
+// Récupérer les photos associées à la fiche
+    $getPhotos = $bdd->prepare('SELECT * FROM IMAGE WHERE ID_FICHE = ?');
+    $getPhotos->execute(array($fiche_id));
 
-        $modele = $getModele->fetch();
+// Initialiser l'image principale avec la première photo récupérée
+    $firstPhoto = $getPhotos->fetch();
 
-        if(!$ficheInfos){
-                echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
-        }else{
-                
-                $getPhotos = $bdd->prepare('SELECT * FROM IMAGE WHERE ID_FICHE=?');
-                $getPhotos->execute(array($fiche_id));
+// Vérifier si une image a été trouvée
+    if ($firstPhoto) {
+        $imageArray = [];
+        $index = 0;
 
-                $photo = $getPhotos->fetch();
-                        
-                        $getNomFiche = $bdd->prepare('SELECT * FROM FICHE WHERE ID = ?');
-                        $getNomFiche->execute(array($fiche_id));
-                        $nomFiche = $getNomFiche->fetch()
+        // Ajouter la première image à la galerie
+        $imageArray[] = "'../../library/voitures/" . htmlspecialchars($modele['NOM_MODELE']) . "/" . $firstPhoto['ID_FICHE'] . "/" . htmlspecialchars($firstPhoto['IMAGE_URL']) . "'";
 
-                        ?>
-                        <br><br>
-                        <article class="article-fiche-title-photos">
-                                <h2 class="ficheTitreModelePhotos"><?= $nomFiche['NOM_FICHE']; ?></h2>
-                        </article>
-                        <br><br>
-                        <br><br>
-
-                        <?php
-                        if($photo['IMAGE_URL']!=""){
-                        ?>
-
-                                <div class="img">
-                                        <a target="_blank" onclick="currentSlide<?= $photo['ID_FICHE']; ?>(1)">
-                                        <img src="../../library/voitures/<?= $modele['NOM_MODELE']; ?>/<?= $photo['ID_FICHE']; ?>/<?= $photo['IMAGE_URL']; ?>" alt=<?= $photo['IMAGE_URL']; ?> width="300" height="200">
-                                        </a>
-                                </div>
-
-                        <?php }if($photo['img_2']!=""){
-                        ?>
-
-                                <div class="img">
-                                        <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(2)">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_2']; ?>" alt=<?= $photo['img_2']; ?> width="300" height="200">
-                                        </a>
-                                </div>
-
-                        <?php }if($photo['img_3']!=""){
-                        ?>
-
-                                <div class="img">
-                                        <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(3)">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_3']; ?>" alt=<?= $photo['img_3']; ?> width="300" height="200">
-                                        </a>
-                                </div>
-
-                        <?php }if($photo['img_4']!=""){
-                        ?>
-
-                                <div class="img">
-                                        <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(4)">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_4']; ?>" alt=<?= $photo['img_4']; ?> width="300" height="200">
-                                        </a>
-                                </div>
-
-                        <?php }if($photo['img_5']!=""){
-                        ?>
-                                
-                                <div class="img">
-                                        <a target="_blank" onclick="currentSlide<?= $photo['id_fiche']; ?>(5)">
-                                        <img src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_5']; ?>" alt=<?= $photo['img_5']; ?> width="300" height="200">
-                                        </a>
-                                </div>
-
-                        <?php }if($photo['img_1']!=""){
-                        ?>
-                                <!-- CARROUSEL -->
-
-                                <div class="container">
-                                <div class="slides<?= $photo['id_fiche']; ?>">
-                                <img class="fiche-photo-carousel" src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_1']; ?>" >
-                                </div>
-
-                                <?php if($photo['img_2']!=""){
-                        ?>
-
-                                        <div class="slides<?= $photo['id_fiche']; ?>">
-                                        <img class="fiche-photo-carousel" src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_2']; ?>" >
-                                        </div>
-
-                                <?php }if($photo['img_3']!=""){
-                        ?>
-
-                                        <div class="slides<?= $photo['id_fiche']; ?>">
-                                        <img class="fiche-photo-carousel" src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_3']; ?>" >
-                                        </div>
-
-                                <?php }if($photo['img_4']!=""){
-                        ?>
-
-                                        <div class="slides<?= $photo['id_fiche']; ?>">
-                                        <img class="fiche-photo-carousel" src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_4']; ?>" >
-                                        </div>
-
-                                <?php }if($photo['img_5']!=""){
-                        ?>
-
-                                        <div class="slides<?= $photo['id_fiche']; ?>">
-                                        <img class="fiche-photo-carousel" src="../../library/voitures/<?= $modele['nom']; ?>/<?= $photo['id_fiche']; ?>/<?= $photo['img_5']; ?>" >
-                                        </div>
-
-                                <?php }
-                        ?>
-
-                                <a class="prev" onclick="plusSlides<?= $photo['id_fiche']; ?>(-1)">&#10094;</a>
-                                <a class="next" onclick="plusSlides<?= $photo['id_fiche']; ?>(1)">&#10095;</a>
-                                </div>
-
-                                <script>
-
-                                let slideIndex<?= $photo['id_fiche']; ?> = 1;
-                                showSlides<?= $photo['id_fiche']; ?>(slideIndex<?= $photo['id_fiche']; ?>);
-
-
-                                function plusSlides<?= $photo['id_fiche']; ?>(n) {
-                                showSlides<?= $photo['id_fiche']; ?>(slideIndex<?= $photo['id_fiche']; ?> += n);
-                                }
-
-                                function currentSlide<?= $photo['id_fiche']; ?>(n) {
-                                showSlides<?= $photo['id_fiche']; ?>(slideIndex<?= $photo['id_fiche']; ?> = n);
-                                }
-
-                                function showSlides<?= $photo['id_fiche']; ?>(n) {
-                                let slides = document.getElementsByClassName('slides<?= $photo['id_fiche']; ?>');
-                                
-                                if(n > slides.length) { slideIndex<?= $photo['id_fiche']; ?> = 1 }
-                                
-                                if(n < 1 ) { slideIndex<?= $photo['id_fiche']; ?> = slides.length }
-                                
-                                // Cacher toutes les slides
-                                for(let i = 0; i < slides.length; i++) {
-                                slides[i].style.display = "none";
-                                }
-                                
-                                
-                                // Afficher la slide demandée
-                                slides[slideIndex<?= $photo['id_fiche']; ?> - 1].style.display = 'block';
-                                
-                                }
-
-                                </script>
-        <?php
-                        }
-                
+        // Créer un tableau pour les autres photos
+        $otherPhotos = [];
+        while ($photo = $getPhotos->fetch()) {
+            $otherPhotos[] = $photo;
         }
 
+        ?>
+
+        <div class="carrousel-container">
+            <div class="main-image-container">
+                <button class="nav-button left" onclick="previousImage()">&#10094;</button>
+                <img id="main-image" class="main-image" src="../../library/voitures/<?= htmlspecialchars($modele['NOM_MODELE']); ?>/<?= $firstPhoto['ID_FICHE']; ?>/<?= htmlspecialchars($firstPhoto['IMAGE_URL']); ?>" alt="Main Image">
+                <button class="nav-button right" onclick="nextImage()">&#10095;</button>
+            </div>
+
+            <!-- Gallery with the first three images -->
+            <div class="gallery-container">
+                <?php for ($i = 0; $i < min(3, count($otherPhotos)); $i++) :
+                    $photo = $otherPhotos[$i];
+                    $imageArray[] = "'../../library/voitures/" . htmlspecialchars($modele['NOM_MODELE']) . "/" . $photo['ID_FICHE'] . "/" . htmlspecialchars($photo['IMAGE_URL']) . "'";
+                    ?>
+                    <div class="img-thumbnail" onclick="showImage(<?= $i+1; ?>)">
+                        <img src="../../library/voitures/<?= htmlspecialchars($modele['NOM_MODELE']); ?>/<?= $photo['ID_FICHE']; ?>/<?= htmlspecialchars($photo['IMAGE_URL']); ?>" alt="Thumbnail">
+                    </div>
+                <?php endfor; ?>
+            </div>
+        </div>
+
+        <!-- Remaining images displayed below -->
+        <div class="remaining-gallery">
+            <?php
+            // Afficher les autres images en dessous
+            for ($i = 3; $i < count($otherPhotos); $i++) {
+                $photo = $otherPhotos[$i];
+                $imageArray[] = "'../../library/voitures/" . htmlspecialchars($modele['NOM_MODELE']) . "/" . $photo['ID_FICHE'] . "/" . htmlspecialchars($photo['IMAGE_URL']) . "'";
+                ?>
+                <div class="img-thumbnail-below" onclick="showImage(<?= $i+1; ?>)">
+                    <img src="../../library/voitures/<?= htmlspecialchars($modele['NOM_MODELE']); ?>/<?= $photo['ID_FICHE']; ?>/<?= htmlspecialchars($photo['IMAGE_URL']); ?>" alt="Thumbnail">
+                </div>
+            <?php } ?>
+        </div>
+
+        <?php
+    } // Fin de la vérification d'image
+    ?>
+
+
+
+
+    <?php
 }else{
         echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
 }        
@@ -433,7 +358,10 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 <br>
 
 
-
+    <script>
+        const images = [<?= implode(',', $imageArray); ?>];
+    </script>
+<script src="../scripts/scriptFiche/nav_carrousel.js"></script>
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
 

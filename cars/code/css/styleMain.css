@@ -200,7 +200,7 @@ body{
     font-size: 2rem;
     font-weight: bolder;
     text-align: center;
-    color: #463232;
+    color: var(--secondary-color);
   }
   article h2{
     margin-top: -35px;
@@ -665,7 +665,6 @@ body{
 .image-thumbnail {
   width: 192px; /* Largeur fixe pour les miniatures */
   height: 108px; /* Hauteur fixe pour les miniatures */
-  border: 2px solid #ccc;
   margin: 0 5px;
   position: relative;
   overflow: hidden;
@@ -854,7 +853,7 @@ input.addFiche{
   color: var(--accent-color-yellow);
 }
 
-zegzg
+
 
   /*---------------- DASHBOARD ----------------------*/
 

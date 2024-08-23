@@ -69,7 +69,7 @@ require('../actions/actionsDashboard/actionsDashboardFiches/actionDashboardFiche
                     <tbody id="fichesTable">
                     <?php
                     $getAllFiches = $bdd->query('
-                        SELECT FICHE.id, 
+SELECT FICHE.id, 
        FICHE.NOM_FICHE, 
        MODELE.NOM_MODELE AS modele_nom, 
        CONSTRUCTEUR.NOM_CONSTRUCTEUR AS constructeur_nom, 
@@ -84,23 +84,14 @@ FROM FICHE
 JOIN MODELE ON FICHE.ID_MODELE = MODELE.id
 JOIN CONSTRUCTEUR ON FICHE.ID_CONSTRUCTEUR = CONSTRUCTEUR.id
 JOIN GROUPE AS groupes_constructeurs ON CONSTRUCTEUR.id_groupe = groupes_constructeurs.id
-JOIN TYPE ON FICHE.ID_TYPE = TYPE.id
+JOIN FICHE_TYPE ON FICHE.id = FICHE_TYPE.ID_FICHE
+JOIN TYPE ON FICHE_TYPE.ID_TYPE = TYPE.id
 JOIN SEGMENT ON FICHE.ID_SEGMENT = SEGMENT.id
 JOIN ANNEE AS annee_debut ON FICHE.ID_ANNEE_DEBUT = annee_debut.id
 JOIN ANNEE AS annee_fin ON FICHE.ID_ANNEE_FIN = annee_fin.id
 JOIN UTILISATEUR ON FICHE.ID_UTILISATEUR = UTILISATEUR.id
-GROUP BY FICHE.id, 
-         FICHE.NOM_FICHE, 
-         MODELE.NOM_MODELE, 
-         CONSTRUCTEUR.NOM_CONSTRUCTEUR, 
-         groupes_constructeurs.NOM_GROUPE, 
-         TYPE.NOM_TYPE, 
-         SEGMENT.NOM_SEGMENT, 
-         annee_debut.NOM_ANNEE, 
-         annee_fin.NOM_ANNEE, 
-         UTILISATEUR.PSEUDO_UTILISATEUR, 
-         FICHE.DATE_AJOUT
-ORDER BY FICHE.NOM_FICHE;
+GROUP BY FICHE_TYPE.ID_FICHE;
+
 ');
 
                     while ($fiche = $getAllFiches->fetch()) {

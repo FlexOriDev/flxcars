@@ -16,6 +16,7 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="../scripts/scriptAjouteFiche/scriptAjouteFiche_pictures.js"></script>
 
 </head>
 <!--------------------------------------------CONTENT------------------------------------------------------>
@@ -34,7 +35,6 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                 <?php if(isset($errorMsg)){ echo '<br><p class="error-ajout-fiche">'.$errorMsg.'</p>'; } ?>
                 <br>
                 <div class="register-top-grid">
-                    <h3 class="text-ajout-fiche">Publier une fiche</h3>
                     <br>
                     <!-- NOM -->
                     <div class="input-container">
@@ -53,8 +53,7 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                     <div class="rowMetriques" id="rowMetriques">
                         <div class="columnMetriques">
                             <div class="custom-select">
-                                <select id="selectType" name="selectedType">
-                                    <option value="" disabled selected>Type * </option>
+                                <select id="selectType" name="selectedTypes[]" multiple="multiple">
                                     <?php
                                     // Requête SQL pour récupérer les types depuis la base de données
                                     $getAllTypes = $bdd->query('SELECT * FROM TYPE ORDER BY NOM_TYPE');
@@ -69,6 +68,15 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                                 </select>
                             </div>
                         </div>
+                        <script>
+                            $(document).ready(function() {
+                                $('#selectType').select2({
+                                    placeholder: "Sélectionnez un ou plusieurs types",
+                                    closeOnSelect: false, // Permet de laisser le menu ouvert après une sélection
+                                    allowClear: true
+                                });
+                            });
+                        </script>
                         <div class="columnMetriques">
                             <div class="custom-select">
                                 <select id="selectAnneeSortie" name="selectedAnneeSortie">
@@ -248,53 +256,39 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                     <!-- PICTURES -->
                     <span class="span-ajout-fiche">Images * <label> :</label></span>
 
-                    <div class="image-thumbnails">
-                        <!-- Les inputs file sont ajoutés pour chaque miniature -->
-                        <input type="file" id="fileInput1" name="image1" style="display:none;" accept="image/*" onchange="handleFileUpload(1)" />
-                        <div class="image-thumbnail" id="thumbnail1" onclick="openFileSelector(1)">
-                            <img id="previewImage1" class="image-upload" src="../../library/imgFioritures/upload_icon.png" alt="Upload Icon" />
+                    <div class="image-upload-container">
+                        <div class="central-image">
+                            <img id="centralImage" src="../../library/imgFioritures/upload_icon.png" alt="Central Image" />
                         </div>
-                        <input type="file" id="fileInput2" name="image2" style="display:none;" accept="image/*" onchange="handleFileUpload(2)" />
-                        <div class="image-thumbnail" id="thumbnail2" onclick="openFileSelector(2)">
-                            <img id="previewImage2" class="image-upload" src="../../library/imgFioritures/upload_icon.png" alt="Upload Icon" />
+                        <div class="image-gallery">
+
+                            <div id="galleryContainer" class="gallery-container">
+                                <!-- Encart pour ajouter une nouvelle image -->
+                                <div class="thumbnail-container add-new-image" onclick="openFileSelector()">
+                                    <p>Ajouter une image</p>
+                                </div>
+                            </div>
                         </div>
-                        <input type="file" id="fileInput3" name="image3" style="display:none;" accept="image/*" onchange="handleFileUpload(3)" />
-                        <div class="image-thumbnail" id="thumbnail3" onclick="openFileSelector(3)">
-                            <img id="previewImage3" class="image-upload" src="../../library/imgFioritures/upload_icon.png" alt="Upload Icon" />
-                        </div>
-                        <input type="file" id="fileInput4" name="image4" style="display:none;" accept="image/*" onchange="handleFileUpload(4)" />
-                        <div class="image-thumbnail" id="thumbnail4" onclick="openFileSelector(4)">
-                            <img id="previewImage4" class="image-upload" src="../../library/imgFioritures/upload_icon.png" alt="Upload Icon" />
-                        </div>
-                        <input type="file" id="fileInput5" name="image5" style="display:none;" accept="image/*" onchange="handleFileUpload(5)" />
-                        <div class="image-thumbnail" id="thumbnail5" onclick="openFileSelector(5)">
-                            <img id="previewImage5" class="image-upload" src="../../library/imgFioritures/upload_icon.png" alt="Upload Icon" />
-                        </div>
-                        <input type="file" id="fileInput6" name="image6" style="display:none;" accept="image/*" onchange="handleFileUpload(6)" />
-                        <div class="image-thumbnail" id="thumbnail6" onclick="openFileSelector(6)">
-                            <img id="previewImage6" class="image-upload" src="../../library/imgFioritures/upload_icon.png" alt="Upload Icon" />
-                        </div>
+
                     </div>
 
-                    <div class="container-ajoutFiche">
-                        <div class="selected-images-container">
-                            <!-- Conteneur pour les miniatures des images sélectionnées -->
-                        </div>
-                        <div class="slides-container-ajoutFiche" id="slidesContainer">
-                            <!-- Slides -->
-                        </div>
-                        <button class="prevAjoutfiche"  type="button" onclick="prevSlide()">&#10094;</button>
-                        <button class="nextAjoutfiche"  type="button" onclick="nextSlide()">&#10095;</button>
-                    </div>
+                    <input type="file" id="fileInput" style="display:none;" accept="image/*" onchange="handleFileUpload()" />
 
-                    <script src="../scripts/scriptAjouteFiche/scriptAjouteFiche_pictures.js"></script>
+                    <!-- Champ caché pour les URLs des images -->
+                    <input type="hidden" name="galleryImagesInput" id="galleryImagesInput" value='[]'>
+                    <input type="hidden" name="deletedImagesInput" id="deletedImagesInput" value='[]'>
+
+
+                    <div id="fileInputsContainer" style="display:none;"></div>
+
+
 
                     <br>
                     <br><br><br>
                     <br>
                     <div class="clear"> </div>
                     <div class="register-but">
-                        <input type="submit" value="Publier" name="validate" class="custom-button">
+                        <input type="submit" value="Publier" name="validate" class="custom-button" onclick="submitForm()">
                         <div class="clear"> </div>
                         <br><br><br><br><br><br><br><br><br>
                     </div>
