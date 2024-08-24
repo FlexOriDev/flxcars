@@ -1,0 +1,74 @@
+/* Fichier: styleModifierFiche.css */
+
+/* Style pour centrer le contenu */
+
+
+/* Conteneur pour centrer le contenu */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre le contenu horizontalement */
+    width: 100%;
+    max-width: 800px; /* Largeur maximale pour le conteneur */
+    margin: 0 auto; /* Centre le conteneur sur la page */
+}
+
+/* Style pour la barre de recherche */
+#searchBar {
+    width: 100%; /* Utilise la largeur maximale du conteneur */
+    padding: 10px;
+    margin-bottom: 20px; /* Espace sous la barre de recherche */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+td {
+    width: auto;
+    word-wrap: break-word;
+}
+
+a.btn {
+    display: block; /* Affiche le bouton en tant que bloc pour qu'il occupe toute la largeur de la cellule */
+    width: 100%; /* Largeur du bouton à 100% pour remplir la cellule */
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #fff;
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+    text-align: center;
+    outline: none !important; /* Supprime le contour bleu lors du focus */
+    border: none!important; /* Supprime les bordures */
+}
+
+a.btn:hover {
+    background-color: var(--primary-color);
+    outline: none !important;
+    border: none!important; /* Supprime les bordures */
+}
+
+a.btn:focus {
+    outline: none !important; /* Supprime le contour bleu lors du focus via clavier */
+    border: none!important; /* Supprime les bordures */
+}

@@ -402,3 +402,4 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 <!--------------------------------------------MAIN------------------------------------------------------>
 
 <?php require '../includesHeaderFooter/includeFooter.php'; ?>
+

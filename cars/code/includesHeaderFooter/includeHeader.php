@@ -107,7 +107,8 @@
                             if(isAdmin()){
                             ?>
                                 <li><a href="../pages/pageDashboardConstructeurs.php">Dashboard</a></li>
-                            <li><a href="../pages/pageAjouteFiche.php">Ajouter un fiche</a></li>
+                                <li><a href="../pages/pageAjouteFiche.php">Ajouter une fiche</a></li>
+                                <li><a href="../pages/pageModifierFiche.php">Modifier une fiche</a></li>
                                 <?php
                             }
                             ?>

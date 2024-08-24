@@ -64,12 +64,14 @@ if (isset($_GET['id_annee']) && !empty($_GET['id_annee'])) {
 }
 
 // Construction de la requête SQL
-$sql = "SELECT f.*, c.NOM_CONSTRUCTEUR, m.NOM_MODELE, a.NOM_ANNEE
+$sql = "SELECT f.ID, f.NOM_FICHE, c.NOM_CONSTRUCTEUR, m.NOM_MODELE, a.NOM_ANNEE,
+               GROUP_CONCAT(DISTINCT i.IMAGE_URL ORDER BY i.IMAGE_URL SEPARATOR ',') AS image_urls
         FROM FICHE f
         LEFT JOIN CONSTRUCTEUR c ON f.ID_CONSTRUCTEUR = c.ID
         LEFT JOIN MODELE m ON f.ID_MODELE = m.ID
         LEFT JOIN ANNEE a ON f.ID_ANNEE_DEBUT = a.ID
-        LEFT JOIN FICHE_TYPE ft ON f.ID = ft.ID_FICHE";
+        LEFT JOIN FICHE_TYPE ft ON f.ID = ft.ID_FICHE
+        LEFT JOIN IMAGE i ON f.ID = i.ID_FICHE";
 
 // Ajout des conditions à la requête SQL si des filtres sont appliqués
 if (!empty($conditions) || !empty($searchCondition)) {
@@ -84,6 +86,9 @@ if (!empty($conditions) || !empty($searchCondition)) {
         $sql .= $searchCondition;
     }
 }
+
+// Ajout de la clause GROUP BY pour éviter la duplication des fiches
+$sql .= " GROUP BY f.ID";
 
 // Gestion du tri
 $sort = isset($_GET['sort']) ? $_GET['sort'] : ''; // Récupérer le paramètre de tri
@@ -108,6 +113,8 @@ switch ($sort) {
 // Exécution de la requête avec les paramètres
 $getAllFiches = $bdd->prepare($sql);
 $getAllFiches->execute($params);
+
+
 
 // Affichage des résultats
 if ($getAllFiches->rowCount() > 0) {

@@ -69,39 +69,47 @@ require('../actions/actionsDashboard/actionsDashboardFiches/actionDashboardFiche
                     <tbody id="fichesTable">
                     <?php
                     $getAllFiches = $bdd->query('
-SELECT FICHE.id, 
-       FICHE.NOM_FICHE, 
-       MODELE.NOM_MODELE AS modele_nom, 
-       CONSTRUCTEUR.NOM_CONSTRUCTEUR AS constructeur_nom, 
-       groupes_constructeurs.NOM_GROUPE AS groupe_nom, 
-       TYPE.NOM_TYPE AS type_nom, 
-       SEGMENT.NOM_SEGMENT AS segment_nom, 
-       annee_debut.NOM_ANNEE AS annee_nom, 
-       annee_fin.NOM_ANNEE AS annee_fin_nom, 
-       UTILISATEUR.PSEUDO_UTILISATEUR AS user_nom, 
-       FICHE.DATE_AJOUT
-FROM FICHE
-JOIN MODELE ON FICHE.ID_MODELE = MODELE.id
-JOIN CONSTRUCTEUR ON FICHE.ID_CONSTRUCTEUR = CONSTRUCTEUR.id
-JOIN GROUPE AS groupes_constructeurs ON CONSTRUCTEUR.id_groupe = groupes_constructeurs.id
-JOIN FICHE_TYPE ON FICHE.id = FICHE_TYPE.ID_FICHE
-JOIN TYPE ON FICHE_TYPE.ID_TYPE = TYPE.id
-JOIN SEGMENT ON FICHE.ID_SEGMENT = SEGMENT.id
-JOIN ANNEE AS annee_debut ON FICHE.ID_ANNEE_DEBUT = annee_debut.id
-JOIN ANNEE AS annee_fin ON FICHE.ID_ANNEE_FIN = annee_fin.id
-JOIN UTILISATEUR ON FICHE.ID_UTILISATEUR = UTILISATEUR.id
-GROUP BY FICHE_TYPE.ID_FICHE;
-
+    SELECT FICHE.id, 
+           FICHE.NOM_FICHE, 
+           MODELE.NOM_MODELE AS modele_nom, 
+           CONSTRUCTEUR.NOM_CONSTRUCTEUR AS constructeur_nom, 
+           groupes_constructeurs.NOM_GROUPE AS groupe_nom, 
+           SEGMENT.NOM_SEGMENT AS segment_nom, 
+           annee_debut.NOM_ANNEE AS annee_nom, 
+           annee_fin.NOM_ANNEE AS annee_fin_nom, 
+           UTILISATEUR.PSEUDO_UTILISATEUR AS user_nom, 
+           FICHE.DATE_AJOUT
+    FROM FICHE
+    JOIN MODELE ON FICHE.ID_MODELE = MODELE.id
+    JOIN CONSTRUCTEUR ON FICHE.ID_CONSTRUCTEUR = CONSTRUCTEUR.id
+    JOIN GROUPE AS groupes_constructeurs ON CONSTRUCTEUR.id_groupe = groupes_constructeurs.id
+    JOIN SEGMENT ON FICHE.ID_SEGMENT = SEGMENT.id
+    JOIN ANNEE AS annee_debut ON FICHE.ID_ANNEE_DEBUT = annee_debut.id
+    JOIN ANNEE AS annee_fin ON FICHE.ID_ANNEE_FIN = annee_fin.id
+    JOIN UTILISATEUR ON FICHE.ID_UTILISATEUR = UTILISATEUR.id
 ');
 
-                    while ($fiche = $getAllFiches->fetch()) {
+                    while ($fiche = $getAllFiches->fetch(PDO::FETCH_ASSOC)) {
+                        // Préparer et exécuter la requête pour obtenir les types de la fiche
+                        $stmt = $bdd->prepare('
+        SELECT TYPE.NOM_TYPE AS type_nom
+        FROM FICHE_TYPE
+        JOIN TYPE ON FICHE_TYPE.ID_TYPE = TYPE.id
+        WHERE FICHE_TYPE.ID_FICHE = :fiche_id
+    ');
+                        $stmt->execute(['fiche_id' => $fiche['id']]);
+
+                        // Récupérer tous les types
+                        $types = $stmt->fetchAll(PDO::FETCH_COLUMN);
+                        $typesList = implode(', ', $types); // Convertir le tableau en une chaîne
+
                         echo '<tr class="dashboard-table-row">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($fiche['id']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-name">' . htmlspecialchars($fiche['NOM_FICHE']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-modele">' . htmlspecialchars($fiche['modele_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-constructeur">' . htmlspecialchars($fiche['constructeur_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-groupe">' . htmlspecialchars($fiche['groupe_nom']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-type">' . htmlspecialchars($fiche['type_nom']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-type">' . htmlspecialchars($typesList) . '</td>'; // Afficher les types concaténés
                         echo '<td class="dashboard-table-cell dashboard-table-segment">' . htmlspecialchars($fiche['segment_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-annee">' . htmlspecialchars($fiche['annee_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-annee-fin">' . htmlspecialchars($fiche['annee_fin_nom']) . '</td>';
@@ -116,6 +124,7 @@ GROUP BY FICHE_TYPE.ID_FICHE;
                         echo '</tr>';
                     }
                     ?>
+
                     </tbody>
                 </table>
                 <br><br><br><br><br>
@@ -132,5 +141,3 @@ GROUP BY FICHE_TYPE.ID_FICHE;
     }
 </script>
 <?php require '../includesHeaderFooter/includeFooter.php'; ?>
-</body>
-</html>
