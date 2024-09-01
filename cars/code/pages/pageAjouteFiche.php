@@ -24,7 +24,6 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
 
     <article id="article-1">
         <h1>Ajouter une fiche</h1>
-
     </article>
 
     <div class="main">
@@ -277,8 +276,6 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                     <!-- Champ caché pour les URLs des images -->
                     <input type="hidden" name="galleryImagesInput" id="galleryImagesInput" value='[]'>
                     <input type="hidden" name="deletedImagesInput" id="deletedImagesInput" value='[]'>
-
-
                     <div id="fileInputsContainer" style="display:none;"></div>
 
 
@@ -299,10 +296,6 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
         <div class="clear"></div>
 
     </div><!-- fin de la partie contenu -->
-
-    <?php
-
-    ?>
 
 </main>
 <!--------------------------------------------FOOTER------------------------------------------------------>

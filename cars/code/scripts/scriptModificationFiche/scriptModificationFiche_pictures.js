@@ -1,28 +1,37 @@
 let galleryImages = [];
-let imageCounter = 1;  // Compteur pour suivre le nombre d'images ajoutées
+// Utiliser DOMContentLoaded comme alternative
+if (typeof existingImages !== 'undefined' && existingImages.length > 0) {
+
+    // Ajouter toutes les images à la galerie
+    existingImages.forEach((image, index) => {
+        // Définir la première image comme principale
+        const setAsMain = index === 0;
+        addToGallery(image.url, image.id, setAsMain);
+    });
+} else {
+    console.error("existingImages is undefined or empty");
+}
+
+
+let imageCounter = galleryImages.length > 0 ? galleryImages.length + 1 : 1;
+console.log("counter = " + imageCounter);
 
 // Fonction pour ouvrir le sélecteur de fichiers
 function openFileSelector() {
-    // Crée un nouvel input de fichier de manière dynamique
     const newFileInput = document.createElement('input');
     newFileInput.type = 'file';
-    newFileInput.name = 'image' + imageCounter;  // Nom unique pour chaque image
+    newFileInput.name = 'image' + imageCounter;
     newFileInput.style.display = 'none';
     newFileInput.accept = 'image/*';
-    newFileInput.dataset.imageId = imageCounter;  // Associe un ID à l'image
+    newFileInput.dataset.imageId = imageCounter;
 
-    // Ajoute le nouvel input dans le DOM
     document.getElementById('fileInputsContainer').appendChild(newFileInput);
 
-    // Attacher l'événement onchange directement à cet input dynamique
     newFileInput.addEventListener('change', function() {
         handleFileUpload(this);
     });
 
-    // Ouvre le sélecteur de fichiers
     newFileInput.click();
-
-    // Incrémente le compteur pour le prochain input
     imageCounter++;
 }
 
@@ -34,7 +43,6 @@ function handleFileUpload(inputElement) {
             const reader = new FileReader();
             reader.onload = function(e) {
                 const imageUrl = e.target.result;
-                // Ajouter l'image à la galerie et définir comme image principale
                 addToGallery(imageUrl, inputElement.dataset.imageId, true);
             };
             reader.readAsDataURL(file);
@@ -44,14 +52,13 @@ function handleFileUpload(inputElement) {
 
 // Fonction pour ajouter une image à la galerie
 function addToGallery(imageUrl, imageId, setAsMain) {
+
     const galleryContainer = document.getElementById('galleryContainer');
 
-    // Créer un conteneur pour la miniature
     const thumbnailContainer = document.createElement('div');
     thumbnailContainer.className = 'thumbnail-container';
-    thumbnailContainer.dataset.imageId = imageId;  // Associe le conteneur à l'ID de l'image
+    thumbnailContainer.dataset.imageId = imageId;
 
-    // Créer l'image miniature
     const imgElement = document.createElement('img');
     imgElement.src = imageUrl;
     imgElement.alt = 'Gallery Image';
@@ -59,7 +66,6 @@ function addToGallery(imageUrl, imageId, setAsMain) {
         document.getElementById('centralImage').src = imageUrl;
     };
 
-    // Créer le bouton de suppression
     const removeBtn = document.createElement('button');
     removeBtn.className = 'remove-btn';
     removeBtn.innerHTML = '&times;';
@@ -67,62 +73,75 @@ function addToGallery(imageUrl, imageId, setAsMain) {
         removeImage(thumbnailContainer, imageUrl, imageId);
     };
 
-    // Ajouter l'image et le bouton au conteneur de la miniature
     thumbnailContainer.appendChild(imgElement);
     thumbnailContainer.appendChild(removeBtn);
 
-    // Ajouter le conteneur de la miniature à la galerie
     galleryContainer.appendChild(thumbnailContainer);
 
-    // Ajouter l'URL de l'image au tableau
     galleryImages.push({ url: imageUrl, id: imageId });
 
-    // Définir l'image principale si nécessaire
     if (setAsMain) {
         document.getElementById('centralImage').src = imageUrl;
     }
 
-    // Convertir le tableau en JSON et mettre à jour le champ caché
     updateGalleryImagesInput();
 }
 
 // Fonction pour supprimer une image de la galerie
 function removeImage(thumbnailContainer, imageUrl, imageId) {
     const galleryContainer = document.getElementById('galleryContainer');
-    // Retirer l'image du tableau des images
     galleryImages = galleryImages.filter(image => image.id !== imageId);
 
-    // Ajouter l'image ID supprimée dans un champ caché pour la synchronisation côté serveur
     const deletedImagesInput = document.getElementById('deletedImagesInput');
     const deletedImages = JSON.parse(deletedImagesInput.value || '[]');
     deletedImages.push(imageId);
     deletedImagesInput.value = JSON.stringify(deletedImages);
 
-    // Supprimer l'input correspondant
     const inputToRemove = document.querySelector(`#fileInputsContainer input[data-image-id='${imageId}']`);
     if (inputToRemove) {
         inputToRemove.remove();
     }
 
-    // Retirer le conteneur de la miniature de la galerie
     galleryContainer.removeChild(thumbnailContainer);
+
+
 
     // Si l'image centrale est celle qui a été supprimée, réinitialiser l'image centrale
     const centralImage = document.getElementById('centralImage');
-    if (centralImage.src === imageUrl) {
-        centralImage.src = '../../library/imgFioritures/upload_icon.png'; // Image par défaut
-        // Si possible, définir la première image restante comme centrale
-        if (galleryImages.length > 0) {
-            document.getElementById('centralImage').src = galleryImages[0].url;
+
+
+
+    var imageGallerie = imageUrl;
+
+    var urlComplete = window.location.href;
+
+    var pattern = "/code/";
+    var pattern2 = "../../";
+
+    // Trouve l'index du motif
+    var index = urlComplete.indexOf(pattern);
+    var index2 = imageGallerie.indexOf(pattern2);
+
+    // Si le motif est trouvé, on garde la partie de l'URL jusqu'à ce motif (non inclus)
+    if (index !== -1 && index2 !== -1) {
+        var baseUrl = urlComplete.substring(0, index);
+        var reste = imageGallerie.substring(5, imageGallerie.length);
+        imageUrlReal = baseUrl+reste;
+        console.log('RATIO : '+ imageUrlReal);
+        console.log('RATIO2 : '+ centralImage.src);
+        if (centralImage.src === imageUrlReal) {
+            centralImage.src = '../../library/imgFioritures/upload_icon.png'; // Image par défaut
+            // Si possible, définir la première image restante comme centrale
+            if (galleryImages.length > 0) {
+                document.getElementById('centralImage').src = galleryImages[0].url;
+            }
         }
+    } else {
+        console.log("Motif non trouvé dans l'URL.");
     }
 
-    // Convertir le tableau en JSON et mettre à jour le champ caché
     updateGalleryImagesInput();
 }
-
-
-
 
 // Fonction pour mettre à jour le champ caché avec les URLs des images restantes
 function updateGalleryImagesInput() {
@@ -130,17 +149,16 @@ function updateGalleryImagesInput() {
     document.getElementById('galleryImagesInput').value = galleryImagesJson;
 }
 
-
 // Fonction pour soumettre le formulaire
 function submitForm() {
-    // Convertir galleryImages en JSON et mettre à jour le champ caché
     updateGalleryImagesInput();
-    // Soumettre le formulaire
     document.querySelector('form').submit();
 }
 
 // Ajouter un gestionnaire d'événements pour la soumission du formulaire
 document.querySelector('input[name="validate"]').addEventListener('click', function(event) {
-    event.preventDefault(); // Empêcher la soumission normale du formulaire
-    submitForm(); // Soumettre le formulaire après avoir mis à jour les champs cachés
+    event.preventDefault();
+    submitForm();
 });
+
+

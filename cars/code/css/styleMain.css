@@ -21,6 +21,10 @@ body{
     font-size: 100%
   }
 
+.debug{
+  color: red!important;
+}
+
   p {
     font-size: 1em;
     line-height: 1em;;

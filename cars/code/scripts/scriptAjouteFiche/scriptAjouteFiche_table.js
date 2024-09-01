@@ -29,3 +29,21 @@ $(document).ready(function() {
         initialRowCount++; // Mettre à jour le nombre de lignes
     });
 });
+function removeVersion(button, id) {
+    console.log("id : "+id);
+    // Supprimer la ligne du tableau
+    var row = button.closest('tr');
+    row.remove();
+
+    // Ajouter l'ID à supprimer dans le champ caché
+    var idsToDeleteField = document.getElementById('ids_to_delete');
+
+    // Vérifier si l'ID est déjà dans la liste
+    var currentIds = idsToDeleteField.value ? idsToDeleteField.value.split(',') : [];
+
+    if (!currentIds.includes(id.toString())) {
+        currentIds.push(id); // Ajouter l'ID s'il n'est pas encore dans la liste
+        idsToDeleteField.value = currentIds.join(',');
+    }
+}
+
