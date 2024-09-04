@@ -5,6 +5,7 @@ if (session_id() == '') {
 // Connexion à la base de données
 require('../actions/database.php');
 require('../actions/utils/pictures.php');
+require('../actions/utils/deleteDirectoryRecursively.php');
 //-------------------------------MODIFICATION BDD------------------------------------//
 
 $selectedTypes = isset($_POST['selectedTypes']) ? $_POST['selectedTypes'] : [];
@@ -17,6 +18,19 @@ if (isset($_POST['validate'])) {
         && !empty($_POST['selectedConstructeur']) && !empty($_POST['resume']) && !empty($_POST['editor'])
     ){
         //-------------------------------FICHE INSERT------------------------------------//
+
+        // Récupérer le modèle actuel avant modification
+        $getOldModel = $bdd->prepare('SELECT ID_MODELE FROM FICHE WHERE ID = ?');
+        $getOldModel->execute(array($idFiche));
+        $oldModelArray = $getOldModel->fetch();
+        $oldModel = $oldModelArray['ID_MODELE'];
+
+        // Récupérer le nom du modèle
+        $getNomModele = $bdd->prepare('SELECT NOM_MODELE FROM MODELE WHERE ID = ?');
+        $getNomModele->execute(array($oldModel));
+        $modeleArray = $getNomModele->fetch();
+        $modele = $modeleArray['NOM_MODELE'];
+
         //definition des champs à inserer
         $fiche_nom = htmlspecialchars($_POST['nom']);
         $fiche_annee_sortie = htmlspecialchars($_POST['selectedAnneeSortie']);
@@ -27,6 +41,12 @@ if (isset($_POST['validate'])) {
         $fiche_resume = htmlspecialchars($_POST['resume']);
         $fiche_histoire = $_POST['editor'];
         $formated_DATETIME = date('Y-m-d H:i:s');
+
+        // Récupérer le nom du modèle
+        $getNomModele = $bdd->prepare('SELECT NOM_MODELE FROM MODELE WHERE ID = ?');
+        $getNomModele->execute(array($fiche_modele));
+        $modeleArray = $getNomModele->fetch();
+        $modeleNew = $modeleArray['NOM_MODELE'];
 
         // Insertion dans la table FICHE
 
@@ -60,10 +80,30 @@ if (isset($_POST['validate'])) {
 
         //-------------------------------TYPES INSERT------------------------------------//
 
-        // Insérer chaque type sélectionné dans la table FICHE_TYPE
+        // Récupérer les ID_TYPE déjà existants pour la fiche donnée
+        $existingTypesQuery = $bdd->prepare('SELECT ID_TYPE FROM FICHE_TYPE WHERE ID_FICHE = ?');
+        $existingTypesQuery->execute(array($idFiche));
+        $existingTypes = $existingTypesQuery->fetchAll(PDO::FETCH_COLUMN, 0); // Récupère uniquement la colonne ID_TYPE
+
+        // Préparer les requêtes d'insertion et de suppression
         $insertFicheType = $bdd->prepare('INSERT INTO FICHE_TYPE (ID_FICHE, ID_TYPE) VALUES (?, ?)');
+        $deleteFicheType = $bdd->prepare('DELETE FROM FICHE_TYPE WHERE ID_FICHE = ? AND ID_TYPE = ?');
+
+        // Boucle sur les types sélectionnés pour ajouter ceux qui manquent
         foreach ($selectedTypes as $fiche_type) {
-            $insertFicheType->execute(array($idFiche, htmlspecialchars($fiche_type)));
+            $fiche_type = htmlspecialchars($fiche_type); // Nettoyage des données
+            // Si le type n'est pas déjà présent pour cette fiche, on l'ajoute
+            if (!in_array($fiche_type, $existingTypes)) {
+                $insertFicheType->execute(array($idFiche, $fiche_type));
+            }
+        }
+
+        // Boucle sur les types existants pour supprimer ceux qui ne sont plus sélectionnés
+        foreach ($existingTypes as $existingType) {
+            // Si un type existant n'est pas dans les types sélectionnés, on le supprime
+            if (!in_array($existingType, $selectedTypes)) {
+                $deleteFicheType->execute(array($idFiche, $existingType));
+            }
         }
 
         //-------------------------------VERIONS INSERT------------------------------------//
@@ -123,16 +163,41 @@ if (isset($_POST['validate'])) {
         }
             //-------------------------------IMAGES------------------------------------//
 
+            // Déplacer les images si le modèle a changé
+            if ($oldModel !== $fiche_modele) {
+                $oldFolder = "../../library/voitures/" . $modele . "/" . $idFiche . "/";
+                $oldFolderToRemove = "../../library/voitures/" . $modele . "/";
+                $newFolder = "../../library/voitures/" . $modeleNew . "/" . $idFiche . "/";
+
+                if (file_exists($oldFolder)) {
+                    if (!file_exists($newFolder)) {
+                        mkdir($newFolder, 0777, true);
+                    }
+
+                    // Déplacer les images
+                    $images = glob($oldFolder . "*");
+                    foreach ($images as $image) {
+                        $imageName = basename($image);
+                        rename($image, $newFolder . $imageName);
+                    }
+
+                    // Supprimer l'ancien répertoire s'il est vide
+                    if (count(glob($oldFolder . '*')) === 0) {
+                        deleteDirectoryRecursively($oldFolder);
+                    }
+                    if (count(glob($oldFolderToRemove . '*')) === 0) {
+                        deleteDirectoryRecursively($oldFolderToRemove);
+                    }
+
+                }
+            }
+
             // Requête pour obtenir les images existantes de la fiche
             $getImages = $bdd->prepare('SELECT ID, IMAGE_URL FROM IMAGE WHERE ID_FICHE = ?');
             $getImages->execute([$idFiche]);
             $existingImages = $getImages->fetchAll(PDO::FETCH_ASSOC);
 
-            // Récupérer le nom du modèle
-            $getNomModele = $bdd->prepare('SELECT NOM_MODELE FROM MODELE WHERE ID = ?');
-            $getNomModele->execute(array($fiche_modele));
-            $modeleArray = $getNomModele->fetch();
-            $modele = $modeleArray['NOM_MODELE'];
+
 
             // Obtenir les IDs des images à supprimer depuis le formulaire
             $deletedImages = isset($_POST['deletedImagesInput']) ? json_decode($_POST['deletedImagesInput'], true) : [];
@@ -144,7 +209,6 @@ if (isset($_POST['validate'])) {
 
             // Créer une liste des noms d'images soumises
             foreach ($_FILES as $key => $file) {
-                echo 'RATIO : '.$key;
                 if (preg_match('/^image(\d+)$/', $key, $matches)) {
                     $imageIndex = $matches[1];
                     $submittedImages[] = $idFiche . "_" . $imageIndex . "_" . str_replace(' ', '_', $fiche_nom) . ".jpg";
@@ -155,7 +219,7 @@ if (isset($_POST['validate'])) {
                 // Si l'image n'est pas dans la liste des images soumises et qu'elle est marquée pour suppression
                 if (!in_array($existingImage['IMAGE_URL'], $submittedImages) || in_array($existingImage['ID'], $deletedImages)) {
                     // Supprimer l'image du répertoire
-                    $imagePath = "../../library/voitures/" . $modele . "/" . $idFiche . "/" . $existingImage['IMAGE_URL'];
+                    $imagePath = "../../library/voitures/" . $modeleNew . "/" . $idFiche . "/" . $existingImage['IMAGE_URL'];
                     if (file_exists($imagePath)) {
                         unlink($imagePath);
                     }
@@ -167,7 +231,7 @@ if (isset($_POST['validate'])) {
             }
 
             $imageCounter = 1; // Compteur d'images
-            $destinationFolder = "../../library/voitures/" . $modele . "/" . $idFiche . "/";
+            $destinationFolder = "../../library/voitures/" . $modeleNew . "/" . $idFiche . "/";
             foreach ($_FILES as $key => $file) {
                 if (preg_match('/^image(\d+)$/', $key, $matches)) {
                     $imageIndex = $matches[1];

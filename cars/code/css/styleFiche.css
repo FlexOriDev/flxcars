@@ -60,6 +60,30 @@
     text-indent: 20px; /* Ajouter un retrait (alinea) au début du paragraphe */
 }
 
+.btn-banner-11{
+    position: absolute; /* Position absolue pour placer la bande de contenu à gauche */
+    top: 25%; /* Aligner la bande de contenu au milieu verticalement */
+    left: 800px; /* Positionner la bande de contenu à gauche de l'image */
+    transform: translateY(-50%); /* Ajuster verticalement pour centrer la bande de contenu */
+    width: 350px; /* Largeur de la bande de contenu */
+    background-color: var(--secondary-color); /* Couleur de fond du contenu (blanc semi-transparent) */
+    color: var(--accent-color-yellow);
+    padding: 10px; /* Espacement intérieur du contenu */
+    border-bottom-right-radius: 10px; /* Arrondir le coin inférieur gauche */
+    border-top-right-radius: 10px; /* Arrondir le coin supérieur gauche */
+    transition: 0.2s;
+    text-decoration: none;
+}
+.btn-banner-11:hover{
+    background-color: var(--accent-color-yellow); /* Couleur de fond du contenu (blanc semi-transparent) */
+    color: var(--secondary-color);
+}
+.btn-banner-11 p{
+    margin-top: 10px; /* Espacement en bas du paragraphe */
+    text-align: justify; /* Justifier le texte */
+    margin-bottom: 10px; /* Espacement en bas du paragraphe */
+    text-indent: 20px; /* Ajouter un retrait (alinea) au début du paragraphe */
+}
 .banner-icon,.banner-icon2,.banner-icon3,.banner-icon4,.banner-icon5{
     width: 30px;
     height: auto;
@@ -164,6 +188,21 @@
 .btn-banner-10 {
     top: 60%;
 }
+
+.btn-banner-1 img, .btn-banner-2 img, .btn-banner-3 img, .btn-banner-4 img, .btn-banner-5 img,
+.btn-banner-6 img, .btn-banner-7 img, .btn-banner-8 img, .btn-banner-9 img, .btn-banner-10 img,
+.flag-icon {
+    margin-top: 0; /* Réinitialiser la marge supérieure */
+}
+
+.flag-icon {
+    margin-top: 0; /* Réinitialiser la marge supérieure */
+    width: 50px;  /* Ajustez la taille du drapeau */
+    height: 30px;
+    margin-left: 5px;  /* Espace entre le nom du pays et le drapeau */
+    vertical-align: middle;  /* Aligne l'image au centre du texte */
+}
+
 .h1-fiche{
     color: var(--secondary-color);
 }
