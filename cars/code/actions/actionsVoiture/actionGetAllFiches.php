@@ -118,6 +118,9 @@ $getAllFiches->execute($params);
 
 // Affichage des résultats
 if ($getAllFiches->rowCount() > 0) {
+    ?>
+<div class="row" id="colonne">
+    <?php
     while ($fiche = $getAllFiches->fetch()) {
         // Votre code d'affichage des résultats ici
         $getPhotos = $bdd->prepare('SELECT * FROM IMAGE WHERE ID_FICHE = ?');
@@ -149,6 +152,9 @@ if ($getAllFiches->rowCount() > 0) {
         </div>
         <?php
     }
+    ?>
+</div>
+        <?php
 } else {
     $error = "Aucune voiture n'a été trouvée.";
 }

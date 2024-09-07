@@ -161,6 +161,23 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                                 </select>
                             </div>
                         </div>
+                        <div class="columnMetriques">
+                            <div class="custom-select">
+                                <select id="selectGeneration" name="selectedGeneration">
+                                    <option value="" disabled selected>Génération/Phase * </option>
+                                    <?php
+                                    // Requête SQL pour récupérer les constructeurs depuis la base de données
+                                    $getAllGenerations = $bdd->query('SELECT * FROM GENERATION ORDER BY NOM_GENERATION');
+                                    $generations = $getAllGenerations->fetchAll(PDO::FETCH_ASSOC);
+                                    // Affichage des options pour la liste déroulante
+                                    foreach ($generations as $generation) {
+                                        $isSelected = ($generation['ID'] == $selectedGeneration) ? 'selected' : '';
+                                        echo '<option value="' . $generation['ID'] . '" ' . $isSelected . '>' . $generation['NOM_GENERATION'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <br>

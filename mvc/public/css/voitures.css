@@ -122,10 +122,12 @@ body{
 }
 
 /* NOM DES VOITURES */
+
 .nomWidgetFiche{
     color: var(--accent-color-white);
     font-size: 0.8em;
 }
+
 
 /* FILTER SECTION LATERAL MENU */
 

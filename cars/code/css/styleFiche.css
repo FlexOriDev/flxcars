@@ -92,23 +92,23 @@
 
 }
 
-.btn-banner-1 p,.btn-banner-2 p,.btn-banner-3 p,.btn-banner-4 p,.btn-banner-5 p {
+.btn-banner-1 p,.btn-banner-2 p,.btn-banner-3 p,.btn-banner-4 p,.btn-banner-5,.btn-banner-12 p {
     margin: 0;
     overflow: hidden; /* Masquer le texte qui dépasse */
     text-overflow: ellipsis; /* Afficher des points de suspension pour le texte qui dépasse */
     white-space: nowrap; /* Empêcher le texte de passer à la ligne */
 }
 
-.btn-banner-1:hover ,.btn-banner-2:hover ,.btn-banner-3:hover ,.btn-banner-4:hover ,.btn-banner-5:hover,.btn-banner-6:hover,.btn-banner-7:hover,.btn-banner-8:hover,.btn-banner-9:hover,.btn-banner-10:hover  {
+.btn-banner-1:hover ,.btn-banner-2:hover ,.btn-banner-3:hover ,.btn-banner-4:hover ,.btn-banner-5:hover,.btn-banner-12:hover,.btn-banner-6:hover,.btn-banner-7:hover,.btn-banner-8:hover,.btn-banner-9:hover,.btn-banner-10:hover  {
     color: var(--secondary-color);
     transition: 0.2s;
 }
 
-.btn-banner-1 img,.btn-banner-2 img,.btn-banner-3 img, .btn-banner-4 img, .btn-banner-5 img {
+.btn-banner-1 img,.btn-banner-2 img,.btn-banner-3 img, .btn-banner-4 img, .btn-banner-5, .btn-banner-12 img {
     margin-top: -5px; /* Déplacer l'image vers le bas de 10px */
 }
 
-.btn-banner-1, .btn-banner-2,.btn-banner-3, .btn-banner-4, .btn-banner-5  {
+.btn-banner-1, .btn-banner-2,.btn-banner-3, .btn-banner-4, .btn-banner-5, .btn-banner-12  {
     position: absolute;
     left: -350px;
     transform: translateY(-50%);
@@ -137,6 +137,9 @@
 }
 .btn-banner-5 {
     top: 80%;
+}
+.btn-banner-12 {
+    top: 90%;
 }
 
 .banner-icon6,.banner-icon7,.banner-icon8, .banner-icon9, .banner-icon10 {
@@ -189,7 +192,7 @@
     top: 60%;
 }
 
-.btn-banner-1 img, .btn-banner-2 img, .btn-banner-3 img, .btn-banner-4 img, .btn-banner-5 img,
+.btn-banner-1 img, .btn-banner-2 img, .btn-banner-3 img, .btn-banner-4 img, .btn-banner-5, .btn-banner-12 img,
 .btn-banner-6 img, .btn-banner-7 img, .btn-banner-8 img, .btn-banner-9 img, .btn-banner-10 img,
 .flag-icon {
     margin-top: 0; /* Réinitialiser la marge supérieure */
@@ -228,7 +231,6 @@
 /* TABLE TECHNIQUE */
 
 .table-container {
-    margin-bottom: 20px;
 }
 
 .table-responsive {
@@ -247,6 +249,9 @@
     border: 1px solid #ccc;
 }
 
+.histoire{
+    background-color: white!important;
+}
 
 
 

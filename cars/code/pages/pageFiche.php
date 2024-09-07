@@ -71,6 +71,11 @@ require('../actions/actionsUser/actionIsAdmin.php');
 
                 $modele = $getModele->fetch();
 
+                $getGeneration = $bdd->prepare('SELECT * FROM GENERATION WHERE ID = ?');
+                $getGeneration->execute(array($ficheInfos['ID_GENERATION']));
+
+                $generation = $getGeneration->fetch();
+
                 $getGroupe = $bdd->prepare('SELECT * FROM GROUPE WHERE ID = ?');
                 $getGroupe->execute(array($ficheConstructeur['ID_GROUPE']));
                 $ficheGroupe = $getGroupe->fetch();
@@ -158,6 +163,10 @@ require('../actions/actionsUser/actionIsAdmin.php');
                             <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon2">
                             <p>Groupe automobile : <?= $ficheGroupe['NOM_GROUPE']; ?></p>
                         </a>
+                        <a href="#summary-anchor" class="btn-banner-12">
+                            <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon2">
+                            <p>Génération / Phase : <?= $generation['NOM_GENERATION']; ?></p>
+                        </a>
                         <a href="#summary-anchor" class="btn-banner-6">
                             <img src="../../library/imgIconsFiche/date.png" alt="Icone" class="banner-icon5">
                             <p>Période de production : <?= $ficheAnne['NOM_ANNEE']; ?> - <?= $ficheAnne2['NOM_ANNEE']; ?></p>
@@ -221,10 +230,9 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
             <article class="article-fiche-title" id="histoire">
                     <h1 class="h1-fiche">Histoire</h1>
             </article>
-            <article class="²" id="histoire">
+            <article class="histoire" id="histoire">
                 <?= htmlspecialchars_decode($ficheInfos['HISTOIRE_FICHE']); ?>
             </article>
-            <br><br><br>
 
             <!----------------TABLEAU DES VERSIONS-------------->
             <article class="article-fiche-title" id="technique">
@@ -286,12 +294,9 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
             }
             ?>
 
-
-
-                        <br><br><br>
-                        <article class="article-fiche-title" id="photos">
-                                <h1 id="photo" class="h1-fiche">Galerie photo</h1>
-                        </article>
+            <article class="article-fiche-title" id="photos">
+                    <h1 id="photo" class="h1-fiche">Galerie photo</h1>
+            </article>
 
         </div>
 

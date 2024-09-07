@@ -80,6 +80,14 @@ if (isset($_GET['id_fiche'])) {
     // Valeur sélectionnée pour le modèle
     $selectedConstructeur = $fiche['ID_CONSTRUCTEUR']; // Assurez-vous que cette colonne existe dans la table FICHE
 
+    //-------------------------------GENERATION------------------------------------//
+    $sql = "SELECT * FROM GENERATION ORDER BY NOM_GENERATION";
+    $getAllGenerations = $bdd->query($sql);
+    $generations = $getAllGenerations->fetchAll(PDO::FETCH_ASSOC);
+
+    // Valeur sélectionnée pour le modèle
+    $selectedGeneration = $fiche['ID_GENERATION']; // Assurez-vous que cette colonne existe dans la table FICHE
+
     //-------------------------------VERSIONS------------------------------------//
     $sql = "SELECT * FROM VERSION WHERE ID_FICHE = :id_fiche";
     $stmt = $bdd->prepare($sql);

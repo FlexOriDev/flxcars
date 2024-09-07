@@ -139,49 +139,14 @@ require('../actions/database.php');
 
 
     <!-----------------------AFFICHAGE VOITURES------------------------>
-<div class="row" id="colonne">
+
+
 <?php
 include("../actions/actionsVoiture/actionGetAllFiches.php");
+if (isset($error)) {
+    echo '<br><p class="aucune-fiche-trouvee">' . $error . '</p>';
+}
 ?>
-
-
-<div class="column">
-    <?php
-    while($fiche = $getAllFiches->fetch()){
-        $getConstructeur = $bdd->prepare('SELECT NOM_CONSTRUCTEUR FROM CONSTRUCTEUR WHERE ID=?');
-        $getConstructeur->execute(array($fiche['ID_CONSTRUCTEUR']));
-        $constructeur = $getConstructeur->fetch();
-
-        $getAnnee = $bdd->prepare('SELECT NOM_ANNEE FROM ANNEE WHERE ID=?');
-        $getAnnee->execute(array($fiche['ID_ANNEE_DEBUT']));
-        $annee = $getAnnee->fetch();
-
-        $getModele = $bdd->prepare('SELECT NOM_MODELE FROM MODELE WHERE ID=?');
-        $getModele->execute(array($fiche['ID_MODELE']));
-        $modele = $getModele->fetch();
-
-        $getImage = $bdd->prepare('SELECT IMAGE_URL FROM IMAGE WHERE ID_FICHE=?');
-        $getImage->execute(array($fiche['ID']));
-        $image = $getImage->fetch();
-
-        $stringImageFiche = $modele[0]."/".$fiche['ID']."/".$image['IMAGE_URL'];
-    ?>
-        <div class="card_voitures">
-            <a href="pageFiche.php?id_fiche=<?= $fiche['ID']; ?>">
-                <img class="voitures" src="../../library/voitures/<?= $stringImageFiche; ?>" />
-            </a>
-            <div class="text">
-                <p class="nomWidgetFiche"><?= $constructeur['NOM_CONSTRUCTEUR']; ?><?= $fiche['NOM_FICHE']; ?><?= $annee['NOM_ANNEE']; ?></p>
-            </div>
-        </div>
-    <?php
-    }
-    ?>
-</div>
-
-
-</div> 
-
 
 </main>
 

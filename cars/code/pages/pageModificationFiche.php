@@ -155,6 +155,19 @@ require('../actions/actionsModificationFiche/actionModificationFiche.php');
                                 </select>
                             </div>
                         </div>
+                        <div class="columnMetriques">
+                            <div class="custom-select">
+                                <select id="selectGeneration" name="selectedGeneration">
+                                    <option value="" disabled selected>Génération/Phase * </option>
+                                    <?php
+                                    foreach ($generations as $generation) {
+                                        $isSelected = ($generation['ID'] == $selectedGeneration) ? 'selected' : '';
+                                        echo '<option value="' . $generation['ID'] . '" ' . $isSelected . '>' . $generation['NOM_GENERATION'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <br>

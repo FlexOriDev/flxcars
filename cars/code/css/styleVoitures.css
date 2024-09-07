@@ -103,10 +103,18 @@
     display: inline-block;
 }
 
+.aucune-fiche-trouvee{
+    color: var(--accent-color-yellow);
+}
+
 /* NOM DES VOITURES */
 .nomWidgetFiche{
     color: var(--accent-color-white);
-    font-size: 0.8em;
+    font-size: 0.8vw;
+    max-width: 100%; /* Limite la largeur du texte à celle du parent */
+    white-space: nowrap; /* Empêche le texte de se briser en plusieurs lignes */
+    overflow: hidden; /* Cache le texte qui dépasse les limites */
+    text-overflow: ellipsis; /* Ajoute les points de suspension à la fin */
 }
 
 /* FILTER SECTION LATERAL MENU */

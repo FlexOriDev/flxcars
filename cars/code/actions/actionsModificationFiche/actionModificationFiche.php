@@ -14,7 +14,7 @@ if (isset($_POST['validate'])) {
 
 
     if(!empty($_POST['nom']) && !empty($selectedTypes) && !empty($_POST['selectedAnneeSortie'])
-        && !empty($_POST['selectedAnneeFin']) && !empty($_POST['selectedModele']) && !empty($_POST['selectedSegment'])
+        && !empty($_POST['selectedAnneeFin']) && !empty($_POST['selectedModele']) && !empty($_POST['selectedSegment']) && !empty($_POST['selectedGeneration'])
         && !empty($_POST['selectedConstructeur']) && !empty($_POST['resume']) && !empty($_POST['editor'])
     ){
         //-------------------------------FICHE INSERT------------------------------------//
@@ -38,6 +38,7 @@ if (isset($_POST['validate'])) {
         $fiche_modele = htmlspecialchars($_POST['selectedModele']);
         $fiche_segment = htmlspecialchars($_POST['selectedSegment']);
         $fiche_constructeur = htmlspecialchars($_POST['selectedConstructeur']);
+        $fiche_generation = htmlspecialchars($_POST['selectedGeneration']);
         $fiche_resume = htmlspecialchars($_POST['resume']);
         $fiche_histoire = $_POST['editor'];
         $formated_DATETIME = date('Y-m-d H:i:s');
@@ -59,7 +60,8 @@ if (isset($_POST['validate'])) {
                  RESUME_FICHE = :RESUME_FICHE, 
                  HISTOIRE_FICHE = :HISTOIRE_FICHE, 
                  DATE_AJOUT = :DATE_AJOUT, 
-                 ID_UTILISATEUR = :ID_UTILISATEUR 
+                 ID_UTILISATEUR = :ID_UTILISATEUR ,
+                 ID_GENERATION = :ID_GENERATION 
              WHERE id = :id";
 
         $stmt = $bdd->prepare($sql);
@@ -74,6 +76,7 @@ if (isset($_POST['validate'])) {
         $stmt->bindParam(':HISTOIRE_FICHE', $fiche_histoire);
         $stmt->bindParam(':DATE_AJOUT', $formated_DATETIME);
         $stmt->bindParam(':ID_UTILISATEUR', $_SESSION['id']);
+        $stmt->bindParam(':ID_GENERATION', $fiche_generation);
         $stmt->bindParam(':id', $idFiche);
 
         $stmt->execute();
