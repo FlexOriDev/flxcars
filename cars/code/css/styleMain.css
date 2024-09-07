@@ -21,15 +21,6 @@ body{
     font-size: 100%
   }
 
-.debug{
-  color: red!important;
-}
-
-  p {
-    font-size: 1em;
-    line-height: 1em;;
-  }
-
 @media screen and (max-width: 90em) {
   p {
     font-size: 0.5em;
@@ -63,17 +54,6 @@ body{
 }
 
 
-.imgFiche{
-
-  width: 45%;
-}
-
-.fiche-container{
-  padding-top: 50px;
-  text-align:center;
-
-}
-
   /*----------------------------------------------------------------------------------------------*/
 
   /* MAIN */
@@ -91,104 +71,18 @@ body{
     margin-top: 30px;
     margin-left: 116px;
   }
-
   .global-boutonPath{
     color: var(--accent-color-white);
   }
   .global-boutonPath:hover{
     color: var(--accent-color-gray);
   }
-
   .global-boutonPathActual{
     color: var(--accent-color-yellow);
   }
-
   .global-boutonPathActual:hover{
     color: var(--accent-color-yellow);
   }
-  /*PATH*/
-
-  /* INDEX */
-
-
-
-  /* INDEX */
-
-  /*------FICHE-------*/
-
-  /*------FICHE1-------*/
-
-
-
-  .h5Title{
-    margin-top: -30px;
-
-  }
-
-
-  .ficheConstruct{
-    padding-top: 10px;
-    text-align: left;
-    color: var(--accent-color-yellow);
-  }
-
-  .ficheType{
-    text-align: right;
-    margin-top: -28px;
-    color: var(--accent-color-yellow);
-  }
-
-  h5{
-    text-align: center;
-
-  }
-
-
-
-
-  /*------FICHE2-------*/
-  .article-div-fiche-2{
-
-    margin-left: auto;
-    margin-right: auto;
-    width: 45%;
-    height: 20px;
-    margin-top: -40px;
-
-  }
-
-  .article-fiche-name2{
-
-    background-color: var(--accent-color-yellow);
-
-  }
-
-  /*------FICHE3-------*/
-  .article-div-fiche-3{
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    margin-top: 0px;
-
-  }
-
-  .article-fiche-name3{
-
-    background-color: white;
-
-  }
-
-  /*------FICHE4-------*/
-  .article-div-fiche-4{
-
-    margin-left: auto;
-    margin-right: auto;
-    width: 45%;
-    height: 20px;
-    margin-top: -40px;
-
-  }
-
 
 /*---------------------------*/
 
@@ -267,192 +161,6 @@ body{
     margin-right: 0;
     width: auto;
   }
-
-  /*----------PREFERENCES----------*/
-
-
-
-/* ----------------------------------------------------------------------------------------
-  /* Style The Dropdown Button */
-
-
-
-
-  small
-  {
-    color: var(--accent-color-gray);
-  }
-
-  div.checkbox_select
-  {
-    width: 250px;
-  }
-
-  .checkbox_select_anchor
-  {
-    display: block;
-    background: var(--accent-color-gray);
-    color: var(--secondary-color);
-    cursor: pointer;
-    padding: 10px 5px 5px;
-    position: relative;
-    text-decoration: none;
-  }
-
-  .checkbox_select_anchor:after
-  {
-    width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-top: 10px solid var(--secondary-color);
-    content: "";
-    position: absolute;
-    right: 10px;
-    top: 15px;
-  }
-
-  .expanded .checkbox_select_anchor:after
-  {
-      border-top: 0;
-      border-bottom: 10px solid var(--secondary-color);
-  }
-
-
-  .checkbox_select_anchor:hover
-  {
-    background: var(--accent-color-white) !important;
-    color :var(--secondary-color);
-    text-decoration: none;
-  }
-
-
-
-  div.checkbox_select .select_input
-  {
-      width: 100%;
-      cursor: pointer;
-  }
-
-  .checkbox_select_dropdown
-  {
-      display: none;
-      background: whitesmoke;
-  }
-
-  .checkbox_select_dropdown.show
-  {
-    z-index:2;
-      display: block;
-      position: absolute;
-  }
-
-  .checkbox_select_dropdown ul
-  {
-    max-height: 250px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    padding: 0;
-    margin: 0;
-    border: 1px solid var(--secondary-color);
-    border-top: 0;
-    border-bottom: 0;
-  }
-  .checkbox_select_dropdown ul li
-  {
-      list-style: none;
-      position: relative;
-      color: var(--secondary-color);
-  }
-  .checkbox_select_dropdown ul li label
-  {
-    position: relative;
-        padding: 10px 5px 5px 40px;
-       display: block;
-    cursor: pointer;
-  }
-  .checkbox_select_dropdown ul li label:hover
-  {
-    background: var(--accent-color-gray);
-    color: white;
-  }
-  .checkbox_select_dropdown ul li input:checked + label
-  {
-    background: #bbb;
-    color: white;
-    text-shadow: 0px 1px 1px rgba(150, 150, 150, 1);
-  }
-  .checkbox_select_dropdown ul li input
-  {
-    position: absolute;
-    left:10px;
-    z-index:2;
-    display: inline-block;
-    height: 100%;
-    width: 20px;
-  }
-  .checkbox_select_search
-  {
-      width: 250px;
-      padding: 10px 5px 5px;
-      border: 1px solid #999;
-        border-top: 0;
-      -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-  }
-
-  .checkbox_select_submit
-  {
-      background: var(--accent-color-yellow);
-      color: white;
-      padding: 10px 5px 5px;
-      border: 0;
-      width: 100%;
-      font-size: 14px;
-      cursor: pointer;
-  }
-
-  .checkbox_select_submit:hover
-  {
-      background:  var(--accent-color-yellow);
-      color: white;
-      padding: 10px 5px 5px;
-      border: 0;
-      width: 100%;
-      font-size: 14px;
-      cursor: pointer;
-  }
-
-  .hide
-  {
-      display: none;
-  }
-
-.rowPreferences{
-  display: flex;
-}
-
-.columnPreferences{
-  float:left;
-  width: 20%;
-  padding: 3px;
-}
-
-
-/* -------------------------------------------------------------------------------------------------------------- */
-
-    .checkboxs{
-      display: inline-block;
-    }
-
-  /* CONTENT VOITURES.php */
-
-  .errorCarNotFind{
-    margin-top: 40px;
-    color: var(--accent-color-yellow);
-  }
-
   /*----------------------------------------------------------------------------------------------*/
   /*----------------------------------------------------------------------------------------------*/
   /*----------------------------------------------------------------------------------------------*/
@@ -554,35 +262,8 @@ body{
   /* voitures */
 
   /*AJOUTER FICHE */
-.text-ajout-fiche{
-  color: var(--accent-color-gray);
-}
 
-.error-ajout-fiche{
-  color: var(--accent-color-yellow);
-}
 
-  .custom-button {
-    display: block; /* Afficher le bouton comme un bloc */
-    width: 400px; /* Largeur du bouton */
-    height: 50px;
-    margin: 0 auto; /* Centrer le bouton horizontalement */
-    padding: 10px; /* Espace intérieur du bouton */
-    font-size: 16px; /* Taille de la police */
-    text-align: center; /* Centrer le texte */
-    background-color: var(--accent-color-yellow); /* Couleur de fond */
-    color: var(--secondary-color); /* Couleur du texte */
-    border: none; /* Supprimer la bordure */
-    border-radius: 5px; /* Coins arrondis */
-    cursor: pointer; /* Curseur pointeur au survol */
-}
-
-/* Style au survol */
-.custom-button:hover {
-    background-color: var(--secondary-color); /* Nouvelle couleur de fond au survol */
-  color: var(--accent-color-yellow);
-  transition: 0.2s;
-}
 
   .btn-info,
     .btn-danger {

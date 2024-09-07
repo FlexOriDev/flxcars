@@ -5,7 +5,13 @@
 .history {
     height: 500px;
 }
-
+small
+{
+    color: var(--accent-color-gray);
+}
+.error-ajout-fiche{
+    color: var(--accent-color-yellow);
+}
 /* Style pour les dropdowns */
 .custom-select select {
     width: 100%; /* Pour rendre le dropdown aussi large que son conteneur */
@@ -147,3 +153,24 @@
     background-color: #b11c1c;
 }
 
+.custom-button {
+    display: block; /* Afficher le bouton comme un bloc */
+    width: 400px; /* Largeur du bouton */
+    height: 50px;
+    margin: 0 auto; /* Centrer le bouton horizontalement */
+    padding: 10px; /* Espace intérieur du bouton */
+    font-size: 16px; /* Taille de la police */
+    text-align: center; /* Centrer le texte */
+    background-color: var(--accent-color-yellow); /* Couleur de fond */
+    color: var(--secondary-color); /* Couleur du texte */
+    border: none; /* Supprimer la bordure */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Curseur pointeur au survol */
+}
+
+/* Style au survol */
+.custom-button:hover {
+    background-color: var(--secondary-color); /* Nouvelle couleur de fond au survol */
+    color: var(--accent-color-yellow);
+    transition: 0.2s;
+}

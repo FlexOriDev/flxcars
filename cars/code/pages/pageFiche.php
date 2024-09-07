@@ -189,7 +189,7 @@ if (isset($_GET['id_fiche']) && !empty($_GET['id_fiche'])) {
                     <p>Groupe automobile : <?= htmlspecialchars($groupesNomsString); ?></p>
                 </a>
                 <a href="#summary-anchor" class="btn-banner-12">
-                    <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon2">
+                    <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon12">
                     <p>Génération / Phase : <?= htmlspecialchars($generation['NOM_GENERATION']); ?></p>
                 </a>
                 <a href="#summary-anchor" class="btn-banner-6">

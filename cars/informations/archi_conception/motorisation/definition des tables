@@ -1,0 +1,66 @@
+TABLE motorisation
+
+id
+appelation_motorisation : 316i
+reference_motorisation : m40b16
+#constructeurs représentés par motorisation_constructeur
+type_motorisation : électrique, thermique, hybride
+id_annee_debut_production : fk sur ANNEE.ID
+id_annee_fin_production : fk sur ANNEE.ID
+
+TABLE motorisation_constructeur
+
+id
+id_motorisation
+id_constructeur
+
+TYPOLOGIES :
+
+TY_NOMBRE_CYLINDRE
+id
+nombre : 3,4,5,6 ...
+
+TY_COMBUSTION
+id
+nom_type_combustion : essence, diesel
+
+TY_CYCLE_MOTEUR
+id
+nom_cycle_moteur : 2 ou 4
+
+TY_ALIMENTATION
+id
+nom_alimentation : carbu, injection directe, turbo, compresseur
+
+TY_NORME_EMISSION
+id
+nom_norme : euro6, EPA
+
+TY_TRANSMISSION
+id
+nom_transmission : manuelle, automatique, CVT
+
+TY_NOMBRE_RAPPORTS
+id
+nombre_rapports : 3,4,5,6,7,8
+
+TY_SURALIMENTATION
+id
+nom_suralimentation : turbo, bi-turbo, comrpesseur
+
+TY_REFROIDISSEMENT
+id
+nom_refroidissement : air, liquide
+
+TY_ARCHITECTURE_MOTEUR
+id
+nom_architecture_moteur : ligne, V, W, à plat
+
+TY_DISTRIBUTION
+id
+nom_distribution : SOHC,DOHC,multivalves,distri variable (VVT, VTEC)
+
+TY_ALLUMAGE
+id
+nom_allumage : electronique, bougies, comrpession (diesel)
+

@@ -1,0 +1,58 @@
+1)infos gen
+appellation du moteur
+reference / modele : code moteur
+type de moteur : elec, thermique, hybride
+année de fabbrication : debut et fin
+
+2)techniques
+Cylindrée (pour les moteurs thermiques)
+nombre cylindres
+type de combustion : essence, diesel ...
+cycle moteur : 2temps ou 4temps
+puissance nominale : kW ou ch à un régime donné
+couple moteur : nm à un regime référence
+régime maximal : tr/min max
+type d'alim : carbu, injection directe, turbo, compresseur
+norme d'emission : euro6, EPA
+
+3)Dims et poids
+poids du bloc
+dimensions : longueur, largeur, hauteur en mm
+capa des fluides : huile moteur, refroidisement
+
+4)caractéristiques méca
+type transmission : manuelle, automatique, CVT
+nb rapports : pour moteurs couplés à boite de vitesse
+sural : turbo, bi-turbo, comrpesseur
+refroidissement : air, liquide
+archi moteur : ligne, V, W, à plat
+distrib : SOHC,DOHC,multivalves,distri variable (VVT, VTEC)
+allumage : electronique, bougies, comrpession (diesel)
+
+5)carac elec
+type moteur : synchrone, async, brushless
+tension nominale : en volt V
+batterie : Li-ion, NiMH
+Autonomie : km
+temps de charge
+
+6)perfs
+accel 0à100 : en s
+vmax : km/h
+conso : litres/100 km (moteurs thermiques) ou kWh/100 km (électriques).
+emission co2
+
+7)maintenance et dura
+intervalle d'entretion constructeur : nb km
+type lubrifiant : spec huile (5W30)
+moyenne durée de vie : km/heures de focntionnement
+---------------------------------------------------------------------------
+8)Options et tech spécifiques
+start and stop
+systeme d'assistance : récup d'energie cinétique, freinage regeneratif
+mode eco ou perf : différents modes moteurs
+
+9)Autres carac
+systeme pilotage : electro embarqué, régu vitesse
+systeme secu : surveillance tempé, capteurs
+homologations : CE, UL, CSA

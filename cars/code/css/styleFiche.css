@@ -84,7 +84,7 @@
     margin-bottom: 10px; /* Espacement en bas du paragraphe */
     text-indent: 20px; /* Ajouter un retrait (alinea) au début du paragraphe */
 }
-.banner-icon,.banner-icon2,.banner-icon3,.banner-icon4,.banner-icon5{
+.banner-icon,.banner-icon2,.banner-icon3,.banner-icon4,.banner-icon5, .banner-icon12{
     width: 30px;
     height: auto;
     margin-right: 10px;
@@ -104,7 +104,7 @@
     transition: 0.2s;
 }
 
-.btn-banner-1 img,.btn-banner-2 img,.btn-banner-3 img, .btn-banner-4 img, .btn-banner-5, .btn-banner-12 img {
+.btn-banner-1 img,.btn-banner-2 img,.btn-banner-3 img, .btn-banner-4 img, .btn-banner-5 img, .btn-banner-12 img {
     margin-top: -5px; /* Déplacer l'image vers le bas de 10px */
 }
 
@@ -192,7 +192,7 @@
     top: 60%;
 }
 
-.btn-banner-1 img, .btn-banner-2 img, .btn-banner-3 img, .btn-banner-4 img, .btn-banner-5, .btn-banner-12 img,
+.btn-banner-1 img, .btn-banner-2 img, .btn-banner-3 img, .btn-banner-4 img, .btn-banner-5 img, .btn-banner-12 img,
 .btn-banner-6 img, .btn-banner-7 img, .btn-banner-8 img, .btn-banner-9 img, .btn-banner-10 img,
 .flag-icon {
     margin-top: 0; /* Réinitialiser la marge supérieure */
