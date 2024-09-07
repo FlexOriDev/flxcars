@@ -244,7 +244,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
         $ficheInfos = $getInfosOfThisFicheReq->fetch();
 
         if(!$ficheInfos){
-                echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
+                //echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
         }else{?>
 
         <div class="fiche-container">
@@ -322,10 +322,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
 
         </div>
 
-        <?php
-                        }
 
-        ?>
 
 
     <!-- GALERIE -->
@@ -417,12 +414,15 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
     ?>
 
 
+        <?php
+    }
 
+            ?>
 
     <?php
     }
 }else{
-        echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
+        //echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
 }
 
         ?>

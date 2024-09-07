@@ -217,7 +217,7 @@
     margin-left: 115px;
     padding-top: 50px;
     font-size: large;
-    color: #8d1616;
+    color: var(--accent-color-yellow);
 }
 
 /* ERROR FICHE */
@@ -231,6 +231,7 @@
 /* TABLE TECHNIQUE */
 
 .table-container {
+
 }
 
 .table-responsive {
@@ -259,7 +260,6 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 20px;
 }
 
 .main-image-container {
