@@ -76,13 +76,19 @@ require('../actions/actionsDashboard/actionsDashboardConstructeurs/actionDashboa
                     <tbody id="constructeursTable">
                     <?php
                     $getAllConstructeurs = $bdd->query('
-                        SELECT CONSTRUCTEUR.id, CONSTRUCTEUR.NOM_CONSTRUCTEUR, PAYS.NOM_PAYS AS pays_nom, GROUPE.NOM_GROUPE AS groupe_nom, COUNT(FICHE.id) AS fiches_count
+                        SELECT CONSTRUCTEUR.id, 
+                           CONSTRUCTEUR.NOM_CONSTRUCTEUR, 
+                           PAYS.NOM_PAYS AS pays_nom, 
+                           GROUPE.NOM_GROUPE AS groupe_nom, 
+                           COUNT(FICHE.id) AS fiches_count
                         FROM CONSTRUCTEUR
+                        -- LEFT JOIN pour récupérer tous les constructeurs, même ceux sans fiche
+                        LEFT JOIN FICHE_CONSTRUCTEUR ON CONSTRUCTEUR.ID = FICHE_CONSTRUCTEUR.ID_CONSTRUCTEUR
+                        LEFT JOIN FICHE ON FICHE.id = FICHE_CONSTRUCTEUR.ID_FICHE
                         JOIN PAYS ON CONSTRUCTEUR.ID_PAYS = PAYS.id
                         JOIN GROUPE ON CONSTRUCTEUR.id_groupe = GROUPE.id
-                        LEFT JOIN FICHE ON CONSTRUCTEUR.id = FICHE.id_constructeur
                         GROUP BY CONSTRUCTEUR.id
-                        ORDER BY CONSTRUCTEUR.NOM_CONSTRUCTEUR
+                        ORDER BY CONSTRUCTEUR.NOM_CONSTRUCTEUR;
                     ');
 
                     while ($constructeur = $getAllConstructeurs->fetch()) {
