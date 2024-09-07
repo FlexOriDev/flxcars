@@ -57,13 +57,14 @@ require('../actions/actionsDashboard/actionsDashboardPays/actionDashboardPays.ph
                     <tbody id="paysTable">
                     <?php
                     $getAllPays = $bdd->query('
-                        SELECT PAYS.id, PAYS.NOM_PAYS, COUNT(FICHE.id) AS fiches_count
+                        SELECT PAYS.id, PAYS.NOM_PAYS, COUNT(DISTINCT FICHE_CONSTRUCTEUR.ID_FICHE) AS fiches_count
                         FROM PAYS
-                        LEFT JOIN CONSTRUCTEUR ON PAYS.id = CONSTRUCTEUR.id_pays
-                        LEFT JOIN FICHE ON CONSTRUCTEUR.id = FICHE.id_constructeur
+                        LEFT JOIN CONSTRUCTEUR ON PAYS.id = CONSTRUCTEUR.ID_PAYS
+                        LEFT JOIN FICHE_CONSTRUCTEUR ON CONSTRUCTEUR.id = FICHE_CONSTRUCTEUR.ID_CONSTRUCTEUR
                         GROUP BY PAYS.id, PAYS.NOM_PAYS
                         ORDER BY PAYS.NOM_PAYS;
                     ');
+
 
                     while ($pays = $getAllPays->fetch()) {
                         echo '<tr class="dashboard-table-row" data-id="' . htmlspecialchars($pays['id']) . '">';

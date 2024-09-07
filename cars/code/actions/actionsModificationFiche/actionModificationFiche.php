@@ -9,13 +9,14 @@ require('../actions/utils/deleteDirectoryRecursively.php');
 //-------------------------------MODIFICATION BDD------------------------------------//
 
 $selectedTypes = isset($_POST['selectedTypes']) ? $_POST['selectedTypes'] : [];
+$selectedConstructeurs = isset($_POST['selectedConstructeurs']) ? $_POST['selectedConstructeurs'] : [];
 // Validation du formulaire
 if (isset($_POST['validate'])) {
 
 
-    if(!empty($_POST['nom']) && !empty($selectedTypes) && !empty($_POST['selectedAnneeSortie'])
+    if(!empty($_POST['nom']) && !empty($selectedTypes) && !empty($selectedConstructeurs) && !empty($_POST['selectedAnneeSortie'])
         && !empty($_POST['selectedAnneeFin']) && !empty($_POST['selectedModele']) && !empty($_POST['selectedSegment']) && !empty($_POST['selectedGeneration'])
-        && !empty($_POST['selectedConstructeur']) && !empty($_POST['resume']) && !empty($_POST['editor'])
+        && !empty($_POST['resume']) && !empty($_POST['editor'])
     ){
         //-------------------------------FICHE INSERT------------------------------------//
 
@@ -37,7 +38,6 @@ if (isset($_POST['validate'])) {
         $fiche_annee_fin = htmlspecialchars($_POST['selectedAnneeFin']);
         $fiche_modele = htmlspecialchars($_POST['selectedModele']);
         $fiche_segment = htmlspecialchars($_POST['selectedSegment']);
-        $fiche_constructeur = htmlspecialchars($_POST['selectedConstructeur']);
         $fiche_generation = htmlspecialchars($_POST['selectedGeneration']);
         $fiche_resume = htmlspecialchars($_POST['resume']);
         $fiche_histoire = $_POST['editor'];
@@ -51,7 +51,7 @@ if (isset($_POST['validate'])) {
 
         // Insertion dans la table FICHE
 
-        $sql = "UPDATE FICHE SET ID_CONSTRUCTEUR = :ID_CONSTRUCTEUR, 
+        $sql = "UPDATE FICHE SET 
                  ID_MODELE = :ID_MODELE, 
                  ID_ANNEE_DEBUT = :ID_ANNEE_DEBUT, 
                  ID_ANNEE_FIN = :ID_ANNEE_FIN, 
@@ -66,7 +66,6 @@ if (isset($_POST['validate'])) {
 
         $stmt = $bdd->prepare($sql);
 
-        $stmt->bindParam(':ID_CONSTRUCTEUR', $fiche_constructeur);
         $stmt->bindParam(':ID_MODELE', $fiche_modele);
         $stmt->bindParam(':ID_ANNEE_DEBUT', $fiche_annee_sortie);
         $stmt->bindParam(':ID_ANNEE_FIN', $fiche_annee_fin);
@@ -106,6 +105,34 @@ if (isset($_POST['validate'])) {
             // Si un type existant n'est pas dans les types sélectionnés, on le supprime
             if (!in_array($existingType, $selectedTypes)) {
                 $deleteFicheType->execute(array($idFiche, $existingType));
+            }
+        }
+
+        //-------------------------------CONSTRUCTEURS INSERT------------------------------------//
+
+        // Récupérer les ID_TYPE déjà existants pour la fiche donnée
+        $existingConstructeursQuery = $bdd->prepare('SELECT ID_CONSTRUCTEUR FROM FICHE_CONSTRUCTEUR WHERE ID_FICHE = ?');
+        $existingConstructeursQuery->execute(array($idFiche));
+        $existingConstructeurs = $existingConstructeursQuery->fetchAll(PDO::FETCH_COLUMN, 0); // Récupère uniquement la colonne ID_TYPE
+
+        // Préparer les requêtes d'insertion et de suppression
+        $insertFicheConstructeur = $bdd->prepare('INSERT INTO FICHE_CONSTRUCTEUR (ID_FICHE, ID_CONSTRUCTEUR) VALUES (?, ?)');
+        $deleteFicheConstructeur = $bdd->prepare('DELETE FROM FICHE_CONSTRUCTEUR WHERE ID_FICHE = ? AND ID_CONSTRUCTEUR = ?');
+
+        // Boucle sur les types sélectionnés pour ajouter ceux qui manquent
+        foreach ($selectedConstructeurs as $fiche_constructeur) {
+            $fiche_constructeur = htmlspecialchars($fiche_constructeur); // Nettoyage des données
+            // Si le type n'est pas déjà présent pour cette fiche, on l'ajoute
+            if (!in_array($fiche_constructeur, $existingConstructeurs)) {
+                $insertFicheConstructeur->execute(array($idFiche, $fiche_constructeur));
+            }
+        }
+
+        // Boucle sur les types existants pour supprimer ceux qui ne sont plus sélectionnés
+        foreach ($existingConstructeurs as $existingConstructeur) {
+            // Si un type existant n'est pas dans les types sélectionnés, on le supprime
+            if (!in_array($existingConstructeur, $selectedConstructeurs)) {
+                $deleteFicheConstructeur->execute(array($idFiche, $existingConstructeur));
             }
         }
 

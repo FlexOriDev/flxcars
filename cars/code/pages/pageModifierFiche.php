@@ -32,28 +32,44 @@ require('../actions/database.php');
 
     <!-- Requete fiches + constructeurs-->
     <?php
-    $sql = "SELECT FICHE.ID, FICHE.NOM_FICHE, CONSTRUCTEUR.NOM_CONSTRUCTEUR FROM FICHE JOIN CONSTRUCTEUR ON FICHE.ID_CONSTRUCTEUR = CONSTRUCTEUR.ID";
+    $sql = "SELECT FICHE.ID, FICHE.NOM_FICHE, CONSTRUCTEUR.NOM_CONSTRUCTEUR 
+            FROM FICHE 
+            JOIN FICHE_CONSTRUCTEUR ON FICHE.ID = FICHE_CONSTRUCTEUR.ID_FICHE
+            JOIN CONSTRUCTEUR ON FICHE_CONSTRUCTEUR.ID_CONSTRUCTEUR = CONSTRUCTEUR.ID";
     $getFiches = $bdd->prepare($sql);
     $getFiches->execute();
 
     $fiches = $getFiches->fetchAll(PDO::FETCH_ASSOC);
 
-    if ($fiches && count($fiches) > 0) {
-        echo '<table id="ficheTable">';  // Ajoutez un id au tableau ici
+    // Regrouper les constructeurs pour chaque fiche
+    $fichesGrouped = [];
+    foreach ($fiches as $row) {
+        $id = $row['ID'];
+        if (!isset($fichesGrouped[$id])) {
+            $fichesGrouped[$id] = [
+                'NOM_FICHE' => $row['NOM_FICHE'],
+                'NOM_CONSTRUCTEURS' => []
+            ];
+        }
+        $fichesGrouped[$id]['NOM_CONSTRUCTEURS'][] = $row['NOM_CONSTRUCTEUR'];
+    }
+
+    if (count($fichesGrouped) > 0) {
+        echo '<table id="ficheTable">';
         echo '<thead>';
         echo '<tr>';
         echo '<th>Nom Fiche</th>';
-        echo '<th>Constructeur</th>';
+        echo '<th>Constructeurs</th>';
         echo '<th>Action</th>';
         echo '</tr>';
         echo '</thead>';
         echo '<tbody>';
 
-        foreach ($fiches as $row) {
+        foreach ($fichesGrouped as $id => $data) {
             echo '<tr>';
-            echo '<td>' . htmlspecialchars($row['NOM_FICHE']) . '</td>';
-            echo '<td>' . htmlspecialchars($row['NOM_CONSTRUCTEUR']) . '</td>';
-            echo '<td><a href="pageModificationFiche.php?id_fiche=' . urlencode($row['ID']) . '" class="btn btn-primary">Modifier</a></td>';
+            echo '<td>' . htmlspecialchars($data['NOM_FICHE']) . '</td>';
+            echo '<td>' . htmlspecialchars(implode(', ', $data['NOM_CONSTRUCTEURS'])) . '</td>';
+            echo '<td><a href="pageModificationFiche.php?id_fiche=' . urlencode($id) . '" class="btn btn-primary">Modifier</a></td>';
             echo '</tr>';
         }
 

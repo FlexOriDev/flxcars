@@ -144,17 +144,26 @@ require('../actions/actionsModificationFiche/actionModificationFiche.php');
                         </div>
                         <div class="columnMetriques">
                             <div class="custom-select">
-                                <select id="selectConstructeur" name="selectedConstructeur">
-                                    <option value="" disabled selected>Constructeur * </option>
+                                <select id="selectConstructeur" name="selectedConstructeurs[]" multiple="multiple">
                                     <?php
                                     foreach ($constructeurs as $constructeur) {
-                                        $isSelected = ($constructeur['ID'] == $selectedConstructeur) ? 'selected' : '';
-                                        echo '<option value="' . $constructeur['ID'] . '" ' . $isSelected . '>' . $constructeur['NOM_CONSTRUCTEUR'] . '</option>';
+                                        // Vérifier si l'ID du type est dans la liste des types associés
+                                        $isSelected = in_array($constructeur['ID'], $associatedConstructeurIds) ? 'selected' : '';
+                                        echo '<option value="' . $constructeur['ID'] . '" ' . $isSelected . '>' . htmlspecialchars($constructeur['NOM_CONSTRUCTEUR']) . '</option>';
                                     }
                                     ?>
                                 </select>
                             </div>
                         </div>
+                        <script>
+                            $(document).ready(function() {
+                                $('#selectConstructeur').select2({
+                                    placeholder: "Sélectionnez un ou plusieurs constructeurs",
+                                    closeOnSelect: false, // Permet de laisser le menu ouvert après une sélection
+                                    allowClear: true
+                                });
+                            });
+                        </script>
                         <div class="columnMetriques">
                             <div class="custom-select">
                                 <select id="selectGeneration" name="selectedGeneration">

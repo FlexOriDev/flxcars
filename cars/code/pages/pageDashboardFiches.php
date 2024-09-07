@@ -72,8 +72,6 @@ require('../actions/actionsDashboard/actionsDashboardFiches/actionDashboardFiche
     SELECT FICHE.id, 
            FICHE.NOM_FICHE, 
            MODELE.NOM_MODELE AS modele_nom, 
-           CONSTRUCTEUR.NOM_CONSTRUCTEUR AS constructeur_nom, 
-           groupes_constructeurs.NOM_GROUPE AS groupe_nom, 
            SEGMENT.NOM_SEGMENT AS segment_nom, 
            annee_debut.NOM_ANNEE AS annee_nom, 
            annee_fin.NOM_ANNEE AS annee_fin_nom, 
@@ -81,8 +79,6 @@ require('../actions/actionsDashboard/actionsDashboardFiches/actionDashboardFiche
            FICHE.DATE_AJOUT
     FROM FICHE
     JOIN MODELE ON FICHE.ID_MODELE = MODELE.id
-    JOIN CONSTRUCTEUR ON FICHE.ID_CONSTRUCTEUR = CONSTRUCTEUR.id
-    JOIN GROUPE AS groupes_constructeurs ON CONSTRUCTEUR.id_groupe = groupes_constructeurs.id
     JOIN SEGMENT ON FICHE.ID_SEGMENT = SEGMENT.id
     JOIN ANNEE AS annee_debut ON FICHE.ID_ANNEE_DEBUT = annee_debut.id
     JOIN ANNEE AS annee_fin ON FICHE.ID_ANNEE_FIN = annee_fin.id
@@ -92,23 +88,47 @@ require('../actions/actionsDashboard/actionsDashboardFiches/actionDashboardFiche
                     while ($fiche = $getAllFiches->fetch(PDO::FETCH_ASSOC)) {
                         // Préparer et exécuter la requête pour obtenir les types de la fiche
                         $stmt = $bdd->prepare('
-        SELECT TYPE.NOM_TYPE AS type_nom
-        FROM FICHE_TYPE
-        JOIN TYPE ON FICHE_TYPE.ID_TYPE = TYPE.id
-        WHERE FICHE_TYPE.ID_FICHE = :fiche_id
-    ');
+                            SELECT TYPE.NOM_TYPE AS type_nom
+                            FROM FICHE_TYPE
+                            JOIN TYPE ON FICHE_TYPE.ID_TYPE = TYPE.id
+                            WHERE FICHE_TYPE.ID_FICHE = :fiche_id
+                        ');
                         $stmt->execute(['fiche_id' => $fiche['id']]);
 
                         // Récupérer tous les types
                         $types = $stmt->fetchAll(PDO::FETCH_COLUMN);
                         $typesList = implode(', ', $types); // Convertir le tableau en une chaîne
 
+                        // Préparer et exécuter la requête pour obtenir les constructeurs et leurs groupes
+                        $stmtConst = $bdd->prepare('
+                            SELECT CONSTRUCTEUR.NOM_CONSTRUCTEUR AS constructeur_nom, GROUPE.NOM_GROUPE AS groupe_nom
+                            FROM FICHE_CONSTRUCTEUR
+                            JOIN CONSTRUCTEUR ON FICHE_CONSTRUCTEUR.ID_CONSTRUCTEUR = CONSTRUCTEUR.ID
+                            JOIN GROUPE ON CONSTRUCTEUR.ID_GROUPE = GROUPE.ID
+                            WHERE FICHE_CONSTRUCTEUR.ID_FICHE = :fiche_id
+                        ');
+                        $stmtConst->execute(['fiche_id' => $fiche['id']]);
+
+                        // Récupérer tous les constructeurs et groupes associés
+                        $constructeurs = $stmtConst->fetchAll(PDO::FETCH_ASSOC);
+
+                        // Préparer une liste formatée avec les constructeurs et leurs groupes
+                        $constructeursList = [];
+                        $groupesList = [];
+                        foreach ($constructeurs as $constructeur) {
+                            $constructeursList[] = $constructeur['constructeur_nom'];
+                            $groupesList[] = $constructeur['groupe_nom'];
+                        }
+                        $constructeursStr = implode(', ', $constructeursList); // Convertir le tableau en une chaîne pour les constructeurs
+                        $groupesStr = implode(', ', array_unique($groupesList)); // Convertir le tableau en une chaîne pour les groupes, sans doublons
+
+
                         echo '<tr class="dashboard-table-row">';
                         echo '<td class="dashboard-table-cell dashboard-table-id">' . htmlspecialchars($fiche['id']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-name">' . htmlspecialchars($fiche['NOM_FICHE']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-modele">' . htmlspecialchars($fiche['modele_nom']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-constructeur">' . htmlspecialchars($fiche['constructeur_nom']) . '</td>';
-                        echo '<td class="dashboard-table-cell dashboard-table-groupe">' . htmlspecialchars($fiche['groupe_nom']) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-constructeur">' . htmlspecialchars($constructeursStr) . '</td>';
+                        echo '<td class="dashboard-table-cell dashboard-table-groupe">' . htmlspecialchars($groupesStr) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-type">' . htmlspecialchars($typesList) . '</td>'; // Afficher les types concaténés
                         echo '<td class="dashboard-table-cell dashboard-table-segment">' . htmlspecialchars($fiche['segment_nom']) . '</td>';
                         echo '<td class="dashboard-table-cell dashboard-table-annee">' . htmlspecialchars($fiche['annee_nom']) . '</td>';

@@ -13,13 +13,13 @@ $selectedAnneeSortie = isset($_POST['selectedAnneeSortie']) ? $_POST['selectedAn
 $selectedAnneeFin = isset($_POST['selectedAnneeFin']) ? $_POST['selectedAnneeFin'] : '';
 $selectedModele = isset($_POST['selectedModele']) ? $_POST['selectedModele'] : '';
 $selectedSegment = isset($_POST['selectedSegment']) ? $_POST['selectedSegment'] : '';
-$selectedConstructeur = isset($_POST['selectedConstructeur']) ? $_POST['selectedConstructeur'] : '';
 $selectedGeneration = isset($_POST['selectedGeneration']) ? $_POST['selectedGeneration'] : '';
 $resume = isset($_POST['resume']) ? $_POST['resume'] : '';
 $editor = isset($_POST['editor']) ? $_POST['editor'] : '';
 
 // Récupération des types sélectionnés (en tant que tableau)
 $selectedTypes = isset($_POST['selectedTypes']) ? $_POST['selectedTypes'] : [];
+$selectedConstructeurs = isset($_POST['selectedConstructeurs']) ? $_POST['selectedConstructeurs'] : [];
 
 $galleryImages = isset($_POST['galleryImagesInput']) ? json_decode($_POST['galleryImagesInput'], true) : [];
 
@@ -33,9 +33,9 @@ if (isset($_POST['validate'])) {
     $imageCounter = 1;
 
     // Vérifier si l'utilisateur a bien complété tous les champs
-    if (!empty($_POST['nom']) && !empty($selectedTypes) && !empty($_POST['selectedAnneeSortie']) && !empty($_POST['selectedGeneration'])
+    if (!empty($_POST['nom']) && !empty($selectedTypes) && !empty($_POST['selectedAnneeSortie']) && !empty($_POST['selectedGeneration']) && !empty($selectedConstructeurs)
         && !empty($_POST['selectedAnneeFin']) && !empty($_POST['selectedModele']) && !empty($_POST['selectedSegment'])
-        && !empty($_POST['selectedConstructeur']) && !empty($_POST['resume']) && !empty($_POST['editor'])
+        && !empty($_POST['resume']) && !empty($_POST['editor'])
         ) {
 
         $fiche_nom = htmlspecialchars($_POST['nom']);
@@ -43,15 +43,14 @@ if (isset($_POST['validate'])) {
         $fiche_annee_fin = htmlspecialchars($_POST['selectedAnneeFin']);
         $fiche_modele = htmlspecialchars($_POST['selectedModele']);
         $fiche_segment = htmlspecialchars($_POST['selectedSegment']);
-        $fiche_constructeur = htmlspecialchars($_POST['selectedConstructeur']);
         $fiche_generation = htmlspecialchars($_POST['selectedGeneration']);
         $fiche_resume = htmlspecialchars($_POST['resume']);
         $fiche_histoire = htmlspecialchars($_POST['editor']);
         $formated_DATETIME = date('Y-m-d H:i:s');
 
         // Insertion dans la table FICHE
-        $insertFicheOnWebsite = $bdd->prepare('INSERT INTO FICHE (ID_CONSTRUCTEUR, ID_MODELE, ID_ANNEE_DEBUT, ID_ANNEE_FIN, ID_SEGMENT, NOM_FICHE, RESUME_FICHE, HISTOIRE_FICHE, DATE_AJOUT, ID_UTILISATEUR, ID_GENERATION) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        $insertFicheOnWebsite->execute(array($fiche_constructeur, $fiche_modele, $fiche_annee_sortie, $fiche_annee_fin, $fiche_segment, $fiche_nom, $fiche_resume, $fiche_histoire, $formated_DATETIME, $_SESSION['id'], $fiche_generation));
+        $insertFicheOnWebsite = $bdd->prepare('INSERT INTO FICHE (ID_MODELE, ID_ANNEE_DEBUT, ID_ANNEE_FIN, ID_SEGMENT, NOM_FICHE, RESUME_FICHE, HISTOIRE_FICHE, DATE_AJOUT, ID_UTILISATEUR, ID_GENERATION) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $insertFicheOnWebsite->execute(array($fiche_modele, $fiche_annee_sortie, $fiche_annee_fin, $fiche_segment, $fiche_nom, $fiche_resume, $fiche_histoire, $formated_DATETIME, $_SESSION['id'], $fiche_generation));
 
         // Récupérer l'ID de la fiche nouvellement insérée
         $fiche_id = $bdd->lastInsertId();
@@ -60,6 +59,11 @@ if (isset($_POST['validate'])) {
         $insertFicheType = $bdd->prepare('INSERT INTO FICHE_TYPE (ID_FICHE, ID_TYPE) VALUES (?, ?)');
         foreach ($selectedTypes as $fiche_type) {
             $insertFicheType->execute(array($fiche_id, htmlspecialchars($fiche_type)));
+        }
+        // Insérer chaque type sélectionné dans la table FICHE_TYPE
+        $insertFicheConstructeur = $bdd->prepare('INSERT INTO FICHE_CONSTRUCTEUR (ID_FICHE, ID_CONSTRUCTEUR) VALUES (?, ?)');
+        foreach ($selectedConstructeurs as $fiche_constructeur) {
+            $insertFicheConstructeur->execute(array($fiche_id, htmlspecialchars($fiche_constructeur)));
         }
 
         // Récupérer le nom du modèle

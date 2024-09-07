@@ -146,14 +146,14 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                         </div>
                         <div class="columnMetriques">
                             <div class="custom-select">
-                                <select id="selectConstructeur" name="selectedConstructeur">
-                                    <option value="" disabled selected>Constructeur * </option>
+                                <select id="selectConstructeur" name="selectedConstructeurs[]" multiple="multiple">
                                     <?php
-                                    // Requête SQL pour récupérer les constructeurs depuis la base de données
+                                    // Requête SQL pour récupérer les types depuis la base de données
                                     $getAllConstructeurs = $bdd->query('SELECT * FROM CONSTRUCTEUR ORDER BY NOM_CONSTRUCTEUR');
                                     $constructeurs = $getAllConstructeurs->fetchAll(PDO::FETCH_ASSOC);
                                     // Affichage des options pour la liste déroulante
                                     foreach ($constructeurs as $constructeur) {
+                                        // Vérifier si l'ID du type correspond à la valeur sélectionnée
                                         $isSelected = ($constructeur['ID'] == $selectedConstructeur) ? 'selected' : '';
                                         echo '<option value="' . $constructeur['ID'] . '" ' . $isSelected . '>' . $constructeur['NOM_CONSTRUCTEUR'] . '</option>';
                                     }
@@ -161,6 +161,15 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                                 </select>
                             </div>
                         </div>
+                        <script>
+                            $(document).ready(function() {
+                                $('#selectConstructeur').select2({
+                                    placeholder: "Sélectionnez un ou plusieurs constructeurs",
+                                    closeOnSelect: false, // Permet de laisser le menu ouvert après une sélection
+                                    allowClear: true
+                                });
+                            });
+                        </script>
                         <div class="columnMetriques">
                             <div class="custom-select">
                                 <select id="selectGeneration" name="selectedGeneration">

@@ -72,13 +72,18 @@ if (isset($_GET['id_fiche'])) {
     // Valeur sélectionnée pour le modèle
     $selectedSegment = $fiche['ID_SEGMENT']; // Assurez-vous que cette colonne existe dans la table FICHE
 
-    //-------------------------------CONSTRUCTEUR------------------------------------//
-    $sql = "SELECT * FROM CONSTRUCTEUR ORDER BY NOM_CONSTRUCTEUR";
+    //-------------------------------CONSTRUCTEURS------------------------------------//
+
+    $sql = "SELECT ID_CONSTRUCTEUR FROM fiche_CONSTRUCTEUR WHERE ID_FICHE = :id_fiche";
+    $stmt = $bdd->prepare($sql);
+    $stmt->bindParam(':id_fiche', $idFiche, PDO::PARAM_INT);
+    $stmt->execute();
+    $associatedConstructeurIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    // Récupérer tous les types disponibles
+    $sql = "SELECT * FROM constructeur ORDER BY NOM_CONSTRUCTEUR";
     $getAllConstructeurs = $bdd->query($sql);
     $constructeurs = $getAllConstructeurs->fetchAll(PDO::FETCH_ASSOC);
-
-    // Valeur sélectionnée pour le modèle
-    $selectedConstructeur = $fiche['ID_CONSTRUCTEUR']; // Assurez-vous que cette colonne existe dans la table FICHE
 
     //-------------------------------GENERATION------------------------------------//
     $sql = "SELECT * FROM GENERATION ORDER BY NOM_GENERATION";

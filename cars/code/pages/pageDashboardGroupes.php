@@ -56,10 +56,10 @@ require('../actions/actionsDashboard/actionsDashboardGroupes/actionDashboardGrou
                     <tbody id="groupesTable">
                     <?php
                     $getAllGroupes = $bdd->query('
-                        SELECT GROUPE.id, GROUPE.NOM_GROUPE, COUNT(FICHE.id) AS fiches_count
+                        SELECT GROUPE.id, GROUPE.NOM_GROUPE, COUNT(DISTINCT FICHE_CONSTRUCTEUR.ID_FICHE) AS fiches_count
                         FROM GROUPE
-                        LEFT JOIN CONSTRUCTEUR ON GROUPE.id = CONSTRUCTEUR.id_groupe
-                        LEFT JOIN FICHE ON CONSTRUCTEUR.id = FICHE.id_constructeur
+                        LEFT JOIN CONSTRUCTEUR ON GROUPE.id = CONSTRUCTEUR.ID_GROUPE
+                        LEFT JOIN FICHE_CONSTRUCTEUR ON CONSTRUCTEUR.id = FICHE_CONSTRUCTEUR.ID_CONSTRUCTEUR
                         GROUP BY GROUPE.id, GROUPE.NOM_GROUPE
                         ORDER BY GROUPE.NOM_GROUPE;
                     ');

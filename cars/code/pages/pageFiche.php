@@ -27,183 +27,205 @@ require('../actions/actionsUser/actionIsAdmin.php');
 <br>
 
 <?php
-        if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
+if (isset($_GET['id_fiche']) && !empty($_GET['id_fiche'])) {
+    $fiche_id = $_GET['id_fiche'];
 
-            $fiche_id = $_GET['id_fiche'];
+    $getInfosOfThisFicheReq = $bdd->prepare('SELECT * FROM FICHE WHERE ID = ?');
+    $getInfosOfThisFicheReq->execute([$fiche_id]);
+    $ficheInfos = $getInfosOfThisFicheReq->fetch();
 
-            $getInfosOfThisFicheReq = $bdd->prepare('SELECT * FROM FICHE WHERE ID = ?');
-            $getInfosOfThisFicheReq->execute(array($fiche_id));
+    if (!$ficheInfos) {
+        echo '<p class="errorFicheNonTrouvee">Erreur 10 : Fiche introuvable.</p>';
+    } else {
+        // -------------------------------CONSTRUCTEURS----------------------------------------------------
+        $getConstructeurs = $bdd->prepare('
+            SELECT ID_CONSTRUCTEUR
+            FROM FICHE_CONSTRUCTEUR
+            WHERE ID_FICHE = ?');
+        $getConstructeurs->execute([$ficheInfos['ID']]);
+        $constructeursIds = $getConstructeurs->fetchAll(PDO::FETCH_COLUMN);
 
-            $ficheInfos = $getInfosOfThisFicheReq->fetch();
+        // Initialiser les tableaux pour les noms des constructeurs, des groupes et des pays
+        $constructeursNoms = [];
+        $groupesNoms = [];
+        $paysInfos = []; // Stocker les informations des pays pour chaque constructeur
 
-            if(!$ficheInfos){
-                echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
-            }else{
+        foreach ($constructeursIds as $constructeurId) {
+            // Requête pour récupérer les informations du constructeur
+            $getConstructeur = $bdd->prepare('
+                SELECT c.NOM_CONSTRUCTEUR, c.ID_GROUPE, c.ID_PAYS
+                FROM CONSTRUCTEUR c
+                WHERE c.ID = ?');
+            $getConstructeur->execute([$constructeurId]);
+            $ficheConstructeur = $getConstructeur->fetch();
 
-                $getConstructor = $bdd->prepare('SELECT * FROM CONSTRUCTEUR WHERE ID = ?');
-                $getConstructor->execute(array($ficheInfos['ID_CONSTRUCTEUR']));
+            if ($ficheConstructeur) {
+                $constructeursNoms[] = htmlspecialchars($ficheConstructeur['NOM_CONSTRUCTEUR']);
 
-                $ficheConstructeur = $getConstructor->fetch();
-
-                $getPays = $bdd->prepare('SELECT * FROM PAYS WHERE ID = ?');
-                $getPays->execute(array($ficheConstructeur['ID_PAYS']));
-
-                $fichePays = $getPays->fetch();
-
-
-                $getAnnee = $bdd->prepare('SELECT * FROM ANNEE WHERE ID = ?');
-                $getAnnee->execute(array($ficheInfos['ID_ANNEE_DEBUT']));
-
-                $ficheAnne = $getAnnee->fetch();
-
-                $getAnnee2 = $bdd->prepare('SELECT * FROM ANNEE WHERE ID = ?');
-                $getAnnee2->execute(array($ficheInfos['ID_ANNEE_FIN']));
-
-                $ficheAnne2 = $getAnnee2->fetch();
-
-                $getAnneeFin = $bdd->prepare('SELECT * FROM ANNEE WHERE ID = ?');
-                $getAnneeFin->execute(array($ficheInfos['ID_ANNEE_FIN']));
-
-                $ficheAnneFin = $getAnneeFin->fetch();
-
-                $getModele = $bdd->prepare('SELECT * FROM MODELE WHERE ID = ?');
-                $getModele->execute(array($ficheInfos['ID_MODELE']));
-
-                $modele = $getModele->fetch();
-
-                $getGeneration = $bdd->prepare('SELECT * FROM GENERATION WHERE ID = ?');
-                $getGeneration->execute(array($ficheInfos['ID_GENERATION']));
-
-                $generation = $getGeneration->fetch();
-
-                $getGroupe = $bdd->prepare('SELECT * FROM GROUPE WHERE ID = ?');
-                $getGroupe->execute(array($ficheConstructeur['ID_GROUPE']));
+                // Récupérer le groupe associé à ce constructeur
+                $getGroupe = $bdd->prepare('SELECT NOM_GROUPE FROM GROUPE WHERE ID = ?');
+                $getGroupe->execute([$ficheConstructeur['ID_GROUPE']]);
                 $ficheGroupe = $getGroupe->fetch();
-                $ficheGroupeFinal = $ficheConstructeur['NOM_CONSTRUCTEUR'];
 
-                if($ficheGroupe){
-                    $ficheGroupeFinal = $ficheGroupe['NOM_GROUPE'];
+                if ($ficheGroupe) {
+                    $groupesNoms[] = htmlspecialchars($ficheGroupe['NOM_GROUPE']);
                 }
 
-                $getFicheTypes = $bdd->prepare('SELECT * FROM FICHE_TYPE WHERE ID_FICHE = ?');
-                $getFicheTypes->execute(array($ficheInfos['ID']));
-                $ficheTypes = $getFicheTypes->fetchAll();
+                // Récupérer le pays associé à ce constructeur
+                $getPays = $bdd->prepare('
+                    SELECT NOM_PAYS, IMAGE_PAYS
+                    FROM PAYS
+                    WHERE ID = ?');
+                $getPays->execute([$ficheConstructeur['ID_PAYS']]);
+                $fichePays = $getPays->fetch();
 
-                $getSegment = $bdd->prepare('SELECT * FROM SEGMENT WHERE ID = ?');
-                $getSegment->execute(array($ficheInfos['ID_SEGMENT']));
-
-                $ficheSegment = $getSegment->fetch();
-
-                $getImage = $bdd->prepare('SELECT IMAGE_URL FROM IMAGE WHERE ID_FICHE=?');
-                $getImage->execute(array($ficheInfos['ID']));
-                $image = $getImage->fetch();
-
-                $getLignesOfTab = $bdd->prepare('SELECT * FROM VERSION WHERE ID_FICHE = ?');
-                $getLignesOfTab->execute(array($fiche_id));
-
-                // Récupération de toutes les lignes de résultats dans un tableau
-                $tabInfos = $getLignesOfTab->fetchAll();
-
-            ?>
-                <div class="color-band">
-                    <div class="car-details">
-                        <div class="content-left">
-                            <p><?= $ficheInfos['RESUME_FICHE']; ?></p>
-                        </div>
-                        <div class="title-banner">
-                            <h2><?= $ficheConstructeur['NOM_CONSTRUCTEUR']; ?> <?= $ficheInfos['NOM_FICHE']; ?></h2>
-                        </div>
-                        <a href="#summary-anchor" class="btn-banner-1">
-                            <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon4">
-                            <p>Modèle : <?= $modele['NOM_MODELE']; ?></p>
-                        </a>
-                        <?php
-                        $typesList = [];
-
-                        foreach ($ficheTypes as $ficheType) {
-                            $getType = $bdd->prepare('SELECT * FROM TYPE WHERE ID = ?');
-                            $getType->execute(array($ficheType['ID_TYPE']));
-                            $Type = $getType->fetch();
-                            $typesList[] = htmlspecialchars($Type['NOM_TYPE']);  // Ajout du nom du type à la liste
-                        }
-
-                        $typesString = implode(' - ', $typesList);  // Conversion de la liste en chaîne de caractères séparée par des tirets
-
-                        $cheminImage = "../../library/dummy/aucune_image.png";
-
-                        $cheminDossier = "../../library/voitures/" . $modele['NOM_MODELE'] . "/" . $ficheInfos['ID'];
-                        if (is_dir($cheminDossier)) {
-                            // Obtenir la liste des fichiers dans le répertoire
-                            $fichiers = scandir($cheminDossier);
-
-                            // Filtrer les fichiers pour ignorer les entrées '.' et '..'
-                            $fichiers = array_diff($fichiers, array('.', '..'));
-
-                            // Vérifiez si le répertoire contient des fichiers
-                            if (!empty($fichiers)) {
-                                $cheminImage = "../../library/voitures/" . $modele['NOM_MODELE'] . "/" . $ficheInfos['ID'] . "/" . $image['IMAGE_URL'];
-                            }
-                        }
-
-                        ?>
-
-                        <a href="#summary-anchor" class="btn-banner-2">
-                            <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon7">
-                            <p>Type : <?= $typesString; ?></p>
-                        </a>
-                        <a href="#summary-anchor" class="btn-banner-3">
-                            <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon3">
-                            <p>Segment : <?= $ficheSegment['NOM_SEGMENT']; ?></p>
-                        </a>
-                        <a href="#summary-anchor" class="btn-banner-4">
-                            <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon">
-                            <p>Constructeur : <?= $ficheConstructeur['NOM_CONSTRUCTEUR']; ?></p>
-                        </a>
-                        <a href="#summary-anchor" class="btn-banner-5">
-                            <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon2">
-                            <p>Groupe automobile : <?= $ficheGroupe['NOM_GROUPE']; ?></p>
-                        </a>
-                        <a href="#summary-anchor" class="btn-banner-12">
-                            <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon2">
-                            <p>Génération / Phase : <?= $generation['NOM_GENERATION']; ?></p>
-                        </a>
-                        <a href="#summary-anchor" class="btn-banner-6">
-                            <img src="../../library/imgIconsFiche/date.png" alt="Icone" class="banner-icon5">
-                            <p>Période de production : <?= $ficheAnne['NOM_ANNEE']; ?> - <?= $ficheAnne2['NOM_ANNEE']; ?></p>
-                        </a>
-                        <a href="#summary-anchor" class="btn-banner-7">
-                            <img src="../../library/imgIconsFiche/pays.png" alt="Icone" class="banner-icon2">
-                            <p>Pays constructeur :
-                                <?= htmlspecialchars($fichePays['NOM_PAYS']); ?>
-                                <?php if (!empty($fichePays['IMAGE_PAYS'])): ?>
-                                    <img src="../../library/flags/<?= htmlspecialchars($fichePays['IMAGE_PAYS']); ?>" alt="Drapeau" class="flag-icon">
-                                <?php endif; ?>
-                            </p>
-                        </a>
-                        <img src="<?= $cheminImage; ?>" alt="Car Photo" class="car-photo">
-                        <a href="#histoire" class="btn-banner-8">
-                            <img src="../../library/imgIconsFiche/histoire.png" alt="Icone" class="banner-icon8">
-                            <p>Histoire</p>
-                        </a>
-                        <a href="#technique" class="btn-banner-9">
-                            <img src="../../library/imgIconsFiche/technique.png" alt="Icone" class="banner-icon9">
-                            <p>Nombre de versions : <?= count($tabInfos); ?></p>
-                        </a>
-                        <a href="#photo" class="btn-banner-10">
-                            <img src="../../library/imgIconsFiche/photo.png" alt="Icone" class="banner-icon10">
-                            <p>Galerie photo</p>
-                        </a>
-                        <?php if (isAdmin()): ?>
-                            <a href="./pageModificationFiche.php?id_fiche=<?php echo htmlspecialchars($fiche_id); ?>" class="btn-banner-11">
-                                <p>Modifier</p>
-                            </a>
-                        <?php endif; ?>
-                    </div>
-                    <!-- Ajoutez d'autres détails de la voiture ici -->
-                </div>
-            <?php
+                if ($fichePays) {
+                    $paysInfos[] = $fichePays; // Stocker toutes les informations de pays
+                }
             }
-            } else{echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';}?>
+        }
+
+        // Convertir les tableaux en chaînes de caractères séparées par des tirets
+        $constructeursNomsString = implode(' - ', $constructeursNoms);
+        $groupesNomsString = isset($groupesNoms) ? implode(' - ', $groupesNoms) : 'Aucun groupe';
+
+        // Préparer l'affichage des pays et des drapeaux
+        $paysDisplay = '';
+        foreach ($paysInfos as $pays) {
+            $paysDisplay .= htmlspecialchars($pays['NOM_PAYS']);
+            if (!empty($pays['IMAGE_PAYS'])) {
+                $paysDisplay .= ' <img src="../../library/flags/' . htmlspecialchars($pays['IMAGE_PAYS']) . '" alt="Drapeau" class="flag-icon">';
+            }
+            $paysDisplay .= ' ';
+        }
+        $paysDisplay = trim($paysDisplay);
+
+        // -------------------------------ANNEES----------------------------------------------------
+        $getAnnee = $bdd->prepare('SELECT * FROM ANNEE WHERE ID = ?');
+        $getAnnee->execute([$ficheInfos['ID_ANNEE_DEBUT']]);
+        $ficheAnne = $getAnnee->fetch();
+
+        $getAnnee2 = $bdd->prepare('SELECT * FROM ANNEE WHERE ID = ?');
+        $getAnnee2->execute([$ficheInfos['ID_ANNEE_FIN']]);
+        $ficheAnne2 = $getAnnee2->fetch();
+        // -------------------------------MODELE----------------------------------------------------
+        $getModele = $bdd->prepare('SELECT * FROM MODELE WHERE ID = ?');
+        $getModele->execute([$ficheInfos['ID_MODELE']]);
+        $modele = $getModele->fetch();
+        // -------------------------------GEN----------------------------------------------------
+        $getGeneration = $bdd->prepare('SELECT * FROM GENERATION WHERE ID = ?');
+        $getGeneration->execute([$ficheInfos['ID_GENERATION']]);
+        $generation = $getGeneration->fetch();
+        // -------------------------------GROUPES----------------------------------------------------
+
+        // -------------------------------TYPES----------------------------------------------------
+        $getFicheTypes = $bdd->prepare('SELECT * FROM FICHE_TYPE WHERE ID_FICHE = ?');
+        $getFicheTypes->execute([$ficheInfos['ID']]);
+        $ficheTypes = $getFicheTypes->fetchAll();
+        // -------------------------------SEGMENT----------------------------------------------------
+        $getSegment = $bdd->prepare('SELECT * FROM SEGMENT WHERE ID = ?');
+        $getSegment->execute([$ficheInfos['ID_SEGMENT']]);
+        $ficheSegment = $getSegment->fetch();
+        // -------------------------------IMAGES----------------------------------------------------
+        $getImage = $bdd->prepare('SELECT IMAGE_URL FROM IMAGE WHERE ID_FICHE=?');
+        $getImage->execute([$ficheInfos['ID']]);
+        $image = $getImage->fetch();
+        // -------------------------------VERSIONS----------------------------------------------------
+        $getLignesOfTab = $bdd->prepare('SELECT * FROM VERSION WHERE ID_FICHE = ?');
+        $getLignesOfTab->execute([$fiche_id]);
+        $tabInfos = $getLignesOfTab->fetchAll();
+        ?>
+
+        <div class="color-band">
+            <div class="car-details">
+                <div class="content-left">
+                    <p><?= htmlspecialchars($ficheInfos['RESUME_FICHE']); ?></p>
+                </div>
+                <div class="title-banner">
+                    <h2><?= htmlspecialchars($ficheConstructeur['NOM_CONSTRUCTEUR']); ?> <?= htmlspecialchars($ficheInfos['NOM_FICHE']); ?></h2>
+                </div>
+                <a href="#summary-anchor" class="btn-banner-1">
+                    <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon4">
+                    <p>Modèle : <?= htmlspecialchars($modele['NOM_MODELE']); ?></p>
+                </a>
+
+                <?php
+                $typesList = [];
+
+                foreach ($ficheTypes as $ficheType) {
+                    $getType = $bdd->prepare('SELECT * FROM TYPE WHERE ID = ?');
+                    $getType->execute([$ficheType['ID_TYPE']]);
+                    $Type = $getType->fetch();
+                    $typesList[] = htmlspecialchars($Type['NOM_TYPE']);
+                }
+
+                $typesString = implode(' - ', $typesList);
+
+                $cheminImage = "../../library/dummy/aucune_image.png";
+                $cheminDossier = "../../library/voitures/" . $modele['NOM_MODELE'] . "/" . $ficheInfos['ID'];
+
+                if (is_dir($cheminDossier)) {
+                    $fichiers = array_diff(scandir($cheminDossier), ['.', '..']);
+                    if (!empty($fichiers)) {
+                        $cheminImage = "../../library/voitures/" . $modele['NOM_MODELE'] . "/" . $ficheInfos['ID'] . "/" . htmlspecialchars($image['IMAGE_URL']);
+                    }
+                }
+                ?>
+
+                <a href="#summary-anchor" class="btn-banner-2">
+                    <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon7">
+                    <p>Type : <?= htmlspecialchars($typesString); ?></p>
+                </a>
+                <a href="#summary-anchor" class="btn-banner-3">
+                    <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon3">
+                    <p>Segment : <?= htmlspecialchars($ficheSegment['NOM_SEGMENT']); ?></p>
+                </a>
+                <a href="#summary-anchor" class="btn-banner-4">
+                    <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon">
+                    <p>Constructeur : <?= htmlspecialchars($constructeursNomsString); ?></p>
+                </a>
+                <a href="#summary-anchor" class="btn-banner-5">
+                    <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon2">
+                    <p>Groupe automobile : <?= htmlspecialchars($groupesNomsString); ?></p>
+                </a>
+                <a href="#summary-anchor" class="btn-banner-12">
+                    <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon2">
+                    <p>Génération / Phase : <?= htmlspecialchars($generation['NOM_GENERATION']); ?></p>
+                </a>
+                <a href="#summary-anchor" class="btn-banner-6">
+                    <img src="../../library/imgIconsFiche/date.png" alt="Icone" class="banner-icon5">
+                    <p>Période de production : <?= htmlspecialchars($ficheAnne['NOM_ANNEE']); ?> - <?= htmlspecialchars($ficheAnne2['NOM_ANNEE']); ?></p>
+                </a>
+                <a href="#summary-anchor" class="btn-banner-7">
+                    <img src="../../library/imgIconsFiche/pays.png" alt="Icone" class="banner-icon4">
+                    <p>Pays : <?= $paysDisplay; ?></p>
+                </a>
+                <img src="<?= $cheminImage; ?>" alt="Car Photo" class="car-photo">
+                <a href="#histoire" class="btn-banner-8">
+                    <img src="../../library/imgIconsFiche/histoire.png" alt="Icone" class="banner-icon8">
+                    <p>Histoire</p>
+                </a>
+                <a href="#technique" class="btn-banner-9">
+                    <img src="../../library/imgIconsFiche/technique.png" alt="Icone" class="banner-icon9">
+                    <p>Technique</p>
+                </a>
+                <a href="#photo" class="btn-banner-10">
+                    <img src="../../library/imgIconsFiche/photo.png" alt="Icone" class="banner-icon10">
+                    <p>Galerie photo</p>
+                </a>
+                <?php if (isAdmin()): ?>
+                    <a href="./pageModificationFiche.php?id_fiche=<?php echo htmlspecialchars($fiche_id); ?>" class="btn-banner-11">
+                        <p>Modifier</p>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php
+    }
+} else {
+    echo '<p class="errorFicheNonTrouvee">Erreur 11 : Fiche non spécifiée.</p>';
+}
+        ?>
 
 
 <!----------CARD---------->
@@ -401,7 +423,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
     }
 }else{
         echo '<p class="errorFicheNonTrouvee">'."Erreur 10 : Fiche introuvable.".'</p>';
-}        
+}
 
         ?>
 <br>

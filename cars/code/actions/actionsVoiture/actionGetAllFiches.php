@@ -3,7 +3,7 @@ require('../actions/Database.php');
 
 // Définition des clés de paramètres et de leurs équivalents SQL
 $paramMapping = [
-    'id_constructeur' => 'f.ID_CONSTRUCTEUR',
+    'id_constructeur' => 'f.ID_CONSTRUCTEUR', // Utilisé via FICHE_CONSTRUCTEUR maintenant
     'id_modele' => 'f.ID_MODELE',
     'id_annee' => 'f.ID_ANNEE_DEBUT',
     'id_segment' => 'f.ID_SEGMENT'
@@ -18,7 +18,12 @@ foreach ($paramMapping as $paramKey => $sqlColumn) {
     if ($paramKey !== 'id_annee' && isset($_GET[$paramKey]) && !empty($_GET[$paramKey])) {
         $ids = explode(",", $_GET[$paramKey]);
         $placeholders = rtrim(str_repeat('?,', count($ids)), ','); // Créer les placeholders
-        $conditions[] = "$sqlColumn IN ($placeholders)";
+        if ($paramKey === 'id_constructeur') {
+            // Ne filtrez que les fiches qui ont le constructeur spécifié, mais ne limitez pas les constructeurs affichés
+            $conditions[] = "f.ID IN (SELECT ID_FICHE FROM FICHE_CONSTRUCTEUR WHERE ID_CONSTRUCTEUR IN ($placeholders))";
+        } else {
+            $conditions[] = "$sqlColumn IN ($placeholders)";
+        }
         $params = array_merge($params, $ids); // Ajouter les IDs au tableau des paramètres
     }
 }
@@ -26,9 +31,9 @@ foreach ($paramMapping as $paramKey => $sqlColumn) {
 // Traitement du paramètre `id_type`
 if (isset($_GET['id_type']) && !empty($_GET['id_type'])) {
     $idsType = explode(",", $_GET['id_type']);
-    $placeholdersType = rtrim(str_repeat('?,', count($idsType)), ','); // Créer les placeholders pour les types
+    $placeholdersType = rtrim(str_repeat('?,', count($idsType)), ',');
     $conditions[] = "ft.ID_TYPE IN ($placeholdersType)";
-    $params = array_merge($params, $idsType); // Ajouter les IDs de type au tableau des paramètres
+    $params = array_merge($params, $idsType);
 }
 
 // Recherche
@@ -39,35 +44,12 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
     $params = array_merge($params, array_fill(0, 4, "%$searchInput%"));
 }
 
-// Modification de la logique pour récupérer les ID des années correspondant à la décennie
-if (isset($_GET['id_annee']) && !empty($_GET['id_annee'])) {
-    // Récupérer les ID des années correspondant à chaque décennie spécifiée
-    $idDecennies = explode(",", $_GET['id_annee']);
-    $conditionsAnnee = []; // Tableau pour stocker les conditions d'année
-    $paramsAnnee = []; // Tableau pour stocker les paramètres d'année
-    foreach ($idDecennies as $decennie) {
-        $sqlAnnees = "SELECT ID FROM ANNEE WHERE ID_DECENNIE = ?";
-        $getAnnees = $bdd->prepare($sqlAnnees);
-        $getAnnees->execute([$decennie]);
-        $annees = $getAnnees->fetchAll(PDO::FETCH_COLUMN);
-        if (!empty($annees)) {
-            $placeholders = rtrim(str_repeat('?,', count($annees)), ','); // Créer les placeholders
-            $conditionsAnnee[] = "f.ID_ANNEE_DEBUT IN ($placeholders)"; // Ajouter la condition d'année
-            $paramsAnnee = array_merge($paramsAnnee, $annees); // Ajouter les ID des années aux paramètres
-        }
-    }
-    // Ajouter les conditions d'année et les paramètres à la requête principale
-    if (!empty($conditionsAnnee)) {
-        $conditions[] = "(" . implode(" OR ", $conditionsAnnee) . ")";
-        $params = array_merge($params, $paramsAnnee);
-    }
-}
-
 // Construction de la requête SQL
-$sql = "SELECT f.ID, f.NOM_FICHE, c.NOM_CONSTRUCTEUR, m.NOM_MODELE, a.NOM_ANNEE,
-               GROUP_CONCAT(DISTINCT i.IMAGE_URL ORDER BY i.IMAGE_URL SEPARATOR ',') AS image_urls
+$sql = "SELECT f.ID, f.NOM_FICHE, GROUP_CONCAT(DISTINCT c.NOM_CONSTRUCTEUR ORDER BY c.NOM_CONSTRUCTEUR SEPARATOR ', ') AS NOM_CONSTRUCTEUR, 
+               m.NOM_MODELE, a.NOM_ANNEE, GROUP_CONCAT(DISTINCT i.IMAGE_URL ORDER BY i.IMAGE_URL SEPARATOR ',') AS image_urls
         FROM FICHE f
-        LEFT JOIN CONSTRUCTEUR c ON f.ID_CONSTRUCTEUR = c.ID
+        LEFT JOIN FICHE_CONSTRUCTEUR fc ON f.ID = fc.ID_FICHE
+        LEFT JOIN CONSTRUCTEUR c ON fc.ID_CONSTRUCTEUR = c.ID
         LEFT JOIN MODELE m ON f.ID_MODELE = m.ID
         LEFT JOIN ANNEE a ON f.ID_ANNEE_DEBUT = a.ID
         LEFT JOIN FICHE_TYPE ft ON f.ID = ft.ID_FICHE
@@ -90,8 +72,9 @@ if (!empty($conditions) || !empty($searchCondition)) {
 // Ajout de la clause GROUP BY pour éviter la duplication des fiches
 $sql .= " GROUP BY f.ID";
 
+
 // Gestion du tri
-$sort = isset($_GET['sort']) ? $_GET['sort'] : ''; // Récupérer le paramètre de tri
+$sort = isset($_GET['sort']) ? $_GET['sort'] : '';
 switch ($sort) {
     case 'alphabetique_asc':
         $sql .= " ORDER BY f.NOM_FICHE ASC";
@@ -106,7 +89,7 @@ switch ($sort) {
         $sql .= " ORDER BY a.NOM_ANNEE DESC";
         break;
     default:
-        $sql .= " ORDER BY f.NOM_FICHE ASC"; // Par défaut, tri par ordre alphabétique croissant
+        $sql .= " ORDER BY f.NOM_FICHE ASC";
         break;
 }
 
@@ -114,47 +97,40 @@ switch ($sort) {
 $getAllFiches = $bdd->prepare($sql);
 $getAllFiches->execute($params);
 
-
-
 // Affichage des résultats
 if ($getAllFiches->rowCount() > 0) {
     ?>
-<div class="row" id="colonne">
-    <?php
-    while ($fiche = $getAllFiches->fetch()) {
-        // Votre code d'affichage des résultats ici
-        $getPhotos = $bdd->prepare('SELECT * FROM IMAGE WHERE ID_FICHE = ?');
-        $getPhotos->execute([$fiche['ID']]);
-        $photo = $getPhotos->fetch();
+    <div class="row" id="colonne">
+        <?php
+        while ($fiche = $getAllFiches->fetch()) {
+            $getPhotos = $bdd->prepare('SELECT * FROM IMAGE WHERE ID_FICHE = ?');
+            $getPhotos->execute([$fiche['ID']]);
+            $photo = $getPhotos->fetch();
 
-        $cheminImage = "../../library/dummy/aucune_image.png";
+            $cheminImage = "../../library/dummy/aucune_image.png";
 
-        $cheminDossier = "../../library/voitures/" . $fiche['NOM_MODELE'] . "/" . $fiche['ID'];
-        if (is_dir($cheminDossier)) {
-            // Obtenir la liste des fichiers dans le répertoire
-            $fichiers = scandir($cheminDossier);
+            $cheminDossier = "../../library/voitures/" . $fiche['NOM_MODELE'] . "/" . $fiche['ID'];
+            if (is_dir($cheminDossier)) {
+                $fichiers = scandir($cheminDossier);
+                $fichiers = array_diff($fichiers, array('.', '..'));
 
-            // Filtrer les fichiers pour ignorer les entrées '.' et '..'
-            $fichiers = array_diff($fichiers, array('.', '..'));
-
-            // Vérifiez si le répertoire contient des fichiers
-            if (!empty($fichiers)) {
-                $cheminImage = "../../library/voitures/" . $fiche['NOM_MODELE'] . "/" . $fiche['ID'] . "/" . $photo['IMAGE_URL'];
+                if (!empty($fichiers)) {
+                    $cheminImage = "../../library/voitures/" . $fiche['NOM_MODELE'] . "/" . $fiche['ID'] . "/" . $photo['IMAGE_URL'];
+                }
             }
-        }
 
-        ?>
-        <div class="column">
-            <a href="pageFiche.php?id_fiche=<?= $fiche['ID']; ?>"><input type=image src="<?= $cheminImage; ?>" width="100%"/></a>
-            <div class="text">
-                <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $fiche['NOM_CONSTRUCTEUR']; ?> </span>  <?= $fiche['NOM_FICHE']; ?> <span class="spanNomAnnee"><?= $fiche['NOM_ANNEE']; ?> </span></p>
+            ?>
+            <div class="column">
+                <a href="pageFiche.php?id_fiche=<?= $fiche['ID']; ?>"><input type=image src="<?= $cheminImage; ?>" width="100%"/></a>
+                <div class="text">
+                    <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $fiche['NOM_CONSTRUCTEUR']; ?> </span>  <?= $fiche['NOM_FICHE']; ?> <span class="spanNomAnnee"><?= $fiche['NOM_ANNEE']; ?> </span></p>
+                </div>
             </div>
-        </div>
-        <?php
-    }
-    ?>
-</div>
-        <?php
+            <?php
+        }
+        ?>
+    </div>
+    <?php
 } else {
     $error = "Aucune voiture n'a été trouvée.";
 }
