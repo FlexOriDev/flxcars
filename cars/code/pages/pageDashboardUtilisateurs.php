@@ -5,6 +5,7 @@ require('../actions/actionsUser/actionIsAdmin.php');
 redirectIfNotAdmin();
 require('../actions/database.php');
 require('../actions/actionsDashboard/actionsDashboardUtilisateurs/actionDashboardUtilisateurs.php');
+require('../actions/constant/paths.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -31,25 +32,25 @@ require('../actions/actionsDashboard/actionsDashboardUtilisateurs/actionDashboar
                     <thead>
                     <tr>
                         <th class="dashboard-table-header dashboard-table-id" id="sortById">ID
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByIdIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByIdIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-pseudo">Pseudo
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByPseudoIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByPseudoIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-prenom">Prénom
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByPrenomIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByPrenomIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-nom">Nom
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByNomIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByNomIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-mail">E-mail
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByMailIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByMailIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-role">Role
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByRoleIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByRoleIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-fiches-count">Fiches Count
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByCountIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByCountIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-actions">Actions</th>
                     </tr>

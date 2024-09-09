@@ -5,6 +5,7 @@ require('../actions/actionsUser/actionIsAdmin.php');
 redirectIfNotAdmin();
 require('../actions/database.php');
 require('../actions/actionsDashboard/actionsDashboardFiches/actionDashboardFiches.php');
+require('../actions/constant/paths.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -31,37 +32,37 @@ require('../actions/actionsDashboard/actionsDashboardFiches/actionDashboardFiche
                     <thead>
                     <tr>
                         <th class="dashboard-table-header dashboard-table-id" id="sortById">ID
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByIdIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByIdIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-name">Nom
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByNameIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByNameIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-modele">Modèle
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByModeleIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByModeleIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-constructeur">Constructeur
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByConstructeurIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByConstructeurIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-groupe">Groupe
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByGroupeIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByGroupeIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-type">Type
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByTypeIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByTypeIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-segment">Segment
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortBySegmentIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortBySegmentIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-annee">Année début de production
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByAnneeIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByAnneeIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-annee-fin">Année fin de production
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByAnneeFinIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByAnneeFinIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-user">Utilisateur
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByUserIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByUserIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-date">Date
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByDateIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByDateIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-actions">Actions</th>
                     </tr>

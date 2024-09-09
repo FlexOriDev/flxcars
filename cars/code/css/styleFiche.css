@@ -92,7 +92,7 @@
 
 }
 
-.btn-banner-1 p,.btn-banner-2 p,.btn-banner-3 p,.btn-banner-4 p,.btn-banner-5,.btn-banner-12 p {
+.btn-banner-1 p,.btn-banner-2 p,.btn-banner-3 p,.btn-banner-4 p,.btn-banner-5 p,.btn-banner-12 p {
     margin: 0;
     overflow: hidden; /* Masquer le texte qui dépasse */
     text-overflow: ellipsis; /* Afficher des points de suspension pour le texte qui dépasse */

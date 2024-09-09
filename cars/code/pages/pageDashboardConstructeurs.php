@@ -5,6 +5,7 @@ require('../actions/actionsUser/actionIsAdmin.php');
 redirectIfNotAdmin();
 require('../actions/database.php');
 require('../actions/actionsDashboard/actionsDashboardConstructeurs/actionDashboardConstructeurs.php');
+require('../actions/constant/paths.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -56,19 +57,19 @@ require('../actions/actionsDashboard/actionsDashboardConstructeurs/actionDashboa
                     <thead>
                     <tr>
                         <th class="dashboard-table-header dashboard-table-id" id="sortById">ID
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByIdIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByIdIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-name">Nom
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByNameIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByNameIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-pays">Pays
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByPaysIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByPaysIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-group">Groupe
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByGroupIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByGroupIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-fiches-count">Fiches Count
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByCountIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByCountIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-actions">Actions</th>
                     </tr>
@@ -114,6 +115,7 @@ require('../actions/actionsDashboard/actionsDashboardConstructeurs/actionDashboa
         </section>
     </main>
 </div>
+<script src="../scripts/constant/paths.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_constructeurs/search_filter.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_constructeurs/column_filter.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_constructeurs/modif_tab.js"></script>

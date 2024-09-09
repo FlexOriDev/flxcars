@@ -5,6 +5,7 @@ require('../actions/actionsUser/actionIsAdmin.php');
 redirectIfNotAdmin();
 require('../actions/database.php');
 require('../actions/actionsDashboard/actionsDashboardVersions/actionDashboardVersions.php');
+require('../actions/constant/paths.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -31,46 +32,46 @@ require('../actions/actionsDashboard/actionsDashboardVersions/actionDashboardVer
                     <thead>
                     <tr>
                         <th class="dashboard-table-header dashboard-table-id" id="sortById">ID
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByIdIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByIdIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-fiche">Fiche
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByFicheIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByFicheIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-appellation">Appellation
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByAppellationIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByAppellationIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-carburant">Carburant
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByCarburantIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByCarburantIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-construction">Construction
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByConstructionIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByConstructionIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-moteur">Moteur
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByMoteurIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByMoteurIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-cylindree">Cylindrée
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByCylindreetIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByCylindreetIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-performance">Performance
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByPerformanceIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByPerformanceIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-couple">Couple
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByCoupleFinIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByCoupleFinIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-zero_to_hundred">0 à 100 km/h
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByZeroToHundredIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByZeroToHundredIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-vmax">V-MAX
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByVmaxIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByVmaxIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-conso">Consommation
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByConsommationIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByConsommationIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-carrosserie">Carrosserie
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByCarrosserieIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByCarrosserieIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-marche">Marché
-                            <img src="../../library/iconsDashboard/descendant.png" alt="Ascendant" id="sortByMarcheIcon" style="width: 16px; height: 16px;">
+                            <img src="<?= $iconsDashboardDescendant;?>" alt="Ascendant" id="sortByMarcheIcon" style="width: 16px; height: 16px;">
                         </th>
                         <th class="dashboard-table-header dashboard-table-actions">Actions</th>
                     </tr>
@@ -130,6 +131,7 @@ require('../actions/actionsDashboard/actionsDashboardVersions/actionDashboardVer
         </section>
     </main>
 </div>
+<script src="../scripts/constant/paths.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_versions/search_pays_and_group.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_versions/search_filter.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_versions/column_filter.js"></script>

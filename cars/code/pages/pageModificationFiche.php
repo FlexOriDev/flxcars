@@ -237,6 +237,7 @@ require('../actions/actionsModificationFiche/actionModificationFiche.php');
                                         echo '<option value="diesel" ' . ($version['CARBURANT'] == 'diesel' ? 'selected' : '') . '>Diesel</option>';
                                         echo '<option value="electrique" ' . ($version['CARBURANT'] == 'electrique' ? 'selected' : '') . '>Électrique</option>';
                                         echo '<option value="hydrogene" ' . ($version['CARBURANT'] == 'hydrogene' ? 'selected' : '') . '>Hydrogène</option>';
+                                        echo '<option value="hybride" ' . ($version['CARBURANT'] == 'hybride' ? 'selected' : '') . '>Hybride</option>';
                                         echo '</select></td>';
 
                                         echo '<td><input type="text" name="construction[]" class="form-control" value="' . htmlspecialchars($version['CONSTRUCTION_ANNEE']) . '"/></td>';
