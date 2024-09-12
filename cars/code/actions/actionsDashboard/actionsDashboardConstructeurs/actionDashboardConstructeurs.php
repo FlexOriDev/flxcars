@@ -2,6 +2,7 @@
 if (session_id() == '') {
     session_start();
 }
+
 require('../actions/Database.php');
 
 // Handling AJAX update requests

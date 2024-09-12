@@ -46,13 +46,14 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 
 // Construction de la requête SQL
 $sql = "SELECT f.ID, f.NOM_FICHE, GROUP_CONCAT(DISTINCT c.NOM_CONSTRUCTEUR ORDER BY c.NOM_CONSTRUCTEUR SEPARATOR ', ') AS NOM_CONSTRUCTEUR, 
-               m.NOM_MODELE, a.NOM_ANNEE, GROUP_CONCAT(DISTINCT i.IMAGE_URL ORDER BY i.IMAGE_URL SEPARATOR ',') AS image_urls
+               m.NOM_MODELE, a.NOM_ANNEE, GROUP_CONCAT(DISTINCT i.IMAGE_URL ORDER BY i.IMAGE_URL SEPARATOR ',') AS image_urls, g.NOM_GENERATION
         FROM FICHE f
         LEFT JOIN FICHE_CONSTRUCTEUR fc ON f.ID = fc.ID_FICHE
         LEFT JOIN CONSTRUCTEUR c ON fc.ID_CONSTRUCTEUR = c.ID
         LEFT JOIN MODELE m ON f.ID_MODELE = m.ID
         LEFT JOIN ANNEE a ON f.ID_ANNEE_DEBUT = a.ID
         LEFT JOIN FICHE_TYPE ft ON f.ID = ft.ID_FICHE
+        LEFT JOIN GENERATION g ON f.ID_GENERATION = g.ID
         LEFT JOIN IMAGE i ON f.ID = i.ID_FICHE";
 
 // Ajout des conditions à la requête SQL si des filtres sont appliqués
@@ -121,11 +122,15 @@ if ($getAllFiches->rowCount() > 0) {
 
             ?>
             <div class="column">
-                <a href="pageFiche.php?id_fiche=<?= $fiche['ID']; ?>"><input type=image src="<?= $cheminImage; ?>" width="100%"/></a>
-                <div class="text">
-                    <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $fiche['NOM_CONSTRUCTEUR']; ?> </span>  <?= $fiche['NOM_FICHE']; ?> <span class="spanNomAnnee"><?= $fiche['NOM_ANNEE']; ?> </span></p>
-                </div>
+                <a href="pageFiche.php?id_fiche=<?= $fiche['ID']; ?>">
+                    <input type="image" src="<?= $cheminImage; ?>" width="100%"/>
+                    <div class="text">
+                        <p class="nomWidgetFiche"><span class="spanNomConstructeur"><?= $fiche['NOM_CONSTRUCTEUR']; ?> </span>  <?= $fiche['NOM_FICHE']; ?></p>
+                        <p class="nomWidgetFiche">Phase <?= $fiche['NOM_GENERATION']; ?> - <span class="spanNomAnnee"><?= $fiche['NOM_ANNEE']; ?> </span></p>
+                    </div>
+                </a>
             </div>
+
             <?php
         }
         ?>

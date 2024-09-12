@@ -12,6 +12,7 @@
 <?php
 include '../includesHeaderFooter/includeHeader.php';
 require('../actions/actionsUser/actionIsAdmin.php');
+require('../actions/constant/paths.php');
 ?>
 <!--------------------------------------------HEADER------------------------------------------------------>
 
@@ -134,6 +135,29 @@ if (isset($_GET['id_fiche']) && !empty($_GET['id_fiche'])) {
         $getLignesOfTab = $bdd->prepare('SELECT * FROM VERSION WHERE ID_FICHE = ?');
         $getLignesOfTab->execute([$fiche_id]);
         $tabInfos = $getLignesOfTab->fetchAll();
+
+        // -------------------------------TYPES----------------------------------------------------
+        $typesList = [];
+
+        foreach ($ficheTypes as $ficheType) {
+            $getType = $bdd->prepare('SELECT * FROM TYPE WHERE ID = ?');
+            $getType->execute([$ficheType['ID_TYPE']]);
+            $Type = $getType->fetch();
+            $typesList[] = htmlspecialchars($Type['NOM_TYPE']);
+        }
+
+        $typesString = implode(' - ', $typesList);
+
+        $cheminImage = "../../library/dummy/aucune_image.png";
+        $cheminDossier = "../../library/voitures/" . $modele['NOM_MODELE'] . "/" . $ficheInfos['ID'];
+
+        if (is_dir($cheminDossier)) {
+            $fichiers = array_diff(scandir($cheminDossier), ['.', '..']);
+            if (!empty($fichiers)) {
+                $cheminImage = "../../library/voitures/" . $modele['NOM_MODELE'] . "/" . $ficheInfos['ID'] . "/" . htmlspecialchars($image['IMAGE_URL']);
+            }
+        }
+
         ?>
 
         <div class="color-band">
@@ -145,79 +169,56 @@ if (isset($_GET['id_fiche']) && !empty($_GET['id_fiche'])) {
                     <h2><?= htmlspecialchars($ficheConstructeur['NOM_CONSTRUCTEUR']); ?> <?= htmlspecialchars($ficheInfos['NOM_FICHE']); ?></h2>
                 </div>
                 <a href="#summary-anchor" class="btn-banner-1">
-                    <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon4">
+                    <img src="<?= $iconsFiche; ?>modele-voiture.png" alt="Icone" class="banner-icon4">
                     <p>Modèle : <?= htmlspecialchars($modele['NOM_MODELE']); ?></p>
                 </a>
 
-                <?php
-                $typesList = [];
-
-                foreach ($ficheTypes as $ficheType) {
-                    $getType = $bdd->prepare('SELECT * FROM TYPE WHERE ID = ?');
-                    $getType->execute([$ficheType['ID_TYPE']]);
-                    $Type = $getType->fetch();
-                    $typesList[] = htmlspecialchars($Type['NOM_TYPE']);
-                }
-
-                $typesString = implode(' - ', $typesList);
-
-                $cheminImage = "../../library/dummy/aucune_image.png";
-                $cheminDossier = "../../library/voitures/" . $modele['NOM_MODELE'] . "/" . $ficheInfos['ID'];
-
-                if (is_dir($cheminDossier)) {
-                    $fichiers = array_diff(scandir($cheminDossier), ['.', '..']);
-                    if (!empty($fichiers)) {
-                        $cheminImage = "../../library/voitures/" . $modele['NOM_MODELE'] . "/" . $ficheInfos['ID'] . "/" . htmlspecialchars($image['IMAGE_URL']);
-                    }
-                }
-                ?>
-
                 <a href="#summary-anchor" class="btn-banner-2">
-                    <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon7">
+                    <img src="<?= $iconsFiche; ?>segment.png" alt="Icone" class="banner-icon7">
                     <p>Type : <?= htmlspecialchars($typesString); ?></p>
                 </a>
                 <a href="#summary-anchor" class="btn-banner-3">
-                    <img src="../../library/imgIconsFiche/segment.png" alt="Icone" class="banner-icon3">
+                    <img src="<?= $iconsFiche; ?>segment.png" alt="Icone" class="banner-icon3">
                     <p>Segment : <?= htmlspecialchars($ficheSegment['NOM_SEGMENT']); ?></p>
                 </a>
                 <a href="#summary-anchor" class="btn-banner-4">
-                    <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon">
+                    <img src="<?= $iconsFiche; ?>fabrication-automobile.png" alt="Icone" class="banner-icon">
                     <p>Constructeur : <?= htmlspecialchars($constructeursNomsString); ?></p>
                 </a>
                 <a href="#summary-anchor" class="btn-banner-5">
-                    <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon2">
+                    <img src="<?= $iconsFiche; ?>automobile.png" alt="Icone" class="banner-icon2">
                     <p>Groupe automobile : <?= htmlspecialchars($groupesNomsString); ?></p>
                 </a>
                 <a href="#summary-anchor" class="btn-banner-12">
-                    <img src="../../library/imgIconsFiche/groupe.png" alt="Icone" class="banner-icon12">
+                    <img src="<?= $iconsFiche; ?>groupe.png" alt="Icone" class="banner-icon12">
                     <p>Génération / Phase : <?= htmlspecialchars($generation['NOM_GENERATION']); ?></p>
-                </a>
-                <a href="#summary-anchor" class="btn-banner-6">
-                    <img src="../../library/imgIconsFiche/date.png" alt="Icone" class="banner-icon5">
-                    <p>Période de production : <?= htmlspecialchars($ficheAnne['NOM_ANNEE']); ?> - <?= htmlspecialchars($ficheAnne2['NOM_ANNEE']); ?></p>
-                </a>
-                <a href="#summary-anchor" class="btn-banner-7">
-                    <img src="../../library/imgIconsFiche/pays.png" alt="Icone" class="banner-icon4">
-                    <p>Pays : <?= $paysDisplay; ?></p>
-                </a>
-                <img src="<?= $cheminImage; ?>" alt="Car Photo" class="car-photo">
-                <a href="#histoire" class="btn-banner-8">
-                    <img src="../../library/imgIconsFiche/histoire.png" alt="Icone" class="banner-icon8">
-                    <p>Histoire</p>
-                </a>
-                <a href="#technique" class="btn-banner-9">
-                    <img src="../../library/imgIconsFiche/technique.png" alt="Icone" class="banner-icon9">
-                    <p>Technique</p>
-                </a>
-                <a href="#photo" class="btn-banner-10">
-                    <img src="../../library/imgIconsFiche/photo.png" alt="Icone" class="banner-icon10">
-                    <p>Galerie photo</p>
                 </a>
                 <?php if (isAdmin()): ?>
                     <a href="./pageModificationFiche.php?id_fiche=<?php echo htmlspecialchars($fiche_id); ?>" class="btn-banner-11">
                         <p>Modifier</p>
                     </a>
                 <?php endif; ?>
+                <a href="#histoire" class="btn-banner-8">
+                    <img src="<?= $iconsFiche; ?>histoire.png" alt="Icone" class="banner-icon8">
+                    <p>Histoire</p>
+                </a>
+                <a href="#technique" class="btn-banner-9">
+                    <img src="<?= $iconsFiche; ?>technique.png" alt="Icone" class="banner-icon9">
+                    <p>Technique</p>
+                </a>
+                <a href="#photo" class="btn-banner-10">
+                    <img src="<?= $iconsFiche; ?>photo.png" alt="Icone" class="banner-icon10">
+                    <p>Galerie photo</p>
+                </a>
+                <a href="#summary-anchor" class="btn-banner-6">
+                    <img src="<?= $iconsFiche; ?>date.png" alt="Icone" class="banner-icon5">
+                    <p>Période de production : <?= htmlspecialchars($ficheAnne['NOM_ANNEE']); ?> - <?= htmlspecialchars($ficheAnne2['NOM_ANNEE']); ?></p>
+                </a>
+                <a href="#summary-anchor" class="btn-banner-7">
+                    <img src="<?= $iconsFiche; ?>pays.png" alt="Icone" class="banner-icon4">
+                    <p>Pays : <?= $paysDisplay; ?></p>
+                </a>
+                <img src="<?= $cheminImage; ?>" alt="Car Photo" class="car-photo">
             </div>
         </div>
         <?php
@@ -253,7 +254,7 @@ if(isset($_GET['id_fiche'] ) AND !empty($_GET['id_fiche'])){
                     <h1 class="h1-fiche">Histoire</h1>
             </article>
             <article class="histoire" id="histoire">
-                <?= htmlspecialchars_decode($ficheInfos['HISTOIRE_FICHE']); ?>
+                <p class="p-fiche-histoire"><?= htmlspecialchars_decode($ficheInfos['HISTOIRE_FICHE']); ?></p>
             </article>
 
             <!----------------TABLEAU DES VERSIONS-------------->

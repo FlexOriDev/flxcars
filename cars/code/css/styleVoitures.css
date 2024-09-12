@@ -115,8 +115,22 @@
     white-space: nowrap; /* Empêche le texte de se briser en plusieurs lignes */
     overflow: hidden; /* Cache le texte qui dépasse les limites */
     text-overflow: ellipsis; /* Ajoute les points de suspension à la fin */
+    margin: 0; /* Supprime les marges verticales par défaut */
+    padding: 0; /* Supprime le padding */
 }
 
+.column a {
+    display: block; /* Permet de rendre l'ensemble de la div et de l'image cliquable */
+    text-decoration: none; /* Supprime le soulignement du texte */
+}
+
+.column a .text {
+    color: var(--accent-color-white); /* Assure que la couleur du texte soit la bonne */
+    text-decoration: none; /* Supprime le soulignement du texte dans le lien */
+}
+
+.column a:hover .text {text-decoration: none; /* Supprime le soulignement du texte dans le lien */
+}
 /* FILTER SECTION LATERAL MENU */
 
 .filter-section h2{
