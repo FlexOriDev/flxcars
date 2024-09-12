@@ -21,32 +21,6 @@ body{
     font-size: 100%
   }
 
-@media screen and (max-width: 90em) {
-  p {
-    font-size: 0.5em;
-    line-height: 0.5em;;
-  }
-}
-
-@media screen and (max-width: 50em) {
-  p {
-      font-size: 0.25em;
-    }
-  }
-
-  @media screen and (max-width: 30em){
-    p {
-      font-size: 0.125em;
-    }
-  }
-
-  @media screen and (max-width: 10em){
-    p {
-      font-size: 0.0625em;
-    }
-  }
-
-
 .text{
   background-color: var(--secondary-color);
   text-align: center;
@@ -181,10 +155,13 @@ body{
   width: 100%;
   background-color: var(--secondary-color);
   transition: 0.5s;
+  position: relative;
 }
 
 .nav_header ul {
   list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .header nav ul li {
@@ -241,26 +218,110 @@ body{
   font-size: 12px;
 }
 
-/* Classe pour le bouton de déconnexion */
-/* Classe pour le bouton de déconnexion */
-.btn-link-style {
-  display: block; /* Comme les liens */
-  text-decoration: none; /* Comme les liens */
-  color: var(--accent-color-white); /* Couleur du texte comme les liens */
-  border-bottom: 2px solid transparent; /* Bordure en bas comme les liens */
-  padding: 10px 0; /* Padding comme les liens */
-  background: none; /* Enlève le fond par défaut */
-  border: none; /* Enlève la bordure par défaut */
-  cursor: pointer; /* Change le curseur en pointeur */
-  font-size: 16px; /* Taille du texte similaire */
-  font-family: inherit; /* Hérite de la police utilisée pour les liens */
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header nav ul {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .header nav ul li {
+    float: none;
+    width: 100%;
+    text-align: center;
+  }
+
+  .header .sous {
+    position: static;
+    display: none;
+  }
+
+  .header nav ul li.active .sous {
+    display: block;
+  }
+
+  .header nav a {
+    padding: 15px;
+    border-bottom: none;
+  }
 }
 
-/* Applique les styles au survol */
-.btn-link-style:hover {
-  color: var(--accent-color-yellow); /* Couleur au survol */
-  border-bottom: 2px solid var(--accent-color-yellow); /* Bordure au survol */
-  background-color: RGBa(200,200,200,0.1); /* Fond au survol */
+/* Menu Toggle Button for Mobile */
+.menu-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    padding: 20px 0;
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: var(--accent-color-white);
+    border: none;
+    cursor: pointer;
+  }
+
+  .header nav ul {
+    display: none;
+    width: 100%;
+  }
+
+  .header nav.active ul {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Existing Styles */
+/* ... */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header nav {
+    position: relative; /* Ensures the menu is positioned relative to the header */
+  }
+
+  .header nav ul {
+    display: none; /* Initially hide the menu */
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--secondary-color);
+    position: absolute; /* Position absolutely to overlay the content */
+    top: 100%; /* Position below the header */
+    left: 0; /* Align to the left edge */
+    z-index: 1000; /* Ensure it is above other content */
+  }
+
+  .header nav.active ul {
+    display: flex; /* Show the menu when the header has the active class */
+  }
+
+  .header .sous {
+    display: block; /* Show dropdowns within the menu */
+    position: static; /* Ensure dropdowns are positioned normally */
+    width: 100%; /* Full width of the menu */
+  }
+
+  .header nav ul li {
+    float: none; /* Ensure list items take full width */
+    width: 100%;
+  }
+
+  .header .sous a {
+    padding: 15px; /* Adjust padding for touch screens */
+  }
+
+  .menu-toggle {
+    display: block; /* Show the menu toggle button on small screens */
+    background-color: var(--secondary-color);
+    color: var(--accent-color-white);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+  }
 }
 
 
