@@ -241,6 +241,29 @@ body{
   font-size: 12px;
 }
 
+/* Classe pour le bouton de déconnexion */
+/* Classe pour le bouton de déconnexion */
+.btn-link-style {
+  display: block; /* Comme les liens */
+  text-decoration: none; /* Comme les liens */
+  color: var(--accent-color-white); /* Couleur du texte comme les liens */
+  border-bottom: 2px solid transparent; /* Bordure en bas comme les liens */
+  padding: 10px 0; /* Padding comme les liens */
+  background: none; /* Enlève le fond par défaut */
+  border: none; /* Enlève la bordure par défaut */
+  cursor: pointer; /* Change le curseur en pointeur */
+  font-size: 16px; /* Taille du texte similaire */
+  font-family: inherit; /* Hérite de la police utilisée pour les liens */
+}
+
+/* Applique les styles au survol */
+.btn-link-style:hover {
+  color: var(--accent-color-yellow); /* Couleur au survol */
+  border-bottom: 2px solid var(--accent-color-yellow); /* Bordure au survol */
+  background-color: RGBa(200,200,200,0.1); /* Fond au survol */
+}
+
+
 /*----------------------------------------------------------------------------------------------*/
 /* bot */
 

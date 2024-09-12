@@ -4,3 +4,17 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ pageIndex.php?url=$1 [QSA,L]
+
+#RewriteCond %{HTTPS} off
+#RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Désactiver l'affichage des erreurs pour éviter que des informations sensibles ne soient exposées
+php_flag display_errors Off
+php_value error_log "/chemin/vers/ton/fichier/log/php-error.log"
+
+#RewriteCond %{HTTPS} off
+#RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Désactiver l'affichage des erreurs pour éviter que des informations sensibles ne soient exposées
+php_flag display_errors Off
+php_value error_log "/chemin/vers/ton/fichier/log/php-error.log"

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-<!--------------------------------------------HEAD------------------------------------------------------>
 <head>
     <meta charset="utf_8"><!--Encodage universel-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,7 +46,7 @@
                     </ul>
                 </li>
 
-                <li class="deroulant"><a href="../pages/pageVoitures.php">Voitures</a>
+                <li class="deroulant"><a href="pageVoitures.php">Voitures</a>
                     <ul class="sous">
                         <?php
                         $getAllTypes = $bdd->query('SELECT * FROM TYPE ORDER BY NOM_TYPE');
@@ -112,7 +111,12 @@
                                 <?php
                             }
                             ?>
-                            <li><a href="../actions/actionsUser/actionLogout.php">Deconnexion</a></li>
+                            <form id="logout-form" action="../actions/actionsUser/actionLogout.php" method="POST" style="display: none;">
+                                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                            </form>
+                            <li>
+                                <a href="javascript:void(0);" onclick="document.getElementById('logout-form').submit();" class="nav-link">Déconnexion</a>
+                            </li>
                         </ul>
                     </li>
                     <?php

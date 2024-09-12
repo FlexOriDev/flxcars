@@ -1,12 +1,12 @@
 <!--------------------------------------------HEAD------------------------------------------------------>
+
 <head>
     <link rel="shortcut icon" href="img/fav.png"><!--favicon du site-->
-    <meta charset ="utf_8"><!--Encodage universel-->
+    <meta charset ="utf-8"><!--Encodage universel-->
 
     <title>Connexion</title><!--Titre de la page web-->
     <link href="../css/styleLogin.css" rel="stylesheet">
 </head>
-
 
 <!------------------------------------------INCLUDES---------------------------------------------------->
 <?php
@@ -32,10 +32,12 @@ require('../actions/actionsUser/actionLogin.php');
                 <h3 class="h3-register">Déjà membre ?</h3>
                 <p>Si vous avez déjà un compte, merci de vous connecter</p>
                 <br>
-                <?php if(isset($errorMsg)){ echo '<p>'.$errorMsg.'</p>'; } ?>
+                <?php if (isset($errorMsg)) { echo '<p>'.$errorMsg.'</p>'; } ?>
             </div>
 
             <form class="login-form" method="POST">
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+
                 <div class="login-form-item">
                     <span>Pseudo<label>*</label></span>
                     <input class="login-input" type="text" name="pseudo">
@@ -46,7 +48,7 @@ require('../actions/actionsUser/actionLogin.php');
                 </div>
                 <a class="login-forgot" href="#">Mot de passe oublié</a>
                 <br>
-                <input class="login-submit" type="submit" value="Se connecter" name="validate">
+                <input class="login-submit" type="submit" value="Se connecter" name="validate-login">
             </form>
 
         </div>

@@ -19,25 +19,27 @@ include("../actions/actionsUser/actionRegister.php");
 <div class="main-register">
     <div class="register-container">
         <form class="register-form" method="POST">
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+
 
             <?php if(isset($errorMsg)){ echo '<p class="error-register">'.$errorMsg.'</p>'; } ?>
             <br>
             <div class="register-top-grid">
                 <h3 class="h3-register">Vos informations</h3>
                 <div class="register-form-item">
-                    <span>Prénom<label>*</label></span>
+                    <span>Prénom<label> * (entre 3 et 20 caractères)</label></span>
                     <input class="register-input" type="text" name="prenom">
                 </div>
                 <div class="register-form-item">
-                    <span>Nom<label>*</label></span>
+                    <span>Nom<label> * (entre 3 et 20 caractères)</label></span>
                     <input class="register-input" type="text" name="nom">
                 </div>
                 <div class="register-form-item">
-                    <span>Pseudo<label>*</label></span>
+                    <span>Pseudo<label> * (entre 3 et 20 caractères alphanumériques ou des underscores)</label></span>
                     <input class="register-input" type="text" name="pseudo">
                 </div>
                 <div class="register-form-item">
-                    <span>Email<label>*</label></span>
+                    <span>Email<label>* (adresse valide)</label></span>
                     <input class="register-input" type="text" name="mail">
                 </div>
                 <div class="clear"> </div>
@@ -45,18 +47,18 @@ include("../actions/actionsUser/actionRegister.php");
             <div class="register-bottom-grid">
                 <h3 class="h3-register">Pour vous authentifier</h3>
                 <div class="register-form-item">
-                    <span>Password<label>*</label></span>
+                    <span>Mot de passe<label>* (au moins 8 caractères, incluant une majuscule et un chiffre)</label></span>
                     <input class="register-input" type="password" name="password">
                 </div>
                 <div class="register-form-item">
-                    <span>Retapez votre Password<label>*</label></span>
+                    <span>Retapez votre mot de passe<label>*</label></span>
                     <input class="register-input" type="password" name="passwordtwo">
                 </div>
                 <div class="clear"> </div>
             </div>
             <div class="clear"> </div>
             <div class="register-but">
-                <input type="submit" value="M'inscrire" name="validate">
+                <input type="submit" value="M'inscrire" name="validate-register">
                 <div class="clear"> </div>
             </div>
         </form>
