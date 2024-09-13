@@ -17,9 +17,6 @@
     cursor: pointer;
 }
 
-.space{
-    margin-top: 20px;
-}
 
 #carousel-item-index-active{
     margin-top: 10px;
@@ -47,4 +44,9 @@
     background: var(--accent-color-yellow);
     padding: 100px 0;
     text-align: center;
+}
+
+.slide {
+    min-width: 100%;
+    overflow: hidden;
 }

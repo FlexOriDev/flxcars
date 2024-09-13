@@ -184,3 +184,28 @@ small
     color: var(--accent-color-yellow);
     transition: 0.2s;
 }
+
+/* ---------------------------------------Selecteurs -------------------------------------------------*/
+.rowMetriques {
+    display: flex;
+    flex-wrap: wrap; /* Permet le retour à la ligne des éléments si nécessaire */
+    justify-content: space-between; /* Répartit les éléments sur la a ligne */
+}
+
+/* Style pour chaque colonne contenant un select */
+.columnMetriques {
+    flex: 0 0 calc(33.33% - 10px); /* Ajuste la largeur de chaque colonne avec espace entre elles */
+    margin-bottom: 10px; /* Espacement entre les colonnes */
+    box-sizing: border-box; /* Inclut le padding dans le calcul de la largeur */
+    border-radius: 4px; /* Coins arrondis */
+}
+
+/* Style pour chaque select */
+
+
+/* Media query pour rendre responsive */
+@media (max-width: 768px) {
+    .columnMetriques {
+        flex: 0 0 100%; /* Sur mobile, chaque colonne prend toute la largeur */
+    }
+}

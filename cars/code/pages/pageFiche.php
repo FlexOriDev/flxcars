@@ -2,7 +2,6 @@
 <head>
     <link rel="shortcut icon" href="img/fav.png"><!--favicon du site-->
     <meta charset ="utf_8"><!--Encodage universel-->
-
     <title>Fiche</title><!--Titre de la page web-->
     <link href="../css/styleFiche.css" rel="stylesheet">
 </head>
