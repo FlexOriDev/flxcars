@@ -78,7 +78,7 @@
                             }
                             ?>
                             <form id="logout-form" action="../actions/actionsUser/actionLogout.php" method="POST" style="display: none;">
-                                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
+                                <input type="hidden" name="csrf_token_login" value="<?= htmlspecialchars($_SESSION['csrf_token_login'], ENT_QUOTES, 'UTF-8'); ?>">
                             </form>
                             <li>
                                 <a href="javascript:void(0);" onclick="document.getElementById('logout-form').submit();" class="nav-link">Déconnexion</a>

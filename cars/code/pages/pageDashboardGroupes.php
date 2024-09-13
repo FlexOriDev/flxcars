@@ -5,7 +5,6 @@ require('../actions/actionsUser/actionIsAdmin.php');
 redirectIfNotAdmin();
 require('../actions/database.php');
 require('../actions/actionsDashboard/actionsDashboardGroupes/actionDashboardGroupes.php');
-require('../actions/constant/paths.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">

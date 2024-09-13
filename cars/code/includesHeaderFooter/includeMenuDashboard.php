@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
+<?php
+require('../actions/constant/paths.php');
+?>
 <!--------------------------------------------HEAD------------------------------------------------------>
 <head>
     <link rel="shortcut icon" href="img/fav.png">
     <meta charset="utf_8">
     <link href="../css/styleMenuDashboard.css" rel="stylesheet">
+    <!-- Code factorisé des tris de colonnes -->
+    <script src="../scripts/scriptDashboard/utils/column_function.js"></script>
+    <script>
+        var iconsDashboardDescendant = "<?= $iconsDashboardDescendant; ?>";
+        var iconsDashboardAscendant = "<?= $iconsDashboardAscendant; ?>";
+    </script>
 </head>
+
 <!--------------------------------------------CONTENT------------------------------------------------------>
 <aside class="dashboard-sidebar">
     <nav class="dashboard-nav">

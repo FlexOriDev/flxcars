@@ -9,7 +9,7 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
 <!--------------------------------------------HEAD------------------------------------------------------>
 <head>
     <link rel="shortcut icon" href="img/fav.png"><!--favicon du site-->
-    <meta charset ="utf_8"><!--Encodage universel-->
+    <meta charset ="utf-8"><!--Encodage universel-->
 
     <title>Ajouter une fiche</title><!--Titre de la page web-->
     <link href="../css/styleAjouteFiche.css" rel="stylesheet">
@@ -38,7 +38,7 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                     <!-- NOM -->
                     <div class="input-container">
                         <span class="span-ajout-fiche">Nom * <label> :</label></span>
-                        <input class="nom" type="text" name="nom" value="<?php echo $nom; ?>">
+                        <input class="nom" type="text" name="nom" value="<?php echo $nom; ?>" required>
                     </div>
                     <!-- METRIQUES -->
                     <script>
@@ -310,8 +310,9 @@ require('../actions/actionsAjoutFiche/actionAjouteFiche.php');
                     <br><br><br>
                     <br>
                     <div class="clear"> </div>
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="register-but">
-                        <input type="submit" value="Publier" name="validate" class="custom-button" onclick="submitForm()">
+                        <input type="submit" value="Publier" name="validate-ajout-fiche" class="custom-button" onclick="submitForm()">
                         <div class="clear"> </div>
                         <br><br><br><br><br><br><br><br><br>
                     </div>

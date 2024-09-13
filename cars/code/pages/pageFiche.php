@@ -46,6 +46,7 @@ if (isset($_GET['id_fiche']) && !empty($_GET['id_fiche'])) {
         $constructeursIds = $getConstructeurs->fetchAll(PDO::FETCH_COLUMN);
 
         // Initialiser les tableaux pour les noms des constructeurs, des groupes et des pays
+        // Initialiser les tableaux pour les noms des constructeurs, des groupes et des pays
         $constructeursNoms = [];
         $groupesNoms = [];
         $paysInfos = []; // Stocker les informations des pays pour chaque constructeur
@@ -53,9 +54,9 @@ if (isset($_GET['id_fiche']) && !empty($_GET['id_fiche'])) {
         foreach ($constructeursIds as $constructeurId) {
             // Requête pour récupérer les informations du constructeur
             $getConstructeur = $bdd->prepare('
-                SELECT c.NOM_CONSTRUCTEUR, c.ID_GROUPE, c.ID_PAYS
-                FROM CONSTRUCTEUR c
-                WHERE c.ID = ?');
+        SELECT c.NOM_CONSTRUCTEUR, c.ID_GROUPE, c.ID_PAYS
+        FROM CONSTRUCTEUR c
+        WHERE c.ID = ?');
             $getConstructeur->execute([$constructeurId]);
             $ficheConstructeur = $getConstructeur->fetch();
 
@@ -73,23 +74,23 @@ if (isset($_GET['id_fiche']) && !empty($_GET['id_fiche'])) {
 
                 // Récupérer le pays associé à ce constructeur
                 $getPays = $bdd->prepare('
-                    SELECT NOM_PAYS, IMAGE_PAYS
-                    FROM PAYS
-                    WHERE ID = ?');
+            SELECT NOM_PAYS, IMAGE_PAYS
+            FROM PAYS
+            WHERE ID = ?');
                 $getPays->execute([$ficheConstructeur['ID_PAYS']]);
                 $fichePays = $getPays->fetch();
 
                 if ($fichePays) {
-                    $paysInfos[] = $fichePays; // Stocker toutes les informations de pays
+                    $paysInfos[$fichePays['NOM_PAYS']] = $fichePays; // Utiliser le nom du pays comme clé pour éviter les doublons
                 }
             }
         }
 
-        // Convertir les tableaux en chaînes de caractères séparées par des tirets
+// Convertir les tableaux en chaînes de caractères séparées par des tirets
         $constructeursNomsString = implode(' - ', $constructeursNoms);
         $groupesNomsString = isset($groupesNoms) ? implode(' - ', $groupesNoms) : 'Aucun groupe';
 
-        // Préparer l'affichage des pays et des drapeaux
+// Préparer l'affichage des pays et des drapeaux
         $paysDisplay = '';
         foreach ($paysInfos as $pays) {
             $paysDisplay .= htmlspecialchars($pays['NOM_PAYS']);
@@ -99,6 +100,7 @@ if (isset($_GET['id_fiche']) && !empty($_GET['id_fiche'])) {
             $paysDisplay .= ' ';
         }
         $paysDisplay = trim($paysDisplay);
+
 
         // -------------------------------ANNEES----------------------------------------------------
         $getAnnee = $bdd->prepare('SELECT * FROM ANNEE WHERE ID = ?');

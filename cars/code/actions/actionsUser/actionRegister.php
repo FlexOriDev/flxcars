@@ -10,8 +10,8 @@ header('X-Frame-Options: DENY');
 header('X-XSS-Protection: 1; mode=block');
 header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
 
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+if (empty($_SESSION['csrf_token_register'])) {
+    $_SESSION['csrf_token_register'] = bin2hex(random_bytes(32));
 }
 
 require('../actions/Database.php');
@@ -22,7 +22,7 @@ $errorMsg = '';
 // Vérifier si la requête est une soumission de formulaire (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérifier le CSRF Token
-    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    if (!isset($_POST['csrf_token_register']) || $_POST['csrf_token_register'] !== $_SESSION['csrf_token_register']) {
         $errorMsg = "Action non autorisée.";
     }
 

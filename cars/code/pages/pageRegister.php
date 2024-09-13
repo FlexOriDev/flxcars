@@ -19,7 +19,7 @@ include("../actions/actionsUser/actionRegister.php");
 <div class="main-register">
     <div class="register-container">
         <form class="register-form" method="POST">
-            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+            <input type="hidden" name="csrf_token_register" value="<?php echo $_SESSION['csrf_token_register']; ?>">
 
 
             <?php if(isset($errorMsg)){ echo '<p class="error-register">'.$errorMsg.'</p>'; } ?>

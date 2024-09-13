@@ -5,7 +5,6 @@ require('../actions/actionsUser/actionIsAdmin.php');
 redirectIfNotAdmin();
 require('../actions/database.php');
 require('../actions/actionsDashboard/actionsDashboardConstructeurs/actionDashboardConstructeurs.php');
-require('../actions/constant/paths.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -115,7 +114,6 @@ require('../actions/constant/paths.php');
         </section>
     </main>
 </div>
-<script src="../scripts/constant/paths.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_constructeurs/search_filter.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_constructeurs/column_filter.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_constructeurs/modif_tab.js"></script>

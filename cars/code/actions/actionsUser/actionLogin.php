@@ -14,8 +14,8 @@ require('../actions/Database.php');
 require('../actions/actionsUser/actionIsAdmin.php');
 
 // Ajouter un token CSRF pour la connexion
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+if (empty($_SESSION['csrf_token_login'])) {
+    $_SESSION['csrf_token_login'] = bin2hex(random_bytes(32));
 }
 
 // Initialiser une variable pour les messages d'erreur
@@ -25,7 +25,7 @@ $errorMsg = '';
 if (isset($_POST['validate-login'])) {
 
     // Vérifier le CSRF Token
-    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    if (!isset($_POST['csrf_token_login']) || $_POST['csrf_token_login'] !== $_SESSION['csrf_token_login']) {
         $errorMsg = "Action non autorisée.";
     }
 

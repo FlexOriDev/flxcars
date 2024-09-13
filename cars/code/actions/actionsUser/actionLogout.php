@@ -5,7 +5,7 @@ if (session_id() == '') {
 }
 
 // Vérifier le token CSRF pour éviter les déconnexions involontaires
-if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+if (isset($_POST['csrf_token_login']) && $_POST['csrf_token_login'] === $_SESSION['csrf_token_login']) {
     // Détruire toutes les variables de session
     $_SESSION = [];
 

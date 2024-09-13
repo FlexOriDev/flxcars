@@ -36,7 +36,7 @@ require('../actions/actionsUser/actionLogin.php');
             </div>
 
             <form class="login-form" method="POST">
-                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                <input type="hidden" name="csrf_token_login" value="<?php echo $_SESSION['csrf_token_login']; ?>">
 
                 <div class="login-form-item">
                     <span>Pseudo<label>*</label></span>
