@@ -49,7 +49,7 @@ require('../actions/actionsDashboard/actionsDashboardConstructeurs/actionDashboa
                                 <option value="<?= htmlspecialchars($groupe['ID']) ?>"><?= htmlspecialchars($groupe['NOM_GROUPE']) ?></option>
                             <?php endforeach; ?>
                         </select>
-                        <input type="submit" value="Ajouter" class="dashboard-btn" id="ajouterConstructeur" name="validate">
+                        <input type="submit" value="Ajouter" class="dashboard-btn" id="ajouterConstructeur" name="validate_dashboard_constructeur">
                     </div>
                 </form>
                 <table class="dashboard-table-constructeurs">

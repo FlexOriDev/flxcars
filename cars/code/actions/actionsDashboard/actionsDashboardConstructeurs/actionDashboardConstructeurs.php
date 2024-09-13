@@ -18,10 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && strpos($_SERVER["CONTENT_TYPE"], "ap
         echo json_encode(['success' => false, 'message' => 'Colonne invalide']);
         exit;
     }
-
     // Mise à jour de la requête avec la colonne validée
     try {
-        $sql = "UPDATE CONSTRUCTEUR SET $column = :value WHERE ID_CONSTRUCTEUR = :id";
+        $sql = "UPDATE CONSTRUCTEUR SET $column = :value WHERE ID = :id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindParam(':value', $value);
         $stmt->bindParam(':id', $id);
@@ -38,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && strpos($_SERVER["CONTENT_TYPE"], "ap
 }
 
 // Handling form submission for adding new constructor
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate_dashboard_constructeur'])) {
     if (isset($_POST["nom"], $_POST["pays"], $_POST["groupe"])) {
         $nom = htmlspecialchars(trim($_POST["nom"]));
         $pays = htmlspecialchars(trim($_POST["pays"]));
@@ -75,11 +74,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validate'])) {
 if (isset($_POST['delete'])) {
     $deleteId = $_POST['delete_id'];
     try {
-        $deleteConstructeur = $bdd->prepare('DELETE FROM CONSTRUCTEUR WHERE ID_CONSTRUCTEUR = ?');
+        $deleteConstructeur = $bdd->prepare('DELETE FROM CONSTRUCTEUR WHERE ID = ?');
         $deleteConstructeur->execute(array($deleteId));
         $url = htmlspecialchars('pageDashboardConstructeurs.php');
-        echo '<script>window.location = "'.$url.'";</script>';
         $errorMsg = "Votre fiche a bien été supprimée.";
+        echo '<script>window.location = "'.$url.'";</script>';
         exit;
     } catch (PDOException $e) {
         $errorMsg = "Erreur de base de données : " . $e->getMessage();
