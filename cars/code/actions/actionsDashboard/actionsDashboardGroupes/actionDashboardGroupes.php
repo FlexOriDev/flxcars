@@ -41,7 +41,7 @@ if (isset($_POST['delete'])) {
 
     try {
         // Using the new table and column names
-        $deleteGroup = $bdd->prepare('DELETE FROM GROUPE WHERE ID_GROUPE = ?');
+        $deleteGroup = $bdd->prepare('DELETE FROM GROUPE WHERE ID = ?');
         $deleteGroup->execute(array($deleteId));
         $url = htmlspecialchars('pageDashboardGroupes.php');
         echo '<script>window.location = "'.$url.'";</script>';

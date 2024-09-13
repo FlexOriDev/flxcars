@@ -72,7 +72,7 @@ require('../actions/actionsDashboard/actionsDashboardGroupes/actionDashboardGrou
                         echo '<td class="dashboard-table-cell dashboard-table-actions">';
                         echo '<form method="POST" action="pageDashboardGroupes.php" onsubmit="return confirmDelete();">';
                         echo '<input type="hidden" name="delete_id" value="' . htmlspecialchars($groupe['id']) . '">';
-                        echo '<button type="submit" class="dashboard-delete-btn" name="delete">Supprimer</button>';
+                        echo '<button type="submit" class="dashboard-delete-btn" name="delete" onclick="return confirmDelete(this);">Supprimer</button>';
                         echo '</form>';
                         echo '</td>';
                         echo '</tr>';
@@ -89,7 +89,14 @@ require('../actions/actionsDashboard/actionsDashboardGroupes/actionDashboardGrou
 <script src="../scripts/scriptDashboard/dashboard_groupes/search_filter.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_groupes/column_filter.js"></script>
 <script>
-    function confirmDelete() {
+    function confirmDelete(button) {
+        const row = button.closest('tr'); // Trouve la ligne correspondante
+        const fichesCount = parseInt(row.querySelector('.dashboard-table-fiches-count').textContent); // Récupère la valeur de fiches_count
+
+        if (fichesCount > 0) {
+            alert('Vous ne pouvez pas supprimer cette ligne car elle contient des fiches.');
+            return false;
+        }
         return confirm('Êtes-vous sûr de vouloir supprimer cette ligne ?');
     }
 </script>
