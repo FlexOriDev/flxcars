@@ -90,7 +90,6 @@ require('../actions/constant/paths.php');
         </section>
     </main>
 </div>
-<script src="../scripts/scriptDashboard/dashboard_utilisateurs/search_pays_and_group.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_utilisateurs/search_filter.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_utilisateurs/column_filter.js"></script>
 <script>

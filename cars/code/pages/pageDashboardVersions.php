@@ -131,7 +131,6 @@ require('../actions/constant/paths.php');
         </section>
     </main>
 </div>
-<script src="../scripts/scriptDashboard/dashboard_versions/search_pays_and_group.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_versions/search_filter.js"></script>
 <script src="../scripts/scriptDashboard/dashboard_versions/column_filter.js"></script>
 <script>
